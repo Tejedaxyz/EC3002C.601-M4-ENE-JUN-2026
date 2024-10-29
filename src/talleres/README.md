@@ -4,7 +4,7 @@
     * [Números duales](numeros_duales.ipynb)
     * [Steepest descent](steepest_descent.ipynb)
     * [Problemas de Optimización usando Métodos de primer orden](metodos_primer_orden.ipynb)
-    * [Problema de Optimización usando Algoritmos Genéticos]()
+    * [Problema de Optimización usando Algoritmos Genéticos](prob_opt_algo_gen.ipynb)
     * Test del paquete algo_optim_mod04
     * Particle Swarm Optimization (PSO)
     * [Resiliencia y robustez en redes]()
