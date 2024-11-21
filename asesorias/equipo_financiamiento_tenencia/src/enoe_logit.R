@@ -61,6 +61,20 @@ beta_ingreso <- modelo$coefficients[4] # -7.116697e-05
 probabilidad_predicha <- exp( intercepto + beta_sexo*1 + beta_escolaridad*11 + beta_ingreso*4232.285)/ (1 + exp( intercepto + beta_sexo*1 + beta_escolaridad*11 + beta_ingreso*4232.285))
 probabilidad_predicha
 
+ingreso_secuencia = seq(4232.285, 70000)
+
+calcula_probabilidades <- function(ingreso_arg){
+  probabilidad_predicha <- exp( intercepto + beta_sexo*1 + beta_escolaridad*11 + beta_ingreso*ingreso_arg)/ (1 + exp( intercepto + beta_sexo*1 + beta_escolaridad*11 + beta_ingreso*ingreso_arg))
+  return(probabilidad_predicha)
+}
+
+probabilidades_predichas = calcula_probabilidades(ingreso_secuencia)
+plot(probabilidades_predichas)
+
+
+#### ASI CALCULAMOS LOS ODD RATIO
+exp(modelo$coefficients)
+
 ## La probabilidad que una mujer con 11 años de escolaridad e ingreso mensual de 4232.285 pesos tenga un empleo informal es de 56.54%
 
 ## USAREMOS ESTOS COEFICIENTES PARA CALCULAR LAS PROBABILIDADES QUE UNA MUJER TENGA UN EMPLEO INFORMAL 
