@@ -32,10 +32,10 @@ Repositorio del módulo **Técnicas computacionales avanzadas para modelar fenó
 
 ## Descarga del repositorio
 
-Para descargar el repositorio para la rama ```ccm-2024``` utiliza la instrucción:
+Para descargar el repositorio para la rama ```ccm-2025``` utiliza la instrucción:
 
 ```
-git clone -b ccm-2024 https://github.com/milocortes/mod_04_concentracion.git
+git clone -b ccm-2025 https://github.com/milocortes/mod_04_concentracion.git
 ```
 
 ## Información adicional
