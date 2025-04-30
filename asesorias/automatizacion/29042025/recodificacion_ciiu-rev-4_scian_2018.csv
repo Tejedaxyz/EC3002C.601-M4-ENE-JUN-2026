@@ -1,0 +1,1181 @@
+codigo,codigo_nuevo,clasificador,nombre_ocupacion
+2321,1,sinco,Profesores universitarios y de enseñanza superior
+2715,1,sinco,Instructores y capacitadores en oficios y para el trabajo
+25-1011,1,onet,"Business Teachers, Postsecondary"
+25-1022,1,onet,"Mathematical Science Teachers, Postsecondary"
+25-1021,1,onet,"Computer Science Teachers, Postsecondary"
+25-1031,1,onet,"Architecture Teachers, Postsecondary"
+25-1032,1,onet,"Engineering Teachers, Postsecondary"
+25-1041,1,onet,"Agricultural Sciences Teachers, Postsecondary"
+25-1042,1,onet,"Biological Science Teachers, Postsecondary"
+25-1043,1,onet,"Forestry and Conservation Science Teachers, Postsecondary"
+25-1052,1,onet,"Chemistry Teachers, Postsecondary"
+25-1051,1,onet,"Atmospheric, Earth, Marine, and Space Sciences Teachers, Postsecondary"
+25-1053,1,onet,"Environmental Science Teachers, Postsecondary"
+25-1054,1,onet,"Physics Teachers, Postsecondary"
+25-1065,1,onet,"Political Science Teachers, Postsecondary"
+25-1063,1,onet,"Economics Teachers, Postsecondary"
+25-1069,1,onet,"Social Sciences Teachers, Postsecondary, All Other"
+25-1062,1,onet,"Area, Ethnic, and Cultural Studies Teachers, Postsecondary"
+25-1066,1,onet,"Psychology Teachers, Postsecondary"
+25-1061,1,onet,"Anthropology and Archeology Teachers, Postsecondary"
+25-1067,1,onet,"Sociology Teachers, Postsecondary"
+25-1064,1,onet,"Geography Teachers, Postsecondary"
+25-1071,1,onet,"Health Specialties Teachers, Postsecondary"
+25-1072,1,onet,"Nursing Instructors and Teachers, Postsecondary"
+25-1082,1,onet,"Library Science Teachers, Postsecondary"
+25-1081,1,onet,"Education Teachers, Postsecondary"
+25-1113,1,onet,"Social Work Teachers, Postsecondary"
+25-1112,1,onet,"Law Teachers, Postsecondary"
+25-1111,1,onet,"Criminal Justice and Law Enforcement Teachers, Postsecondary"
+25-1125,1,onet,"History Teachers, Postsecondary"
+25-1126,1,onet,"Philosophy and Religion Teachers, Postsecondary"
+25-1121,1,onet,"Art, Drama, and Music Teachers, Postsecondary"
+25-1123,1,onet,"English Language and Literature Teachers, Postsecondary"
+25-1124,1,onet,"Foreign Language and Literature Teachers, Postsecondary"
+25-1122,1,onet,"Communications Teachers, Postsecondary"
+25-1199,1,onet,"Postsecondary Teachers, All Other"
+25-1192,1,onet,"Family and Consumer Sciences Teachers, Postsecondary"
+25-1194,1,onet,"Career/Technical Education Teachers, Postsecondary"
+25-1193,1,onet,"Recreation and Fitness Studies Teachers, Postsecondary"
+9111,2,sinco,Trabajadores de apoyo en actividades agrícolas
+9112,2,sinco,Trabajadores de apoyo en actividades ganaderas
+9113,2,sinco,Trabajadores de apoyo que realizan actividades agrícolas y ganaderas
+45-2099,2,onet,"Agricultural Workers, All Other"
+45-2091,2,onet,Agricultural Equipment Operators
+45-2092,2,onet,"Farmworkers and Laborers, Crop, Nursery, and Greenhouse"
+45-2093,2,onet,"Farmworkers, Farm, Ranch, and Aquacultural Animals"
+45-2021,2,onet,Animal Breeders
+6311,2,sinco,Operadores de maquinaria agropecuaria y forestal
+6212,2,sinco,Trabajadores en actividades de acuacultura
+6223,2,sinco,Trabajadores en viveros e invernaderos
+6999,2,sinco,"Otros trabajadores en actividades agrícolas, ganaderas, forestales, caza y pesca, no clasificados anteriormente"
+6111,2,sinco,Trabajadores en el cultivo de maíz y/o frijol
+6112,2,sinco,Trabajadores en el cultivo de hortalizas y verduras
+6113,2,sinco,"Trabajadores en el cultivo de café, cacao y tabaco"
+6114,2,sinco,Trabajadores en el cultivo de frutales
+6115,2,sinco,Trabajadores en el cultivo de flores
+6116,2,sinco,Trabajadores en otros cultivos agrícolas
+6117,2,sinco,Trabajadores en actividades de beneficio de productos agrícolas
+6119,2,sinco,"Otros trabajadores en actividades agrícolas, no clasificados anteriormente"
+6121,2,sinco,Trabajadores en la cría de ganado bovino
+6122,2,sinco,Trabajadores en la cría de porcinos
+6123,2,sinco,Trabajadores en la cría avícola
+6124,2,sinco,Trabajadores en la cría de caprinos y ovinos
+6125,2,sinco,Trabajadores en la cría de equinos
+6126,2,sinco,Trabajadores en la apicultura
+6127,2,sinco,Trabajadores en la cría y cuidado de otro tipo de animales
+6131,2,sinco,Trabajadores que combinan actividades agrícolas con ganaderas
+51-3023,3,onet,Slaughterers and Meat Packers
+51-3022,3,onet,"Meat, Poultry, and Fish Cutters and Trimmers"
+51-3021,3,onet,Butchers and Meat Cutters
+51-3092,3,onet,Food Batchmakers
+51-3093,3,onet,Food Cooking Machine Operators and Tenders
+51-3091,3,onet,"Food and Tobacco Roasting, Baking, and Drying Machine Operators and Tenders"
+51-3099,3,onet,"Food Processing Workers, All Other"
+9236,3,sinco,"Trabajadores de apoyo en la industria de alimentos, bebidas y productos de tabaco"
+9237,3,sinco,"Trabajadores de apoyo en la industria de la cerámica, vidrio y similares"
+9239,3,sinco,"Trabajadores de apoyo en la industria, no clasificados anteriormente"
+51-4081,3,onet,"Multiple Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
+51-9041,3,onet,"Extruding, Forming, Pressing, and Compacting Machine Setters, Operators, and Tenders"
+51-9032,3,onet,"Cutting and Slicing Machine Setters, Operators, and Tenders"
+51-9031,3,onet,"Cutters and Trimmers, Hand"
+8133,3,sinco,Operadores de máquinas para la elaboración y ensamble de productos de plástico y hule
+7511,3,sinco,"Trabajadores en la elaboración de productos de carne, pescado y sus derivados"
+7512,3,sinco,Trabajadores en la elaboración de productos lácteos
+7514,3,sinco,Trabajadores en la elaboración de productos a base de frutas y verduras
+7515,3,sinco,"Trabajadores en la elaboración de productos a base de azúcar, chocolate, confitería y tabaco"
+51-9021,3,onet,"Crushing, Grinding, and Polishing Machine Setters, Operators, and Tenders"
+7517,3,sinco,Trabajadores en la elaboración de bebidas alcohólicas y no alcohólicas
+51-9022,3,onet,"Grinding and Polishing Workers, Hand"
+51-9023,3,onet,"Mixing and Blending Machine Setters, Operators, and Tenders"
+8161,3,sinco,"Operadores de máquinas en la elaboración de alimentos, aceites, grasas, sal y especias"
+8162,3,sinco,Operadores de máquinas en la elaboración de tabaco
+8171,3,sinco,"Operadores de máquinas en la elaboración de cemento, cal, yeso y productos de cemento"
+9231,4,sinco,"Trabajadores de apoyo en la elaboración, reparación y mantenimiento mecánico de equipos, maquinaria y productos de metal y de precisión"
+9232,4,sinco,"Trabajadores de apoyo en la industria eléctrica, electrónica y comunicaciones"
+9233,4,sinco,"Trabajadores de apoyo en la industria química, petroquímica y plásticos"
+9234,4,sinco,"Trabajadores de apoyo en la industria de la madera, papel y cartón"
+9235,4,sinco,Trabajadores de apoyo en la industria textil y del zapato
+7321,4,sinco,Artesanos y trabajadores en la elaboración de productos de papel y cartón
+8999,4,sinco,"Otros operadores de maquinaria industrial, ensambladores y conductores de transporte, no clasificados anteriormente"
+7612,4,sinco,"Trabajadores en la elaboración de productos de cemento, cal, yeso, azulejo, piedra y ladrilleros"
+7613,4,sinco,Trabajadores del vidrio y similares
+7999,4,sinco,"Otros trabajadores artesanales, no clasificados anteriormente"
+53-6031,4,onet,Automotive and Watercraft Service Attendants
+8143,4,sinco,"Operadores de máquinas en la elaboración de celulosa, papel y similares"
+8144,4,sinco,Operadores de máquinas para la impresión y encuadernación
+51-9195,4,onet,"Molders, Shapers, and Casters, Except Metal and Plastic"
+51-9197,4,onet,Tire Builders
+51-9199,4,onet,"Production Workers, All Other"
+51-9191,4,onet,Adhesive Bonding Machine Operators and Tenders
+51-9194,4,onet,Etchers and Engravers
+51-9193,4,onet,Cooling and Freezing Equipment Operators and Tenders
+51-9196,4,onet,"Paper Goods Machine Setters, Operators, and Tenders"
+51-9192,4,onet,"Cleaning, Washing, and Metal Pickling Equipment Operators and Tenders"
+51-9198,4,onet,Helpers--Production Workers
+2624,5,sinco,Auxiliares y técnicos en construcción y arquitectura
+17-3023,5,onet,Electrical and Electronic Engineering Technologists and Technicians
+17-3029,5,onet,"Engineering Technologists and Technicians, Except Drafters, All Other"
+17-3024,5,onet,Electro-Mechanical and Mechatronics Technologists and Technicians
+17-3025,5,onet,Environmental Engineering Technologists and Technicians
+17-3027,5,onet,Mechanical Engineering Technologists and Technicians
+17-3026,5,onet,Industrial Engineering Technologists and Technicians
+17-3022,5,onet,Civil Engineering Technologists and Technicians
+17-3021,5,onet,Aerospace Engineering and Operations Technologists and Technicians
+2631,5,sinco,Técnicos en mantenimiento y reparación de vehículos de motor
+2633,5,sinco,Técnicos en mantenimiento y reparación de maquinaria e instrumentos industriales
+53-6041,5,onet,Traffic Technicians
+2635,5,sinco,Técnicos en mantenimiento y reparación de instrumentos de precisión y musicales
+2641,5,sinco,Técnicos eléctricos
+2643,5,sinco,"Técnicos en instalación y reparación de equipos electrónicos, telecomunicaciones y electrodoméstico (excepto equipos informáticos)"
+2645,5,sinco,Técnicos en reparación de equipos electromecánicos
+2621,5,sinco,Auxiliares y técnicos industriales y químicos
+2623,5,sinco,"Auxiliares y técnicos mineros, metalúrgicos y petroleros"
+49-2091,6,onet,Avionics Technicians
+49-2093,6,onet,"Electrical and Electronics Installers and Repairers, Transportation Equipment"
+49-2092,6,onet,"Electric Motor, Power Tool, and Related Repairers"
+49-2098,6,onet,Security and Fire Alarm Systems Installers
+49-2096,6,onet,"Electronic Equipment Installers and Repairers, Motor Vehicles"
+49-2095,6,onet,"Electrical and Electronics Repairers, Powerhouse, Substation, and Relay"
+49-2094,6,onet,"Electrical and Electronics Repairers, Commercial and Industrial Equipment"
+49-9031,6,onet,Home Appliance Repairers
+47-4021,6,onet,Elevator Installers and Repairers
+49-9012,6,onet,"Control and Valve Installers and Repairers, Except Mechanical Door"
+49-9011,6,onet,Mechanical Door Repairers
+51-2023,6,onet,Electromechanical Equipment Assemblers
+2644,6,sinco,"Trabajadores en instalación y reparación de equipos electrónicos, telecomunicaciones y electrodoméstico (excepto equipos informáticos)"
+2646,6,sinco,Trabajadores en reparación de equipos electromecánicos
+49-9081,6,onet,Wind Turbine Service Technicians
+49-2021,6,onet,"Radio, Cellular, and Tower Equipment Installers and Repairers"
+49-2022,6,onet,"Telecommunications Equipment Installers and Repairers, Except Line Installers"
+49-2097,6,onet,Electronic Home Entertainment Equipment Installers and Repairers
+2816,7,sinco,Técnicos dietistas y nutriólogos
+31-2021,7,onet,Physical Therapist Assistants
+2823,7,sinco,Auxiliares hospitalarios y de medicina
+29-1081,7,onet,Podiatrists
+29-2053,7,onet,Psychiatric Technicians
+29-2057,7,onet,Ophthalmic Medical Technicians
+29-2055,7,onet,Surgical Technologists
+29-2051,7,onet,Dietetic Technicians
+29-2052,7,onet,Pharmacy Technicians
+29-2056,7,onet,Veterinary Technologists and Technicians
+29-2081,7,onet,"Opticians, Dispensing"
+31-9011,7,onet,Massage Therapists
+31-2011,7,onet,Occupational Therapy Assistants
+2812,7,sinco,"Técnicos en aparatos de diagnóstico, tratamiento médico, podólogos y fisioterapeutas"
+31-2012,7,onet,Occupational Therapy Aides
+2814,7,sinco,Técnicos y asistentes farmacéuticos
+31-2022,7,onet,Physical Therapist Aides
+7341,8,sinco,"Sastres y modistos, costureras y confeccionadores de prendas de vestir"
+49-9071,8,onet,"Maintenance and Repair Workers, General"
+49-9099,8,onet,"Installation, Maintenance, and Repair Workers, All Other"
+49-9091,8,onet,"Coin, Vending, and Amusement Machine Servicers and Repairers"
+49-9096,8,onet,Riggers
+2639,8,sinco,"Otras ocupaciones de mecánicos y técnicos en el mantenimiento y reparación de equipos mecánicos, vehículos de motor e instrumentos industriales, no clasificados anteriormente"
+49-9092,8,onet,Commercial Divers
+49-9094,8,onet,Locksmiths and Safe Repairers
+49-9095,8,onet,Manufactured Building and Mobile Home Installers
+49-9097,8,onet,Signal and Track Switch Repairers
+49-9098,8,onet,"Helpers--Installation, Maintenance, and Repair Workers"
+7221,8,sinco,"Herreros, balconeros, aluminadores y forjadores"
+2649,8,sinco,"Otros técnicos eléctricos, en electrónica y de equipos en telecomunicaciones y electromecánicos, no clasificados anteriormente"
+7222,8,sinco,"Cerrajeros, afiladores y pulidores de herramientas"
+51-2041,8,onet,Structural Metal Fabricators and Fitters
+49-9093,8,onet,"Fabric Menders, Except Garment"
+8132,9,sinco,Operadores de máquinas para la elaboración de productos farmacéuticos y cosméticos
+7211,9,sinco,"Moldeadores, torneros y troqueladores"
+8172,9,sinco,"Operadores de máquinas en la elaboración de productos de cerámica, mosaico, azulejo y similares"
+51-4031,9,onet,"Cutting, Punching, and Press Machine Setters, Operators, and Tenders, Metal and Plastic"
+51-4032,9,onet,"Drilling and Boring Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
+51-4033,9,onet,"Grinding, Lapping, Polishing, and Buffing Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
+51-4034,9,onet,"Lathe and Turning Machine Tool Setters, Operators, and Tenders, Metal and Plastic"
+51-4035,9,onet,"Milling and Planing Machine Setters, Operators, and Tenders, Metal and Plastic"
+51-9111,9,onet,Packaging and Filling Machine Operators and Tenders
+8141,9,sinco,Operadores de máquinas para el tratamiento de la madera y elaboración de aglomerados y triplay
+8145,9,sinco,Operadores de máquinas para la elaboración de productos a base de papel y cartón
+7223,9,sinco,"Joyeros, orfebres, plateros y pulidores de metal"
+8123,9,sinco,"Operadores de máquinas que cortan, perforan, doblan, troquelan, sueldan, etc., piezas y productos metálicos"
+51-9071,9,onet,Jewelers and Precious Stone and Metal Workers
+2541,10,sinco,Diseñadores de moda y vestuario
+27-1023,10,onet,Floral Designers
+27-1026,10,onet,Merchandise Displayers and Window Trimmers
+27-1029,10,onet,"Designers, All Other"
+27-1021,10,onet,Commercial and Industrial Designers
+27-1027,10,onet,Set and Exhibit Designers
+27-1022,10,onet,Fashion Designers
+2164,10,sinco,Escenógrafos
+27-1024,10,onet,Graphic Designers
+27-1025,10,onet,Interior Designers
+2542,10,sinco,Diseñadores industriales
+2543,10,sinco,Diseñadores gráficos
+2544,10,sinco,"Decoradores de interiores, jardines y diversos materiales (tazas, llaveros, etcétera)"
+19-1021,11,onet,Biochemists and Biophysicists
+19-1029,11,onet,"Biological Scientists, All Other"
+19-1022,11,onet,Microbiologists
+19-1023,11,onet,Zoologists and Wildlife Biologists
+19-1099,11,onet,"Life Scientists, All Other"
+19-2042,11,onet,"Geoscientists, Except Hydrologists and Geographers"
+19-2041,11,onet,"Environmental Scientists and Specialists, Including Health"
+19-2043,11,onet,Hydrologists
+29-2012,11,onet,Medical and Clinical Laboratory Technicians
+29-2011,11,onet,Medical and Clinical Laboratory Technologists
+2221,11,sinco,Biólogos y especialistas en ciencias del mar y oceanógrafos
+2234,11,sinco,Especialistas en pesca y en acuacultura
+2813,11,sinco,Técnicos de laboratorios médicos
+2632,12,sinco,Mecánicos en mantenimiento y reparación de vehículos de motor
+49-3011,12,onet,Aircraft Mechanics and Service Technicians
+49-3023,12,onet,Automotive Service Technicians and Mechanics
+49-3021,12,onet,Automotive Body and Related Repairers
+49-3022,12,onet,Automotive Glass Installers and Repairers
+49-3031,12,onet,Bus and Truck Mechanics and Diesel Engine Specialists
+49-3043,12,onet,Rail Car Repairers
+49-3042,12,onet,"Mobile Heavy Equipment Mechanics, Except Engines"
+49-3041,12,onet,Farm Equipment Mechanics and Service Technicians
+49-3052,12,onet,Motorcycle Mechanics
+49-3051,12,onet,Motorboat Mechanics and Service Technicians
+49-3053,12,onet,Outdoor Power Equipment and Other Small Engine Mechanics
+5411,13,sinco,Trabajadores de la fuerza armada aérea
+5412,13,sinco,Trabajadores de la fuerza armada marítima
+5413,13,sinco,Trabajadores de la fuerza armada terrestre
+55-3011,13,onet,Air Crew Members
+55-3012,13,onet,Aircraft Launch and Recovery Specialists
+55-3018,13,onet,Special Forces
+55-3016,13,onet,Infantry
+55-3015,13,onet,Command and Control Center Specialists
+55-3014,13,onet,Artillery and Missile Crew Members
+55-3019,13,onet,"Military Enlisted Tactical Operations and Air/Weapons Specialists and Crew Members, All Other"
+55-3013,13,onet,Armored Assault Vehicle Crew Members
+2652,13,sinco,Técnicos en operaciones de equipos de radio
+3112,14,sinco,"Taquígrafos, mecanógrafos y similares"
+3113,14,sinco,Capturistas de datos
+31-9097,14,onet,Phlebotomists
+31-9093,14,onet,Medical Equipment Preparers
+31-9099,14,onet,"Healthcare Support Workers, All Other"
+31-9094,14,onet,Medical Transcriptionists
+31-9092,14,onet,Medical Assistants
+31-9091,14,onet,Dental Assistants
+31-9095,14,onet,Pharmacy Aides
+31-9096,14,onet,Veterinary Assistants and Laboratory Animal Caretakers
+43-9022,14,onet,Word Processors and Typists
+43-9021,14,onet,Data Entry Keyers
+9411,15,sinco,Ayudantes en la preparación de alimentos
+35-2013,15,onet,"Cooks, Private Household"
+35-2015,15,onet,"Cooks, Short Order"
+35-2014,15,onet,"Cooks, Restaurant"
+35-2012,15,onet,"Cooks, Institution and Cafeteria"
+35-2019,15,onet,"Cooks, All Other"
+35-2011,15,onet,"Cooks, Fast Food"
+35-2021,15,onet,Food Preparation Workers
+5111,15,sinco,Cocineros
+5112,15,sinco,"Fonderos, vendedores y comerciantes de comida"
+5113,15,sinco,Cocineros domésticos
+5114,15,sinco,"Taqueros y preparadores de comida rápida, antojitos, pizzas, hot dogs, jugos, café, etcétera"
+5312,16,sinco,Policías y agentes de tránsito
+5314,16,sinco,Vigilantes y porteros en casas particulares
+33-3012,16,onet,Correctional Officers and Jailers
+33-3011,16,onet,Bailiffs
+33-3041,16,onet,Parking Enforcement Workers
+33-3052,16,onet,Transit and Railroad Police
+33-3051,16,onet,Police and Sheriff's Patrol Officers
+33-9092,16,onet,"Lifeguards, Ski Patrol, and Other Recreational Protective Service Workers"
+33-9091,16,onet,Crossing Guards and Flaggers
+33-9093,16,onet,Transportation Security Screeners
+33-9099,16,onet,"Protective Service Workers, All Other"
+9221,17,sinco,Trabajadores de apoyo en la construcción
+9222,17,sinco,Trabajadores de apoyo en plomería e instalación de tuberías
+47-2061,17,onet,Construction Laborers
+47-3013,17,onet,Helpers--Electricians
+47-3016,17,onet,Helpers--Roofers
+47-3011,17,onet,"Helpers--Brickmasons, Blockmasons, Stonemasons, and Tile and Marble Setters"
+47-3015,17,onet,"Helpers--Pipelayers, Plumbers, Pipefitters, and Steamfitters"
+47-3014,17,onet,"Helpers--Painters, Paperhangers, Plasterers, and Stucco Masons"
+47-3012,17,onet,Helpers--Carpenters
+47-3019,17,onet,"Helpers, Construction Trades, All Other"
+47-4051,17,onet,Highway Maintenance Workers
+1225,18,sinco,Comandantes de las fuerzas armadas
+1525,18,sinco,"Capitanes, tenientes y jefes de área de las fuerzas armadas"
+55-1013,18,onet,Armored Assault Vehicle Officers
+55-1014,18,onet,Artillery and Missile Officers
+55-1017,18,onet,Special Forces Officers
+55-1015,18,onet,Command and Control Center Officers
+55-1012,18,onet,Aircraft Launch and Recovery Officers
+55-1011,18,onet,Air Crew Officers
+55-1019,18,onet,"Military Officer Special and Tactical Operations Leaders, All Other"
+55-1016,18,onet,Infantry Officers
+29-1129,19,onet,"Therapists, All Other"
+29-1122,19,onet,Occupational Therapists
+29-1125,19,onet,Recreational Therapists
+29-1127,19,onet,Speech-Language Pathologists
+29-1126,19,onet,Respiratory Therapists
+29-1128,19,onet,Exercise Physiologists
+29-1123,19,onet,Physical Therapists
+29-1124,19,onet,Radiation Therapists
+29-1181,19,onet,Audiologists
+2427,19,sinco,"Fisioterapeutas, audiólogos y logopedas"
+7331,20,sinco,Trabajadores en la preparación de fibras e hilados
+51-6031,20,onet,Sewing Machine Operators
+51-6062,20,onet,"Textile Cutting Machine Setters, Operators, and Tenders"
+51-6063,20,onet,"Textile Knitting and Weaving Machine Setters, Operators, and Tenders"
+51-6064,20,onet,"Textile Winding, Twisting, and Drawing Out Machine Setters, Operators, and Tenders"
+51-6061,20,onet,Textile Bleaching and Dyeing Machine Operators and Tenders
+8152,20,sinco,"Operadores de máquinas para fabricar tejidos de punto, telas y alfombras"
+7352,20,sinco,"Peleteros, cortadores, curtidores y teñidores de cuero, piel y similares"
+8153,20,sinco,"Operadores de máquinas de costura, bordado y de corte para la confección de productos textiles y prendas de vestir"
+8155,20,sinco,"Operadores de máquinas de lavado, blanqueo, teñido, estampado, afelpado, planchado y acabado de productos textiles, cuero, piel y similares"
+7201,21,sinco,Supervisores de artesanos y trabajadores en el tratamiento y elaboración de productos de metal
+7301,21,sinco,"Supervisores de artesanos y trabajadores en la elaboración de productos de madera, papel, textiles y de cuero y piel"
+8101,21,sinco,Supervisores de operadores de maquinaria industrial
+7401,21,sinco,"Supervisores de artesanos y trabajadores en la elaboración de productos de hule, caucho, plásticos y de sustancias químicas"
+8201,21,sinco,"Supervisores en procesos de ensamblado y montaje de  maquinaria, herramientas y productos metálicos y electrónicos"
+51-9061,21,onet,"Inspectors, Testers, Sorters, Samplers, and Weighers"
+1613,21,sinco,Coordinadores y jefes de área en generación y provisión de energía eléctrica y agua
+7601,21,sinco,"Supervisores de artesanos y trabajadores en la elaboración de productos de cerámica, vidrio, azulejo y similares"
+51-1011,21,onet,First-Line Supervisors of Production and Operating Workers
+43-4011,22,onet,Brokerage Clerks
+43-4041,22,onet,"Credit Authorizers, Checkers, and Clerks"
+43-4131,22,onet,Loan Interviewers and Clerks
+13-2071,22,onet,Credit Counselors
+13-2072,22,onet,Loan Officers
+2512,22,sinco,"Auxiliares en contabilidad, economía, finanzas y agentes de bolsa"
+13-2041,22,onet,Credit Analysts
+43-3021,22,onet,Billing and Posting Clerks
+43-3031,22,onet,"Bookkeeping, Accounting, and Auditing Clerks"
+2131,23,sinco,"Antropólogos, arqueólogos e historiadores"
+19-3099,23,onet,"Social Scientists and Related Workers, All Other"
+19-3091,23,onet,Anthropologists and Archeologists
+19-3093,23,onet,Historians
+19-3092,23,onet,Geographers
+19-3094,23,onet,Political Scientists
+2133,23,sinco,Investigadores y especialistas en ciencias políticas y administración pública
+2134,23,sinco,Geógrafos
+2141,23,sinco,Investigadores y especialistas en filosofía y letras (filólogos)
+27-1019,24,onet,"Artists and Related Workers, All Other"
+27-1011,24,onet,Art Directors
+27-1012,24,onet,Craft Artists
+27-1013,24,onet,"Fine Artists, Including Painters, Sculptors, and Illustrators"
+27-1014,24,onet,Special Effects Artists and Animators
+2161,24,sinco,Pintores
+2162,24,sinco,"Dibujantes y diseñadores artísticos, ilustradores y grabadores"
+2163,24,sinco,Escultores
+7611,24,sinco,Alfareros y trabajadores ceramistas
+2312,25,sinco,"Pedagogos, orientadores educativos y otros especialistas en ciencias educativas"
+21-1011,25,onet,Substance Abuse and Behavioral Disorder Counselors
+21-1012,25,onet,"Educational, Guidance, and Career Counselors and Advisors"
+21-1013,25,onet,Marriage and Family Therapists
+21-1015,25,onet,Rehabilitation Counselors
+21-1019,25,onet,"Counselors, All Other"
+21-1014,25,onet,Mental Health Counselors
+25-9031,25,onet,Instructional Coordinators
+2711,25,sinco,Auxiliares y técnicos en pedagogía y en educación
+2511,26,sinco,"Auxiliares en administración, mercadotecnia, comercialización y comercio exterior"
+13-1051,26,onet,Cost Estimators
+13-1131,26,onet,Fundraisers
+19-3022,26,onet,Survey Researchers
+43-3051,26,onet,Payroll and Timekeeping Clerks
+43-3061,26,onet,Procurement Clerks
+43-4161,26,onet,"Human Resources Assistants, Except Payroll and Timekeeping"
+43-5061,26,onet,"Production, Planning, and Expediting Clerks"
+43-9041,26,onet,Insurance Claims and Policy Processing Clerks
+2531,27,sinco,Auxiliares en ciencias sociales y humanistas
+19-4061,27,onet,Social Science Research Assistants
+21-1091,27,onet,Health Educators
+21-1094,27,onet,Community Health Workers
+21-1093,27,onet,Social and Human Service Assistants
+21-1099,27,onet,"Community and Social Service Specialists, All Other"
+21-1092,27,onet,Probation Officers and Correctional Treatment Specialists
+25-4031,27,onet,Library Technicians
+43-4121,27,onet,"Library Assistants, Clerical"
+49-3091,28,onet,Bicycle Repairers
+49-3093,28,onet,Tire Repairers and Changers
+49-3092,28,onet,Recreational Vehicle Service Technicians
+51-4062,28,onet,"Patternmakers, Metal and Plastic"
+51-4061,28,onet,"Model Makers, Metal and Plastic"
+51-4111,28,onet,Tool and Die Makers
+2634,28,sinco,Mecánicos en mantenimiento y reparación de maquinaria e instrumentos industriales
+7411,28,sinco,"Trabajadores en la elaboración y reparación de productos de hule, caucho, plásticos y vulcanización de neumáticos"
+47-2011,28,onet,Boilermakers
+13-1081,29,onet,Logisticians
+13-1111,29,onet,Management Analysts
+13-1141,29,onet,"Compensation, Benefits, and Job Analysis Specialists"
+25-9021,29,onet,Farm and Home Management Educators
+13-1022,29,onet,"Wholesale and Retail Buyers, Except Farm Products"
+13-1023,29,onet,"Purchasing Agents, Except Wholesale, Retail, and Farm Products"
+13-1021,29,onet,"Buyers and Purchasing Agents, Farm Products"
+2111,29,sinco,Administradores y especialistas en recursos humanos y sistemas de gestión
+53-7081,30,onet,Refuse and Recyclable Material Collectors
+8341,30,sinco,"Conductores de camiones, camionetas y automóviles de carga"
+4214,30,sinco,Choferes vendedores
+9621,30,sinco,Barrenderos y trabajadores de limpieza  (excepto en hoteles y restaurantes)
+53-3032,30,onet,Heavy and Tractor-Trailer Truck Drivers
+53-3033,30,onet,Light Truck Drivers
+53-3031,30,onet,Driver/Sales Workers
+9661,30,sinco,Recolectores de basura y material reciclable
+5212,31,sinco,"Maquillistas, manicuristas, pedicuristas y tatuadores"
+39-5093,31,onet,Shampooers
+39-5011,31,onet,Barbers
+39-5012,31,onet,"Hairdressers, Hairstylists, and Cosmetologists"
+5211,31,sinco,"Peluqueros, barberos, estilistas y peinadores"
+39-5091,31,onet,"Makeup Artists, Theatrical and Performance"
+39-5094,31,onet,Skincare Specialists
+39-5092,31,onet,Manicurists and Pedicurists
+47-2121,32,onet,Glaziers
+47-2131,32,onet,"Insulation Workers, Floor, Ceiling, and Wall"
+47-2132,32,onet,"Insulation Workers, Mechanical"
+47-2171,32,onet,Reinforcing Iron and Rebar Workers
+47-4031,32,onet,Fence Erectors
+47-4099,32,onet,"Construction and Related Workers, All Other"
+47-4091,32,onet,Segmental Pavers
+7133,32,sinco,"Instaladores de material aislante, de impermeabilización, vidrio y otros materiales"
+7351,33,sinco,Tapiceros
+7342,33,sinco,Artesanos y confeccionadores de productos textiles
+7344,33,sinco,Patronistas de productos textiles
+8151,33,sinco,Operadores de máquinas y equipos de hilar y bobinar fibras textiles naturales y sintética
+51-6092,33,onet,Fabric and Apparel Patternmakers
+51-6091,33,onet,"Extruding and Forming Machine Setters, Operators, and Tenders, Synthetic and Glass Fibers"
+51-6099,33,onet,"Textile, Apparel, and Furnishings Workers, All Other"
+51-6093,33,onet,Upholsterers
+8173,34,sinco,Operadores de máquinas en la elaboración de vidrio y productos de vidrio y similares
+51-2099,34,onet,"Assemblers and Fabricators, All Other"
+51-2093,34,onet,Timing Device Assemblers and Adjusters
+51-2091,34,onet,Fiberglass Laminators and Fabricators
+51-2092,34,onet,Team Assemblers
+8211,34,sinco,"Ensambladores y montadores de herramientas, maquinaria, equipos y productos metálicos"
+51-2011,34,onet,"Aircraft Structure, Surfaces, Rigging, and Systems Assemblers"
+51-2031,34,onet,Engine and Other Machine Assemblers
+53-7199,35,onet,"Material Moving Workers, All Other"
+9712,35,sinco,Empacadores de objetos y mercancías
+9331,35,sinco,Cargadores
+53-7064,35,onet,"Packers and Packagers, Hand"
+53-7062,35,onet,"Laborers and Freight, Stock, and Material Movers, Hand"
+53-7061,35,onet,Cleaners of Vehicles and Equipment
+53-7063,35,onet,Machine Feeders and Offbearers
+53-7121,35,onet,"Tank Car, Truck, and Ship Loaders"
+1411,36,sinco,"Directores y gerentes de ventas, comercialización y alquiler"
+11-9141,36,onet,"Property, Real Estate, and Community Association Managers"
+11-2022,36,onet,Sales Managers
+11-2021,36,onet,Marketing Managers
+1134,36,sinco,Directores de organizaciones agrarias
+1711,36,sinco,"Coordinadores y jefes de área de ventas, comercialización y alquiler"
+4111,36,sinco,Comerciantes en establecimientos
+1312,37,sinco,"Directores y gerentes en producción minera, petrolera y gas"
+1313,37,sinco,Directores y gerentes en generación y provisión de energía eléctrica y agua
+1322,37,sinco,Directores y gerentes en comunicación y telecomunicaciones
+11-9199,37,onet,"Managers, All Other"
+1619,37,sinco,"Otros coordinadores y jefes de área en producción agropecuaria, industrial, construcción y mantenimiento, no clasificados anteriormente"
+1622,37,sinco,Coordinadores y jefes de área en comunicación y telecomunicaciones
+1629,37,sinco,"Otros coordinadores y jefes de área  en informática, telecomunicaciones, transporte y en investigación y desarrollo tecnológico, no clasificados anteriormente"
+1223,38,sinco,Directores y gerentes en centros de enseñanza y capacitación
+11-3131,38,onet,Training and Development Managers
+11-9039,38,onet,"Education Administrators, All Other"
+11-9031,38,onet,"Education and Childcare Administrators, Preschool and Day Care"
+11-9032,38,onet,"Education Administrators, Kindergarten through Grade 12"
+11-9033,38,onet,"Education Administrators, Postsecondary"
+1523,38,sinco,Coordinadores y jefes de área en centros de enseñanza y capacitación
+2311,39,sinco,Supervisores e inspectores educativos
+13-1041,39,onet,Compliance Officers
+43-4031,39,onet,"Court, Municipal, and License Clerks"
+45-2011,39,onet,Agricultural Inspectors
+47-4011,39,onet,Construction and Building Inspectors
+2523,39,sinco,Agentes de recaudación tributaria y de licencias
+2524,39,sinco,"Inspectores en seguridad social, de precios y otros inspectores públicos"
+19-4021,40,onet,Biological Technicians
+19-4031,40,onet,Chemical Technicians
+19-4051,40,onet,Nuclear Technicians
+19-4099,40,onet,"Life, Physical, and Social Science Technicians, All Other"
+19-4092,40,onet,Forensic Science Technicians
+2612,40,sinco,"Auxiliares y técnicos en ciencias biológicas, químicas y del medio ambiente"
+2614,40,sinco,"Auxiliares y técnicos en veterinaria, pesca y forestación"
+49-9062,41,onet,Medical Equipment Repairers
+49-9063,41,onet,Musical Instrument Repairers and Tuners
+49-9069,41,onet,"Precision Instrument and Equipment Repairers, All Other"
+49-9061,41,onet,Camera and Photographic Equipment Repairers
+49-9064,41,onet,Watch Repairers
+2636,41,sinco,Mecánicos en mantenimiento y reparación de instrumentos de precisión y musicales
+51-4041,41,onet,Machinists
+51-9081,42,onet,Dental Laboratory Technicians
+51-9082,42,onet,Medical Appliance Technicians
+51-9083,42,onet,Ophthalmic Laboratory Technicians
+29-2099,42,onet,"Health Technologists and Technicians, All Other"
+29-2091,42,onet,Orthotists and Prosthetists
+29-2092,42,onet,Hearing Aid Specialists
+2815,42,sinco,Técnicos de prótesis médicas y dentales
+39-3092,43,onet,Costume Attendants
+39-3093,43,onet,"Locker Room, Coatroom, and Dressing Room Attendants"
+39-3091,43,onet,Amusement and Recreation Attendants
+5999,43,sinco,"Otras ocupaciones en servicios personales y vigilancia, no clasificadas anteriormente"
+9713,43,sinco,"Trabajadores de apoyo a la realización de espectáculos, deportes y en parques de diversiones"
+5213,43,sinco,Bañeros y masajistas
+39-3099,43,onet,"Entertainment Attendants and Related Workers, All Other"
+37-3013,44,onet,Tree Trimmers and Pruners
+37-3012,44,onet,"Pesticide Handlers, Sprayers, and Applicators, Vegetation"
+37-3019,44,onet,"Grounds Maintenance Workers, All Other"
+37-3011,44,onet,Landscaping and Groundskeeping Workers
+9651,44,sinco,Ayudantes de jardineros
+5241,44,sinco,Jardineros en establecimientos
+5242,44,sinco,Jardineros en casas particulares
+47-2051,45,onet,Cement Masons and Concrete Finishers
+47-2042,45,onet,"Floor Layers, Except Carpet, Wood, and Hard Tiles"
+47-2041,45,onet,Carpet Installers
+7132,45,sinco,"Instaladores de pisos, azulejos, mosaicos y baldosas"
+47-2044,45,onet,Tile and Stone Setters
+47-2043,45,onet,Floor Sanders and Finishers
+47-2053,45,onet,Terrazzo Workers and Finishers
+37-2011,46,onet,"Janitors and Cleaners, Except Maids and Housekeeping Cleaners"
+37-2019,46,onet,"Building Cleaning Workers, All Other"
+37-2012,46,onet,Maids and Housekeeping Cleaners
+35-9021,46,onet,Dishwashers
+9611,46,sinco,Trabajadores domésticos
+9643,46,sinco,Lavanderos y planchadores domésticos
+9623,46,sinco,Mozos de hotel y restaurante
+11-2011,47,onet,Advertising and Promotions Managers
+11-3061,47,onet,Purchasing Managers
+1511,47,sinco,"Coordinadores y jefes de área en administración, recursos humanos y mercadotecnia"
+11-3111,47,onet,Compensation and Benefits Managers
+11-3121,47,onet,Human Resources Managers
+1211,47,sinco,"Directores y gerentes en administración, recursos humanos y mercadotecnia"
+1224,48,sinco,"Jueces de juzgado, directores y gerentes en servicios legales y procuración de justicia"
+1226,48,sinco,Directores en servicios de vigilancia y seguridad
+1524,48,sinco,"Coordinadores y jefes de área en servicios legales, jueces calificadores y fiscales"
+23-1022,48,onet,"Arbitrators, Mediators, and Conciliators"
+23-1023,48,onet,"Judges, Magistrate Judges, and Magistrates"
+23-1021,48,onet,"Administrative Law Judges, Adjudicators, and Hearing Officers"
+27-2012,49,onet,Producers and Directors
+27-2011,49,onet,Actors
+1421,49,sinco,"Directores y productores artísticos de cine, teatro y afines"
+13-1011,49,onet,"Agents and Business Managers of Artists, Performers, and Athletes"
+1721,49,sinco,"Coordinadores y jefes de área en actividades artísticas, de cine, teatro y afines"
+2175,49,sinco,Actores
+2144,50,sinco,"Especialistas en archivonomía, biblioteconomía y museografía"
+25-4012,50,onet,Curators
+25-4013,50,onet,Museum Technicians and Conservators
+25-4011,50,onet,Archivists
+1422,50,sinco,"Directores y gerentes de museos, cines y otros establecimientos deportivos y culturales"
+1722,50,sinco,"Coordinadores y jefes de área en museos, cines, deportivos y servicios culturales"
+33-1021,51,onet,First-Line Supervisors of Fire Fighting and Prevention Workers
+33-1012,51,onet,First-Line Supervisors of Police and Detectives
+33-1011,51,onet,First-Line Supervisors of Correctional Officers
+33-1099,51,onet,"First-Line Supervisors of Protective Service Workers, All Other"
+5301,51,sinco,Supervisores en servicios de protección y vigilancia
+1526,51,sinco,Coordinadores y jefes de área en servicios de vigilancia y seguridad
+2122,52,sinco,Asesores y analistas en finanzas
+13-2052,52,onet,Personal Financial Advisors
+13-2051,52,onet,Financial and Investment Analysts
+13-2053,52,onet,Insurance Underwriters
+13-2061,52,onet,Financial Examiners
+13-2099,52,onet,"Financial Specialists, All Other"
+15-2041,53,onet,Statisticians
+15-2099,53,onet,"Mathematical Science Occupations, All Other"
+2212,53,sinco,"Investigadores y especialistas en matemáticas, estadística y actuaría"
+15-2011,53,onet,Actuaries
+15-2021,53,onet,Mathematicians
+15-2031,53,onet,Operations Research Analysts
+2241,54,sinco,Ingenieros eléctricos
+2242,54,sinco,Ingenieros electrónicos
+2281,54,sinco,Ingenieros en comunicaciones y telecomunicaciones
+17-2072,54,onet,"Electronics Engineers, Except Computer"
+17-2071,54,onet,Electrical Engineers
+17-2141,54,onet,Mechanical Engineers
+29-1029,55,onet,"Dentists, All Other Specialists"
+29-1023,55,onet,Orthodontists
+2413,55,sinco,Dentistas
+29-1021,55,onet,"Dentists, General"
+29-1024,55,onet,Prosthodontists
+29-1022,55,onet,Oral and Maxillofacial Surgeons
+2561,56,sinco,Deportistas
+2562,56,sinco,Entrenadores deportivos y directores técnicos
+2563,56,sinco,Árbitros y jueces deportivos
+27-2022,56,onet,Coaches and Scouts
+27-2023,56,onet,"Umpires, Referees, and Other Sports Officials"
+27-2021,56,onet,Athletes and Sports Competitors
+39-3011,57,onet,Gambling Dealers
+39-3019,57,onet,"Gambling Service Workers, All Other"
+39-3012,57,onet,Gambling and Sports Book Writers and Runners
+39-7012,57,onet,Travel Guides
+39-7011,57,onet,Tour Guides and Escorts
+3222,57,sinco,"Guías de turismo en museos, casinos, parques, cines y otros centros recreativos"
+4211,58,sinco,"Empleados de ventas, despachadores y dependientes en comercios"
+4212,58,sinco,"Anaqueleros, acomodadores y seleccionadores de mercancías y alimentadores de máquinas expendedoras"
+41-2021,58,onet,Counter and Rental Clerks
+41-2022,58,onet,Parts Salespersons
+41-2031,58,onet,Retail Salespersons
+4312,58,sinco,"Trabajadores en el alquiler de bienes muebles (loza, películas, video juegos, etcétera)"
+5313,59,sinco,Vigilantes y guardias en establecimientos
+33-3031,59,onet,Fish and Game Wardens
+33-9011,59,onet,Animal Control Workers
+33-9032,59,onet,Security Guards
+33-9031,59,onet,Gambling Surveillance Officers and Gambling Investigators
+39-3031,59,onet,"Ushers, Lobby Attendants, and Ticket Takers"
+45-4029,60,onet,"Logging Workers, All Other"
+45-4022,60,onet,Logging Equipment Operators
+45-4021,60,onet,Fallers
+45-4023,60,onet,Log Graders and Scalers
+6221,60,sinco,"Taladores, trocadores, cortadores de árboles y similares"
+6222,60,sinco,"Caucheros, chicleros, resineros y similares"
+7213,61,sinco,"Hojalateros, chaperos, latoneros, cobreros y pintores de metales"
+7312,61,sinco,Pintores y barnizadores de madera
+47-2211,61,onet,Sheet Metal Workers
+51-9123,61,onet,"Painting, Coating, and Decorating Workers"
+51-9121,61,onet,"Coating, Painting, and Spraying Machine Setters, Operators, and Tenders"
+51-9122,61,onet,"Painters, Transportation Equipment"
+51-4052,62,onet,"Pourers and Casters, Metal"
+51-4051,62,onet,Metal-Refining Furnace Operators and Tenders
+8121,62,sinco,"Operadores de hornos metalúrgicos, coladores y laminadores y operadores de máquinas trefiladoras y estiradoras de metales"
+51-4022,62,onet,"Forging Machine Setters, Operators, and Tenders, Metal and Plastic"
+51-4023,62,onet,"Rolling Machine Setters, Operators, and Tenders, Metal and Plastic"
+51-4021,62,onet,"Extruding and Drawing Machine Setters, Operators, and Tenders, Metal and Plastic"
+8199,63,sinco,"Otros operadores de instalaciones y maquinaria fija industrial, no clasificados anteriormente"
+47-5021,63,onet,"Earth Drillers, Except Oil and Gas"
+8113,63,sinco,"Operadores de máquinas y equipos para la captación, bombeo y distribución de agua"
+53-7073,63,onet,Wellhead Pumpers
+53-7071,63,onet,Gas Compressor and Gas Pumping Station Operators
+53-7072,63,onet,"Pump Operators, Except Wellhead Pumpers"
+51-4194,64,onet,"Tool Grinders, Filers, and Sharpeners"
+51-4192,64,onet,"Layout Workers, Metal and Plastic"
+8122,64,sinco,"Operadores de máquinas pulidoras, galvanizadoras y recubridoras de metal"
+51-4193,64,onet,"Plating and Coating Machine Setters, Operators, and Tenders, Metal and Plastic"
+51-4199,64,onet,"Metal Workers and Plastic Workers, All Other"
+51-4191,64,onet,"Heat Treating Equipment Setters, Operators, and Tenders, Metal and Plastic"
+51-9051,65,onet,"Furnace, Kiln, Oven, Drier, and Kettle Operators and Tenders"
+51-8012,65,onet,Power Distributors and Dispatchers
+51-8013,65,onet,Power Plant Operators
+8181,65,sinco,Operadores de máquinas e instalaciones para la generación de energía
+51-8021,65,onet,Stationary Engineers and Boiler Operators
+51-8011,65,onet,Nuclear Power Reactor Operators
+9312,66,sinco,Ayudantes de conductores de transporte en vías férreas
+53-4013,66,onet,"Rail Yard Engineers, Dinkey Operators, and Hostlers"
+53-4011,66,onet,Locomotive Engineers
+53-4041,66,onet,Subway and Streetcar Operators
+8331,66,sinco,"Conductores de transporte en vías férreas (tren, metro y tren ligero)"
+53-4099,66,onet,"Rail Transportation Workers, All Other"
+11-1011,67,onet,Chief Executives
+1122,67,sinco,Presidentes y directores generales en instituciones y empresas privadas
+11-1021,67,onet,General and Operations Managers
+1121,67,sinco,Presidentes y directores generales en instituciones públicas
+1111,67,sinco,Altas autoridades gubernamentales y jurisdiccionales
+11-9041,68,onet,Architectural and Engineering Managers
+1315,68,sinco,"Directores y gerentes en construcción, reparación y mantenimiento"
+11-9121,68,onet,Natural Sciences Managers
+1324,68,sinco,Directores y gerentes en centros de investigación y desarrollo tecnológico
+1624,68,sinco,Coordinadores y jefes de área en centros de investigación y desarrollo tecnológico
+13-1074,69,onet,Farm Labor Contractors
+25-3021,69,onet,Self-Enrichment Teachers
+2712,69,sinco,Instructores en estudios y capacitación artística
+13-1071,69,onet,Human Resources Specialists
+13-1075,69,onet,Labor Relations Specialists
+21-1023,70,onet,Mental Health and Substance Abuse Social Workers
+21-1021,70,onet,"Child, Family, and School Social Workers"
+21-1029,70,onet,"Social Workers, All Other"
+21-1022,70,onet,Healthcare Social Workers
+2143,70,sinco,Especialistas en trabajo social
+27-2041,71,onet,Music Directors and Composers
+27-2042,71,onet,Musicians and Singers
+2171,71,sinco,Compositores y arreglistas
+2172,71,sinco,Músicos
+2173,71,sinco,Cantantes
+2341,72,sinco,Profesores de personas con problemas de audición y lenguaje
+2342,72,sinco,Profesores de personas con problemas de aprendizaje
+2343,72,sinco,Otros profesores de enseñanza especial
+25-2051,72,onet,"Special Education Teachers, Pre-Kindergarten"
+25-2059,72,onet,"Special Education Teachers, All Other"
+33-2021,73,onet,Fire Inspectors and Investigators
+33-2022,73,onet,Forest Fire Inspectors and Prevention Specialists
+33-3021,73,onet,Detectives and Criminal Investigators
+33-9021,73,onet,Private Detectives and Investigators
+2521,73,sinco,Oficiales del ministerio público y detectives
+2625,74,sinco,Dibujantes técnicos
+17-3019,74,onet,"Drafters, All Other"
+17-3012,74,onet,Electrical and Electronics Drafters
+17-3011,74,onet,Architectural and Civil Drafters
+17-3013,74,onet,Mechanical Drafters
+49-9043,75,onet,"Maintenance Workers, Machinery"
+49-9045,75,onet,"Refractory Materials Repairers, Except Brickmasons"
+7212,75,sinco,Soldadores y oxicortadores
+51-4121,75,onet,"Welders, Cutters, Solderers, and Brazers"
+51-4122,75,onet,"Welding, Soldering, and Brazing Machine Setters, Operators, and Tenders"
+2642,76,sinco,Electricistas y linieros
+47-2111,76,onet,Electricians
+47-2231,76,onet,Solar Photovoltaic Installers
+49-9051,76,onet,Electrical Power-Line Installers and Repairers
+49-9052,76,onet,Telecommunications Line Installers and Repairers
+27-4012,77,onet,Broadcast Technicians
+27-4014,77,onet,Sound Engineering Technicians
+27-4011,77,onet,Audio and Video Technicians
+27-4099,77,onet,"Media and Communication Equipment Workers, All Other"
+2654,77,sinco,"Auxiliares y técnicos de ingeniería de audio, sonido e iluminación"
+2821,78,sinco,Auxiliares en enfermería y paramédicos
+31-1014,78,onet,Nursing Assistants
+31-1011,78,onet,Home Health Aides
+31-1015,78,onet,Orderlies
+31-1013,78,onet,Psychiatric Aides
+43-6012,79,onet,Legal Secretaries and Administrative Assistants
+43-6014,79,onet,"Secretaries and Administrative Assistants, Except Legal, Medical, and Executive"
+43-6011,79,onet,Executive Secretaries and Executive Administrative Assistants
+43-6013,79,onet,Medical Secretaries and Administrative Assistants
+3111,79,sinco,Secretarias
+43-4051,80,onet,Customer Service Representatives
+43-4081,80,onet,"Hotel, Motel, and Resort Desk Clerks"
+43-4171,80,onet,Receptionists and Information Clerks
+43-4199,80,onet,"Information and Record Clerks, All Other"
+3211,80,sinco,Recepcionistas y trabajadores que brindan información (de forma personal)
+9511,81,sinco,Vendedores ambulantes de periódicos y lotería
+9512,81,sinco,Vendedores ambulantes de artículos diversos (excluyendo los de venta de alimentos)
+4999,81,sinco,"Otros comerciantes, empleados en ventas y agentes de ventas en establecimientos, no clasificados anteriormente"
+41-9099,81,onet,"Sales and Related Workers, All Other"
+41-9091,81,onet,"Door-to-Door Sales Workers, News and Street Vendors, and Related Workers"
+9121,82,sinco,Trabajadores de apoyo en actividades silvícolas y forestales
+45-4011,82,onet,Forest and Conservation Workers
+6224,82,sinco,"Trabajadores en actividades de plantación, reforestación y conservación de bosques"
+6225,82,sinco,Cortadores de leña
+6226,82,sinco,"Trabajadores en actividades de recolección de plantas, hierbas y raíces no cultivadas"
+43-9081,83,onet,Proofreaders and Copy Markers
+51-5112,83,onet,Printing Press Operators
+51-5113,83,onet,Print Binding and Finishing Workers
+51-5111,83,onet,Prepress Technicians and Workers
+7322,83,sinco,"Impresores, linotipistas, fotograbadores y encuadernadores"
+51-8099,84,onet,"Plant and System Operators, All Other"
+51-8091,84,onet,Chemical Plant and System Operators
+51-8092,84,onet,Gas Plant Operators
+51-8093,84,onet,"Petroleum Pump System Operators, Refinery Operators, and Gaugers"
+8135,84,sinco,Operadores de máquinas y equipos para la refinación del petróleo y gas
+8352,85,sinco,"Conductores de maquinaria móvil para el movimiento de mercancías en fábricas, puertos, comercios, etcétera"
+53-6011,85,onet,Bridge and Lock Tenders
+53-7011,85,onet,Conveyor Operators and Tenders
+53-7021,85,onet,Crane and Tower Operators
+53-7051,85,onet,Industrial Truck and Tractor Operators
+1521,86,sinco,"Coordinadores y jefes de área en servicios de salud, protección civil y medio ambiente"
+11-9161,86,onet,Emergency Management Directors
+11-9111,86,onet,Medical and Health Services Managers
+1221,86,sinco,"Directores y gerentes en servicios de salud, protección civil y medio ambiente"
+2112,87,sinco,"Especialistas y consultores en mercadotecnia, publicidad, comunicación y comercio exterior"
+13-1161,87,onet,Market Research Analysts and Marketing Specialists
+27-3031,87,onet,Public Relations Specialists
+41-9031,87,onet,Sales Engineers
+13-2011,88,onet,Accountants and Auditors
+2121,88,sinco,Contadores y auditores
+13-2081,88,onet,"Tax Examiners and Collectors, and Revenue Agents"
+13-2031,88,onet,Budget Analysts
+23-1012,89,onet,Judicial Law Clerks
+23-1011,89,onet,Lawyers
+23-2011,89,onet,Paralegals and Legal Assistants
+2135,89,sinco,Abogados
+2152,90,sinco,Periodistas y redactores
+27-3041,90,onet,Editors
+27-3042,90,onet,Technical Writers
+2151,90,sinco,Escritores y críticos literarios
+19-2012,91,onet,Physicists
+19-2011,91,onet,Astronomers
+2211,91,sinco,Investigadores y especialistas en física
+19-2099,91,onet,"Physical Scientists, All Other"
+2232,92,sinco,Veterinarios y zootecnistas
+19-1011,92,onet,Animal Scientists
+19-1012,92,onet,Food Scientists and Technologists
+29-1131,92,onet,Veterinarians
+2424,93,sinco,Especialistas en seguridad e higiene y salud pública
+19-1042,93,onet,"Medical Scientists, Except Epidemiologists"
+17-2111,93,onet,"Health and Safety Engineers, Except Mining Safety Engineers and Inspectors"
+19-1041,93,onet,Epidemiologists
+17-2151,94,onet,"Mining and Geological Engineers, Including Mining Safety Engineers"
+17-2171,94,onet,Petroleum Engineers
+2254,94,sinco,"Ingenieros en minas, metalurgia y petróleo"
+17-2131,94,onet,Materials Engineers
+29-1151,95,onet,Nurse Anesthetists
+2426,95,sinco,Enfermeras especialistas
+29-1171,95,onet,Nurse Practitioners
+29-1141,95,onet,Registered Nurses
+2514,96,sinco,"Valuadores, subastadores y rematadores"
+13-1031,96,onet,"Claims Adjusters, Examiners, and Investigators"
+13-1032,96,onet,"Insurance Appraisers, Auto Damage"
+13-2021,96,onet,Appraisers and Assessors of Real Estate
+2552,97,sinco,Animadores y organizadores de eventos
+27-3011,97,onet,Broadcast Announcers
+13-1121,97,onet,"Meeting, Convention, and Event Planners"
+2551,97,sinco,"Locutores de radio, televisión y otros medios de comunicación"
+51-9141,98,onet,Semiconductor Processing Technicians
+51-2021,98,onet,"Coil Winders, Tapers, and Finishers"
+51-2022,98,onet,Electrical and Electronic Equipment Assemblers
+8212,98,sinco,Ensambladores y montadores de partes eléctricas y electrónicas
+27-4032,99,onet,Film and Video Editors
+27-4031,99,onet,"Camera Operators, Television, Video, and Motion Picture"
+39-3021,99,onet,Motion Picture Projectionists
+2653,99,sinco,Auxiliares y técnicos de equipos de grabación y reproducción de video
+53-4031,100,onet,Railroad Conductors and Yardmasters
+53-6051,100,onet,Transportation Inspectors
+2662,100,sinco,"Controladores de tráfico de otros transportes (terrestre, ferroviario y marítimo)"
+3142,100,sinco,Checadores y revisores de transporte
+13-1199,101,onet,"Business Operations Specialists, All Other"
+17-2161,101,onet,Nuclear Engineers
+17-2199,101,onet,"Engineers, All Other"
+2991,101,sinco,Otros especialistas no clasificados anteriormente
+43-4021,102,onet,Correspondence Clerks
+3131,102,sinco,Trabajadores en archivo y correspondencia
+43-9051,102,onet,"Mail Clerks and Mail Machine Operators, Except Postal Service"
+43-4071,102,onet,File Clerks
+43-9031,103,onet,Desktop Publishers
+43-9061,103,onet,"Office Clerks, General"
+43-9199,103,onet,"Office and Administrative Support Workers, All Other"
+3999,103,sinco,"Otras secretarias, capturistas, cajeros y trabajadores que brindan información, no clasificados anteriormente"
+41-4011,104,onet,"Sales Representatives, Wholesale and Manufacturing, Technical and Scientific Products"
+4221,104,sinco,Agentes y representantes de ventas y consignatarios
+41-3011,104,onet,Advertising Sales Agents
+41-4012,104,onet,"Sales Representatives, Wholesale and Manufacturing, Except Technical and Scientific Products"
+41-3021,105,onet,Insurance Sales Agents
+41-3031,105,onet,"Securities, Commodities, and Financial Services Sales Agents"
+43-4141,105,onet,New Accounts Clerks
+4222,105,sinco,Agentes de seguros y servicios financieros (ejecutivos de cuenta)
+4311,106,sinco,"Trabajadores en el alquiler inmobiliario (casas, terrenos, etcétera)"
+41-9021,106,onet,Real Estate Brokers
+41-9022,106,onet,Real Estate Sales Agents
+4223,106,sinco,Agentes de bienes raíces
+4231,107,sinco,Demostradores y promotores
+41-9011,107,onet,Demonstrators and Product Promoters
+4233,107,sinco,"Modelos de moda, arte y publicidad"
+41-9012,107,onet,Models
+35-1012,108,onet,First-Line Supervisors of Food Preparation and Serving Workers
+7501,108,sinco,"Supervisores de trabajadores en la elaboración y procesamiento de alimentos, bebidas y productos de tabaco"
+35-1011,108,onet,Chefs and Head Cooks
+5101,108,sinco,"Supervisores en la preparación y servicio de alimentos y bebidas, así como en servicios de esparcimiento y de hotelería"
+39-9011,109,onet,Childcare Workers
+39-9021,109,onet,Personal Care Aides
+5221,109,sinco,"Cuidadores de niños, personas con discapacidad y ancianos en establecimientos"
+5222,109,sinco,"Cuidadores de niños, personas con discapacidad y ancianos en casas particulares"
+9624,110,sinco,Limpiadores de calzado
+39-9099,110,onet,"Personal Care and Service Workers, All Other"
+5251,110,sinco,"Astrólogos, adivinadores y afines"
+5252,110,sinco,Trabajadores dedicados a la prostitución
+55-2011,111,onet,First-Line Supervisors of Air Crew Members
+5401,111,sinco,Supervisores de las fuerzas armadas
+55-2012,111,onet,First-Line Supervisors of Weapons Specialists/Crew Members
+55-2013,111,onet,First-Line Supervisors of All Other Tactical Operations Specialists
+45-3011,112,onet,Fishers and Related Fishing Workers
+45-3021,112,onet,Hunters and Trappers
+9122,112,sinco,Trabajadores de apoyo en actividades de acuicultura y pesca
+6211,112,sinco,Trabajadores en actividades pesqueras
+37-1012,113,onet,"First-Line Supervisors of Landscaping, Lawn Service, and Groundskeeping Workers"
+9601,113,sinco,"Supervisores en limpieza, amas de llaves, mayordomos y en estacionamientos"
+7101,113,sinco,"Supervisores de trabajadores en la extracción, albañiles y en acabados de la construcción"
+37-1011,113,onet,First-Line Supervisors of Housekeeping and Janitorial Workers
+47-2081,114,onet,Drywall and Ceiling Tile Installers
+47-2161,114,onet,Plasterers and Stucco Masons
+7131,114,sinco,"Yeseros, escayolistas y otros recubridores de techos y paredes"
+47-2082,114,onet,Tapers
+47-2151,115,onet,Pipelayers
+47-4071,115,onet,Septic Tank Servicers and Sewer Pipe Cleaners
+7134,115,sinco,"Plomeros, fontaneros e instaladores de tubería"
+47-2152,115,onet,"Plumbers, Pipefitters, and Steamfitters"
+51-7011,116,onet,Cabinetmakers and Bench Carpenters
+51-7021,116,onet,Furniture Finishers
+51-7099,116,onet,"Woodworkers, All Other"
+7311,116,sinco,"Carpinteros, ebanistas y cepilladores en la elaboración de productos de madera"
+7353,117,sinco,Zapateros artesanales
+8154,117,sinco,"Operadores de máquinas en el tratamiento del cuero, piel y la elaboración de calzado"
+51-6041,117,onet,Shoe and Leather Workers and Repairers
+51-6042,117,onet,Shoe Machine Operators and Tenders
+47-5041,118,onet,Continuous Mining Machine Operators
+47-5049,118,onet,"Underground Mining Machine Operators, All Other"
+53-7041,118,onet,Hoist and Winch Operators
+8111,118,sinco,Operadores de máquinas y equipos para la extracción y beneficio en minas y canteras
+8112,119,sinco,Operadores de máquinas y equipos para la extracción en pozos petroleros
+47-5011,119,onet,"Derrick Operators, Oil and Gas"
+47-5013,119,onet,"Service Unit Operators, Oil and Gas"
+47-5012,119,onet,"Rotary Drill Operators, Oil and Gas"
+8114,120,sinco,Operadores de equipos portátiles especializados para la construcción
+47-2071,120,onet,"Paving, Surfacing, and Tamping Equipment Operators"
+47-2073,120,onet,Operating Engineers and Other Construction Equipment Operators
+47-2072,120,onet,Pile-Driver Operators
+51-9011,121,onet,Chemical Equipment Operators and Tenders
+51-9012,121,onet,"Separating, Filtering, Clarifying, Precipitating, and Still Machine Setters, Operators, and Tenders"
+8131,121,sinco,Operadores de máquinas para la elaboración de productos químicos
+8163,121,sinco,Operadores de máquinas en la elaboración de bebidas alcohólicas y no alcohólicas
+8321,122,sinco,Capitanes y conductores de transporte marítimo
+8324,122,sinco,"Conductores de pequeñas embarcaciones (lanchas, botes, trajineras, etcétera)"
+53-5021,122,onet,"Captains, Mates, and Pilots of Water Vessels"
+53-5022,122,onet,Motorboat Operators
+8344,123,sinco,Conductores de motocicleta
+53-3099,123,onet,"Motor Vehicle Operators, All Other"
+8349,123,sinco,"Otros conductores de transporte terrestre con motor, no clasificados anteriormente"
+8343,123,sinco,Choferes en casas particulares
+9721,124,sinco,Carteros (a pie y en bicicleta)
+43-5053,124,onet,"Postal Service Mail Sorters, Processors, and Processing Machine Operators"
+43-5051,124,onet,Postal Service Clerks
+43-5052,124,onet,Postal Service Mail Carriers
+1112,125,sinco,Legisladores
+1113,125,sinco,Presidentes y autoridades municipales
+11-1031,125,onet,Legislators
+11-3071,126,onet,"Transportation, Storage, and Distribution Managers"
+1323,126,sinco,Directores y gerentes en servicios de transporte
+1623,126,sinco,Coordinadores y jefes de área en servicios de transporte
+1512,127,sinco,"Coordinadores y jefes de área en servicios contables, financieros, banca y seguros"
+11-3031,127,onet,Financial Managers
+1212,127,sinco,"Directores y gerentes en servicios contables, financieros, banca y seguros"
+1522,128,sinco,Coordinadores y jefes de área en desarrollo social y económico
+1222,128,sinco,Directores y gerentes en desarrollo social y económico
+11-9151,128,onet,Social and Community Service Managers
+11-9013,129,onet,"Farmers, Ranchers, and Other Agricultural Managers"
+1611,129,sinco,"Coordinadores y jefes de área en producción agropecuaria, silvícola y pesquera"
+1311,129,sinco,"Directores y gerentes en producción agropecuaria, silvícola y pesquera"
+11-3051,130,onet,Industrial Production Managers
+1314,130,sinco,Directores y gerentes en producción manufacturera
+1614,130,sinco,Coordinadores y jefes de área en producción manufacturera
+1321,131,sinco,Directores y gerentes en informática
+11-3021,131,onet,Computer and Information Systems Managers
+1621,131,sinco,Coordinadores y jefes de área en informática
+11-9051,132,onet,Food Service Managers
+1712,132,sinco,Coordinadores y jefes de área de restaurantes y hoteles
+39-9041,132,onet,Residential Advisors
+6201,133,sinco,"Supervisores, encargados y capataces de trabajadores en actividades pesqueras, acuícolas, forestales, caza y similares"
+45-1011,133,onet,"First-Line Supervisors of Farming, Fishing, and Forestry Workers"
+6101,133,sinco,"Supervisores, encargados y capataces agropecuarios"
+2640,134,sinco,"Supervisores de técnicos eléctricos, en electrónica y de equipos en telecomunicaciones y electromecánicos"
+2630,134,sinco,"Supervisores de mecánicos y técnicos en mantenimiento y reparación de equipos mecánicos, vehículos  de motor, instrumentos industriales y equipo de refrigeración"
+49-1011,134,onet,"First-Line Supervisors of Mechanics, Installers, and Repairers"
+19-3041,135,onet,Sociologists
+19-3051,135,onet,Urban and Regional Planners
+2132,135,sinco,Investigadores y especialistas en sociología y desarrollo social
+2142,136,sinco,Psicólogos
+19-3039,136,onet,"Psychologists, All Other"
+19-3032,136,onet,Industrial-Organizational Psychologists
+27-3091,137,onet,Interpreters and Translators
+2153,137,sinco,Traductores e intérpretes
+27-3099,137,onet,"Media and Communication Workers, All Other"
+27-2031,138,onet,Dancers
+27-2032,138,onet,Choreographers
+2174,138,sinco,Bailarines y coreógrafos
+15-2091,139,onet,Mathematical Technicians
+2611,139,sinco,"Auxiliares y técnicos en física, matemáticas, estadística y actuaría"
+43-9111,139,onet,Statistical Assistants
+19-2032,140,onet,Materials Scientists
+19-2031,140,onet,Chemists
+2222,140,sinco,Químicos
+2223,141,sinco,Ecólogos y especialistas en ciencias atmosféricas
+19-2021,141,onet,Atmospheric and Space Scientists
+19-1031,141,onet,Conservation Scientists
+17-2021,142,onet,Agricultural Engineers
+19-1013,142,onet,Soil and Plant Scientists
+2231,142,sinco,Agrónomos
+17-2121,143,onet,Marine Engineers and Naval Architects
+17-2011,143,onet,Aerospace Engineers
+2252,143,sinco,Ingenieros mecánicos
+17-1022,144,onet,Surveyors
+17-2051,144,onet,Civil Engineers
+2261,144,sinco,Ingenieros civiles y de la construcción
+17-1011,145,onet,"Architects, Except Landscape and Naval"
+17-1012,145,onet,Landscape Architects
+2263,145,sinco,"Arquitectos, planificadores urbanos y del transporte"
+2272,146,sinco,Administradores de bases de datos y redes de computadora
+2271,146,sinco,Desarrolladores y analistas de software y multimedia
+17-2061,146,onet,Computer Hardware Engineers
+2331,147,sinco,Profesores de enseñanza secundaria
+25-2031,147,onet,"Grade 9-12 Teachers, Except Special and Career/Technical Education"
+25-2032,147,onet,"Career/Technical Education Teachers, Grade 9-12"
+2714,148,sinco,Instructores en idiomas extranjeros
+2333,148,sinco,Alfabetizadores
+25-3011,148,onet,"Adult Basic, Adult Secondary, and English as a Second Language Instructors"
+25-2011,149,onet,"Pre-kindergarten Teachers, Except Special Education"
+25-2012,149,onet,"Kindergarten Teachers, Except Special Education"
+2335,149,sinco,Profesores de enseñanza preescolar
+2532,150,sinco,Auxiliares en servicios jurídicos
+23-2093,150,onet,"Title Examiners, Abstractors, and Searchers"
+23-2099,150,onet,"Legal Support Workers, All Other"
+19-4041,151,onet,"Geological Technicians, Except Hydrologic Technicians"
+17-3031,151,onet,Surveying and Mapping Technicians
+2622,151,sinco,"Auxiliares y técnicos topógrafos, en hidrología y geología"
+2661,152,sinco,Controladores de tráfico aéreo
+53-2021,152,onet,Air Traffic Controllers
+53-2022,152,onet,Airfield Operations Specialists
+2716,153,sinco,Profesores en educación física y deporte
+39-9031,153,onet,Exercise Trainers and Group Fitness Instructors
+39-9032,153,onet,Recreation Workers
+3201,154,sinco,Supervisores de trabajadores que brindan y manejan información
+3101,154,sinco,"Supervisores de secretarias, capturistas, cajeros y trabajadores de control de archivo y transporte"
+43-1011,154,onet,First-Line Supervisors of Office and Administrative Support Workers
+43-3011,155,onet,Bill and Account Collectors
+3122,155,sinco,"Cobradores, pagadores y prestamistas"
+41-2012,155,onet,Gambling Change Persons and Booth Cashiers
+43-3071,156,onet,Tellers
+3121,156,sinco,"Cajeros, taquilleros y receptores de apuestas"
+43-3041,156,onet,Gambling Cage Workers
+3132,157,sinco,Encargados y trabajadores en control de almacén y bodega
+43-4151,157,onet,Order Clerks
+43-5111,157,onet,"Weighers, Measurers, Checkers, and Samplers, Recordkeeping"
+43-5032,158,onet,"Dispatchers, Except Police, Fire, and Ambulance"
+3141,158,sinco,Despachadores de transporte
+43-5031,158,onet,"Police, Fire, and Ambulance Dispatchers"
+3213,159,sinco,Telefonistas y telegrafistas
+43-2021,159,onet,Telephone Operators
+43-2099,159,onet,"Communications Equipment Operators, All Other"
+41-3041,160,onet,Travel Agents
+43-4181,160,onet,Reservation and Transportation Ticket Agents and Travel Clerks
+3221,160,sinco,Trabajadores en agencias de viajes
+3231,161,sinco,Encuestadores
+43-4111,161,onet,"Interviewers, Except Eligibility and Loan"
+43-4061,161,onet,"Eligibility Interviewers, Government Programs"
+4201,162,sinco,Encargados y supervisores de ventas de productos y de servicios financieros y de alquiler
+41-1011,162,onet,First-Line Supervisors of Retail Sales Workers
+41-1012,162,onet,First-Line Supervisors of Non-Retail Sales Workers
+39-4011,163,onet,Embalmers
+39-4021,163,onet,Funeral Attendants
+5253,163,sinco,Trabajadores en servicios funerarios
+39-2011,164,onet,Animal Trainers
+5254,164,sinco,Entrenadores de animales y ocupaciones relacionadas con el cuidado de mascotas
+39-2021,164,onet,Nonfarm Animal Caretakers
+6128,165,sinco,Trabajadores en actividades de beneficio de productos pecuarios
+6129,165,sinco,"Otros trabajadores en actividades ganaderas y en la cría de animales, no clasificados anteriormente"
+45-2041,165,onet,"Graders and Sorters, Agricultural Products"
+7112,166,sinco,"Trabajadores en la extracción de cantera, arcilla, arena, piedra y grava"
+47-5051,166,onet,"Rock Splitters, Quarry"
+7111,166,sinco,Mineros y trabajadores en la extracción en minas de minerales metálicos
+7121,167,sinco,"Albañiles, mamposteros y afines"
+47-2021,167,onet,Brickmasons and Blockmasons
+47-2022,167,onet,Stonemasons
+47-2141,168,onet,"Painters, Construction and Maintenance"
+47-2142,168,onet,Paperhangers
+7135,168,sinco,Pintores de brocha gorda
+51-4072,169,onet,"Molding, Coremaking, and Casting Machine Setters, Operators, and Tenders, Metal and Plastic"
+51-4071,169,onet,Foundry Mold and Coremakers
+7412,169,sinco,Trabajadores en la elaboración de sustancias y compuestos químicos
+7332,170,sinco,Tejedores de fibras
+51-6051,170,onet,"Sewers, Hand"
+51-6052,170,onet,"Tailors, Dressmakers, and Custom Sewers"
+51-7042,171,onet,"Woodworking Machine Setters, Operators, and Tenders, Except Sawing"
+51-7041,171,onet,"Sawing Machine Setters, Operators, and Tenders, Wood"
+8142,171,sinco,"Operadores de máquinas para la elaboración de productos de madera, bejuco, mimbre  y similares"
+53-2012,172,onet,Commercial Pilots
+53-2011,172,onet,"Airline Pilots, Copilots, and Flight Engineers"
+8311,172,sinco,Pilotos de aviación
+47-5081,173,onet,Helpers--Extraction Workers
+9212,173,sinco,Trabajadores de apoyo en la extracción
+47-5071,173,onet,"Roustabouts, Oil and Gas"
+9321,174,sinco,Conductores de vehículos de transporte en bicicleta
+53-6099,174,onet,"Transportation Workers, All Other"
+9322,174,sinco,"Conductores de transporte de tracción animal (carretas, arrieros, etcétera)"
+39-6011,175,onet,Baggage Porters and Bellhops
+9711,175,sinco,"Trabajadores de paquetería, maleteros y botones de hotel"
+39-6012,175,onet,Concierges
+43-5021,176,onet,Couriers and Messengers
+9722,176,sinco,Repartidores de mensajería (a pie y en bicicleta) y mandaderos
+9723,176,sinco,Repartidores de mercancías (a pie y en bicicleta)
+21-2021,177,onet,"Directors, Religious Activities and Education"
+1135,177,sinco,Directores de organizaciones civiles y religiosas
+11-9021,178,onet,Construction Managers
+1615,178,sinco,"Coordinadores y jefes de área en construcción, reparación y mantenimiento"
+11-9081,179,onet,Lodging Managers
+1412,179,sinco,Directores y gerentes de restaurantes y hoteles
+1423,180,sinco,Directores y gerentes en servicios funerarios y otros servicios
+11-9071,180,onet,Gambling Managers
+1612,181,sinco,"Coordinadores y jefes de área en producción minera, petrolera y gas"
+47-1011,181,onet,First-Line Supervisors of Construction Trades and Extraction Workers
+39-4031,182,onet,"Morticians, Undertakers, and Funeral Arrangers"
+1723,182,sinco,Coordinadores y jefes de área en servicios funerarios y otros servicios
+11-9131,183,onet,Postmasters and Mail Superintendents
+1999,183,sinco,"Otros directores, funcionarios, gerentes, coordinadores y jefes de área, no clasificados anteriormente"
+2522,184,sinco,Agentes aduanales y fronterizos
+13-2082,184,onet,Tax Preparers
+2123,185,sinco,"Economistas, consultores e investigadores en política económica"
+19-3011,185,onet,Economists
+2145,186,sinco,"Sacerdotes, pastores y otros teólogos"
+21-2011,186,onet,Clergy
+19-1032,187,onet,Foresters
+2233,187,sinco,Especialistas en forestación
+17-2041,188,onet,Chemical Engineers
+2251,188,sinco,Ingenieros químicos
+2253,189,sinco,Ingenieros industriales
+17-2112,189,onet,Industrial Engineers
+17-1021,190,onet,Cartographers and Photogrammetrists
+2262,190,sinco,"Ingenieros en topografía, hidrología, geología y geodesia"
+2411,191,sinco,Médicos generales y familiares
+29-1071,191,onet,Physician Assistants
+17-2031,192,onet,Biomedical Engineers
+2421,192,sinco,Ingenieros biomédicos
+29-1041,193,onet,Optometrists
+2422,193,sinco,Optometristas
+29-1031,194,onet,Dietitians and Nutritionists
+2423,194,sinco,Nutriólogos
+2824,195,sinco,Parteras
+29-1161,195,onet,Nurse Midwives
+2428,196,sinco,Farmacólogos
+29-1051,196,onet,Pharmacists
+2513,197,sinco,Tramitadores aduanales
+43-5011,197,onet,Cargo and Freight Agents
+21-2099,198,onet,"Religious Workers, All Other"
+2533,198,sinco,Monjas y predicadores
+2553,199,sinco,"Payasos, mimos y cirqueros"
+27-2099,199,onet,"Entertainers and Performers, Sports and Related Workers, All Other"
+2651,200,sinco,"Técnicos en la instalación y reparación de redes, equipos y en sistemas computacionales"
+49-2011,200,onet,"Computer, Automated Teller, and Office Machine Repairers"
+2637,201,sinco,"Técnicos en la instalación, reparación y mantenimiento de equipos de refrigeración, climas y aire acondicionado"
+49-9021,201,onet,"Heating, Air Conditioning, and Refrigeration Mechanics and Installers"
+27-4021,202,onet,Photographers
+2655,202,sinco,Fotógrafos
+2713,203,sinco,Instructores en estudios y capacitación comercial y administrativa
+13-1151,203,onet,Training and Development Specialists
+2811,204,sinco,Enfermeras (técnicas)
+29-2061,204,onet,Licensed Practical and Licensed Vocational Nurses
+2826,205,sinco,"Curanderos, hierberos y hueseros"
+29-1011,205,onet,Chiropractors
+29-2071,206,onet,Medical Registrar and Records Specialists
+2822,206,sinco,Auxiliares y asistentes dentales
+53-3011,207,onet,"Ambulance Drivers and Attendants, Except Emergency Medical Technicians"
+8342,207,sinco,"Conductores de autobuses, camiones, camionetas, taxis y automóviles de pasajeros"
+37-2021,208,onet,Pest Control Workers
+2827,208,sinco,Fumigadores y controladores de plagas
+3114,209,sinco,"Operadores de máquinas de oficina (fotocopiadora, etcétera)"
+43-9071,209,onet,"Office Machine Operators, Except Computer"
+9732,210,sinco,Recolectores de dinero
+41-2011,210,onet,Cashiers
+3212,211,sinco,Trabajadores que brindan información por teléfono (centro de llamadas) y anunciadores
+43-2011,211,onet,"Switchboard Operators, Including Answering Service"
+35-9099,212,onet,"Food Preparation and Serving Related Workers, All Other"
+9521,212,sinco,Preparadores y vendedores ambulantes de alimentos
+41-9041,213,onet,Telemarketers
+4213,213,sinco,Vendedores por teléfono
+4224,214,sinco,Vendedores por catálogo
+41-3099,214,onet,"Sales Representatives, Services, All Other"
+4232,215,sinco,Edecanes
+35-9031,215,onet,"Hosts and Hostesses, Restaurant, Lounge, and Coffee Shop"
+5115,216,sinco,Cantineros
+35-3011,216,onet,Bartenders
+9622,217,sinco,Recamaristas y camaristas
+35-3031,217,onet,Waiters and Waitresses
+5116,218,sinco,Meseros
+35-9011,218,onet,Dining Room and Cafeteria Attendants and Bartender Helpers
+39-1021,219,onet,First-Line Supervisors of Personal Service Workers
+5201,219,sinco,Supervisores y encargados de trabajadores en cuidados personales y del hogar
+53-2031,220,onet,Flight Attendants
+5231,220,sinco,Azafatas y sobrecargos
+33-2011,221,onet,Firefighters
+5311,221,sinco,Bomberos
+7113,222,sinco,Dinamiteros y buzos en perforación de pozos y en la construcción
+47-5031,222,onet,"Explosives Workers, Ordnance Handling Experts, and Blasters"
+7122,223,sinco,"Techadores (colocadores de palapas, etcétera)"
+47-2181,223,onet,Roofers
+7123,224,sinco,Carpinteros de obra negra
+47-2031,224,onet,Carpenters
+47-2221,225,onet,Structural Iron and Steel Workers
+7214,225,sinco,Montadores de estructuras metálicas
+51-9151,226,onet,Photographic Process Workers and Processing Machine Operators
+7323,226,sinco,Reveladores e impresores de fotografías
+7513,227,sinco,"Trabajadores en la elaboración de pan, tortilla, repostería, y otros productos de cereales y harinas"
+51-3011,227,onet,Bakers
+51-8031,228,onet,Water and Wastewater Treatment Plant and System Operators
+8134,228,sinco,Operadores de máquinas para el tratamiento de agua
+9641,229,sinco,Lavanderos en establecimientos
+51-6011,229,onet,Laundry and Dry-Cleaning Workers
+9642,230,sinco,Planchadores y tintoreros en establecimientos
+51-6021,230,onet,"Pressers, Textile, Garment, and Related Materials"
+8322,231,sinco,Oficiales y marineros de cubierta y prácticos
+53-5011,231,onet,Sailors and Marine Oilers
+53-5031,232,onet,Ship Engineers
+8323,232,sinco,Oficiales maquinistas de transporte marítimo
+53-7031,233,onet,Dredge Operators
+8351,233,sinco,Conductores de maquinaria móvil para la construcción y minería
+9211,234,sinco,Trabajadores de apoyo en la minería
+47-5099,234,onet,"Extraction Workers, All Other"
+53-6061,235,onet,Transportation Passenger Attendants
+9311,235,sinco,Ayudantes de conductores de transporte terrestre con motor
+9633,236,sinco,Cuidadores y acomodadores de autos en estacionamientos
+53-6021,236,onet,Parking Attendants
+47-4041,237,onet,Hazardous Materials Removal Workers
+9663,237,sinco,Recolectores de otros materiales
+9731,238,sinco,Lecturistas de medidores
+43-5041,238,onet,"Meter Readers, Utilities"
