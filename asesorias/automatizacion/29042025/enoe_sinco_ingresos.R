@@ -39,3 +39,8 @@ options(survey.lonely.psu="adjust")
 ingreso_promedio_mensual_sinco <- svyby(~ingocup, ~p3, enoedesign, svymean, vartype=c("se","cv"))
 
 
+df_ingreso_promedio_mensual_sinco <- as.data.frame(ingreso_promedio_mensual_sinco)
+
+setwd("/home/milo/Documents/egtp/clases/ccm/mod_04_concentracion/asesorias/automatizacion/29042025")
+
+write.csv(df_ingreso_promedio_mensual_sinco, "df_ingreso_promedio_mensual_sinco.csv", row.names = FALSE)
