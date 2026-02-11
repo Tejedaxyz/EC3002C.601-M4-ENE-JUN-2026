@@ -120,24 +120,7 @@ Al finalizar el curso, los estudiantes serán capaces de:
 ├── Sesion_06_EDIAM/
 ├── Wiki_Teoria_Juegos/
 └── Wiki_Cooperacion_Evolutiva/
-```
-
-## Uso
-
-Cada sesión contiene:
-- Notebooks de Jupyter con teoría y ejemplos
-- Ejercicios prácticos
-- Implementaciones de algoritmos
-- Datasets de ejemplo (cuando aplica)
-
-Para ejecutar los notebooks, clone el repositorio y asegúrese de tener instaladas las dependencias necesarias:
-
-```bash
-git clone [URL_DEL_REPOSITORIO]
-cd tecnicas-computacionales-fenomenos-sociales
-pip install -r requirements.txt
-jupyter notebook
-```
+````
 
 ## Bibliografía Recomendada
 
