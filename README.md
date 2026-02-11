@@ -128,3 +128,8 @@ Al finalizar el curso, los estudiantes serán capaces de:
 - Axelrod, R. (1984). *The Evolution of Cooperation*
 - Mitchell, M. (2009). *Complexity: A Guided Tour*
 - Nowak, M. A. (2006). *Evolutionary Dynamics*
+- 
+## Examen de autoevaluación : Técnicas Computacionales Avanzadas para Modelar Fenómenos Sociales
+
+https://claude.ai/public/artifacts/306939fc-96ef-4a9a-94b3-104fe04da7a5
+
