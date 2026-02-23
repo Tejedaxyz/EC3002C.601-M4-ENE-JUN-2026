@@ -1,0 +1,630 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: file:///Users/leonardogonzalez/Desktop/Sol.%20Optimizacio%CC%81n%20Computacional.html
+Subject: =?utf-8?Q?Laboratorio=20de=20Optimizaci=C3=B3n=20Computacional=20-=20ITESM?=
+Date: Fri, 20 Feb 2026 13:39:12 -0600
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--depo5Vo5EXTMeLdrd1q0tHVugs8n6ih3iY1wnfSBU0----"
+
+
+------MultipartBoundary--depo5Vo5EXTMeLdrd1q0tHVugs8n6ih3iY1wnfSBU0----
+Content-Type: text/html
+Content-ID: <frame-B32B214DAC824C19AD698B43A8F6DE5D@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///Users/leonardogonzalez/Desktop/Sol.%20Optimizacio%CC%81n%20Computacional.html
+
+<!DOCTYPE html><html lang=3D"es"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-32059bdc-4033-489c-8635-38bace84c80b@mhtml.blink" />
+   =20
+    <meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=
+=3D1.0">
+    <title>Laboratorio de Optimizaci=C3=B3n Computacional - ITESM</title>
+   =20
+   =20
+</head>
+<body>
+    <!-- Header -->
+    <div class=3D"header">
+        <div class=3D"header-content">
+            <div class=3D"header-title">
+                <h1>Laboratorio de Optimizaci=C3=B3n Computacional</h1>
+                <p class=3D"header-subtitle">Tecnol=C3=B3gico de Monterrey =
+=E2=80=A2 Campus Santa Fe</p>
+                <p class=3D"header-small">Departamento de Econom=C3=ADa y C=
+iencia de Datos</p>
+            </div>
+            <div class=3D"header-author">
+                <p class=3D"author-label">Dirigido por:</p>
+                <p class=3D"author-name">Dr. Leonardo Gonz=C3=A1lez Tejeda<=
+/p>
+                <p class=3D"author-title">Profesor-Investigador</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class=3D"navigation">
+        <div class=3D"nav-content">
+            <div class=3D"nav-buttons" id=3D"navButtons"><button class=3D"n=
+av-button active"><span style=3D"font-weight: bold; margin-right: 0.25rem;"=
+>1.</span>Conceptos Fundamentales</button><button class=3D"nav-button"><spa=
+n style=3D"font-weight: bold; margin-right: 0.25rem;">2.</span>Gradiente y =
+Derivadas Direccionales</button><button class=3D"nav-button"><span style=3D=
+"font-weight: bold; margin-right: 0.25rem;">3.</span>Matriz Hessiana y Conv=
+exidad</button><button class=3D"nav-button"><span style=3D"font-weight: bol=
+d; margin-right: 0.25rem;">4.</span>Funci=C3=B3n de Rosenbrock</button><but=
+ton class=3D"nav-button"><span style=3D"font-weight: bold; margin-right: 0.=
+25rem;">5.</span>Optimizaci=C3=B3n con Restricciones</button><button class=
+=3D"nav-button"><span style=3D"font-weight: bold; margin-right: 0.25rem;">6=
+.</span>Condiciones de Wolfe</button><button class=3D"nav-button"><span sty=
+le=3D"font-weight: bold; margin-right: 0.25rem;">7.</span>Portafolio de Mar=
+kowitz</button><button class=3D"nav-button"><span style=3D"font-weight: bol=
+d; margin-right: 0.25rem;">8.</span>Producci=C3=B3n Multi-Producto</button>=
+<button class=3D"nav-button"><span style=3D"font-weight: bold; margin-right=
+: 0.25rem;">9.</span>Art=C3=ADculo Cient=C3=ADfico</button></div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class=3D"container">
+        <!-- Exercise Header Card -->
+        <div class=3D"card" id=3D"exerciseHeader">
+                <div class=3D"exercise-header">
+                    <div class=3D"exercise-title">
+                        <h2>
+                            Ejercicio 1: Conceptos Fundamentales
+                            <span class=3D"level-badge">B=C3=A1sico =E2=98=
+=85</span>
+                        </h2>
+                        <p class=3D"description">Optimizaci=C3=B3n de funci=
+=C3=B3n univariada cuadr=C3=A1tica</p>
+                        <div class=3D"metadata">
+                            <div class=3D"metadata-item">
+                                <svg class=3D"icon" style=3D"color: #2563eb=
+;" fill=3D"none" stroke=3D"currentColor" viewBox=3D"0 0 24 24">
+                                    <path stroke-linecap=3D"round" stroke-l=
+inejoin=3D"round" stroke-width=3D"2" d=3D"M12 6.253v13m0-13C10.832 5.477 9.=
+246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4=
+.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C1=
+9.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                                <span><strong>Metodolog=C3=ADa:</strong> An=
+=C3=A1lisis de primera y segunda derivada (FONC/SONC)</span>
+                            </div>
+                            <div class=3D"metadata-item">
+                                <svg class=3D"icon" style=3D"color: #16a34a=
+;" fill=3D"none" stroke=3D"currentColor" viewBox=3D"0 0 24 24">
+                                    <path stroke-linecap=3D"round" stroke-l=
+inejoin=3D"round" stroke-width=3D"2" d=3D"M10 20l4-16m4 4l4 4-4 4M6 16l-4-4=
+ 4-4"></path>
+                                </svg>
+                                <span><strong>APIs:</strong> Math.js, NumPy=
+, SciPy.optimize</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Exercise Content Card -->
+        <div class=3D"card" id=3D"exerciseContent">
+                <div class=3D"alert alert-blue">
+                    <h4 class=3D"alert-title">Formulaci=C3=B3n Matem=C3=A1t=
+ica</h4>
+                    <p style=3D"font-family: monospace;">f(x) =3D 1x=C2=B2 =
++ (-4)x + 3</p>
+                    <p style=3D"margin-top: 0.5rem; font-size: 0.875rem;">F=
+ONC: f'(x*) =3D 0 =E2=86=92 x* =3D 2.000</p>
+                    <p style=3D"font-size: 0.875rem;">SONC: f''(x*) =3D 2.0=
+00 &gt; 0 =E2=9C=93 M=C3=ADnimo</p>
+                </div>
+
+                <div class=3D"controls controls-3">
+                    <div class=3D"control-group">
+                        <label class=3D"control-label">Coeficiente a</label=
+>
+                        <input type=3D"number" step=3D"0.1" value=3D"1" cla=
+ss=3D"control-input">
+                    </div>
+                    <div class=3D"control-group">
+                        <label class=3D"control-label">Coeficiente b</label=
+>
+                        <input type=3D"number" step=3D"0.1" value=3D"-4" cl=
+ass=3D"control-input">
+                    </div>
+                    <div class=3D"control-group">
+                        <label class=3D"control-label">Coeficiente c</label=
+>
+                        <input type=3D"number" step=3D"0.1" value=3D"3" cla=
+ss=3D"control-input">
+                    </div>
+                </div>
+
+                <div class=3D"chart-container">
+                    <canvas id=3D"chart" width=3D"1184" height=3D"400" styl=
+e=3D"display: block; box-sizing: border-box; height: 400px; width: 1184px;"=
+></canvas>
+                </div>
+
+                <div class=3D"results-grid results-grid-2">
+                    <div class=3D"result-item">
+                        <p class=3D"result-label">Punto cr=C3=ADtico</p>
+                        <p class=3D"result-value">x* =3D 2.000</p>
+                    </div>
+                    <div class=3D"result-item">
+                        <p class=3D"result-label">Valor =C3=B3ptimo</p>
+                        <p class=3D"result-value">f(x*) =3D -1.000</p>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Scientific Resources -->
+        <div class=3D"resources-grid">
+            <div class=3D"card">
+                <div style=3D"display: flex; align-items: center; gap: 0.5r=
+em; margin-bottom: 1rem;">
+                    <svg class=3D"icon" style=3D"color: #2563eb;" fill=3D"n=
+one" stroke=3D"currentColor" viewBox=3D"0 0 24 24">
+                        <path stroke-linecap=3D"round" stroke-linejoin=3D"r=
+ound" stroke-width=3D"2" d=3D"M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012=
+-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></=
+path>
+                    </svg>
+                    <h3 style=3D"font-size: 1.125rem; font-weight: bold;">R=
+eferencias Bibliogr=C3=A1ficas</h3>
+                </div>
+                <div style=3D"font-size: 0.875rem;">
+                    <div class=3D"reference-item" style=3D"border-color: #2=
+563eb;">
+                        <p class=3D"reference-title">Boyd, S., &amp; Vanden=
+berghe, L. (2004)</p>
+                        <p class=3D"reference-journal">Convex Optimization<=
+/p>
+                        <p class=3D"reference-publisher">Cambridge Universi=
+ty Press</p>
+                    </div>
+                    <div class=3D"reference-item" style=3D"border-color: #1=
+6a34a;">
+                        <p class=3D"reference-title">Nocedal, J., &amp; Wri=
+ght, S. (2006)</p>
+                        <p class=3D"reference-journal">Numerical Optimizati=
+on</p>
+                        <p class=3D"reference-publisher">Springer Series in=
+ Operations Research</p>
+                    </div>
+                    <div class=3D"reference-item" style=3D"border-color: #9=
+333ea;">
+                        <p class=3D"reference-title">Markowitz, H. (1952)</=
+p>
+                        <p class=3D"reference-journal">Portfolio Selection<=
+/p>
+                        <p class=3D"reference-publisher">Journal of Finance=
+, 7(1), 77-91</p>
+                    </div>
+                    <div class=3D"reference-item" style=3D"border-color: #e=
+a580c;">
+                        <p class=3D"reference-title">Luenberger, D. G. (198=
+4)</p>
+                        <p class=3D"reference-journal">Linear and Nonlinear=
+ Programming</p>
+                        <p class=3D"reference-publisher">Addison-Wesley</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class=3D"card">
+                <div style=3D"display: flex; align-items: center; gap: 0.5r=
+em; margin-bottom: 1rem;">
+                    <svg class=3D"icon" style=3D"color: #16a34a;" fill=3D"n=
+one" stroke=3D"currentColor" viewBox=3D"0 0 24 24">
+                        <path stroke-linecap=3D"round" stroke-linejoin=3D"r=
+ound" stroke-width=3D"2" d=3D"M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0=
+ 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
+                    </svg>
+                    <h3 style=3D"font-size: 1.125rem; font-weight: bold;">R=
+ecursos Computacionales</h3>
+                </div>
+                <div style=3D"font-size: 0.875rem;">
+                    <div class=3D"resource-item">
+                        <svg class=3D"icon" style=3D"color: #2563eb; flex-s=
+hrink: 0; margin-top: 0.125rem;" fill=3D"none" stroke=3D"currentColor" view=
+Box=3D"0 0 24 24">
+                            <path stroke-linecap=3D"round" stroke-linejoin=
+=3D"round" stroke-width=3D"2" d=3D"M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2=
+ 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        <div class=3D"resource-content">
+                            <p class=3D"resource-title">Wolfram Mathematica=
+</p>
+                            <p class=3D"resource-description">Computaci=C3=
+=B3n simb=C3=B3lica y num=C3=A9rica</p>
+                            <a href=3D"https://www.wolfram.com/" class=3D"r=
+esource-link" target=3D"_blank">wolfram.com</a>
+                        </div>
+                    </div>
+                    <div class=3D"resource-item">
+                        <svg class=3D"icon" style=3D"color: #2563eb; flex-s=
+hrink: 0; margin-top: 0.125rem;" fill=3D"none" stroke=3D"currentColor" view=
+Box=3D"0 0 24 24">
+                            <path stroke-linecap=3D"round" stroke-linejoin=
+=3D"round" stroke-width=3D"2" d=3D"M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2=
+ 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        <div class=3D"resource-content">
+                            <p class=3D"resource-title">SciPy Optimize</p>
+                            <p class=3D"resource-description">Biblioteca de=
+ optimizaci=C3=B3n Python</p>
+                            <a href=3D"https://docs.scipy.org/doc/scipy/ref=
+erence/optimize.html" class=3D"resource-link" target=3D"_blank">scipy.org</=
+a>
+                        </div>
+                    </div>
+                    <div class=3D"resource-item">
+                        <svg class=3D"icon" style=3D"color: #2563eb; flex-s=
+hrink: 0; margin-top: 0.125rem;" fill=3D"none" stroke=3D"currentColor" view=
+Box=3D"0 0 24 24">
+                            <path stroke-linecap=3D"round" stroke-linejoin=
+=3D"round" stroke-width=3D"2" d=3D"M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2=
+ 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        <div class=3D"resource-content">
+                            <p class=3D"resource-title">CVXPY</p>
+                            <p class=3D"resource-description">Optimizaci=C3=
+=B3n convexa en Python</p>
+                            <a href=3D"https://www.cvxpy.org/" class=3D"res=
+ource-link" target=3D"_blank">cvxpy.org</a>
+                        </div>
+                    </div>
+                    <div class=3D"resource-item">
+                        <svg class=3D"icon" style=3D"color: #2563eb; flex-s=
+hrink: 0; margin-top: 0.125rem;" fill=3D"none" stroke=3D"currentColor" view=
+Box=3D"0 0 24 24">
+                            <path stroke-linecap=3D"round" stroke-linejoin=
+=3D"round" stroke-width=3D"2" d=3D"M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2=
+ 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
+                        <div class=3D"resource-content">
+                            <p class=3D"resource-title">NEOS Server</p>
+                            <p class=3D"resource-description">Optimizaci=C3=
+=B3n remota gratuita</p>
+                            <a href=3D"https://neos-server.org/" class=3D"r=
+esource-link" target=3D"_blank">neos-server.org</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Methodology Section -->
+        <div class=3D"methodology-section">
+            <div class=3D"methodology-header">
+                <svg style=3D"width: 2rem; height: 2rem;" fill=3D"none" str=
+oke=3D"currentColor" viewBox=3D"0 0 24 24">
+                    <path stroke-linecap=3D"round" stroke-linejoin=3D"round=
+" stroke-width=3D"2" d=3D"M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.80=
+6 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3=
+.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.4=
+2 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.4=
+2 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946=
+ 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"=
+></path>
+                </svg>
+                <h3>Marco Metodol=C3=B3gico Cient=C3=ADfico</h3>
+            </div>
+           =20
+            <div class=3D"methodology-grid">
+                <div class=3D"methodology-card">
+                    <h4 style=3D"color: #bfdbfe;">1. Fundamentaci=C3=B3n Te=
+=C3=B3rica</h4>
+                    <ul style=3D"color: #dbeafe;">
+                        <li>=E2=80=A2 An=C3=A1lisis convexo y dualidad</li>
+                        <li>=E2=80=A2 Condiciones de optimalidad (KKT)</li>
+                        <li>=E2=80=A2 Teor=C3=ADa de puntos fijos</li>
+                        <li>=E2=80=A2 An=C3=A1lisis asint=C3=B3tico</li>
+                    </ul>
+                </div>
+               =20
+                <div class=3D"methodology-card">
+                    <h4 style=3D"color: #e9d5ff;">2. Implementaci=C3=B3n Al=
+gor=C3=ADtmica</h4>
+                    <ul style=3D"color: #f3e8ff;">
+                        <li>=E2=80=A2 M=C3=A9todos de primer orden</li>
+                        <li>=E2=80=A2 M=C3=A9todos de segundo orden</li>
+                        <li>=E2=80=A2 Programaci=C3=B3n din=C3=A1mica</li>
+                        <li>=E2=80=A2 Algoritmos estoc=C3=A1sticos</li>
+                    </ul>
+                </div>
+               =20
+                <div class=3D"methodology-card">
+                    <h4 style=3D"color: #fbcfe8;">3. Validaci=C3=B3n Emp=C3=
+=ADrica</h4>
+                    <ul style=3D"color: #fce7f3;">
+                        <li>=E2=80=A2 Benchmarking con casos test</li>
+                        <li>=E2=80=A2 An=C3=A1lisis de complejidad</li>
+                        <li>=E2=80=A2 Estudios de convergencia</li>
+                        <li>=E2=80=A2 Validaci=C3=B3n cruzada</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class=3D"methodology-note">
+                <p style=3D"color: #bfdbfe;">
+                    <strong>Nota metodol=C3=B3gica:</strong> Este laborator=
+io integra principios de an=C3=A1lisis num=C3=A9rico, teor=C3=ADa de optimi=
+zaci=C3=B3n matem=C3=A1tica,=20
+                    y econometr=C3=ADa computacional para proporcionar un a=
+mbiente de aprendizaje riguroso y aplicado. Todos los algoritmos implementa=
+dos=20
+                    est=C3=A1n respaldados por garant=C3=ADas te=C3=B3ricas=
+ de convergencia y estabilidad num=C3=A9rica.
+                </p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class=3D"footer">
+            <p>
+                <strong>Dr. Leonardo Gonz=C3=A1lez Tejeda</strong> =E2=80=
+=A2 Departamento de Econom=C3=ADa =E2=80=A2 ITESM Campus Santa Fe, Ciudad d=
+e M=C3=A9xico
+            </p>
+            <p class=3D"footer-small">
+                M=C3=B3dulo 4: T=C3=A9cnicas Computacionales Avanzadas para=
+ Modelar Fen=C3=B3menos Sociales =E2=80=A2 Concentraci=C3=B3n en Econom=C3=
+=ADa Aplicada y Ciencia de Datos
+            </p>
+            <p class=3D"footer-small" style=3D"margin-top: 0.5rem;">
+                =C2=A9 2026 Tecnol=C3=B3gico de Monterrey. Material educati=
+vo para uso acad=C3=A9mico.
+            </p>
+        </div>
+    </div>
+
+   =20
+
+
+</body></html>
+------MultipartBoundary--depo5Vo5EXTMeLdrd1q0tHVugs8n6ih3iY1wnfSBU0----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-32059bdc-4033-489c-8635-38bace84c80b@mhtml.blink
+
+@charset "utf-8";
+
+* { margin: 0px; padding: 0px; box-sizing: border-box; }
+
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, s=
+ans-serif; background-color: rgb(249, 250, 251); color: rgb(31, 41, 55); }
+
+.header { background: linear-gradient(to right, rgb(30, 58, 138), rgb(30, 6=
+4, 175)); color: white; padding: 2rem 1.5rem; }
+
+.header-content { max-width: 1280px; margin: 0px auto; display: flex; justi=
+fy-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;=
+ }
+
+.header-title { flex: 1 1 0%; }
+
+.header-title h1 { font-size: 1.875rem; font-weight: bold; margin-bottom: 0=
+.5rem; }
+
+.header-subtitle { color: rgb(147, 197, 253); font-size: 1.125rem; }
+
+.header-small { color: rgb(191, 219, 254); font-size: 0.875rem; margin-top:=
+ 0.25rem; }
+
+.header-author { background: rgba(255, 255, 255, 0.1); backdrop-filter: blu=
+r(10px); padding: 0.5rem 1rem; border-radius: 0.5rem; text-align: right; }
+
+.author-label { font-size: 0.875rem; color: rgb(147, 197, 253); }
+
+.author-name { font-size: 1.125rem; font-weight: bold; }
+
+.author-title { font-size: 0.75rem; color: rgb(191, 219, 254); }
+
+.navigation { background: white; border-bottom: 1px solid rgb(229, 231, 235=
+); position: sticky; top: 0px; z-index: 50; box-shadow: rgba(0, 0, 0, 0.1) =
+0px 1px 3px; }
+
+.nav-content { max-width: 1280px; margin: 0px auto; padding: 0.75rem 1.5rem=
+; overflow-x: auto; white-space: nowrap; }
+
+.nav-buttons { display: inline-flex; gap: 0.5rem; }
+
+.nav-button { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 500=
+; font-size: 0.875rem; border: none; cursor: pointer; transition: 0.2s; fle=
+x-shrink: 0; }
+
+.nav-button.active { background: rgb(37, 99, 235); color: white; box-shadow=
+: rgba(0, 0, 0, 0.1) 0px 4px 6px; }
+
+.nav-button:not(.active) { background: rgb(243, 244, 246); color: rgb(55, 6=
+5, 81); }
+
+.nav-button:not(.active):hover { background: rgb(229, 231, 235); }
+
+.container { max-width: 1280px; margin: 0px auto; padding: 2rem 1.5rem; }
+
+.card { background: white; padding: 1.5rem; border-radius: 0.5rem; box-shad=
+ow: rgba(0, 0, 0, 0.1) 0px 1px 3px; margin-bottom: 2rem; }
+
+.exercise-header { display: flex; align-items: start; justify-content: spac=
+e-between; margin-bottom: 1rem; }
+
+.exercise-title { flex: 1 1 0%; }
+
+.exercise-title h2 { font-size: 1.5rem; font-weight: bold; color: rgb(31, 4=
+1, 55); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.7=
+5rem; }
+
+.level-badge { padding: 0.25rem 0.75rem; background: rgb(219, 234, 254); co=
+lor: rgb(30, 64, 175); border-radius: 9999px; font-size: 0.875rem; font-wei=
+ght: 500; }
+
+.description { color: rgb(107, 114, 128); margin-bottom: 0.75rem; }
+
+.metadata { display: flex; flex-wrap: wrap; gap: 1rem; font-size: 0.875rem;=
+ }
+
+.metadata-item { display: flex; align-items: center; gap: 0.5rem; color: rg=
+b(55, 65, 81); }
+
+.icon { width: 1rem; height: 1rem; }
+
+.alert { padding: 1rem; border-left: 4px solid; margin-bottom: 1.5rem; }
+
+.alert-blue { background: rgb(239, 246, 255); border-color: rgb(37, 99, 235=
+); }
+
+.alert-green { background: rgb(240, 253, 244); border-color: rgb(22, 163, 7=
+4); }
+
+.alert-yellow { background: rgb(254, 252, 232); border-color: rgb(202, 138,=
+ 4); }
+
+.alert-red { background: rgb(254, 242, 242); border-color: rgb(220, 38, 38)=
+; }
+
+.alert-purple { background: rgb(250, 245, 255); border-color: rgb(147, 51, =
+234); }
+
+.alert-orange { background: rgb(255, 247, 237); border-color: rgb(234, 88, =
+12); }
+
+.alert-title { font-weight: bold; margin-bottom: 0.5rem; }
+
+.alert-blue .alert-title { color: rgb(30, 58, 138); }
+
+.alert-green .alert-title { color: rgb(22, 101, 52); }
+
+.alert-yellow .alert-title { color: rgb(133, 77, 14); }
+
+.alert-red .alert-title { color: rgb(153, 27, 27); }
+
+.alert-purple .alert-title { color: rgb(107, 33, 168); }
+
+.alert-orange .alert-title { color: rgb(154, 52, 18); }
+
+.controls { display: grid; gap: 1rem; margin-bottom: 1.5rem; }
+
+.controls-2 { grid-template-columns: repeat(2, 1fr); }
+
+.controls-3 { grid-template-columns: repeat(3, 1fr); }
+
+.control-group { display: flex; flex-direction: column; }
+
+.control-label { display: block; font-size: 0.875rem; font-weight: 500; mar=
+gin-bottom: 0.25rem; }
+
+.control-input { width: 100%; padding: 0.5rem 0.75rem; border: 1px solid rg=
+b(209, 213, 219); border-radius: 0.375rem; font-size: 0.875rem; }
+
+.control-input:focus { outline: none; border-color: rgb(37, 99, 235); box-s=
+hadow: rgba(37, 99, 235, 0.1) 0px 0px 0px 3px; }
+
+input[type=3D"range"] { height: 0.5rem; background: rgb(229, 231, 235); bor=
+der-radius: 0.25rem; outline: none; }
+
+input[type=3D"range"]::-webkit-slider-thumb { appearance: none; width: 1rem=
+; height: 1rem; background: rgb(37, 99, 235); border-radius: 50%; cursor: p=
+ointer; }
+
+.chart-container { position: relative; height: 400px; margin-bottom: 1.5rem=
+; }
+
+.results-grid { display: grid; gap: 1rem; padding: 1rem; background: rgb(24=
+9, 250, 251); border-radius: 0.5rem; margin-bottom: 1.5rem; }
+
+.results-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+.results-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+.result-item { text-align: center; }
+
+.result-label { font-size: 0.875rem; color: rgb(107, 114, 128); margin-bott=
+om: 0.25rem; }
+
+.result-value { font-size: 1.5rem; font-weight: bold; color: rgb(37, 99, 23=
+5); }
+
+.matrix-display { text-align: center; font-family: "Courier New", monospace=
+; }
+
+.matrix-border { display: inline-block; border: 2px solid rgb(37, 99, 235);=
+ padding: 0.75rem; }
+
+.matrix-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1=
+rem; }
+
+.matrix-grid span { min-width: 2rem; }
+
+.resources-grid { display: grid; grid-template-columns: repeat(auto-fit, mi=
+nmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem; }
+
+.reference-item { border-left: 4px solid; padding-left: 0.75rem; margin-bot=
+tom: 0.75rem; }
+
+.reference-title { font-weight: 600; }
+
+.reference-journal { color: rgb(107, 114, 128); font-style: italic; }
+
+.reference-publisher { font-size: 0.75rem; color: rgb(156, 163, 175); }
+
+.resource-item { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+
+.resource-content { flex: 1 1 0%; }
+
+.resource-title { font-weight: 600; }
+
+.resource-description { color: rgb(107, 114, 128); font-size: 0.875rem; }
+
+.resource-link { color: rgb(37, 99, 235); font-size: 0.75rem; text-decorati=
+on: none; }
+
+.methodology-section { background: linear-gradient(to right, rgb(37, 99, 23=
+5), rgb(147, 51, 234)); color: white; padding: 2rem; border-radius: 0.5rem;=
+ box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px; margin-bottom: 2rem; }
+
+.methodology-header { display: flex; align-items: center; gap: 0.75rem; mar=
+gin-bottom: 1.5rem; }
+
+.methodology-header h3 { font-size: 1.5rem; font-weight: bold; }
+
+.methodology-grid { display: grid; grid-template-columns: repeat(auto-fit, =
+minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+
+.methodology-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: =
+blur(10px); border-radius: 0.5rem; padding: 1rem; }
+
+.methodology-card h4 { font-weight: bold; margin-bottom: 0.5rem; }
+
+.methodology-card ul { font-size: 0.875rem; list-style: none; padding: 0px;=
+ }
+
+.methodology-card li { margin-bottom: 0.25rem; }
+
+.methodology-note { padding-top: 1.5rem; border-top: 1px solid rgba(255, 25=
+5, 255, 0.2); font-size: 0.875rem; }
+
+.footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgb(22=
+9, 231, 235); text-align: center; font-size: 0.875rem; color: rgb(107, 114,=
+ 128); }
+
+.footer p { margin-bottom: 0.5rem; }
+
+.footer-small { font-size: 0.75rem; color: rgb(156, 163, 175); }
+
+@media (max-width: 768px) {
+  .header-content { flex-direction: column; align-items: flex-start; }
+  .header-author { align-self: stretch; text-align: left; }
+  .controls-2, .controls-3 { grid-template-columns: 1fr; }
+  .results-grid-2, .results-grid-3 { grid-template-columns: 1fr; }
+  .methodology-grid { grid-template-columns: 1fr; }
+}
+
+.hidden { display: none; }
+
+strong { font-weight: 600; }
+------MultipartBoundary--depo5Vo5EXTMeLdrd1q0tHVugs8n6ih3iY1wnfSBU0------
