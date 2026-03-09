@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecosistema Algorítmico — Algoritmos Genéticos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Syne+Mono&family=Fraunces:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #03050d;
+  --deep: #060b18;
+  --panel: #0a1220;
+  --surface: #0f1a2e;
+  --lift: #142038;
+  --edge: #1c2e4a;
+  --edge-bright: #2a4570;
+
+  --bio-cyan: #00e5c4;
+  --bio-cyan-dim: rgba(0,229,196,0.15);
+  --bio-cyan-glow: rgba(0,229,196,0.4);
+  --amber: #ffb703;
+  --amber-dim: rgba(255,183,3,0.12);
+  --amber-glow: rgba(255,183,3,0.35);
+  --violet: #9b59f5;
+  --violet-dim: rgba(155,89,245,0.12);
+  --violet-glow: rgba(155,89,245,0.3);
+  --coral: #ff6b6b;
+  --coral-dim: rgba(255,107,107,0.12);
+  --lime: #39d353;
+  --lime-dim: rgba(57,211,83,0.12);
+  --sky: #38bdf8;
+  --sky-dim: rgba(56,189,248,0.12);
+  --rose: #fb7185;
+
+  --text-bright: #e8f4ff;
+  --text-mid: #8fafc8;
+  --text-dim: #3d5570;
+
+  --font-display: 'Syne', sans-serif;
+  --font-mono: 'Syne Mono', monospace;
+  --font-body: 'Fraunces', Georgia, serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text-bright);
+  font-family: var(--font-display);
+  overflow-x: hidden;
+  cursor: default;
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 40px;
+}
+
+#cosmosCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 900px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bio-cyan);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: riseIn 0.8s 0.3s ease forwards;
+}
+
+h1.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--text-bright);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: riseIn 0.8s 0.5s ease forwards;
+}
+
+h1.hero-title .hl { color: var(--bio-cyan); }
+h1.hero-title .hl2 { color: var(--amber); }
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-mid);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.65;
+  opacity: 0;
+  animation: riseIn 0.8s 0.7s ease forwards;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: riseIn 0.8s 0.9s ease forwards;
+}
+
+.hstat {
+  text-align: center;
+}
+
+.hstat-val {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--bio-cyan);
+  display: block;
+  line-height: 1;
+}
+
+.hstat-label {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 4px;
+  display: block;
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: riseIn 1s 1.5s ease forwards;
+}
+
+.scroll-cue-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--bio-cyan), transparent);
+  animation: pulseDown 2s infinite;
+}
+
+.scroll-cue-text {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+@keyframes pulseDown {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== SECTIONS ===== */
+section {
+  padding: 80px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--bio-cyan);
+  margin-bottom: 12px;
+}
+
+h2.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.section-desc {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-mid);
+  max-width: 680px;
+  line-height: 1.7;
+  margin-bottom: 48px;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--edge), transparent);
+  margin: 0;
+}
+
+/* ===== DOMAIN ECOSYSTEM CARDS ===== */
+.ecosystem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.domain-card {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  padding: 28px;
+  cursor: pointer;
+  transition: all 0.28s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.domain-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--card-glow, rgba(0,229,196,0.04));
+  opacity: 0;
+  transition: opacity 0.28s;
+}
+
+.domain-card:hover::before { opacity: 1; }
+
+.domain-card:hover {
+  border-color: var(--card-color, var(--bio-cyan));
+  transform: translateY(-2px);
+  z-index: 2;
+}
+
+.domain-card.expanded {
+  border-color: var(--card-color, var(--bio-cyan));
+  background: var(--surface);
+}
+
+.domain-card.expanded::before { opacity: 1; }
+
+.card-icon {
+  font-size: 28px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.card-number {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.card-subtitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--card-color, var(--bio-cyan));
+  margin-bottom: 12px;
+}
+
+.card-teaser {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+.card-expand-btn {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--card-color, var(--bio-cyan));
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s;
+}
+
+.domain-card:hover .card-expand-btn { gap: 10px; }
+
+/* Expanded detail panel */
+.detail-panel {
+  display: none;
+  grid-column: 1 / -1;
+  background: var(--surface);
+  border: 1px solid var(--edge-bright);
+  border-top: none;
+  padding: 36px 40px;
+  animation: panelOpen 0.3s ease;
+}
+
+.detail-panel.open { display: block; }
+
+@keyframes panelOpen {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.detail-main h3 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.detail-main p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+
+.detail-apps h4 {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.app-item {
+  padding: 10px 14px;
+  border-left: 2px solid var(--card-color, var(--bio-cyan));
+  margin-bottom: 8px;
+  background: rgba(255,255,255,0.02);
+}
+
+.app-item-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-bright);
+  margin-bottom: 3px;
+}
+
+.app-item-desc {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--text-mid);
+  font-style: italic;
+}
+
+.detail-visual {
+  /* Mini chart area */
+}
+
+.mini-chart {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  border-radius: 2px;
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.mini-chart-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 10px;
+}
+
+.mini-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mini-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mini-bar-name {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-mid);
+  min-width: 80px;
+  text-align: right;
+}
+
+.mini-bar-track {
+  flex: 1;
+  height: 5px;
+  background: var(--edge);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.mini-bar-fill {
+  height: 100%;
+  border-radius: 1px;
+  transition: width 0.8s ease;
+}
+
+.mini-bar-val {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-dim);
+  min-width: 28px;
+}
+
+/* ===== NETWORK VIZ ===== */
+.network-section {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.network-wrapper {
+  position: relative;
+  width: 100%;
+  height: 600px;
+}
+
+#networkCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+.network-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 40px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--bio-cyan), var(--amber), var(--violet), var(--coral));
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 44px 32px;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: all 0.5s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -5px;
+  top: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--void);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--bio-cyan);
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 6px;
+}
+
+.timeline-body {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  font-style: italic;
+}
+
+.timeline-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 1px;
+  margin-top: 8px;
+  margin-right: 4px;
+}
+
+/* ===== COMPARISON MATRIX ===== */
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 32px;
+  font-family: var(--font-display);
+}
+
+.matrix-table th {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--edge);
+  font-weight: 400;
+}
+
+.matrix-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(28,46,74,0.5);
+  font-size: 13px;
+  color: var(--text-mid);
+  vertical-align: middle;
+}
+
+.matrix-table tr:hover td {
+  background: rgba(255,255,255,0.02);
+}
+
+.algo-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+.dot-rating {
+  display: flex;
+  gap: 4px;
+}
+
+.dot-r {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-fill { background: var(--bio-cyan); }
+.dot-half { background: var(--amber); }
+.dot-empty { background: var(--edge); }
+
+.feature-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 1px;
+  margin: 2px;
+}
+
+/* ===== USE CASE MOSAIC ===== */
+.mosaic {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+}
+
+.mosaic-item {
+  background: var(--panel);
+  border: 1px solid var(--edge);
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.mosaic-item:hover {
+  border-color: var(--item-color, var(--bio-cyan));
+  transform: scale(1.005);
+  z-index: 2;
+}
+
+.mosaic-item.large {
+  grid-row: span 2;
+  padding: 36px;
+}
+
+.mosaic-bg-glyph {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-size: 80px;
+  opacity: 0.04;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.mosaic-item-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--item-color, var(--bio-cyan));
+  margin-bottom: 10px;
+}
+
+.mosaic-item-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.mosaic-item.large .mosaic-item-title {
+  font-size: 22px;
+}
+
+.mosaic-item-body {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.75;
+  font-style: italic;
+}
+
+.mosaic-item.large .mosaic-item-body {
+  font-size: 14px;
+}
+
+.mosaic-metric {
+  margin-top: 18px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mosaic-metric-item {
+  text-align: left;
+}
+
+.mosaic-metric-val {
+  font-family: var(--font-mono);
+  font-size: 20px;
+  color: var(--item-color, var(--bio-cyan));
+  display: block;
+  line-height: 1;
+}
+
+.mosaic-metric-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* ===== GENOME STRIP ===== */
+.genome-strip {
+  padding: 60px;
+  background: var(--panel);
+  border-top: 1px solid var(--edge);
+  border-bottom: 1px solid var(--edge);
+  position: relative;
+  overflow: hidden;
+}
+
+.genome-canvas-wrapper {
+  position: relative;
+  height: 120px;
+  margin-top: 24px;
+}
+
+#genomeCanvas {
+  width: 100%;
+  height: 120px;
+}
+
+/* ===== FOOTER ===== */
+.site-footer {
+  padding: 40px 60px;
+  border-top: 1px solid var(--edge);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-left {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+}
+
+.footer-right {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-link {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-link:hover { color: var(--bio-cyan); }
+
+/* ===== FLOATING TOOLTIP ===== */
+.node-tooltip {
+  position: fixed;
+  background: var(--surface);
+  border: 1px solid var(--edge-bright);
+  padding: 12px 16px;
+  pointer-events: none;
+  z-index: 1000;
+  display: none;
+  max-width: 240px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+.tooltip-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.tooltip-body {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--text-mid);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* ===== MISC ===== */
+.tag-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 1px;
+  margin: 3px 3px 0 0;
+}
+
+.glow-text { text-shadow: 0 0 20px currentColor; }
+
+@media (max-width: 900px) {
+  section { padding: 60px 24px; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .mosaic { grid-template-columns: 1fr 1fr; }
+  .mosaic-item.large { grid-row: span 1; }
+  .network-section { padding: 60px 0; }
+  .genome-strip, .site-footer { padding: 40px 24px; }
+  .hero { padding: 40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Floating tooltip -->
+<div class="node-tooltip" id="nodeTooltip">
+  <div class="tooltip-title" id="ttTitle"></div>
+  <div class="tooltip-body" id="ttBody"></div>
+</div>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <canvas id="cosmosCanvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Infografía Interactiva · ITESM-SF · Módulo 4</div>
+    <h1 class="hero-title">El <span class="hl">Ecosistema</span><br>de los <span class="hl2">Algoritmos Genéticos</span></h1>
+    <p class="hero-sub">Desde la codificación genética hasta la optimización de ciudades: un mapa de las aplicaciones, dominios y fronteras de la computación evolutiva.</p>
+    <div class="hero-stats">
+      <div class="hstat">
+        <span class="hstat-val glow-text">8</span>
+        <span class="hstat-label">Dominios</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-val" style="color:var(--amber)">40+</span>
+        <span class="hstat-label">Aplicaciones</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-val" style="color:var(--violet)">50+</span>
+        <span class="hstat-label">Años de Historia</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-val" style="color:var(--lime)">∞</span>
+        <span class="hstat-label">Espacio de Búsqueda</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span class="scroll-cue-text">Explorar</span>
+    <div class="scroll-cue-line"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 1: DOMAINS ===== -->
+<section id="domains">
+  <div class="section-label">01 — Dominios de Aplicación</div>
+  <h2 class="section-title">¿Dónde Operan los Algoritmos Genéticos?</h2>
+  <p class="section-desc">Los AGs resuelven problemas que los métodos analíticos no pueden: multimodales, no diferenciables, combinatoriales. Haz clic en cada dominio para explorar sus aplicaciones en profundidad.</p>
+
+  <div class="ecosystem-grid" id="ecosystemGrid"></div>
+  <div class="detail-panel" id="detailPanel"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 2: NETWORK ===== -->
+<section style="padding:80px 60px 40px">
+  <div class="section-label">02 — Red de Conexiones</div>
+  <h2 class="section-title">El Grafo del Conocimiento Evolutivo</h2>
+  <p class="section-desc">Los AGs no operan en aislamiento. Sus conceptos, operadores y variantes se interconectan con disciplinas y algoritmos del ecosistema más amplio de la computación bio-inspirada.</p>
+</section>
+<div class="network-section">
+  <div class="network-wrapper">
+    <canvas id="networkCanvas"></canvas>
+    <div class="network-legend" id="networkLegend"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 3: MOSAIC USE CASES ===== -->
+<section id="usecases">
+  <div class="section-label">03 — Casos de Uso Emblemáticos</div>
+  <h2 class="section-title">Aplicaciones que Cambiaron el Campo</h2>
+  <p class="section-desc">De la evolución de circuitos electrónicos al diseño de rutas de reparto: los AGs han producido soluciones que sorprendieron incluso a sus creadores.</p>
+  <div class="mosaic" id="mosaicGrid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 4: GENOME STRIP ===== -->
+<div class="genome-strip">
+  <div style="max-width:1400px;margin:0 auto">
+    <div class="section-label">04 — Visualización del Código Genético</div>
+    <h2 class="section-title" style="font-size:clamp(22px,2.5vw,32px)">La Evolución en Tiempo Real</h2>
+    <p style="font-family:var(--font-body);font-style:italic;font-size:13px;color:var(--text-mid);margin-top:6px">Una población de 30 cromosomas binarios evolucionando hacia la minimización de la función objetivo. Cada columna es un individuo; cada fila, un bit del cromosoma.</p>
+    <div class="genome-canvas-wrapper">
+      <canvas id="genomeCanvas"></canvas>
+    </div>
+    <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap">
+      <button onclick="genomeRun()" style="background:var(--bio-cyan);color:var(--void);border:none;padding:8px 20px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:opacity 0.2s" id="genomeBtn">▶ Iniciar</button>
+      <button onclick="genomeReset()" style="background:var(--lift);color:var(--text-mid);border:1px solid var(--edge);padding:8px 20px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer">↺ Reset</button>
+      <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);align-self:center">Generación: <span id="genomeGen" style="color:var(--bio-cyan)">0</span></span>
+      <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-dim);align-self:center">Mejor fitness: <span id="genomeFit" style="color:var(--amber)">—</span></span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 5: COMPARISON ===== -->
+<section id="comparison">
+  <div class="section-label">05 — Comparativa Algorítmica</div>
+  <h2 class="section-title">AGs en el Ecosistema de Metaheurísticas</h2>
+  <p class="section-desc">Los algoritmos genéticos no son la única solución bio-inspirada. Esta matriz compara sus fortalezas y debilidades frente a las principales alternativas de optimización.</p>
+  <table class="matrix-table" id="matrixTable"></table>
+</section>
+
+<div class="divider"></div>
+
+<!-- ===== SECTION 6: TIMELINE ===== -->
+<section id="timeline">
+  <div class="section-label">06 — Línea del Tiempo</div>
+  <h2 class="section-title">50 Años de Computación Evolutiva</h2>
+  <p class="section-desc">Desde la formalización de Holland hasta los AGs cuánticos y el diseño de redes neuronales: la evolución de la evolución artificial.</p>
+  <div class="timeline" id="timelineContainer"></div>
+</section>
+
+<div class="divider"></div>
+
+<footer class="site-footer">
+  <div class="footer-left">
+    ITESM Campus Santa Fe · Módulo 4: Técnicas Computacionales Avanzadas · Feb–Jun 2026<br>
+    Concentración en Economía Aplicada y Ciencia de Datos
+  </div>
+  <div class="footer-right">
+    <span class="footer-link">Holland (1975)</span>
+    <span class="footer-link">Goldberg (1989)</span>
+    <span class="footer-link">Deb (2001)</span>
+    <span class="footer-link">La Rocca (2022)</span>
+  </div>
+</footer>
+
+<script>
+// ================================================
+// DATA
+// ================================================
+
+const domains = [
+  {
+    icon: '🏙️', num: '01', color: '#00e5c4', glow: 'rgba(0,229,196,0.1)',
+    title: 'Economía Urbana', subtitle: 'Planeación & Zonificación',
+    teaser: 'Optimización de usos de suelo, densidades habitacionales y accesibilidad en contextos metropolitanos complejos.',
+    body: `Los problemas de planeación urbana son NP-difíciles: la asignación de usos de suelo en miles de predios, bajo restricciones jurídicas, ambientales e infraestructurales, no puede resolverse con métodos analíticos. Los AGs codifican configuraciones urbanas como cromosomas y evalúan fitness multiobjeto: densidad, mezcla de usos, resiliencia hídrica, acceso a transporte.`,
+    body2: `En el análisis de Miguel Hidalgo (CDMX, 88 colonias), un AG multiobjetivo puede encontrar el frente de Pareto entre maximizar vivienda asequible y preservar valor comercial, produciendo soluciones alineadas con el PGDU que ningún planificador podría derivar manualmente.`,
+    apps: [
+      { title: 'Zonificación óptima de usos de suelo', desc: 'PGDU CDMX — asignación Pareto de usos en alcaldías' },
+      { title: 'Localización de infraestructura de cuidado', desc: 'GIZ — optimización de guarderías y estancias' },
+      { title: 'Densidad habitacional con restricción de agua', desc: 'CONAGUA — balance crecimiento vs. acuíferos' },
+      { title: 'Gentrificación y políticas de contención', desc: 'Frente Pareto: valor inmobiliario vs. desplazamiento' }
+    ],
+    chartData: [{ name: 'Mezcla usos', val: 88 }, { name: 'Asequibilidad', val: 72 }, { name: 'Transporte', val: 91 }, { name: 'Ambiental', val: 65 }],
+    tags: ['PGDU', 'SEDATU', 'Multiobjetivo', 'NSGA-II']
+  },
+  {
+    icon: '📈', num: '02', color: '#ffb703', glow: 'rgba(255,183,3,0.1)',
+    title: 'Finanzas & Portafolios', subtitle: 'Optimización de Inversiones',
+    teaser: 'Construcción de portafolios eficientes, calibración de modelos de riesgo y trading algorítmico evolutivo.',
+    body: `La frontera eficiente de Markowitz con miles de activos es computacionalmente inabordable con métodos de cuadrado mínimo estándar. Los AGs codifican pesos de portafolio como cromosomas de valores reales y optimizan la función: max E[R] − λ·Var(R), sujeto a restricciones regulatorias y de liquidez.`,
+    body2: `En el ecosistema financiero mexicano (AFORES, FIBRAs, IPC), los AGs son especialmente valiosos para calibrar modelos bajo restricciones institucionales complejas: límites por clase de activo (CONSAR), requerimientos de reserva y correlaciones cambiantes con variables macroeconómicas (tipo de cambio, tasas Banxico).`,
+    apps: [
+      { title: 'Optimización de portafolios AFORE', desc: 'Restricciones CONSAR + maximización rendimiento ajustado' },
+      { title: 'Calibración de modelos VaR', desc: 'Parámetros de distribución de pérdidas con AGs' },
+      { title: 'Estrategias de trading evolutivo', desc: 'Evolución de reglas técnicas vs. benchmark IPC' },
+      { title: 'Pricing de opciones exóticas', desc: 'Calibración de volatilidad implícita no paramétrica' }
+    ],
+    chartData: [{ name: 'Rendimiento', val: 85 }, { name: 'Sharpe Ratio', val: 78 }, { name: 'Max Drawdown', val: 60 }, { name: 'Liquidez', val: 92 }],
+    tags: ['AFORE', 'CONSAR', 'FIBRAs', 'Markowitz', 'VaR']
+  },
+  {
+    icon: '🏠', num: '03', color: '#9b59f5', glow: 'rgba(155,89,245,0.1)',
+    title: 'Mercado de Vivienda', subtitle: 'PropTech & Modelos Hedónicos',
+    teaser: 'Calibración de precios hedónicos, selección automática de variables y detección de burbujas inmobiliarias.',
+    body: `Los modelos hedónicos en bienes raíces sufren de multicolinealidad severa entre atributos (superficie, alcaldía, amenidades, distancia a transporte). Los AGs resuelven la selección de variables como problema combinatorio: el cromosoma codifica qué atributos incluir, y el fitness es el R² ajustado del modelo resultante.`,
+    body2: `En el análisis de ~2.3 millones de registros de CDMX (2019–2023), los AGs pueden identificar automáticamente las transformaciones funcionales óptimas de variables (log, cuadrática, interacciones) que un econometrista tardaría meses en probar, mejorando la precisión del índice SHF.`,
+    apps: [
+      { title: 'Selección automática de variables hedónicas', desc: 'AGs como wrapper para modelos de precios CDMX' },
+      { title: 'Calibración de modelos espaciales SAR', desc: 'Estimación de ρ en modelos de rezago espacial' },
+      { title: 'Detección de clusters de precios anómalos', desc: 'Fitness basado en divergencia local de precio/m²' },
+      { title: 'Optimización de AVMs (Automated Valuation)', desc: 'Homepty — ranking de modelos por precisión evolutiva' }
+    ],
+    chartData: [{ name: 'R² ajustado', val: 94 }, { name: 'Error MAPE', val: 82 }, { name: 'Vars selec.', val: 71 }, { name: 'Estabilidad', val: 88 }],
+    tags: ['Homepty', 'SHF', 'Hedónico', 'CDMX', 'Espacial']
+  },
+  {
+    icon: '🚛', num: '04', color: '#ff6b6b', glow: 'rgba(255,107,107,0.1)',
+    title: 'Logística & Nearshoring', subtitle: 'Cadenas de Suministro',
+    teaser: 'El problema del viajante (TSP), localización de plantas industriales y optimización de rutas bajo incertidumbre.',
+    body: `El Problema del Viajante (TSP) es el banco de pruebas clásico de los AGs combinatorios. Con codificación de permutación, cruza de orden (OX) y mutación de inversión, los AGs producen rutas dentro del 1-2% del óptimo global para instancias de cientos de ciudades.`,
+    body2: `En el contexto del nearshoring mexicano (Nuevo León, Querétaro, Bajío), los AGs optimizan la localización de parques industriales balanceando: costos laborales IMSS, acceso a puertos (Veracruz, Manzanillo, Lázaro Cárdenas), disponibilidad de agua y tiempo de entrega a mercados EE.UU./Canadá bajo TMEC.`,
+    apps: [
+      { title: 'Rutas óptimas de distribución (VRP)', desc: 'Fleet routing con ventanas de tiempo y capacidad' },
+      { title: 'Localización de parques industriales nearshoring', desc: 'Multiobjetivo: costo + resiliencia + infraestructura' },
+      { title: 'Scheduling de producción (JSP)', desc: 'Job-shop scheduling en manufactura avanzada' },
+      { title: 'Optimización de inventarios bajo demanda estocástica', desc: 'Cromosomas codifican políticas (s, S) por SKU' }
+    ],
+    chartData: [{ name: 'Distancia TSP', val: 97 }, { name: 'Tiempo entrega', val: 89 }, { name: 'Costo logístico', val: 84 }, { name: 'Huella CO₂', val: 76 }],
+    tags: ['TSP', 'VRP', 'Nearshoring', 'TMEC', 'Bajío']
+  },
+  {
+    icon: '🧬', num: '05', color: '#39d353', glow: 'rgba(57,211,83,0.1)',
+    title: 'Bioinformática', subtitle: 'Origen Evolutivo del Método',
+    teaser: 'Alineación de secuencias genéticas, plegamiento de proteínas y diseño de fármacos por evolución in silico.',
+    body: `La bioinformática es el dominio donde los AGs son más literalmente apropiados: optimizar secuencias de ADN, ARN y proteínas frente a objetivos de afinidad, estabilidad y expresión. El problema de plegamiento de proteínas (NP-completo) fue uno de los primeros dominios donde los AGs mostraron ventaja sobre métodos clásicos.`,
+    body2: `Los AGs codifican estructuras moleculares como secuencias de aminoácidos o conformaciones tridimensionales. El fitness puede ser la energía libre de Gibbs (minimización), la afinidad de unión ligando-receptor (maximización) o la similitud con proteínas conocidas. AlphaFold usa arquitecturas que heredan principios evolutivos.`,
+    apps: [
+      { title: 'Diseño de secuencias de ADN sintético', desc: 'Optimización de codones para expresión proteica' },
+      { title: 'Docking molecular ligando-receptor', desc: 'Búsqueda evolutiva de conformaciones de mínima energía' },
+      { title: 'Alineación múltiple de secuencias (MSA)', desc: 'Penalización evolutiva de gaps en CLUSTALW-GA' },
+      { title: 'Diseño de péptidos terapéuticos', desc: 'AGs para explorar espacio de secuencias de 20^n' }
+    ],
+    chartData: [{ name: 'Similitud struct.', val: 91 }, { name: 'Energía binding', val: 86 }, { name: 'Especificidad', val: 79 }, { name: 'Solubilidad', val: 72 }],
+    tags: ['Proteómica', 'Docking', 'DNA', 'AlphaFold', 'In Silico']
+  },
+  {
+    icon: '⚡', num: '06', color: '#38bdf8', glow: 'rgba(56,189,248,0.1)',
+    title: 'Ingeniería & Diseño', subtitle: 'Optimización Estructural',
+    teaser: 'Diseño topológico de estructuras, optimización aerodinámica y síntesis automática de circuitos electrónicos.',
+    body: `La optimización topológica —encontrar la forma óptima de una estructura mecánica— es un problema de altísima dimensionalidad. Koza (1992) demostró que la Programación Genética (extensión de los AGs) puede sintetizar circuitos analógicos que superan en desempeño a diseños de ingenieros humanos expertos.`,
+    body2: `En aeronáutica, Boeing y Airbus usan AGs para optimizar perfiles de ala bajo restricciones de sustentación, arrastre, peso y resistencia a fatiga. El cromosoma codifica la geometría del perfil como curvas de Bézier; el fitness integra simulaciones CFD. Cada evaluación puede tomar horas, de ahí el uso de surrogate models (modelos sustitutos de Kriging).`,
+    apps: [
+      { title: 'Optimización topológica de estructuras', desc: 'Mínima masa sujeto a restricciones de esfuerzo' },
+      { title: 'Síntesis de circuitos electrónicos (GP)', desc: 'Evolución de redes RC/RLC con función objetivo eléctrica' },
+      { title: 'Diseño aerodinámico de perfiles de ala', desc: 'AG + CFD para maximizar L/D (lift-to-drag)' },
+      { title: 'Tuning de controladores PID', desc: 'Evolución de parámetros Kp, Ki, Kd para sistemas dinámicos' }
+    ],
+    chartData: [{ name: 'Reducción masa', val: 32 }, { name: 'Rigidez', val: 95 }, { name: 'Tiempo diseño', val: 68 }, { name: 'Factibilidad', val: 87 }],
+    tags: ['Topología', 'CFD', 'PID', 'Bézier', 'Aeronáutica']
+  },
+  {
+    icon: '🤖', num: '07', color: '#fb7185', glow: 'rgba(251,113,133,0.1)',
+    title: 'Machine Learning', subtitle: 'AutoML & Neuroevolución',
+    teaser: 'Optimización de hiperparámetros, arquitectura de redes neuronales y selección evolutiva de características.',
+    body: `Los AGs son la base de la neuroevolución (NEAT, HyperNEAT): evolución simultánea de pesos y topología de redes neuronales. Stanley & Miikkulainen (2002) demostraron que NEAT podía aprender a jugar videojuegos complejos sin necesidad de backpropagation.`,
+    body2: `En AutoML, los AGs buscan en el espacio combinatorial de pipelines de aprendizaje: qué transformaciones de features aplicar, qué modelo usar, qué hiperparámetros configurar. TPOT (Tree-Based Pipeline Optimization Tool) usa Programación Genética para encontrar pipelines sklearn óptimos. En economía aplicada, esto acelera la calibración de modelos predictivos de precios inmobiliarios o deserción hipotecaria.`,
+    apps: [
+      { title: 'Búsqueda de arquitecturas neuronales (NAS)', desc: 'NEAT — evolución de topología y pesos conjuntamente' },
+      { title: 'Optimización de hiperparámetros (AutoML)', desc: 'TPOT — pipelines sklearn evolutivos end-to-end' },
+      { title: 'Selección evolutiva de features', desc: 'Wrapper GA para modelos de vivienda con 100+ variables' },
+      { title: 'Evolución de políticas de refuerzo', desc: 'Alternativa a PPO/A3C en espacios de acción discretos' }
+    ],
+    chartData: [{ name: 'Accuracy', val: 93 }, { name: 'Complejidad', val: 71 }, { name: 'Generalización', val: 88 }, { name: 'Interpretab.', val: 54 }],
+    tags: ['NEAT', 'AutoML', 'TPOT', 'NAS', 'NLP']
+  },
+  {
+    icon: '🌍', num: '08', color: '#a78bfa', glow: 'rgba(167,139,250,0.1)',
+    title: 'Política Pública', subtitle: 'Diseño de Mecanismos',
+    teaser: 'Diseño evolutivo de reglas fiscales, asignación de subsidios de vivienda y calibración de modelos de equilibrio general.',
+    body: `En teoría de mecanismos, diseñar reglas de política que produzcan resultados socialmente deseables bajo información asimétrica es un problema de optimización. Los AGs evolucionan mecanismos (esquemas de incentivos, reglas de subasta, estructuras fiscales) y evalúan su desempeño en simulaciones multi-agente.`,
+    body2: `Axelrod (1987) usó AGs para descubrir estrategias evolutivamente estables en el Dilema del Prisionero repetido. En política habitacional mexicana, los AGs pueden optimizar la asignación de subsidios CONAVI para maximizar cobertura de hogares en situación de carencia habitacional sujeto a restricciones presupuestales y elegibilidad.`,
+    apps: [
+      { title: 'Diseño evolutivo de reglas fiscales', desc: 'AGs evolucionan estructuras de ISR/IVA bajo objetivos distributivos' },
+      { title: 'Asignación óptima de subsidios CONAVI', desc: 'Maximizar cobertura habitacional bajo restricción presupuestal' },
+      { title: 'Calibración de modelos CGE', desc: 'Parámetros de elasticidad con función objetivo de verosimilitud' },
+      { title: 'Diseño de subastas para concesiones', desc: 'Mecanismos de segundo precio con restricciones de equidad' }
+    ],
+    chartData: [{ name: 'Cobertura', val: 84 }, { name: 'Eficiencia', val: 77 }, { name: 'Equidad', val: 69 }, { name: 'Factibilidad', val: 92 }],
+    tags: ['CONAVI', 'CGE', 'Axelrod', 'Mecanismos', 'INFONAVIT']
+  }
+];
+
+const mosaicItems = [
+  {
+    large: true, color: '#00e5c4', icon: '🔬',
+    eyebrow: 'Caso Emblemático · Ingeniería Evolutiva',
+    title: 'El Experimento de Tierra: NASA diseña antena desde cero',
+    body: `En 2006, la NASA utilizó un AG para diseñar la antena del satélite ST5. El resultado fue una estructura tridimensional imposible de derivar analíticamente que superó en rendimiento a todos los diseños humanos previos. El AG operó durante semanas evaluando millones de configuraciones de alambre.`,
+    body2: `La antena resultante tiene una geometría asimétrica y aparentemente caótica, pero maximiza la ganancia de señal en múltiples frecuencias bajo restricciones de peso y tolerancia a vibraciones. Es el ejemplo más célebre de un objeto diseñado por computación evolutiva que voló al espacio.`,
+    metrics: [{ val: '100M+', label: 'Configs evaluadas' }, { val: '7×', label: 'Mejor que diseño humano' }]
+  },
+  {
+    color: '#ffb703', icon: '♟️',
+    eyebrow: 'Teoría de Juegos',
+    title: 'Axelrod y la evolución de la cooperación',
+    body: `Robert Axelrod organizó torneos donde estrategias para el Dilema del Prisionero repetido competían entre sí. Usó AGs para evolucionar estrategias más allá de las enviadas por investigadores humanos. Emergió "tit-for-tat" generalizado: más tolerante y más persistente.`,
+    metrics: [{ val: '1987', label: 'Año del experimento' }]
+  },
+  {
+    color: '#9b59f5', icon: '🧠',
+    eyebrow: 'Neuroevolución',
+    title: 'NEAT: jugando Mario sin backprop',
+    body: `NeuroEvolution of Augmenting Topologies (Stanley, 2002) evoluciona simultáneamente la topología y los pesos de redes neuronales. Agentes NEAT aprendieron a jugar Super Mario Bros sin ninguna regla explícita, emergiendo comportamientos de evitación y salto por selección natural.`,
+    metrics: [{ val: 'NEAT', label: 'Algoritmo' }]
+  },
+  {
+    color: '#39d353', icon: '🦠',
+    eyebrow: 'Biología Computacional',
+    title: 'Diseño de proteínas terapéuticas',
+    body: `AGs exploran el espacio de secuencias de aminoácidos (20^n posibles) para diseñar péptidos con afinidad específica a receptores. Aplicado a inhibidores de ACE-2 durante COVID-19, redujeron el tiempo de screening de candidatos terapéuticos de meses a días.`,
+    metrics: [{ val: '96%', label: 'Reducción tiempo screening' }]
+  },
+  {
+    color: '#ff6b6b', icon: '📦',
+    eyebrow: 'Logística Global',
+    title: 'UPS y el problema de rutas: ORION',
+    body: `El sistema ORION de UPS usa variantes evolutivas para optimizar 55,000 rutas de reparto diarias en EE.UU. Cada conductor tiene ~130 paradas: el espacio de permutaciones es mayor que el número de átomos en el universo observable.`,
+    metrics: [{ val: '100M mi', label: 'Ahorrados/año' }]
+  }
+];
+
+const timelineData = [
+  { year: '1975', color: '#00e5c4', title: 'Holland formaliza los AGs', body: 'John Holland publica "Adaptation in Natural and Artificial Systems", estableciendo la teoría formal de los algoritmos genéticos y el Teorema del Esquema. Primera formalización matemática rigurosa de la evolución como mecanismo de búsqueda.', tags: [{ text: 'Fundacional', c: '#00e5c4', bg: 'rgba(0,229,196,0.1)' }] },
+  { year: '1989', color: '#ffb703', title: 'Goldberg y la explosión práctica', body: 'David Goldberg publica "Genetic Algorithms in Search, Optimization, and Machine Learning", democratizando los AGs para ingenieros y científicos aplicados. Introduce el concepto de hipótesis de bloques constructivos.', tags: [{ text: 'Aplicaciones', c: '#ffb703', bg: 'rgba(255,183,3,0.1)' }] },
+  { year: '1992', color: '#9b59f5', title: 'Koza: Programación Genética', body: 'John Koza extiende los AGs para evolucionar programas completos codificados como árboles. La Programación Genética sintetiza automáticamente circuitos, estrategias de trading y ecuaciones matemáticas.', tags: [{ text: 'Programación Genética', c: '#9b59f5', bg: 'rgba(155,89,245,0.1)' }] },
+  { year: '2000', color: '#39d353', title: 'NSGA-II: Optimización multiobjetivo', body: 'Deb et al. publican NSGA-II, que se convierte en el estándar de oro para optimización multiobjetivo evolutiva. Frente de Pareto + distancia de aglomeración = representación uniforme de compromisos óptimos.', tags: [{ text: 'Multiobjetivo', c: '#39d353', bg: 'rgba(57,211,83,0.1)' }] },
+  { year: '2002', color: '#ff6b6b', title: 'NEAT: Neuroevolución de topologías', body: 'Stanley & Miikkulainen publican NEAT, unificando la evolución de estructura y pesos en redes neuronales. Precursor conceptual de los enfoques de arquitecturas buscadas (NAS) que dominan el AutoML actual.', tags: [{ text: 'ML', c: '#ff6b6b', bg: 'rgba(255,107,107,0.1)' }] },
+  { year: '2006', color: '#38bdf8', title: 'La antena de la NASA', body: 'NASA ST5 lanza al espacio la primera antena diseñada por un algoritmo evolutivo. La geometría asimétrica resultante supera todos los diseños de ingenieros humanos. Hito emblemático del diseño evolutivo.', tags: [{ text: 'Ingeniería', c: '#38bdf8', bg: 'rgba(56,189,248,0.1)' }] },
+  { year: '2016', color: '#fb7185', title: 'AGs en la era del Deep Learning', body: 'OpenAI y Google Brain usan variantes evolutivas (CMA-ES, Evolución Natural) para entrenar redes neuronales profundas sin backpropagation. Reinicio del interés en computación evolutiva para RL y NAS.', tags: [{ text: 'Deep Learning', c: '#fb7185', bg: 'rgba(251,113,133,0.1)' }] },
+  { year: '2023+', color: '#a78bfa', title: 'AGs cuánticos y LLM-asistidos', body: 'Variantes cuánticas de AGs (QGA) prometen aceleración exponencial para problemas combinatorios. Modelos de lenguaje como GPT-4 se usan como operadores de mutación semántica en espacios de solución de alta abstracción.', tags: [{ text: 'Cuántico', c: '#a78bfa', bg: 'rgba(167,139,250,0.1)' }, { text: 'LLM', c: '#00e5c4', bg: 'rgba(0,229,196,0.1)' }] }
+];
+
+const matrixData = [
+  {
+    name: 'Algoritmo Genético (AG)', cat: 'Evolutivo', multiobj: 4, noisy: 4, discr: 5, cont: 4, scale: 3, interp: 3, cost: 3,
+    best: ['Problemas multimodales', 'Espacios discretos complejos', 'Sin gradiente disponible'],
+    tags: [{ text: 'Binario', c: '#00e5c4' }, { text: 'Real', c: '#ffb703' }]
+  },
+  {
+    name: 'Particle Swarm (PSO)', cat: 'Enjambre', multiobj: 3, noisy: 3, discr: 2, cont: 5, scale: 4, interp: 3, cost: 4,
+    best: ['Optimización continua', 'Pocas variables', 'Funciones unimodales'],
+    tags: [{ text: 'Continuo', c: '#38bdf8' }]
+  },
+  {
+    name: 'Simulated Annealing (SA)', cat: 'Física', multiobj: 1, noisy: 4, discr: 4, cont: 4, scale: 2, interp: 4, cost: 5,
+    best: ['Un solo objetivo', 'Problemas combinatorios', 'Funciones con ruido'],
+    tags: [{ text: 'Simple', c: '#39d353' }]
+  },
+  {
+    name: 'NSGA-II', cat: 'Evolutivo MO', multiobj: 5, noisy: 4, discr: 4, cont: 5, scale: 3, interp: 2, cost: 2,
+    best: ['2–3 objetivos en conflicto', 'Frente de Pareto complejo', 'Planeación con compromisos'],
+    tags: [{ text: 'Pareto', c: '#9b59f5' }, { text: 'Multiobjeto', c: '#fb7185' }]
+  },
+  {
+    name: 'Gradient Descent', cat: 'Clásico', multiobj: 2, noisy: 2, discr: 1, cont: 5, scale: 5, interp: 5, cost: 5,
+    best: ['Funciones convexas y diferenciables', 'Redes neuronales (backprop)', 'Alto volumen de datos'],
+    tags: [{ text: 'Requiere gradiente', c: '#ff6b6b' }]
+  },
+  {
+    name: 'Evolución Diferencial (DE)', cat: 'Evolutivo', multiobj: 3, noisy: 5, discr: 2, cont: 5, scale: 3, interp: 3, cost: 4,
+    best: ['Funciones continuas con ruido', 'Calibración de parámetros', 'Benchmarks numéricos CEC'],
+    tags: [{ text: 'Robusto', c: '#ffb703' }]
+  }
+];
+
+// ================================================
+// COSMOS BACKGROUND
+// ================================================
+(function() {
+  const canvas = document.getElementById('cosmosCanvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], animId;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function mkParticle() {
+    const colors = ['#00e5c4','#ffb703','#9b59f5','#38bdf8','#39d353','#fb7185'];
+    return {
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+      r: Math.random() * 1.5 + 0.3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: Math.random() * 0.6 + 0.1,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: 0.01 + Math.random() * 0.02
+    };
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: 160 }, mkParticle);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Connection lines
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 90) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(0,229,196,${0.04 * (1 - dist/90)})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    particles.forEach(p => {
+      p.pulse += p.pulseSpeed;
+      const alphaMod = p.alpha * (0.7 + 0.3 * Math.sin(p.pulse));
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color.replace(')', `,${alphaMod})`).replace('rgb', 'rgba').replace('#', '');
+      // simpler:
+      ctx.globalAlpha = alphaMod;
+      ctx.fillStyle = p.color;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+    });
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); });
+  init();
+  draw();
+})();
+
+// ================================================
+// ECOSYSTEM GRID
+// ================================================
+let activeCard = null;
+
+function buildEcosystem() {
+  const grid = document.getElementById('ecosystemGrid');
+  const panel = document.getElementById('detailPanel');
+
+  domains.forEach((d, i) => {
+    const card = document.createElement('div');
+    card.className = 'domain-card';
+    card.style.setProperty('--card-color', d.color);
+    card.style.setProperty('--card-glow', d.glow);
+    card.innerHTML = `
+      <span class="card-icon">${d.icon}</span>
+      <div class="card-number">${d.num} / 08</div>
+      <div class="card-title">${d.title}</div>
+      <div class="card-subtitle">${d.subtitle}</div>
+      <div class="card-teaser">${d.teaser}</div>
+      <div class="card-expand-btn">Ver aplicaciones <span>→</span></div>
+    `;
+    card.addEventListener('click', () => toggleDomain(i, card, d));
+    grid.appendChild(card);
+  });
+}
+
+function toggleDomain(i, card, d) {
+  const panel = document.getElementById('detailPanel');
+  const cards = document.querySelectorAll('.domain-card');
+
+  if (activeCard === i) {
+    panel.classList.remove('open');
+    card.classList.remove('expanded');
+    activeCard = null;
+    return;
+  }
+
+  cards.forEach(c => c.classList.remove('expanded'));
+  card.classList.add('expanded');
+  activeCard = i;
+
+  const barsHTML = d.chartData.map(item => `
+    <div class="mini-bar-row">
+      <span class="mini-bar-name">${item.name}</span>
+      <div class="mini-bar-track">
+        <div class="mini-bar-fill" style="width:0%;background:${d.color}" data-target="${item.val}"></div>
+      </div>
+      <span class="mini-bar-val">${item.val}%</span>
+    </div>
+  `).join('');
+
+  const tagsHTML = d.tags.map(t => `<span class="tag-pill" style="background:${d.glow};color:${d.color};border:1px solid ${d.color}40">${t}</span>`).join('');
+
+  panel.innerHTML = `
+    <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:${d.color};margin-bottom:20px">${d.icon} ${d.title} — ${d.subtitle}</div>
+    <div class="detail-grid">
+      <div class="detail-main" style="grid-column:span 1">
+        <h3>${d.title}</h3>
+        <p>${d.body}</p>
+        <p>${d.body2}</p>
+        <div style="margin-top:14px">${tagsHTML}</div>
+      </div>
+      <div class="detail-apps">
+        <h4>Aplicaciones Clave</h4>
+        ${d.apps.map(a => `
+          <div class="app-item" style="border-left-color:${d.color}">
+            <div class="app-item-title">${a.title}</div>
+            <div class="app-item-desc">${a.desc}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="detail-visual">
+        <div class="mini-chart">
+          <div class="mini-chart-label">Desempeño del AG en este dominio</div>
+          <div class="mini-bars">${barsHTML}</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  panel.classList.add('open');
+  panel.style.borderColor = d.color + '60';
+
+  setTimeout(() => {
+    panel.querySelectorAll('.mini-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.target + '%';
+    });
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 50);
+}
+
+buildEcosystem();
+
+// ================================================
+// NETWORK CANVAS
+// ================================================
+(function() {
+  const canvas = document.getElementById('networkCanvas');
+  const ctx = canvas.getContext('2d');
+  const tooltip = document.getElementById('nodeTooltip');
+  let W, H, nodes = [], edges = [], animId, hoveredNode = null;
+
+  const nodeData = [
+    { id: 0, label: 'Algoritmo\nGenético', x: 0.5, y: 0.5, r: 36, color: '#00e5c4', glow: true, desc: 'El núcleo: selección, cruza, mutación operando sobre población de soluciones codificadas.' },
+    { id: 1, label: 'Selección\nNatural', x: 0.25, y: 0.25, r: 22, color: '#ffb703', desc: 'Ruleta, torneo, MEU: mecanismos que favorecen la propagación de individuos aptos.' },
+    { id: 2, label: 'Cruza', x: 0.72, y: 0.2, r: 20, color: '#ffb703', desc: 'Operador principal de exploración: combina material genético de dos padres.' },
+    { id: 3, label: 'Mutación', x: 0.8, y: 0.5, r: 18, color: '#ffb703', desc: 'Introduce variabilidad aleatoria. Pm = 0.1/L para preservar diversidad sin destruir información.' },
+    { id: 4, label: 'Codificación\nBinaria', x: 0.28, y: 0.72, r: 18, color: '#38bdf8', desc: 'Cromosomas como cadenas de bits. L = ⌈log₂(rango × 10^precision)⌉' },
+    { id: 5, label: 'Codificación\nReal', x: 0.6, y: 0.78, r: 16, color: '#38bdf8', desc: 'Cromosomas con valores de punto flotante. Más eficiente para espacios continuos.' },
+    { id: 6, label: 'NSGA-II', x: 0.12, y: 0.5, r: 20, color: '#9b59f5', desc: 'Non-dominated Sorting GA II: genera frente de Pareto para optimización multiobjetivo.' },
+    { id: 7, label: 'PSO', x: 0.12, y: 0.72, r: 16, color: '#a78bfa', desc: 'Particle Swarm Optimization: variante de enjambre, complementaria para espacios continuos.' },
+    { id: 8, label: 'Evolución\nDiferencial', x: 0.38, y: 0.12, r: 16, color: '#a78bfa', desc: 'DE: mutación por diferencia de vectores, muy robusto en benchmarks continuos.' },
+    { id: 9, label: 'Programación\nGenética', x: 0.65, y: 0.12, r: 18, color: '#39d353', desc: 'Koza (1992): evoluciona árboles de programa. Puede sintetizar circuitos y estrategias.' },
+    { id: 10, label: 'NEAT', x: 0.88, y: 0.3, r: 16, color: '#fb7185', desc: 'Neuroevolución de Topologías Aumentadas: arquitecturas neuronales evolucionadas.' },
+    { id: 11, label: 'Finanzas', x: 0.18, y: 0.15, r: 14, color: '#ffd166', desc: 'Portafolios eficientes, calibración VaR, trading evolutivo.' },
+    { id: 12, label: 'Logística', x: 0.82, y: 0.78, r: 14, color: '#ff6b6b', desc: 'TSP, VRP, JSP, localización industrial nearshoring.' },
+    { id: 13, label: 'Bioinformática', x: 0.5, y: 0.9, r: 14, color: '#39d353', desc: 'Plegamiento proteínas, docking molecular, diseño de fármacos.' },
+    { id: 14, label: 'Ingeniería', x: 0.88, y: 0.65, r: 14, color: '#38bdf8', desc: 'Topología estructural, PID, aerodinámica, síntesis de circuitos.' }
+  ];
+
+  const edgeData = [
+    [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],
+    [1,6],[1,11],[2,9],[3,10],[4,0],[5,0],[6,7],[9,10],
+    [0,12],[0,13],[0,14],[6,14],[10,14],[9,12]
+  ];
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width = rect.width;
+    H = canvas.height = rect.height || 600;
+  }
+
+  function init() {
+    resize();
+    nodes = nodeData.map(n => ({
+      ...n,
+      px: n.x * W, py: n.y * H,
+      pulse: Math.random() * Math.PI * 2,
+      pulseSpeed: 0.02 + Math.random() * 0.01
+    }));
+    edges = edgeData.map(([a, b]) => ({
+      from: nodes[a], to: nodes[b],
+      alpha: 0, targetAlpha: 0.25 + Math.random() * 0.2,
+      phase: Math.random() * Math.PI * 2,
+      particlePos: Math.random()
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const t = Date.now() * 0.001;
+
+    // Edges
+    edges.forEach(e => {
+      e.alpha += (e.targetAlpha - e.alpha) * 0.05;
+      const wave = 0.5 + 0.5 * Math.sin(t * 1.2 + e.phase);
+      const alpha = e.alpha * wave;
+
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(0,229,196,${alpha * 0.4})`;
+      ctx.lineWidth = 0.8;
+      ctx.moveTo(e.from.px, e.from.py);
+      ctx.lineTo(e.to.px, e.to.py);
+      ctx.stroke();
+
+      // Traveling particle
+      e.particlePos = (e.particlePos + 0.004) % 1;
+      const px = e.from.px + (e.to.px - e.from.px) * e.particlePos;
+      const py = e.from.py + (e.to.py - e.from.py) * e.particlePos;
+      ctx.beginPath();
+      ctx.arc(px, py, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,229,196,${alpha * 1.5})`;
+      ctx.fill();
+    });
+
+    // Nodes
+    nodes.forEach((n, i) => {
+      n.pulse += n.pulseSpeed;
+      const pulseR = n.r + 4 * Math.sin(n.pulse);
+      const isHovered = hoveredNode === i;
+
+      // Glow
+      const grd = ctx.createRadialGradient(n.px, n.py, 0, n.px, n.py, pulseR * 2.5);
+      grd.addColorStop(0, n.color + (isHovered ? 'aa' : '33'));
+      grd.addColorStop(1, 'transparent');
+      ctx.beginPath();
+      ctx.arc(n.px, n.py, pulseR * 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = grd;
+      ctx.fill();
+
+      // Circle
+      ctx.beginPath();
+      ctx.arc(n.px, n.py, pulseR, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(6,11,24,0.85)`;
+      ctx.fill();
+      ctx.strokeStyle = n.color + (isHovered ? 'ff' : '99');
+      ctx.lineWidth = isHovered ? 2 : 1;
+      ctx.stroke();
+
+      // Label
+      ctx.fillStyle = isHovered ? n.color : '#94a3b8';
+      ctx.font = `${n.glow ? '600' : '500'} ${Math.min(n.r * 0.38, 11)}px Syne`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      const lines = n.label.split('\n');
+      const lineH = Math.min(n.r * 0.4, 12);
+      lines.forEach((line, li) => {
+        ctx.fillText(line, n.px, n.py + (li - (lines.length - 1) / 2) * lineH);
+      });
+    });
+
+    animId = requestAnimationFrame(draw);
+  }
+
+  canvas.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    let found = -1;
+    nodes.forEach((n, i) => {
+      const dx = mx - n.px, dy = my - n.py;
+      if (Math.sqrt(dx*dx+dy*dy) < n.r + 8) found = i;
+    });
+    hoveredNode = found >= 0 ? found : null;
+    canvas.style.cursor = found >= 0 ? 'pointer' : 'default';
+
+    if (found >= 0) {
+      const nd = nodes[found];
+      document.getElementById('ttTitle').textContent = nd.label.replace('\n', ' ');
+      document.getElementById('ttBody').textContent = nd.desc;
+      const tt = document.getElementById('nodeTooltip');
+      tt.style.display = 'block';
+      tt.style.left = (e.clientX + 16) + 'px';
+      tt.style.top = (e.clientY - 40) + 'px';
+      tt.style.borderColor = nd.color + '80';
+    } else {
+      document.getElementById('nodeTooltip').style.display = 'none';
+    }
+  });
+
+  canvas.addEventListener('mouseleave', () => {
+    hoveredNode = null;
+    document.getElementById('nodeTooltip').style.display = 'none';
+  });
+
+  const legend = document.getElementById('networkLegend');
+  [['#00e5c4','Núcleo AG'], ['#ffb703','Operadores'], ['#9b59f5','Variantes'], ['#39d353','Bioinformática'], ['#38bdf8','Codificación'], ['#fb7185','ML/Neuro']].forEach(([c, label]) => {
+    legend.innerHTML += `<div class="legend-item"><div class="legend-dot" style="background:${c}"></div>${label}</div>`;
+  });
+
+  window.addEventListener('resize', () => { resize(); nodes.forEach(n => { n.px = n.x * W; n.py = n.y * H; }); });
+  init();
+  draw();
+})();
+
+// ================================================
+// MOSAIC
+// ================================================
+(function() {
+  const grid = document.getElementById('mosaicGrid');
+  mosaicItems.forEach((item, i) => {
+    const el = document.createElement('div');
+    el.className = `mosaic-item${item.large ? ' large' : ''}`;
+    el.style.setProperty('--item-color', item.color);
+    const metricsHTML = item.metrics ? item.metrics.map(m => `
+      <div class="mosaic-metric-item">
+        <span class="mosaic-metric-val">${m.val}</span>
+        <span class="mosaic-metric-label">${m.label}</span>
+      </div>
+    `).join('') : '';
+    el.innerHTML = `
+      <div class="mosaic-bg-glyph">${item.icon}</div>
+      <div class="mosaic-item-eyebrow">${item.eyebrow}</div>
+      <div class="mosaic-item-title">${item.title}</div>
+      <div class="mosaic-item-body">${item.body}</div>
+      ${item.body2 ? `<div class="mosaic-item-body" style="margin-top:10px">${item.body2}</div>` : ''}
+      ${metricsHTML ? `<div class="mosaic-metric">${metricsHTML}</div>` : ''}
+    `;
+    grid.appendChild(el);
+  });
+})();
+
+// ================================================
+// GENOME STRIP
+// ================================================
+let genomeRunning = false, genomeGeneration = 0, genomePop = [], genomeAnimId;
+const GNIND = 30, GLIND = 24;
+
+function himmelblau(x, y) {
+  return Math.pow(x*x + y - 11, 2) + Math.pow(x + y*y - 7, 2);
+}
+
+function decodeG(bits) {
+  const L = bits.length / 2;
+  const bx = bits.slice(0, L), by = bits.slice(L);
+  const dx = bx.reduce((a, b, i) => a + b * Math.pow(2, L - 1 - i), 0);
+  const dy = by.reduce((a, b, i) => a + b * Math.pow(2, L - 1 - i), 0);
+  const x = -5 + dx * 10 / (Math.pow(2, L) - 1);
+  const y = -5 + dy * 10 / (Math.pow(2, L) - 1);
+  return { x, y, f: himmelblau(x, y) };
+}
+
+function initGenome() {
+  genomePop = Array.from({ length: GNIND }, () => Array.from({ length: GLIND }, () => Math.round(Math.random())));
+  genomeGeneration = 0;
+}
+
+function evolveGenome() {
+  const evaluated = genomePop.map(bits => ({ bits, ...decodeG(bits) }));
+  evaluated.sort((a, b) => a.f - b.f);
+  const maxF = evaluated[evaluated.length - 1].f || 1;
+  const apt = evaluated.map(e => ({ ...e, apt: maxF - e.f + 1e-6 }));
+  const total = apt.reduce((s, a) => s + a.apt, 0);
+
+  function select() {
+    let r = Math.random() * total;
+    for (const a of apt) { r -= a.apt; if (r <= 0) return a.bits; }
+    return apt[apt.length - 1].bits;
+  }
+
+  const newPop = [evaluated[0].bits]; // elitism
+  while (newPop.length < GNIND) {
+    const p1 = select(), p2 = select();
+    const pt = Math.floor(Math.random() * (GLIND - 1)) + 1;
+    let child = [...p1.slice(0, pt), ...p2.slice(pt)];
+    child = child.map(b => Math.random() < 0.05 ? 1 - b : b);
+    newPop.push(child);
+  }
+  genomePop = newPop;
+  genomeGeneration++;
+  return evaluated[0].f;
+}
+
+function drawGenome() {
+  const canvas = document.getElementById('genomeCanvas');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth, H = 120;
+  canvas.width = W; canvas.height = H;
+
+  ctx.clearRect(0, 0, W, H);
+  const cellW = W / GNIND;
+  const cellH = H / GLIND;
+
+  genomePop.forEach((bits, i) => {
+    const { f } = decodeG(bits);
+    const normF = Math.min(f / 300, 1);
+    bits.forEach((b, j) => {
+      const x = i * cellW, y = j * cellH;
+      let color;
+      if (b === 1) {
+        color = `rgba(0,229,196,${0.3 + normF * 0.5})`;
+      } else {
+        color = `rgba(6,11,24,0.8)`;
+      }
+      ctx.fillStyle = color;
+      ctx.fillRect(x + 0.5, y + 0.5, cellW - 1, cellH - 1);
+    });
+    // fitness tint on top
+    const barH = (1 - normF) * H;
+    ctx.fillStyle = `rgba(0,229,196,${(1-normF) * 0.08})`;
+    ctx.fillRect(i * cellW, H - barH, cellW, barH);
+  });
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(28,46,74,0.4)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i <= GNIND; i++) {
+    ctx.beginPath(); ctx.moveTo(i * cellW, 0); ctx.lineTo(i * cellW, H); ctx.stroke();
+  }
+}
+
+function genomeRun() {
+  if (genomeRunning) {
+    genomeRunning = false;
+    cancelAnimationFrame(genomeAnimId);
+    document.getElementById('genomeBtn').textContent = '▶ Continuar';
+    return;
+  }
+  genomeRunning = true;
+  document.getElementById('genomeBtn').textContent = '⏸ Pausar';
+  function step() {
+    if (!genomeRunning) return;
+    const best = evolveGenome();
+    drawGenome();
+    document.getElementById('genomeGen').textContent = genomeGeneration;
+    document.getElementById('genomeFit').textContent = best.toFixed(4);
+    genomeAnimId = setTimeout(step, 120);
+  }
+  step();
+}
+
+function genomeReset() {
+  genomeRunning = false;
+  cancelAnimationFrame(genomeAnimId);
+  document.getElementById('genomeBtn').textContent = '▶ Iniciar';
+  initGenome();
+  drawGenome();
+  document.getElementById('genomeGen').textContent = '0';
+  document.getElementById('genomeFit').textContent = '—';
+}
+
+initGenome();
+setTimeout(() => drawGenome(), 200);
+
+// ================================================
+// MATRIX TABLE
+// ================================================
+(function() {
+  const table = document.getElementById('matrixTable');
+  const headers = ['Algoritmo', 'Categoría', 'Multi-obj', 'Ruido', 'Discreto', 'Continuo', 'Escalable', 'Interpret.', 'Eficiencia', 'Mejor para'];
+  let html = `<thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>`;
+
+  function dots(n, color) {
+    let out = '<div class="dot-rating">';
+    for (let i = 0; i < 5; i++) {
+      out += `<div class="dot-r ${i < n ? 'dot-fill' : 'dot-empty'}" style="${i < n ? 'background:' + color : ''}"></div>`;
+    }
+    return out + '</div>';
+  }
+
+  matrixData.forEach((row, i) => {
+    const c = i === 0 ? '#00e5c4' : i === 3 ? '#9b59f5' : '#94a3b8';
+    const tagsHTML = row.tags.map(t => `<span class="feature-tag" style="background:${t.c}22;color:${t.c};border:1px solid ${t.c}44">${t.text}</span>`).join('');
+    html += `<tr>
+      <td><div class="algo-name" style="color:${c}">${row.name}</div>${tagsHTML}</td>
+      <td><span class="feature-tag" style="background:var(--lift);color:var(--text-mid);border:1px solid var(--edge)">${row.cat}</span></td>
+      <td>${dots(row.multiobj, c)}</td>
+      <td>${dots(row.noisy, c)}</td>
+      <td>${dots(row.discr, c)}</td>
+      <td>${dots(row.cont, c)}</td>
+      <td>${dots(row.scale, c)}</td>
+      <td>${dots(row.interp, c)}</td>
+      <td>${dots(row.cost, c)}</td>
+      <td style="font-family:var(--font-body);font-style:italic;font-size:12px;color:var(--text-mid)">${row.best.join(' · ')}</td>
+    </tr>`;
+  });
+
+  html += '</tbody>';
+  table.innerHTML = html;
+})();
+
+// ================================================
+// TIMELINE
+// ================================================
+(function() {
+  const container = document.getElementById('timelineContainer');
+  timelineData.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'timeline-item';
+    const tagsHTML = item.tags.map(t => `<span class="timeline-tag" style="background:${t.bg};color:${t.c};border:1px solid ${t.c}44">${t.text}</span>`).join('');
+    el.innerHTML = `
+      <div class="timeline-dot" style="background:${item.color}"></div>
+      <div class="timeline-year">${item.year}</div>
+      <div class="timeline-title">${item.title}</div>
+      <div class="timeline-body">${item.body}</div>
+      <div>${tagsHTML}</div>
+    `;
+    container.appendChild(el);
+  });
+
+  // Intersection Observer for timeline animations
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+})();
+</script>
+</body>
+</html>
