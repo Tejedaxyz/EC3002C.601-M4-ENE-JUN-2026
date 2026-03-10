@@ -1,0 +1,2511 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: file:///Users/leonardogonzalez/Desktop/algoritmos-geneticos-dashboard.html
+Subject: =?utf-8?Q?Algoritmos=20Gen=C3=A9ticos=20=E2=80=94=20ITESM-SF?=
+Date: Mon, 9 Mar 2026 19:14:29 -0600
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--7KQ9qXmFLGlfABwX9Z7Y28gntLd8EFIxocnbzjnU8n----"
+
+
+------MultipartBoundary--7KQ9qXmFLGlfABwX9Z7Y28gntLd8EFIxocnbzjnU8n----
+Content-Type: text/html
+Content-ID: <frame-417B108955846393F56E868057AA7278@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: file:///Users/leonardogonzalez/Desktop/algoritmos-geneticos-dashboard.html
+
+<!DOCTYPE html><html lang=3D"es"><head><meta http-equiv=3D"Content-Type" co=
+ntent=3D"text/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/=
+css" href=3D"cid:css-7a05f11d-0b1b-4dbd-97e3-6a909caf41cb@mhtml.blink" />
+
+<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1.=
+0">
+<title>Algoritmos Gen=C3=A9ticos =E2=80=94 ITESM-SF</title>
+<link href=3D"https://fonts.googleapis.com/css2?family=3DPlayfair+Display:i=
+tal,wght@0,400;0,700;0,900;1,400&amp;family=3DJetBrains+Mono:wght@300;400;5=
+00;700&amp;family=3DLibre+Baskerville:ital,wght@0,400;0,700;1,400&amp;displ=
+ay=3Dswap" rel=3D"stylesheet">
+
+
+</head>
+<body>
+
+<div class=3D"header">
+  <div class=3D"header-top">
+    <div class=3D"header-meta">ITESM-SF =C2=B7 M=C3=B3dulo 4 =C2=B7 T=C3=A9=
+cnicas Computacionales Avanzadas =C2=B7 Feb=E2=80=93Jun 2026</div>
+    <div class=3D"header-badge">Econom=C3=ADa Aplicada &amp; Ciencia de Dat=
+os</div>
+  </div>
+  <div class=3D"header-title">
+    <h1 class=3D"main-title">Algoritmos <span>Gen=C3=A9ticos</span></h1>
+  </div>
+  <nav class=3D"tabs-nav" id=3D"mainTabs">
+    <button class=3D"tab-btn" data-tab=3D"fundamentos">01 =C2=B7 Fundamento=
+s</button>
+    <button class=3D"tab-btn active" data-tab=3D"problema">02 =C2=B7 Proble=
+ma Did=C3=A1ctico</button>
+    <button class=3D"tab-btn" data-tab=3D"editorial">03 =C2=B7 An=C3=A1lisi=
+s Editorial</button>
+    <button class=3D"tab-btn" data-tab=3D"recursos">04 =C2=B7 Fuentes &amp;=
+ APIs</button>
+  </nav>
+</div>
+
+<div class=3D"content">
+
+  <!-- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D TAB =
+1: FUNDAMENTOS =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D -->
+  <div class=3D"tab-pane" id=3D"tab-fundamentos">
+
+    <div class=3D"section-eyebrow">Meta-heur=C3=ADstica evolutiva</div>
+    <h2 class=3D"section-title">Fundamentos de los Algoritmos Gen=C3=A9tico=
+s</h2>
+
+    <div class=3D"grid-4" style=3D"margin-bottom:28px">
+      <div class=3D"card metric">
+        <div class=3D"metric-value">=E2=88=9E</div>
+        <div class=3D"metric-label">Espacio de B=C3=BAsqueda</div>
+      </div>
+      <div class=3D"card metric">
+        <div class=3D"metric-value" style=3D"color:var(--accent-gold)">4</d=
+iv>
+        <div class=3D"metric-label">Operadores Clave</div>
+      </div>
+      <div class=3D"card metric">
+        <div class=3D"metric-value" style=3D"color:var(--accent-green)">~0.=
+7</div>
+        <div class=3D"metric-label">Prob. de Cruza (Pc)</div>
+      </div>
+      <div class=3D"card metric">
+        <div class=3D"metric-value" style=3D"color:var(--accent-purple)">1/=
+L</div>
+        <div class=3D"metric-label">Prob. de Mutaci=C3=B3n (Pm)</div>
+      </div>
+    </div>
+
+    <!-- Visualizador GA -->
+    <div class=3D"ga-viz-container">
+      <div style=3D"display:flex;justify-content:space-between;align-items:=
+center;margin-bottom:14px">
+        <div>
+          <div class=3D"section-eyebrow" style=3D"margin:0">Simulador en Ti=
+empo Real</div>
+          <div style=3D"font-family:var(--font-mono);font-size:12px;color:v=
+ar(--text-secondary)">Evoluci=C3=B3n de una poblaci=C3=B3n =E2=80=94 Genera=
+ci=C3=B3n: <span id=3D"vizGen">50</span> / <span id=3D"vizMaxGen">50</span>=
+</div>
+        </div>
+        <div style=3D"display:flex;gap:10px;align-items:center">
+          <button class=3D"btn btn-sm" id=3D"vizStart">=E2=96=B6 Iniciar</b=
+utton>
+          <button class=3D"btn btn-sm" style=3D"background:var(--bg-hover);=
+color:var(--text-secondary)" id=3D"vizReset">=E2=86=BA Reset</button>
+        </div>
+      </div>
+      <canvas id=3D"fitnessCanvas" height=3D"400" style=3D"width:100%;max-h=
+eight:200px" width=3D"800"></canvas>
+    </div>
+
+    <!-- Ciclo GA -->
+    <div class=3D"section-eyebrow" style=3D"margin-top:32px">Proceso Iterat=
+ivo</div>
+    <h3 class=3D"subsection-title">Ciclo Evolutivo Completo</h3>
+
+    <div class=3D"flow-steps">
+      <div class=3D"flow-step">
+        <span class=3D"flow-step-num">01</span>
+        <div class=3D"flow-step-label">Inicializaci=C3=B3n</div>
+        <div class=3D"flow-step-desc">Poblaci=C3=B3n aleatoria de cromosoma=
+s binarios</div>
+      </div>
+      <div class=3D"flow-step">
+        <span class=3D"flow-step-num" style=3D"color:var(--accent-gold)">02=
+</span>
+        <div class=3D"flow-step-label">Evaluaci=C3=B3n</div>
+        <div class=3D"flow-step-desc">C=C3=A1lculo del fitness f(x)</div>
+      </div>
+      <div class=3D"flow-step">
+        <span class=3D"flow-step-num" style=3D"color:var(--accent-green)">0=
+3</span>
+        <div class=3D"flow-step-label">Selecci=C3=B3n</div>
+        <div class=3D"flow-step-desc">Ruleta / Torneo / MEU</div>
+      </div>
+      <div class=3D"flow-step">
+        <span class=3D"flow-step-num" style=3D"color:var(--accent-purple)">=
+04</span>
+        <div class=3D"flow-step-label">Cruza</div>
+        <div class=3D"flow-step-desc">1-punto / 2-puntos / uniforme</div>
+      </div>
+      <div class=3D"flow-step">
+        <span class=3D"flow-step-num" style=3D"color:var(--accent-red)">05<=
+/span>
+        <div class=3D"flow-step-label">Mutaci=C3=B3n</div>
+        <div class=3D"flow-step-desc">Flip-bit con P(m) =3D 0.1/L</div>
+      </div>
+    </div>
+
+    <hr class=3D"divider">
+
+    <div class=3D"grid-2" style=3D"gap:24px">
+      <!-- Comparaci=C3=B3n -->
+      <div>
+        <div class=3D"section-eyebrow">Ventaja Diferencial</div>
+        <h3 class=3D"subsection-title">AG vs. M=C3=A9todos Tradicionales</h=
+3>
+        <div style=3D"display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class=3D"card" style=3D"border-top:2px solid var(--accent-cy=
+an)">
+            <div style=3D"font-family:var(--font-mono);font-size:11px;color=
+:var(--accent-cyan);margin-bottom:10px;text-transform:uppercase;letter-spac=
+ing:0.1em">Algoritmo Gen=C3=A9tico</div>
+            <div style=3D"font-size:12px;color:var(--text-secondary);line-h=
+eight:1.9">
+              =E2=9C=93 &nbsp;Caja negra (sin gradientes)<br>
+              =E2=9C=93 &nbsp;Poblaci=C3=B3n paralela<br>
+              =E2=9C=93 &nbsp;Escapa =C3=B3ptimos locales<br>
+              =E2=9C=93 &nbsp;Reglas probabil=C3=ADsticas<br>
+              =E2=9C=93 &nbsp;No requiere punto inicial
+            </div>
+          </div>
+          <div class=3D"card" style=3D"border-top:2px solid var(--text-mute=
+d);opacity:0.8">
+            <div style=3D"font-family:var(--font-mono);font-size:11px;color=
+:var(--text-muted);margin-bottom:10px;text-transform:uppercase;letter-spaci=
+ng:0.1em">M=C3=A9todos Cl=C3=A1sicos</div>
+            <div style=3D"font-size:12px;color:var(--text-muted);line-heigh=
+t:1.9">
+              =E2=9C=97 &nbsp;Requieren derivadas<br>
+              =E2=9C=97 &nbsp;Evaluaci=C3=B3n punto a punto<br>
+              =E2=9C=97 &nbsp;Propensos a m=C3=ADnimos locales<br>
+              =E2=9C=97 &nbsp;Reglas determin=C3=ADsticas<br>
+              =E2=9C=97 &nbsp;Necesitan factibilidad inicial
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Operadores -->
+      <div>
+        <div class=3D"section-eyebrow">Operadores Gen=C3=A9ticos</div>
+        <h3 class=3D"subsection-title">Cruza y Mutaci=C3=B3n Interactiva</h=
+3>
+        <div class=3D"card">
+          <div style=3D"font-family:var(--font-mono);font-size:11px;color:v=
+ar(--text-muted);margin-bottom:10px">Padre 1 &amp; Padre 2 =E2=80=94 punto =
+de corte resaltado en <span style=3D"color:var(--accent-purple)">p=C3=BArpu=
+ra</span></div>
+          <div id=3D"parent1Chrom" class=3D"chromosome"><div class=3D"bit b=
+it-0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</di=
+v><div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><div clas=
+s=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bi=
+t-0">0</div><div class=3D"bit bit-0">0</div><div class=3D"bit bit-0">0</div=
+><div class=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div><div class=
+=3D"bit bit-0">0</div><div class=3D"bit bit-1" style=3D"border-left: 3px so=
+lid var(--accent-purple);">1</div><div class=3D"bit bit-1">1</div><div clas=
+s=3D"bit bit-0">0</div></div>
+          <div id=3D"parent2Chrom" class=3D"chromosome"><div class=3D"bit b=
+it-1">1</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</di=
+v><div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><div clas=
+s=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><div class=3D"bit bi=
+t-1">1</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div=
+><div class=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div><div class=
+=3D"bit bit-0">0</div><div class=3D"bit bit-1" style=3D"border-left: 3px so=
+lid var(--accent-purple);">1</div><div class=3D"bit bit-0">0</div><div clas=
+s=3D"bit bit-0">0</div></div>
+          <div style=3D"font-family:var(--font-mono);font-size:11px;color:v=
+ar(--text-muted);margin-top:10px;margin-bottom:6px">Hijo resultante =E2=80=
+=94 mutaci=C3=B3n en <span style=3D"color:var(--accent-gold)">=C3=A1mbar</s=
+pan></div>
+          <div id=3D"childChrom" class=3D"chromosome"><div class=3D"bit bit=
+-0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div>=
+<div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><div class=
+=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit=
+-0">0</div><div class=3D"bit bit-0">0</div><div class=3D"bit bit-0">0</div>=
+<div class=3D"bit bit-mut">0</div><div class=3D"bit bit-1">1</div><div clas=
+s=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bi=
+t-0">0</div><div class=3D"bit bit-0">0</div></div>
+          <button class=3D"btn btn-sm btn-gold" style=3D"margin-top:14px">=
+=E2=86=BA Nuevos Padres</button>
+        </div>
+      </div>
+    </div>
+
+    <hr class=3D"divider">
+
+    <!-- M=C3=A9todos de selecci=C3=B3n -->
+    <div class=3D"section-eyebrow">Selecci=C3=B3n Proporcional</div>
+    <h3 class=3D"subsection-title">Ruleta de Selecci=C3=B3n =E2=80=94 Visua=
+lizador Din=C3=A1mico</h3>
+    <div class=3D"grid-2" style=3D"align-items:start">
+      <div>
+        <canvas id=3D"rouletteCanvas" width=3D"300" height=3D"300" style=3D=
+"max-width:300px;display:block;margin:auto"></canvas>
+        <div style=3D"text-align:center;margin-top:10px">
+          <button class=3D"btn btn-sm">Girar Ruleta</button>
+        </div>
+      </div>
+      <div>
+        <div class=3D"math-display">
+          p<sub style=3D"font-size:11px">i</sub>(t) =3D f<sub style=3D"font=
+-size:11px">i</sub>(t) / =CE=A3<sup style=3D"font-size:11px">n</sup><sub st=
+yle=3D"font-size:11px">j=3D1</sub> f<sub style=3D"font-size:11px">j</sub>(t=
+)
+        </div>
+        <table class=3D"pop-table">
+          <thead>
+            <tr><th>Ind.</th><th>f(x)</th><th>p(sel.)</th><th>Aptitud Rel.<=
+/th></tr>
+          </thead>
+          <tbody id=3D"rouletteTable">
+    <tr>
+      <td><span style=3D"color:#3b82f6;font-weight:700">A</span></td>
+      <td>15</td>
+      <td style=3D"color:var(--accent-cyan)">15.0%</td>
+      <td>
+        <div class=3D"fitness-bar-container" style=3D"width:80px">
+          <div class=3D"fitness-bar" style=3D"width:15.015015015015015%;bac=
+kground:#3b82f6"></div>
+        </div>
+      </td>
+    </tr>
+ =20
+    <tr>
+      <td><span style=3D"color:#f59e0b;font-weight:700">B</span></td>
+      <td>10.6</td>
+      <td style=3D"color:var(--accent-cyan)">10.6%</td>
+      <td>
+        <div class=3D"fitness-bar-container" style=3D"width:80px">
+          <div class=3D"fitness-bar" style=3D"width:10.610610610610612%;bac=
+kground:#f59e0b"></div>
+        </div>
+      </td>
+    </tr>
+ =20
+    <tr>
+      <td><span style=3D"color:#10b981;font-weight:700">C</span></td>
+      <td>23.9</td>
+      <td style=3D"color:var(--accent-cyan)">23.9%</td>
+      <td>
+        <div class=3D"fitness-bar-container" style=3D"width:80px">
+          <div class=3D"fitness-bar" style=3D"width:23.923923923923923%;bac=
+kground:#10b981"></div>
+        </div>
+      </td>
+    </tr>
+ =20
+    <tr>
+      <td><span style=3D"color:#ef4444;font-weight:700">D</span></td>
+      <td>3.5</td>
+      <td style=3D"color:var(--accent-cyan)">3.5%</td>
+      <td>
+        <div class=3D"fitness-bar-container" style=3D"width:80px">
+          <div class=3D"fitness-bar" style=3D"width:3.5035035035035036%;bac=
+kground:#ef4444"></div>
+        </div>
+      </td>
+    </tr>
+ =20
+    <tr>
+      <td><span style=3D"color:#8b5cf6;font-weight:700">E</span></td>
+      <td>39.8</td>
+      <td style=3D"color:var(--accent-cyan)">39.8%</td>
+      <td>
+        <div class=3D"fitness-bar-container" style=3D"width:80px">
+          <div class=3D"fitness-bar" style=3D"width:39.83983983983984%;back=
+ground:#8b5cf6"></div>
+        </div>
+      </td>
+    </tr>
+ =20
+    <tr>
+      <td><span style=3D"color:#06b6d4;font-weight:700">F</span></td>
+      <td>7.1</td>
+      <td style=3D"color:var(--accent-cyan)">7.1%</td>
+      <td>
+        <div class=3D"fitness-bar-container" style=3D"width:80px">
+          <div class=3D"fitness-bar" style=3D"width:7.107107107107108%;back=
+ground:#06b6d4"></div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+        </table>
+        <div style=3D"margin-top:14px;font-size:12px;color:var(--text-secon=
+dary)">
+          <strong style=3D"color:var(--accent-gold)">Seleccionado:</strong>=
+ <span id=3D"selectedInd" style=3D"font-family:var(--font-mono);color:var(-=
+-accent-cyan)">Individuo E (39.8)</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class=3D"divider">
+
+    <!-- Balance exploraci=C3=B3n/explotaci=C3=B3n -->
+    <div class=3D"highlight-box">
+      <div class=3D"section-eyebrow" style=3D"margin:0 0 8px">Principio Fun=
+damental</div>
+      <h3 class=3D"subsection-title" style=3D"margin-bottom:10px">Balance E=
+xploraci=C3=B3n =E2=86=94 Explotaci=C3=B3n</h3>
+      <div class=3D"grid-2">
+        <div>
+          <div style=3D"font-family:var(--font-mono);font-size:11px;color:v=
+ar(--accent-blue);margin-bottom:6px;text-transform:uppercase">Explotaci=C3=
+=B3n (Cruza)</div>
+          <p style=3D"font-size:13px;color:var(--text-secondary)">Utiliza s=
+oluciones conocidas para construir mejores candidatos. La selecci=C3=B3n po=
+r aptitud asegura que los individuos m=C3=A1s aptos contribuyan m=C3=A1s en=
+ la siguiente generaci=C3=B3n, convergiendo hacia regiones prometedoras.</p=
+>
+        </div>
+        <div>
+          <div style=3D"font-family:var(--font-mono);font-size:11px;color:v=
+ar(--accent-purple);margin-bottom:6px;text-transform:uppercase">Exploraci=
+=C3=B3n (Mutaci=C3=B3n)</div>
+          <p style=3D"font-size:13px;color:var(--text-secondary)">Introduce=
+ variabilidad aleatoria para explorar regiones inexploradas del espacio de =
+b=C3=BAsqueda. Baja probabilidad (1/L) evita destruir informaci=C3=B3n =C3=
+=BAtil manteniendo diversidad gen=C3=A9tica.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D TAB =
+2: PROBLEMA DID=C3=81CTICO =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D -->
+  <div class=3D"tab-pane active" id=3D"tab-problema">
+
+    <div class=3D"section-eyebrow">Aplicaci=C3=B3n paso a paso</div>
+    <h2 class=3D"section-title">Optimizaci=C3=B3n de la Funci=C3=B3n Himmel=
+blau</h2>
+
+    <div class=3D"grid-4" style=3D"margin-bottom:28px">
+      <div class=3D"card metric">
+        <div class=3D"metric-value" id=3D"bestFitVal">0.001719</div>
+        <div class=3D"metric-label">Mejor Fitness</div>
+      </div>
+      <div class=3D"card metric">
+        <div class=3D"metric-value" id=3D"bestXVal" style=3D"color:var(--ac=
+cent-gold)">-2.8047</div>
+        <div class=3D"metric-label">x* =C3=B3ptimo</div>
+      </div>
+      <div class=3D"card metric">
+        <div class=3D"metric-value" id=3D"bestYVal" style=3D"color:var(--ac=
+cent-green)">3.1248</div>
+        <div class=3D"metric-label">y* =C3=B3ptimo</div>
+      </div>
+      <div class=3D"card metric">
+        <div class=3D"metric-value" id=3D"currGenVal" style=3D"color:var(--=
+accent-purple)">100</div>
+        <div class=3D"metric-label">Generaci=C3=B3n Actual</div>
+      </div>
+    </div>
+
+    <!-- Step indicators -->
+    <div class=3D"step-indicator" id=3D"stepIndicator">
+      <div class=3D"step-dot done" data-step=3D"0">1</div>
+      <div class=3D"step-dot done" data-step=3D"1">2</div>
+      <div class=3D"step-dot done" data-step=3D"2">3</div>
+      <div class=3D"step-dot done" data-step=3D"3">4</div>
+      <div class=3D"step-dot done" data-step=3D"4">5</div>
+      <div class=3D"step-dot done" data-step=3D"5">6</div>
+      <div class=3D"step-dot active" data-step=3D"6">7</div>
+    </div>
+
+    <!-- Step panels -->
+    <div id=3D"stepPanels">
+
+      <!-- Step 0: Problema -->
+      <div class=3D"step-panel" id=3D"step-0" style=3D"display: none;">
+        <div class=3D"grid-2" style=3D"gap:24px">
+          <div>
+            <div class=3D"section-eyebrow">Paso 1 / 7</div>
+            <h3 class=3D"subsection-title">Definici=C3=B3n del Problema</h3=
+>
+            <p style=3D"color:var(--text-secondary);margin-bottom:16px;font=
+-size:13px">La funci=C3=B3n de Himmelblau es un cl=C3=A1sico banco de prueb=
+as para algoritmos de optimizaci=C3=B3n. Posee <strong style=3D"color:var(-=
+-accent-cyan)">cuatro m=C3=ADnimos globales id=C3=A9nticos</strong> (f =3D =
+0), lo que la hace ideal para evaluar la capacidad de los AGs de escapar =
+=C3=B3ptimos locales.</p>
+            <div class=3D"math-display">
+              f(x, y) =3D (x=C2=B2 + y =E2=88=92 11)=C2=B2 + (x + y=C2=B2 =
+=E2=88=92 7)=C2=B2
+            </div>
+            <div class=3D"card" style=3D"margin-top:14px">
+              <div style=3D"font-family:var(--font-mono);font-size:11px;col=
+or:var(--text-muted);margin-bottom:10px;text-transform:uppercase;letter-spa=
+cing:0.08em">Especificaciones del Problema</div>
+              <table class=3D"pop-table">
+                <tbody><tr><td style=3D"color:var(--text-muted)">Variables<=
+/td><td style=3D"color:var(--accent-cyan)">x, y =E2=88=88 =E2=84=9D</td></t=
+r>
+                <tr><td style=3D"color:var(--text-muted)">Dominio</td><td s=
+tyle=3D"color:var(--accent-cyan)">=E2=88=925 =E2=89=A4 x, y =E2=89=A4 5</td=
+></tr>
+                <tr><td style=3D"color:var(--text-muted)">Precisi=C3=B3n</t=
+d><td style=3D"color:var(--accent-cyan)">6 decimales</td></tr>
+                <tr><td style=3D"color:var(--text-muted)">Objetivo</td><td =
+style=3D"color:var(--accent-gold)">Minimizar f(x, y)</td></tr>
+                <tr><td style=3D"color:var(--text-muted)">f* global</td><td=
+ style=3D"color:var(--accent-green)">0.0</td></tr>
+              </tbody></table>
+            </div>
+          </div>
+          <div>
+            <div style=3D"font-family:var(--font-mono);font-size:11px;color=
+:var(--text-muted);margin-bottom:8px;text-transform:uppercase">Cuatro M=C3=
+=ADnimos Globales</div>
+            <canvas id=3D"himmelblauCanvas" width=3D"420" height=3D"360" st=
+yle=3D"width:100%;max-height:360px;border:1px solid var(--border);border-ra=
+dius:3px"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Codificaci=C3=B3n -->
+      <div class=3D"step-panel" id=3D"step-1" style=3D"display: none;">
+        <div class=3D"section-eyebrow">Paso 2 / 7</div>
+        <h3 class=3D"subsection-title">Codificaci=C3=B3n Binaria del Cromos=
+oma</h3>
+        <div class=3D"grid-2" style=3D"gap:24px;align-items:start">
+          <div>
+            <p style=3D"color:var(--text-secondary);font-size:13px;margin-b=
+ottom:16px">Para representar cada variable real en binario, calculamos la l=
+ongitud de cadena necesaria para garantizar la precisi=C3=B3n requerida:</p=
+>
+            <div class=3D"math-display">
+              L =3D =E2=8C=88log=E2=82=82((l<sub>sup</sub> =E2=88=92 l<sub>=
+inf</sub>) =C3=97 10<sup>precisi=C3=B3n</sup>)=E2=8C=89
+            </div>
+            <div class=3D"math-display" style=3D"margin-top:12px">
+              L<sub>x</sub> =3D L<sub>y</sub> =3D =E2=8C=88log=E2=82=82(10 =
+=C3=97 10=E2=81=B6)=E2=8C=89 =3D <strong style=3D"color:var(--accent-cyan)"=
+>24 bits</strong>
+            </div>
+            <div class=3D"highlight-box" style=3D"margin-top:16px">
+              <div style=3D"font-family:var(--font-mono);font-size:11px;col=
+or:var(--text-muted);margin-bottom:8px">Cromosoma completo: <strong style=
+=3D"color:var(--accent-gold)">48 bits</strong></div>
+              <div style=3D"display:flex;gap:4px;align-items:center">
+                <div style=3D"background:rgba(59,130,246,0.2);border:1px so=
+lid rgba(59,130,246,0.4);padding:6px 10px;border-radius:2px;font-family:var=
+(--font-mono);font-size:10px;color:var(--accent-blue)">x: 24 bits</div>
+                <div style=3D"color:var(--text-muted);font-family:var(--fon=
+t-mono);font-size:14px">||</div>
+                <div style=3D"background:rgba(6,182,212,0.2);border:1px sol=
+id rgba(6,182,212,0.4);padding:6px 10px;border-radius:2px;font-family:var(-=
+-font-mono);font-size:10px;color:var(--accent-cyan)">y: 24 bits</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class=3D"card">
+              <div style=3D"font-family:var(--font-mono);font-size:11px;col=
+or:var(--text-muted);margin-bottom:12px;text-transform:uppercase">Ejemplo d=
+e cromosoma generado</div>
+              <div id=3D"exampleChromosome" class=3D"chromosome"><div class=
+=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><div class=3D"bit bit=
+-0">0</div><div class=3D"bit bit-0">0</div><div class=3D"bit bit-0">0</div>=
+<div class=3D"bit bit-0">0</div><div class=3D"bit bit-0">0</div><div class=
+=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit=
+-1">1</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div>=
+<div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><div class=
+=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit=
+-0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div>=
+<div class=3D"bit bit-0">0</div><div class=3D"bit bit-0">0</div><div class=
+=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit=
+-0">0</div><div class=3D"bit bit-0" style=3D"opacity: 0.7;">0</div><div cla=
+ss=3D"bit bit-0" style=3D"opacity: 0.7;">0</div><div class=3D"bit bit-1" st=
+yle=3D"opacity: 0.7;">1</div><div class=3D"bit bit-1" style=3D"opacity: 0.7=
+;">1</div><div class=3D"bit bit-1" style=3D"opacity: 0.7;">1</div><div clas=
+s=3D"bit bit-0" style=3D"opacity: 0.7;">0</div><div class=3D"bit bit-0" sty=
+le=3D"opacity: 0.7;">0</div><div class=3D"bit bit-1" style=3D"opacity: 0.7;=
+">1</div><div class=3D"bit bit-1" style=3D"opacity: 0.7;">1</div><div class=
+=3D"bit bit-1" style=3D"opacity: 0.7;">1</div><div class=3D"bit bit-0" styl=
+e=3D"opacity: 0.7;">0</div><div class=3D"bit bit-0" style=3D"opacity: 0.7;"=
+>0</div><div class=3D"bit bit-0" style=3D"opacity: 0.7;">0</div><div class=
+=3D"bit bit-1" style=3D"opacity: 0.7;">1</div><div class=3D"bit bit-1" styl=
+e=3D"opacity: 0.7;">1</div><div class=3D"bit bit-1" style=3D"opacity: 0.7;"=
+>1</div><div class=3D"bit bit-0" style=3D"opacity: 0.7;">0</div><div class=
+=3D"bit bit-1" style=3D"opacity: 0.7;">1</div><div class=3D"bit bit-1" styl=
+e=3D"opacity: 0.7;">1</div><div class=3D"bit bit-0" style=3D"opacity: 0.7;"=
+>0</div><div class=3D"bit bit-1" style=3D"opacity: 0.7;">1</div><div class=
+=3D"bit bit-0" style=3D"opacity: 0.7;">0</div><div class=3D"bit bit-1" styl=
+e=3D"opacity: 0.7;">1</div><div class=3D"bit bit-0" style=3D"opacity: 0.7;"=
+>0</div></div>
+              <div style=3D"margin-top:10px;display:flex;gap:12px">
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--accent-blue)">=E2=97=BC x (bits 1=E2=80=9324)</div>
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--accent-cyan)">=E2=97=BC y (bits 25=E2=80=9348)</div>
+              </div>
+              <button class=3D"btn btn-sm" style=3D"margin-top:12px">=E2=86=
+=BA Regenerar</button>
+            </div>
+            <div class=3D"code-block" style=3D"margin-top:14px">
+<span class=3D"code-comment"># C=C3=A1lculo de longitud del cromosoma</span=
+>
+<span class=3D"code-keyword">import</span> <span class=3D"code-fn">numpy</s=
+pan> <span class=3D"code-keyword">as</span> np
+
+l_inf, l_sup =3D <span class=3D"code-number">-5</span>, <span class=3D"code=
+-number">5</span>
+precision =3D <span class=3D"code-number">6</span>
+
+L =3D <span class=3D"code-fn">np.ceil</span>(
+  <span class=3D"code-fn">np.log2</span>((l_sup - l_inf) * <span class=3D"c=
+ode-number">10</span>**precision)
+)
+<span class=3D"code-comment"># L =3D 24 bits por variable</span>
+Lind =3D <span class=3D"code-fn">int</span>(L) * Nvar  <span class=3D"code-=
+comment"># =3D 48 bits total</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Poblaci=C3=B3n inicial -->
+      <div class=3D"step-panel" id=3D"step-2" style=3D"display: none;">
+        <div class=3D"section-eyebrow">Paso 3 / 7</div>
+        <h3 class=3D"subsection-title">Generaci=C3=B3n de Poblaci=C3=B3n In=
+icial</h3>
+        <div class=3D"grid-2" style=3D"gap:24px;align-items:start">
+          <div>
+            <p style=3D"color:var(--text-secondary);font-size:13px;margin-b=
+ottom:14px">Se genera una poblaci=C3=B3n de <strong style=3D"color:var(--ac=
+cent-cyan)">Nind =3D 20 individuos</strong> con cromosomas binarios aleator=
+ios de longitud 48. Cada individuo representa una soluci=C3=B3n candidata.<=
+/p>
+            <div class=3D"code-block">
+<span class=3D"code-comment"># Generaci=C3=B3n de poblaci=C3=B3n inicial</s=
+pan>
+Nind =3D <span class=3D"code-number">20</span>   <span class=3D"code-commen=
+t"># individuos</span>
+Lind =3D <span class=3D"code-number">48</span>   <span class=3D"code-commen=
+t"># bits por cromosoma</span>
+
+cromosoma =3D np.<span class=3D"code-fn">random.randint</span>(
+  <span class=3D"code-number">0</span>, <span class=3D"code-number">2</span=
+>,
+  size=3D(Nind, Lind)
+)
+<span class=3D"code-comment"># Forma: (20, 48)</span>
+            </div>
+            <div class=3D"highlight-box" style=3D"margin-top:14px">
+              <div style=3D"font-family:var(--font-mono);font-size:11px;col=
+or:var(--text-muted);margin-bottom:8px">Diversidad inicial: fundamental par=
+a exploraci=C3=B3n</div>
+              <p style=3D"font-size:12px;color:var(--text-secondary)">Una p=
+oblaci=C3=B3n inicial diversa evita la convergencia prematura hacia =C3=B3p=
+timos locales. La aleatoriedad garantiza cobertura amplia del espacio de b=
+=C3=BAsqueda antes de que act=C3=BAe la presi=C3=B3n selectiva.</p>
+            </div>
+          </div>
+          <div>
+            <div class=3D"card">
+              <div style=3D"font-family:var(--font-mono);font-size:11px;col=
+or:var(--text-muted);margin-bottom:12px;text-transform:uppercase">Poblaci=
+=C3=B3n inicial (5 individuos mostrados)</div>
+              <div id=3D"initPopDisplay"><div style=3D"margin-bottom: 8px;"=
+><div style=3D"font-family:var(--font-mono);font-size:9px;color:var(--text-=
+muted);margin-bottom:2px">Ind. 1</div><div class=3D"chromosome"><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"b=
+it bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"b=
+it bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div></div></div><div style=3D"margin-bottom: 8px;"><div sty=
+le=3D"font-family:var(--font-mono);font-size:9px;color:var(--text-muted);ma=
+rgin-bottom:2px">Ind. 2</div><div class=3D"chromosome"><div class=3D"bit bi=
+t-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: =
+12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"b=
+it bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div =
+class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: =
+12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: =
+12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div =
+class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">1</div></div></div><div style=3D"margin-bottom: 8px;"><div style=3D"font=
+-family:var(--font-mono);font-size:9px;color:var(--text-muted);margin-botto=
+m:2px">Ind. 3</div><div class=3D"chromosome"><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=
+=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div =
+class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bi=
+t-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=
+=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div =
+class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0<=
+/div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: =
+12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=
+=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div>=
+</div></div><div style=3D"margin-bottom: 8px;"><div style=3D"font-family:va=
+r(--font-mono);font-size:9px;color:var(--text-muted);margin-bottom:2px">Ind=
+. 4</div><div class=3D"chromosome"><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div =
+class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0<=
+/div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: =
+12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div></div></di=
+v><div style=3D"margin-bottom: 8px;"><div style=3D"font-family:var(--font-m=
+ono);font-size:9px;color:var(--text-muted);margin-bottom:2px">Ind. 5</div><=
+div class=3D"chromosome"><div class=3D"bit bit-0" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"b=
+it bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div>=
+<div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">1</div><div class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">1</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-0" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=3D"b=
+it bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div =
+class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bi=
+t-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div class=
+=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div>=
+<div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size: 7px=
+;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font=
+-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: =
+12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px=
+; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=3D"w=
+idth: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"bit bit-1" =
+style=3D"width: 12px; height: 12px; font-size: 7px;">1</div><div class=3D"b=
+it bit-0" style=3D"width: 12px; height: 12px; font-size: 7px;">0</div><div =
+class=3D"bit bit-1" style=3D"width: 12px; height: 12px; font-size: 7px;">1<=
+/div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px; font-size=
+: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; height: 12px;=
+ font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width: 12px; hei=
+ght: 12px; font-size: 7px;">0</div><div class=3D"bit bit-0" style=3D"width:=
+ 12px; height: 12px; font-size: 7px;">0</div><div class=3D"bit bit-1" style=
+=3D"width: 12px; height: 12px; font-size: 7px;">1</div></div></div></div>
+              <button class=3D"btn btn-sm" style=3D"margin-top:12px">=E2=86=
+=BA Nueva Poblaci=C3=B3n</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Decodificaci=C3=B3n -->
+      <div class=3D"step-panel" id=3D"step-3" style=3D"display: none;">
+        <div class=3D"section-eyebrow">Paso 4 / 7</div>
+        <h3 class=3D"subsection-title">Decodificaci=C3=B3n: Binario =E2=86=
+=92 Fenotipo</h3>
+        <div class=3D"grid-2" style=3D"gap:24px;align-items:start">
+          <div>
+            <p style=3D"color:var(--text-secondary);font-size:13px;margin-b=
+ottom:14px">Dos pasos: primero convertir la cadena binaria a decimal, luego=
+ mapear al dominio real del problema.</p>
+            <div class=3D"math-display">Paso 1: decimal(x) =3D =CE=A3 b=E1=
+=B5=A2 =C2=B7 2=E2=81=B1</div>
+            <div class=3D"math-display" style=3D"margin-top:10px">Paso 2: x=
+ =3D l<sub>inf</sub> + decimal(bits) =C2=B7 (l<sub>sup</sub> =E2=88=92 l<su=
+b>inf</sub>) / (2<sup>L</sup> =E2=88=92 1)</div>
+            <div class=3D"code-block" style=3D"margin-top:14px">
+<span class=3D"code-keyword">def</span> <span class=3D"code-fn">decode</spa=
+n>(bits, l_inf, l_sup, L):
+    dec =3D <span class=3D"code-fn">int</span>(<span class=3D"code-string">=
+''.join</span>(<span class=3D"code-fn">map</span>(str, bits)), <span class=
+=3D"code-number">2</span>)
+    x =3D l_inf + dec * (l_sup - l_inf) / (<span class=3D"code-number">2</s=
+pan>**L - <span class=3D"code-number">1</span>)
+    <span class=3D"code-keyword">return</span> x
+            </div>
+          </div>
+          <div>
+            <div class=3D"card">
+              <div style=3D"font-family:var(--font-mono);font-size:11px;col=
+or:var(--text-muted);margin-bottom:12px;text-transform:uppercase">Demo inte=
+ractiva</div>
+              <div id=3D"decodeChrom" class=3D"chromosome"><div class=3D"bi=
+t bit-1" style=3D"font-size: 8px; width: 14px; height: 14px;">1</div><div c=
+lass=3D"bit bit-1" style=3D"font-size: 8px; width: 14px; height: 14px;">1</=
+div><div class=3D"bit bit-1" style=3D"font-size: 8px; width: 14px; height: =
+14px;">1</div><div class=3D"bit bit-0" style=3D"font-size: 8px; width: 14px=
+; height: 14px;">0</div><div class=3D"bit bit-0" style=3D"font-size: 8px; w=
+idth: 14px; height: 14px;">0</div><div class=3D"bit bit-1" style=3D"font-si=
+ze: 8px; width: 14px; height: 14px;">1</div><div class=3D"bit bit-0" style=
+=3D"font-size: 8px; width: 14px; height: 14px;">0</div><div class=3D"bit bi=
+t-1" style=3D"font-size: 8px; width: 14px; height: 14px;">1</div><div class=
+=3D"bit bit-1" style=3D"font-size: 8px; width: 14px; height: 14px;">1</div>=
+<div class=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; height: 14px=
+;">0</div><div class=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; he=
+ight: 14px;">0</div><div class=3D"bit bit-1" style=3D"font-size: 8px; width=
+: 14px; height: 14px;">1</div><div class=3D"bit bit-1" style=3D"font-size: =
+8px; width: 14px; height: 14px;">1</div><div class=3D"bit bit-1" style=3D"f=
+ont-size: 8px; width: 14px; height: 14px;">1</div><div class=3D"bit bit-1" =
+style=3D"font-size: 8px; width: 14px; height: 14px;">1</div><div class=3D"b=
+it bit-1" style=3D"font-size: 8px; width: 14px; height: 14px;">1</div><div =
+class=3D"bit bit-1" style=3D"font-size: 8px; width: 14px; height: 14px;">1<=
+/div><div class=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; height:=
+ 14px;">0</div><div class=3D"bit bit-1" style=3D"font-size: 8px; width: 14p=
+x; height: 14px;">1</div><div class=3D"bit bit-1" style=3D"font-size: 8px; =
+width: 14px; height: 14px;">1</div><div class=3D"bit bit-0" style=3D"font-s=
+ize: 8px; width: 14px; height: 14px;">0</div><div class=3D"bit bit-0" style=
+=3D"font-size: 8px; width: 14px; height: 14px;">0</div><div class=3D"bit bi=
+t-0" style=3D"font-size: 8px; width: 14px; height: 14px;">0</div><div class=
+=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; height: 14px;">0</div>=
+<div class=3D"bit bit-0" style=3D"border-left: 3px solid var(--accent-gold)=
+; font-size: 8px; width: 14px; height: 14px;">0</div><div class=3D"bit bit-=
+0" style=3D"font-size: 8px; width: 14px; height: 14px;">0</div><div class=
+=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; height: 14px;">0</div>=
+<div class=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; height: 14px=
+;">0</div><div class=3D"bit bit-1" style=3D"font-size: 8px; width: 14px; he=
+ight: 14px;">1</div><div class=3D"bit bit-1" style=3D"font-size: 8px; width=
+: 14px; height: 14px;">1</div><div class=3D"bit bit-0" style=3D"font-size: =
+8px; width: 14px; height: 14px;">0</div><div class=3D"bit bit-0" style=3D"f=
+ont-size: 8px; width: 14px; height: 14px;">0</div><div class=3D"bit bit-1" =
+style=3D"font-size: 8px; width: 14px; height: 14px;">1</div><div class=3D"b=
+it bit-0" style=3D"font-size: 8px; width: 14px; height: 14px;">0</div><div =
+class=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; height: 14px;">0<=
+/div><div class=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; height:=
+ 14px;">0</div><div class=3D"bit bit-1" style=3D"font-size: 8px; width: 14p=
+x; height: 14px;">1</div><div class=3D"bit bit-1" style=3D"font-size: 8px; =
+width: 14px; height: 14px;">1</div><div class=3D"bit bit-1" style=3D"font-s=
+ize: 8px; width: 14px; height: 14px;">1</div><div class=3D"bit bit-1" style=
+=3D"font-size: 8px; width: 14px; height: 14px;">1</div><div class=3D"bit bi=
+t-0" style=3D"font-size: 8px; width: 14px; height: 14px;">0</div><div class=
+=3D"bit bit-1" style=3D"font-size: 8px; width: 14px; height: 14px;">1</div>=
+<div class=3D"bit bit-1" style=3D"font-size: 8px; width: 14px; height: 14px=
+;">1</div><div class=3D"bit bit-0" style=3D"font-size: 8px; width: 14px; he=
+ight: 14px;">0</div><div class=3D"bit bit-0" style=3D"font-size: 8px; width=
+: 14px; height: 14px;">0</div><div class=3D"bit bit-1" style=3D"font-size: =
+8px; width: 14px; height: 14px;">1</div><div class=3D"bit bit-1" style=3D"f=
+ont-size: 8px; width: 14px; height: 14px;">1</div><div class=3D"bit bit-1" =
+style=3D"font-size: 8px; width: 14px; height: 14px;">1</div></div>
+              <div style=3D"margin-top:14px;display:grid;grid-template-colu=
+mns:1fr 1fr;gap:10px">
+                <div style=3D"background:rgba(59,130,246,0.08);border:1px s=
+olid rgba(59,130,246,0.2);padding:10px;border-radius:3px">
+                  <div style=3D"font-family:var(--font-mono);font-size:10px=
+;color:var(--text-muted)">Decimal(x)</div>
+                  <div style=3D"font-family:var(--font-mono);font-size:16px=
+;color:var(--accent-blue)" id=3D"decimalX">15,048,624</div>
+                </div>
+                <div style=3D"background:rgba(6,182,212,0.08);border:1px so=
+lid rgba(6,182,212,0.2);padding:10px;border-radius:3px">
+                  <div style=3D"font-family:var(--font-mono);font-size:10px=
+;color:var(--text-muted)">Decimal(y)</div>
+                  <div style=3D"font-family:var(--font-mono);font-size:16px=
+;color:var(--accent-cyan)" id=3D"decimalY">823,143</div>
+                </div>
+                <div style=3D"background:rgba(245,158,11,0.08);border:1px s=
+olid rgba(245,158,11,0.2);padding:10px;border-radius:3px">
+                  <div style=3D"font-family:var(--font-mono);font-size:10px=
+;color:var(--text-muted)">x fenotipo</div>
+                  <div style=3D"font-family:var(--font-mono);font-size:16px=
+;color:var(--accent-gold)" id=3D"phenoX">3.969679</div>
+                </div>
+                <div style=3D"background:rgba(16,185,129,0.08);border:1px s=
+olid rgba(16,185,129,0.2);padding:10px;border-radius:3px">
+                  <div style=3D"font-family:var(--font-mono);font-size:10px=
+;color:var(--text-muted)">y fenotipo</div>
+                  <div style=3D"font-family:var(--font-mono);font-size:16px=
+;color:var(--accent-green)" id=3D"phenoY">-4.509369</div>
+                </div>
+              </div>
+              <button class=3D"btn btn-sm" style=3D"margin-top:12px">=E2=86=
+=BA Nuevo Cromosoma</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Evaluaci=C3=B3n -->
+      <div class=3D"step-panel" id=3D"step-4" style=3D"display: none;">
+        <div class=3D"section-eyebrow">Paso 5 / 7</div>
+        <h3 class=3D"subsection-title">Evaluaci=C3=B3n de la Funci=C3=B3n O=
+bjetivo</h3>
+        <div class=3D"grid-2" style=3D"gap:24px;align-items:start">
+          <div>
+            <p style=3D"color:var(--text-secondary);font-size:13px;margin-b=
+ottom:14px">Con los fenotipos decodificados, evaluamos f(x,y). Para <strong=
+ style=3D"color:var(--accent-red)">minimizaci=C3=B3n</strong>, necesitamos =
+transformar el valor objetivo en aptitud (fitness) no negativa.</p>
+            <div class=3D"math-display">f_max =3D max{f(x=E1=B5=A2, y=E1=B5=
+=A2)}</div>
+            <div class=3D"math-display" style=3D"margin-top:10px">aptitud(i=
+) =3D f_max =E2=88=92 f(x=E1=B5=A2, y=E1=B5=A2) + =CE=B5</div>
+            <div class=3D"code-block" style=3D"margin-top:14px">
+<span class=3D"code-keyword">def</span> <span class=3D"code-fn">himmelblau<=
+/span>(x, y):
+    <span class=3D"code-keyword">return</span> (x**<span class=3D"code-numb=
+er">2</span> + y - <span class=3D"code-number">11</span>)**<span class=3D"c=
+ode-number">2</span> + (x + y**<span class=3D"code-number">2</span> - <span=
+ class=3D"code-number">7</span>)**<span class=3D"code-number">2</span>
+
+<span class=3D"code-comment"># Escalamiento para minimizaci=C3=B3n</span>
+<span class=3D"code-keyword">def</span> <span class=3D"code-fn">fitness_sca=
+le</span>(obj):
+    f_max =3D <span class=3D"code-fn">np.max</span>(obj)
+    <span class=3D"code-keyword">return</span> f_max - obj + <span class=3D=
+"code-number">1e-6</span>
+            </div>
+          </div>
+          <div>
+            <div class=3D"card">
+              <div style=3D"font-family:var(--font-mono);font-size:11px;col=
+or:var(--text-muted);margin-bottom:12px;text-transform:uppercase">Evaluaci=
+=C3=B3n de 6 individuos aleatorios</div>
+              <table class=3D"pop-table" id=3D"evalTable">
+                <thead>
+                  <tr><th>Ind</th><th>x</th><th>y</th><th>f(x,y)</th><th>Ap=
+titud</th></tr>
+                </thead>
+                <tbody><tr>
+      <td style=3D"color:var(--accent-cyan);font-weight:700">1</td>
+      <td>2.3414</td>
+      <td>-4.9128</td>
+      <td style=3D"color:var(--text-secondary)">488.1691</td>
+      <td>0.0000</td>
+    </tr><tr>
+      <td style=3D"color:var(--accent-cyan);font-weight:700">2</td>
+      <td>-4.2430</td>
+      <td>3.9838</td>
+      <td style=3D"color:var(--text-secondary)">142.1230</td>
+      <td>346.0461</td>
+    </tr><tr>
+      <td style=3D"color:var(--accent-cyan);font-weight:700">3</td>
+      <td>0.7846</td>
+      <td>-3.2803</td>
+      <td style=3D"color:var(--text-secondary)">207.3809</td>
+      <td>280.7882</td>
+    </tr><tr>
+      <td style=3D"color:var(--accent-cyan);font-weight:700">4</td>
+      <td>0.1026</td>
+      <td>0.6955</td>
+      <td style=3D"color:var(--text-secondary)">147.1000</td>
+      <td>341.0691</td>
+    </tr><tr>
+      <td style=3D"color:var(--accent-cyan);font-weight:700">5</td>
+      <td>3.8327</td>
+      <td>4.4454</td>
+      <td style=3D"color:var(--text-secondary)">341.5307</td>
+      <td>146.6385</td>
+    </tr><tr>
+      <td style=3D"color:var(--accent-cyan);font-weight:700">6</td>
+      <td>-2.8419</td>
+      <td>-3.3827</td>
+      <td style=3D"color:var(--text-secondary)">42.3294</td>
+      <td>445.8397</td>
+    </tr></tbody>
+              </table>
+              <button class=3D"btn btn-sm" style=3D"margin-top:12px">=E2=86=
+=BA Nueva muestra</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5: Selecci=C3=B3n + Cruza -->
+      <div class=3D"step-panel" id=3D"step-5" style=3D"display: none;">
+        <div class=3D"section-eyebrow">Paso 6 / 7</div>
+        <h3 class=3D"subsection-title">Selecci=C3=B3n y Cruce de Individuos=
+</h3>
+        <div class=3D"grid-2" style=3D"gap:24px;align-items:start">
+          <div>
+            <div style=3D"font-family:var(--font-mono);font-size:11px;color=
+:var(--text-muted);margin-bottom:8px;text-transform:uppercase">Padre 1</div=
+>
+            <div id=3D"crossP1" class=3D"chromosome"><div class=3D"bit bit-=
+0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><=
+div class=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div><div class=
+=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit=
+-0">0</div><div class=3D"bit bit-0">0</div><div class=3D"bit bit-0">0</div>=
+<div class=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div><div class=
+=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit=
+-0">0</div><div class=3D"bit bit-1" style=3D"border-left: 3px solid var(--a=
+ccent-purple);">1</div><div class=3D"bit bit-0">0</div><div class=3D"bit bi=
+t-0">0</div><div class=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div=
+><div class=3D"bit bit-0">0</div><div class=3D"bit bit-0">0</div><div class=
+=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div></div>
+            <div style=3D"font-family:var(--font-mono);font-size:11px;color=
+:var(--text-muted);margin-top:10px;margin-bottom:8px;text-transform:upperca=
+se">Padre 2</div>
+            <div id=3D"crossP2" class=3D"chromosome"><div class=3D"bit bit-=
+0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><=
+div class=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div><div class=
+=3D"bit bit-1">1</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit=
+-1">1</div><div class=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div>=
+<div class=3D"bit bit-0">0</div><div class=3D"bit bit-1">1</div><div class=
+=3D"bit bit-0">0</div><div class=3D"bit bit-0">0</div><div class=3D"bit bit=
+-1">1</div><div class=3D"bit bit-0" style=3D"border-left: 3px solid var(--a=
+ccent-purple);">0</div><div class=3D"bit bit-0">0</div><div class=3D"bit bi=
+t-0">0</div><div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div=
+><div class=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div><div class=
+=3D"bit bit-1">1</div><div class=3D"bit bit-0">0</div></div>
+            <div style=3D"font-family:var(--font-mono);font-size:11px;color=
+:var(--accent-purple);margin-top:14px;margin-bottom:8px;text-transform:uppe=
+rcase">Punto de Corte: <span id=3D"crossPoint">bit 15</span></div>
+            <div style=3D"font-family:var(--font-mono);font-size:11px;color=
+:var(--text-muted);margin-top:10px;margin-bottom:8px;text-transform:upperca=
+se">Hijo 1 (Descendiente)</div>
+            <div id=3D"crossC1" class=3D"chromosome"><div class=3D"bit bit-=
+0" style=3D"background: rgba(59, 130, 246, 0.25);">0</div><div class=3D"bit=
+ bit-1" style=3D"background: rgba(59, 130, 246, 0.25);">1</div><div class=
+=3D"bit bit-0" style=3D"background: rgba(59, 130, 246, 0.25);">0</div><div =
+class=3D"bit bit-1" style=3D"background: rgba(59, 130, 246, 0.25);">1</div>=
+<div class=3D"bit bit-1" style=3D"background: rgba(59, 130, 246, 0.25);">1<=
+/div><div class=3D"bit bit-1" style=3D"background: rgba(59, 130, 246, 0.25)=
+;">1</div><div class=3D"bit bit-1" style=3D"background: rgba(59, 130, 246, =
+0.25);">1</div><div class=3D"bit bit-0" style=3D"background: rgba(59, 130, =
+246, 0.25);">0</div><div class=3D"bit bit-0" style=3D"background: rgba(59, =
+130, 246, 0.25);">0</div><div class=3D"bit bit-0" style=3D"background: rgba=
+(59, 130, 246, 0.25);">0</div><div class=3D"bit bit-0" style=3D"background:=
+ rgba(59, 130, 246, 0.25);">0</div><div class=3D"bit bit-1" style=3D"backgr=
+ound: rgba(59, 130, 246, 0.25);">1</div><div class=3D"bit bit-0" style=3D"b=
+ackground: rgba(59, 130, 246, 0.25);">0</div><div class=3D"bit bit-1" style=
+=3D"background: rgba(59, 130, 246, 0.25);">1</div><div class=3D"bit bit-0" =
+style=3D"background: rgba(59, 130, 246, 0.25);">0</div><div class=3D"bit bi=
+t-0" style=3D"background: rgba(6, 182, 212, 0.2); border-left: 3px solid va=
+r(--accent-purple);">0</div><div class=3D"bit bit-0" style=3D"background: r=
+gba(6, 182, 212, 0.2);">0</div><div class=3D"bit bit-0" style=3D"background=
+: rgba(6, 182, 212, 0.2);">0</div><div class=3D"bit bit-1" style=3D"backgro=
+und: rgba(6, 182, 212, 0.2);">1</div><div class=3D"bit bit-0" style=3D"back=
+ground: rgba(6, 182, 212, 0.2);">0</div><div class=3D"bit bit-1" style=3D"b=
+ackground: rgba(6, 182, 212, 0.2);">1</div><div class=3D"bit bit-0" style=
+=3D"background: rgba(6, 182, 212, 0.2);">0</div><div class=3D"bit bit-1" st=
+yle=3D"background: rgba(6, 182, 212, 0.2);">1</div><div class=3D"bit bit-0"=
+ style=3D"background: rgba(6, 182, 212, 0.2);">0</div></div>
+            <div style=3D"font-family:var(--font-mono);font-size:11px;color=
+:var(--text-muted);margin-top:10px;margin-bottom:8px;text-transform:upperca=
+se">Hijo 2 (Descendiente)</div>
+            <div id=3D"crossC2" class=3D"chromosome"><div class=3D"bit bit-=
+0" style=3D"background: rgba(6, 182, 212, 0.2);">0</div><div class=3D"bit b=
+it-1" style=3D"background: rgba(6, 182, 212, 0.2);">1</div><div class=3D"bi=
+t bit-0" style=3D"background: rgba(6, 182, 212, 0.2);">0</div><div class=3D=
+"bit bit-0" style=3D"background: rgba(6, 182, 212, 0.2);">0</div><div class=
+=3D"bit bit-1" style=3D"background: rgba(6, 182, 212, 0.2);">1</div><div cl=
+ass=3D"bit bit-1" style=3D"background: rgba(6, 182, 212, 0.2);">1</div><div=
+ class=3D"bit bit-1" style=3D"background: rgba(6, 182, 212, 0.2);">1</div><=
+div class=3D"bit bit-1" style=3D"background: rgba(6, 182, 212, 0.2);">1</di=
+v><div class=3D"bit bit-0" style=3D"background: rgba(6, 182, 212, 0.2);">0<=
+/div><div class=3D"bit bit-1" style=3D"background: rgba(6, 182, 212, 0.2);"=
+>1</div><div class=3D"bit bit-0" style=3D"background: rgba(6, 182, 212, 0.2=
+);">0</div><div class=3D"bit bit-1" style=3D"background: rgba(6, 182, 212, =
+0.2);">1</div><div class=3D"bit bit-0" style=3D"background: rgba(6, 182, 21=
+2, 0.2);">0</div><div class=3D"bit bit-0" style=3D"background: rgba(6, 182,=
+ 212, 0.2);">0</div><div class=3D"bit bit-1" style=3D"background: rgba(6, 1=
+82, 212, 0.2);">1</div><div class=3D"bit bit-1" style=3D"background: rgba(5=
+9, 130, 246, 0.25); border-left: 3px solid var(--accent-purple);">1</div><d=
+iv class=3D"bit bit-0" style=3D"background: rgba(59, 130, 246, 0.25);">0</d=
+iv><div class=3D"bit bit-0" style=3D"background: rgba(59, 130, 246, 0.25);"=
+>0</div><div class=3D"bit bit-0" style=3D"background: rgba(59, 130, 246, 0.=
+25);">0</div><div class=3D"bit bit-1" style=3D"background: rgba(59, 130, 24=
+6, 0.25);">1</div><div class=3D"bit bit-0" style=3D"background: rgba(59, 13=
+0, 246, 0.25);">0</div><div class=3D"bit bit-0" style=3D"background: rgba(5=
+9, 130, 246, 0.25);">0</div><div class=3D"bit bit-0" style=3D"background: r=
+gba(59, 130, 246, 0.25);">0</div><div class=3D"bit bit-1" style=3D"backgrou=
+nd: rgba(59, 130, 246, 0.25);">1</div></div>
+            <button class=3D"btn btn-sm btn-gold" style=3D"margin-top:14px"=
+>=E2=86=BA Nueva Cruza</button>
+          </div>
+          <div>
+            <div class=3D"code-block">
+<span class=3D"code-comment"># Cruza en un punto</span>
+<span class=3D"code-keyword">def</span> <span class=3D"code-fn">crossover</=
+span>(p1, p2, Pc=3D<span class=3D"code-number">0.8</span>):
+    <span class=3D"code-keyword">if</span> <span class=3D"code-fn">np.rando=
+m.rand</span>() &lt; Pc:
+        pt =3D <span class=3D"code-fn">np.random.randint</span>(<span class=
+=3D"code-number">1</span>, <span class=3D"code-fn">len</span>(p1))
+        c1 =3D np.<span class=3D"code-fn">concatenate</span>([p1[:pt], p2[p=
+t:]])
+        c2 =3D np.<span class=3D"code-fn">concatenate</span>([p2[:pt], p1[p=
+t:]])
+    <span class=3D"code-keyword">else</span>:
+        c1, c2 =3D p1.<span class=3D"code-fn">copy</span>(), p2.<span class=
+=3D"code-fn">copy</span>()
+    <span class=3D"code-keyword">return</span> c1, c2
+
+<span class=3D"code-comment"># Mutaci=C3=B3n flip-bit</span>
+<span class=3D"code-keyword">def</span> <span class=3D"code-fn">mutate</spa=
+n>(chrom, Pm=3D<span class=3D"code-number">0.01</span>):
+    mask =3D np.<span class=3D"code-fn">random.rand</span>(<span class=3D"c=
+ode-fn">len</span>(chrom)) &lt; Pm
+    chrom[mask] =3D <span class=3D"code-number">1</span> - chrom[mask]
+    <span class=3D"code-keyword">return</span> chrom
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6: Simulaci=C3=B3n completa -->
+      <div class=3D"step-panel" id=3D"step-6" style=3D"display: block;">
+        <div class=3D"section-eyebrow">Paso 7 / 7 =E2=80=94 Resultado Final=
+</div>
+        <h3 class=3D"subsection-title">Simulaci=C3=B3n Completa del Algorit=
+mo Gen=C3=A9tico</h3>
+        <div class=3D"grid-2" style=3D"gap:24px;align-items:start">
+          <div>
+            <div style=3D"display:flex;gap:10px;margin-bottom:16px;flex-wra=
+p:wrap">
+              <div>
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--text-muted);margin-bottom:4px">Poblaci=C3=B3n</div>
+                <select id=3D"simNind" style=3D"background:var(--bg-card);b=
+order:1px solid var(--border);color:var(--text-primary);padding:6px 10px;fo=
+nt-family:var(--font-mono);font-size:11px;border-radius:3px">
+                  <option value=3D"20">20</option><option value=3D"50" sele=
+cted=3D"">50</option><option value=3D"100">100</option>
+                </select>
+              </div>
+              <div>
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--text-muted);margin-bottom:4px">Generaciones</div>
+                <select id=3D"simGen" style=3D"background:var(--bg-card);bo=
+rder:1px solid var(--border);color:var(--text-primary);padding:6px 10px;fon=
+t-family:var(--font-mono);font-size:11px;border-radius:3px">
+                  <option value=3D"50">50</option><option value=3D"100" sel=
+ected=3D"">100</option><option value=3D"200">200</option>
+                </select>
+              </div>
+              <div>
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--text-muted);margin-bottom:4px">Pc</div>
+                <select id=3D"simPc" style=3D"background:var(--bg-card);bor=
+der:1px solid var(--border);color:var(--text-primary);padding:6px 10px;font=
+-family:var(--font-mono);font-size:11px;border-radius:3px">
+                  <option value=3D"0.6">0.6</option><option value=3D"0.8" s=
+elected=3D"">0.8</option><option value=3D"1.0">1.0</option>
+                </select>
+              </div>
+              <div style=3D"align-self:flex-end">
+                <button class=3D"btn" id=3D"runSimBtn">=E2=96=B6 Ejecutar A=
+G</button>
+              </div>
+            </div>
+            <div class=3D"sim-output" id=3D"simOutput"><div><span class=3D"=
+sim-line-gen">Gen    1</span>  =E2=94=82  Mejor: <span class=3D"sim-line-be=
+st">3.630668</span>  =E2=94=82  <span class=3D"sim-line-xy">x=3D-2.7454, y=
+=3D2.8199</span>  =E2=94=82  Prom: 91.5990</div><div><span class=3D"sim-lin=
+e-gen">Gen   11</span>  =E2=94=82  Mejor: <span class=3D"sim-line-best">1.1=
+88624</span>  =E2=94=82  <span class=3D"sim-line-xy">x=3D-2.7454, y=3D2.962=
+5</span>  =E2=94=82  Prom: 40.8298</div><div><span class=3D"sim-line-gen">G=
+en   21</span>  =E2=94=82  Mejor: <span class=3D"sim-line-best">0.008538</s=
+pan>  =E2=94=82  <span class=3D"sim-line-xy">x=3D-2.7998, y=3D3.1174</span>=
+  =E2=94=82  Prom: 15.7240</div><div><span class=3D"sim-line-gen">Gen   31<=
+/span>  =E2=94=82  Mejor: <span class=3D"sim-line-best">0.006078</span>  =
+=E2=94=82  <span class=3D"sim-line-xy">x=3D-2.7998, y=3D3.1199</span>  =E2=
+=94=82  Prom: 1.9148</div><div><span class=3D"sim-line-gen">Gen   41</span>=
+  =E2=94=82  Mejor: <span class=3D"sim-line-best">0.002816</span>  =E2=94=
+=82  <span class=3D"sim-line-xy">x=3D-2.7992, y=3D3.1248</span>  =E2=94=82 =
+ Prom: 2.8036</div><div><span class=3D"sim-line-gen">Gen   51</span>  =E2=
+=94=82  Mejor: <span class=3D"sim-line-best">0.002815</span>  =E2=94=82  <s=
+pan class=3D"sim-line-xy">x=3D-2.7992, y=3D3.1248</span>  =E2=94=82  Prom: =
+2.9272</div><div><span class=3D"sim-line-gen">Gen   61</span>  =E2=94=82  M=
+ejor: <span class=3D"sim-line-best">0.002222</span>  =E2=94=82  <span class=
+=3D"sim-line-xy">x=3D-2.8089, y=3D3.1248</span>  =E2=94=82  Prom: 7.7653</d=
+iv><div><span class=3D"sim-line-gen">Gen   71</span>  =E2=94=82  Mejor: <sp=
+an class=3D"sim-line-best">0.002222</span>  =E2=94=82  <span class=3D"sim-l=
+ine-xy">x=3D-2.8089, y=3D3.1248</span>  =E2=94=82  Prom: 0.2297</div><div><=
+span class=3D"sim-line-gen">Gen   81</span>  =E2=94=82  Mejor: <span class=
+=3D"sim-line-best">0.001753</span>  =E2=94=82  <span class=3D"sim-line-xy">=
+x=3D-2.8040, y=3D3.1248</span>  =E2=94=82  Prom: 0.5342</div><div><span cla=
+ss=3D"sim-line-gen">Gen   91</span>  =E2=94=82  Mejor: <span class=3D"sim-l=
+ine-best">0.001746</span>  =E2=94=82  <span class=3D"sim-line-xy">x=3D-2.80=
+40, y=3D3.1248</span>  =E2=94=82  Prom: 2.9454</div><div><span class=3D"sim=
+-line-gen">Gen  100</span>  =E2=94=82  Mejor: <span class=3D"sim-line-best"=
+>0.001719</span>  =E2=94=82  <span class=3D"sim-line-xy">x=3D-2.8047, y=3D3=
+.1248</span>  =E2=94=82  Prom: 0.8561</div></div>
+            <div style=3D"margin-top:14px;padding:14px;background:var(--bg-=
+card);border:1px solid var(--border);border-radius:3px" id=3D"simResult">
+            </div>
+          </div>
+          <div>
+            <div class=3D"chart-container">
+              <canvas id=3D"evolutionChart" style=3D"box-sizing: border-box=
+; display: block; height: 260px; width: 648px;" width=3D"1296" height=3D"52=
+0"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation buttons -->
+    <div style=3D"display:flex;justify-content:space-between;margin-top:24p=
+x">
+      <button class=3D"btn" style=3D"background:var(--bg-hover);color:var(-=
+-text-secondary)" id=3D"prevStepBtn">=E2=86=90 Anterior</button>
+      <button class=3D"btn" id=3D"nextStepBtn" disabled=3D"">=E2=9C=93 Comp=
+letado</button>
+    </div>
+
+  </div>
+
+  <!-- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D TAB =
+3: EDITORIAL =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D -->
+  <div class=3D"tab-pane" id=3D"tab-editorial">
+
+    <div class=3D"section-eyebrow">An=C3=A1lisis de Aplicaciones</div>
+    <h2 class=3D"section-title">Algoritmos Gen=C3=A9ticos: Fronteras del Co=
+nocimiento Aplicado</h2>
+
+    <div class=3D"editorial-lead">
+      "Los algoritmos gen=C3=A9ticos no imitan la vida por capricho est=C3=
+=A9tico: la imitan porque la vida, en su millones de a=C3=B1os de prueba y =
+error, ha resuelto problemas de optimizaci=C3=B3n que los m=C3=A9todos anal=
+=C3=ADticos no pueden siquiera formular."
+    </div>
+
+    <div class=3D"grid-3" style=3D"margin-bottom:28px">
+      <div class=3D"card card-accent">
+        <div class=3D"tag tag-blue">Econom=C3=ADa</div>
+        <div class=3D"tag tag-gold">Mercados</div>
+        <h3 class=3D"subsection-title" style=3D"margin-top:12px">Optimizaci=
+=C3=B3n de Portafolios</h3>
+        <p style=3D"font-size:13px;color:var(--text-secondary);line-height:=
+1.8">La frontera eficiente de Markowitz, intractable con millones de activo=
+s, se aproxima elegantemente con AGs. Holland &amp; Goldberg (1989) demostr=
+aron convergencia hacia pesos =C3=B3ptimos bajo restricciones complejas. El=
+ AG codifica los pesos como cromosomas reales, y el fitness combina retorno=
+ esperado y varianza del portafolio.</p>
+        <div style=3D"margin-top:14px">
+          <div style=3D"font-family:var(--font-mono);font-size:10px;color:v=
+ar(--text-muted)">Funci=C3=B3n objetivo:</div>
+          <div class=3D"math-display" style=3D"font-size:12px;margin:8px 0"=
+>max E[R] =E2=88=92 =CE=BB =C2=B7 Var(R)</div>
+        </div>
+      </div>
+
+      <div class=3D"card" style=3D"border-left:3px solid var(--accent-gold)=
+">
+        <div class=3D"tag tag-gold">PropTech</div>
+        <div class=3D"tag tag-green">Bienes Ra=C3=ADces</div>
+        <h3 class=3D"subsection-title" style=3D"margin-top:12px">Precios He=
+d=C3=B3nicos Din=C3=A1micos</h3>
+        <p style=3D"font-size:13px;color:var(--text-secondary);line-height:=
+1.8">Los modelos de precios hed=C3=B3nicos en mercados residenciales enfren=
+tan alta colinealidad y no-linealidades. Los AGs permiten selecci=C3=B3n au=
+tom=C3=A1tica de variables y calibraci=C3=B3n de transformaciones funcional=
+es. Aplicado al mercado de CDMX, pueden superar en precisi=C3=B3n a la regr=
+esi=C3=B3n OLS est=C3=A1ndar en presencia de no-linealidades espaciales.</p=
+>
+        <div style=3D"margin-top:14px">
+          <span class=3D"tag tag-gold">Homepty</span>
+          <span class=3D"tag tag-green">CDMX Housing</span>
+        </div>
+      </div>
+
+      <div class=3D"card" style=3D"border-left:3px solid var(--accent-purpl=
+e)">
+        <div class=3D"tag tag-purple">Planeaci=C3=B3n</div>
+        <div class=3D"tag tag-blue">Urbana</div>
+        <h3 class=3D"subsection-title" style=3D"margin-top:12px">Zonificaci=
+=C3=B3n =C3=93ptima</h3>
+        <p style=3D"font-size:13px;color:var(--text-secondary);line-height:=
+1.8">La asignaci=C3=B3n de usos de suelo en territorios urbanos es un probl=
+ema combinatorio NP-dif=C3=ADcil. Los AGs codifican asignaciones de zona co=
+mo cromosomas y eval=C3=BAan fitness multircobjeto: maximizar densidad perm=
+itida, minimizar conflictos de uso, maximizar acceso a infraestructura. Apl=
+icaci=C3=B3n directa al an=C3=A1lisis de Miguel Hidalgo y Bando 1.</p>
+        <div style=3D"margin-top:14px">
+          <span class=3D"tag tag-purple">PGDU</span>
+          <span class=3D"tag tag-blue">Multiobjeto</span>
+        </div>
+      </div>
+    </div>
+
+    <hr class=3D"divider">
+
+    <div class=3D"grid-2" style=3D"gap:28px">
+      <div>
+        <div class=3D"section-eyebrow">Econom=C3=ADa Computacional</div>
+        <h3 class=3D"subsection-title">AGs en Modelos de Agentes y Juegos E=
+volutivos</h3>
+        <p style=3D"font-size:13px;color:var(--text-secondary);margin-botto=
+m:14px;line-height:1.8">En teor=C3=ADa de juegos evolutivos, los AGs modela=
+n la emergencia de estrategias en poblaciones de agentes racionales limitad=
+os. Axelrod (1987) us=C3=B3 AGs para descubrir que estrategias tipo <em>tit=
+-for-tat</em> en el Dilema del Prisionero repetido son evolutivamente estab=
+les: los cromosomas codificaban reglas de decisi=C3=B3n condicional, y la s=
+elecci=C3=B3n natural elimin=C3=B3 estrategias dominadas.</p>
+        <p style=3D"font-size:13px;color:var(--text-secondary);margin-botto=
+m:14px;line-height:1.8">En modelos de equilibrio general computacional (CGE=
+), los AGs calibran par=C3=A1metros de elasticidad cuando la funci=C3=B3n d=
+e verosimilitud es multimodal o discontinua, superando la dependencia del m=
+=C3=A9todo de Newton en condiciones iniciales.</p>
+        <div class=3D"highlight-box">
+          <div style=3D"font-family:var(--font-mono);font-size:11px;color:v=
+ar(--accent-gold);margin-bottom:6px">Conexi=C3=B3n con el curso: M=C3=B3dul=
+o 3</div>
+          <p style=3D"font-size:12px;color:var(--text-secondary)">El Dilema=
+ del Prisionero visto en el M=C3=B3dulo 3 puede combinarse con AGs para evo=
+lucionar estrategias en poblaciones heterog=C3=A9neas, conectando modelos d=
+e agentes (M=C3=B3dulo 1), cadenas de Markov (M=C3=B3dulo 2), y optimizaci=
+=C3=B3n evolutiva en un marco unificado.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class=3D"section-eyebrow">Nearshoring &amp; Localizaci=C3=B3n<=
+/div>
+        <h3 class=3D"subsection-title">Optimizaci=C3=B3n de Cadenas de Sumi=
+nistro</h3>
+        <p style=3D"font-size:13px;color:var(--text-secondary);margin-botto=
+m:14px;line-height:1.8">El problema de localizaci=C3=B3n de plantas industr=
+iales (Weber problem generalizado) es NP-dif=C3=ADcil. Con nearshoring acel=
+erando en M=C3=A9xico, los AGs se aplican para optimizar la localizaci=C3=
+=B3n de parques industriales considerando acceso a puertos, costos laborale=
+s regionales, disponibilidad de agua, y distancia a mercados destino.</p>
+        <p style=3D"font-size:13px;color:var(--text-secondary);margin-botto=
+m:14px;line-height:1.8">Un cromosoma codifica la ubicaci=C3=B3n (latitud, l=
+ongitud) de cada instalaci=C3=B3n. El fitness integra costos de transporte,=
+ costos laborales (IMSS/INEGI), y tiempos de entrega. Generaciones sucesiva=
+s convergen hacia configuraciones log=C3=ADsticamente =C3=B3ptimas.</p>
+        <div style=3D"margin-top:14px;padding:14px;background:var(--bg-card=
+);border:1px solid var(--border);border-radius:3px">
+          <div style=3D"font-family:var(--font-mono);font-size:10px;color:v=
+ar(--text-muted);margin-bottom:8px">M=C3=A9tricas de desempe=C3=B1o compara=
+do</div>
+          <div id=3D"compChart" style=3D"height:120px;position:relative">
+            <canvas id=3D"compCanvas" style=3D"box-sizing: border-box; disp=
+lay: block; height: 0px; width: 0px;" width=3D"0" height=3D"0"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class=3D"divider">
+
+    <div class=3D"section-eyebrow">L=C3=ADmites y Cr=C3=ADtica</div>
+    <h3 class=3D"subsection-title">Cu=C3=A1ndo <em>No</em> Usar Algoritmos =
+Gen=C3=A9ticos</h3>
+
+    <div class=3D"grid-3">
+      <div class=3D"card" style=3D"border-top:2px solid var(--accent-red)">
+        <div style=3D"font-family:var(--font-mono);font-size:10px;color:var=
+(--accent-red);margin-bottom:8px;text-transform:uppercase">Costo Computacio=
+nal</div>
+        <p style=3D"font-size:12px;color:var(--text-secondary);line-height:=
+1.8">Los AGs requieren evaluar la funci=C3=B3n objetivo Nind =C3=97 Generac=
+iones veces. Para funciones computacionalmente costosas (ej. modelos CGE, s=
+imulaciones ABM), el costo puede ser prohibitivo. En estos casos, emuladore=
+s (surrogate models) o Bayesian Optimization son preferibles.</p>
+      </div>
+      <div class=3D"card" style=3D"border-top:2px solid var(--accent-gold)"=
+>
+        <div style=3D"font-family:var(--font-mono);font-size:10px;color:var=
+(--accent-gold);margin-bottom:8px;text-transform:uppercase">Problemas Conve=
+xos</div>
+        <p style=3D"font-size:12px;color:var(--text-secondary);line-height:=
+1.8">Si la funci=C3=B3n objetivo es convexa y diferenciable, m=C3=A9todos d=
+e gradiente como BFGS o Newton-Raphson convergen m=C3=A1s r=C3=A1pido con g=
+arant=C3=ADas te=C3=B3ricas. Los AGs a=C3=B1aden complejidad sin beneficio =
+en este caso. La regla: usar AG cuando la topolog=C3=ADa del espacio de b=
+=C3=BAsqueda es desconocida o multimodal.</p>
+      </div>
+      <div class=3D"card" style=3D"border-top:2px solid var(--accent-purple=
+)">
+        <div style=3D"font-family:var(--font-mono);font-size:10px;color:var=
+(--accent-purple);margin-bottom:8px;text-transform:uppercase">Reproducibili=
+dad</div>
+        <p style=3D"font-size:12px;color:var(--text-secondary);line-height:=
+1.8">La naturaleza estoc=C3=A1stica de los AGs requiere m=C3=BAltiples corr=
+idas y an=C3=A1lisis estad=C3=ADstico de resultados. En contextos de pol=C3=
+=ADtica p=C3=BAblica o econom=C3=ADa aplicada, la variabilidad entre corrid=
+as debe reportarse con intervalos de confianza, especialmente si las decisi=
+ones tienen consecuencias redistributivas.</p>
+      </div>
+    </div>
+
+    <hr class=3D"divider">
+
+    <div class=3D"highlight-box">
+      <div class=3D"section-eyebrow" style=3D"margin:0 0 8px">Perspectiva d=
+el Editor</div>
+      <h3 class=3D"subsection-title" style=3D"margin-bottom:12px">El Lugar =
+de los AGs en el Toolkit del Economista Aplicado</h3>
+      <p style=3D"font-size:13px;color:var(--text-secondary);line-height:1.=
+9;margin-bottom:12px">Los algoritmos gen=C3=A9ticos ocupan un nicho espec=
+=C3=ADfico en el arsenal metodol=C3=B3gico del economista computacional: so=
+n la herramienta de elecci=C3=B3n cuando el espacio de b=C3=BAsqueda es vas=
+to, no diferenciable, o plagado de discontinuidades que derrotan a los m=C3=
+=A9todos cl=C3=A1sicos. Su intuici=C3=B3n evolutiva los hace pedag=C3=B3gic=
+amente poderosos: traducen conceptos de biolog=C3=ADa evolutiva =E2=80=94se=
+lecci=C3=B3n, herencia, mutaci=C3=B3n=E2=80=94 a herramientas formales de o=
+ptimizaci=C3=B3n.</p>
+      <p style=3D"font-size:13px;color:var(--text-secondary);line-height:1.=
+9">En el contexto del an=C3=A1lisis econ=C3=B3mico mexicano, su potencial e=
+st=C3=A1 subutilizado. Desde la calibraci=C3=B3n de modelos hed=C3=B3nicos =
+para el mercado de vivienda hasta la optimizaci=C3=B3n de la infraestructur=
+a de cuidado para esquemas como el de GIZ, los AGs ofrecen soluciones donde=
+ los m=C3=A9todos param=C3=A9tricos fracasan ante la complejidad institucio=
+nal y la heterogeneidad espacial del pa=C3=ADs.</p>
+    </div>
+
+  </div>
+
+  <!-- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D TAB =
+4: RECURSOS =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+ -->
+  <div class=3D"tab-pane" id=3D"tab-recursos">
+
+    <div class=3D"section-eyebrow">Bibliograf=C3=ADa, herramientas y metodo=
+log=C3=ADa</div>
+    <h2 class=3D"section-title">Fuentes, Recursos y APIs</h2>
+
+    <div class=3D"grid-2" style=3D"gap:28px">
+      <div>
+        <div class=3D"section-eyebrow">Bibliograf=C3=ADa Principal</div>
+        <h3 class=3D"subsection-title" style=3D"margin-bottom:16px">Referen=
+cias Can=C3=B3nicas</h3>
+
+        <div class=3D"ref-card">
+          <div class=3D"ref-num">[1]</div>
+          <div class=3D"ref-content">
+            <div class=3D"ref-title">Advanced Algorithms and Data Structure=
+s</div>
+            <div class=3D"ref-authors">La Rocca, M. (2022)</div>
+            <div class=3D"ref-source">Manning Publications =C2=B7 Primera e=
+dici=C3=B3n =C2=B7 Cap=C3=ADtulo 17: Genetic Algorithms</div>
+            <div style=3D"margin-top:6px"><span class=3D"tag tag-blue">Refe=
+rencia base del curso</span></div>
+          </div>
+        </div>
+
+        <div class=3D"ref-card">
+          <div class=3D"ref-num">[2]</div>
+          <div class=3D"ref-content">
+            <div class=3D"ref-title">Adaptation in Natural and Artificial S=
+ystems</div>
+            <div class=3D"ref-authors">Holland, J.H. (1975, 1992)</div>
+            <div class=3D"ref-source">MIT Press =C2=B7 Origen de la teor=C3=
+=ADa formal de AGs</div>
+            <div style=3D"margin-top:6px"><span class=3D"tag tag-gold">Fund=
+acional</span></div>
+          </div>
+        </div>
+
+        <div class=3D"ref-card">
+          <div class=3D"ref-num">[3]</div>
+          <div class=3D"ref-content">
+            <div class=3D"ref-title">Genetic Algorithms in Search, Optimiza=
+tion, and Machine Learning</div>
+            <div class=3D"ref-authors">Goldberg, D.E. (1989)</div>
+            <div class=3D"ref-source">Addison-Wesley =C2=B7 Aplicaciones pr=
+=C3=A1cticas y teorema del esquema</div>
+            <div style=3D"margin-top:6px"><span class=3D"tag tag-gold">Fund=
+acional</span><span class=3D"tag tag-blue">Aplicaciones</span></div>
+          </div>
+        </div>
+
+        <div class=3D"ref-card">
+          <div class=3D"ref-num">[4]</div>
+          <div class=3D"ref-content">
+            <div class=3D"ref-title">Introduction to Evolutionary Computing=
+</div>
+            <div class=3D"ref-authors">Eiben, A.E. &amp; Smith, J.E. (2015)=
+</div>
+            <div class=3D"ref-source">Springer =C2=B7 2=C2=AA edici=C3=B3n =
+=C2=B7 Cubierta completa de AGs, ES, y GP</div>
+            <div style=3D"margin-top:6px"><span class=3D"tag tag-purple">Av=
+anzado</span></div>
+          </div>
+        </div>
+
+        <div class=3D"ref-card">
+          <div class=3D"ref-num">[5]</div>
+          <div class=3D"ref-content">
+            <div class=3D"ref-title">The Evolution of Cooperation in a Nois=
+y Environment</div>
+            <div class=3D"ref-authors">Axelrod, R. (1984)</div>
+            <div class=3D"ref-source">Basic Books =C2=B7 Aplicaci=C3=B3n de=
+ AGs al Dilema del Prisionero</div>
+            <div style=3D"margin-top:6px"><span class=3D"tag tag-green">Teo=
+r=C3=ADa de Juegos</span></div>
+          </div>
+        </div>
+
+        <div class=3D"ref-card">
+          <div class=3D"ref-num">[6]</div>
+          <div class=3D"ref-content">
+            <div class=3D"ref-title">Computational Intelligence: An Introdu=
+ction</div>
+            <div class=3D"ref-authors">Engelbrecht, A.P. (2007)</div>
+            <div class=3D"ref-source">Wiley =C2=B7 2=C2=AA edici=C3=B3n =C2=
+=B7 Comparativa AGs vs PSO vs ACO</div>
+            <div style=3D"margin-top:6px"><span class=3D"tag tag-blue">Comp=
+arativo</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class=3D"section-eyebrow">Herramientas de Implementaci=C3=B3n<=
+/div>
+        <h3 class=3D"subsection-title" style=3D"margin-bottom:16px">Librer=
+=C3=ADas Python</h3>
+
+        <div style=3D"display:grid;gap:12px">
+
+          <div class=3D"card" style=3D"border-left:3px solid var(--accent-b=
+lue)">
+            <div style=3D"display:flex;justify-content:space-between;align-=
+items:flex-start">
+              <div>
+                <div style=3D"font-family:var(--font-mono);font-size:14px;f=
+ont-weight:700;color:var(--text-primary)">DEAP</div>
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--text-muted)">Distributed Evolutionary Algorithms in Python</div>
+              </div>
+              <span class=3D"tag tag-blue">pip install deap</span>
+            </div>
+            <p style=3D"font-size:12px;color:var(--text-secondary);margin-t=
+op:8px">Framework completo para algoritmos evolutivos. Soporta AGs, estrate=
+gias evolutivas, programaci=C3=B3n gen=C3=A9tica, y optimizaci=C3=B3n multi=
+objetivo (NSGA-II). Referencia est=C3=A1ndar en investigaci=C3=B3n acad=C3=
+=A9mica.</p>
+            <div class=3D"code-block" style=3D"margin-top:8px;font-size:10p=
+x">
+<span class=3D"code-keyword">from</span> deap <span class=3D"code-keyword">=
+import</span> base, creator, tools, algorithms
+creator.<span class=3D"code-fn">create</span>(<span class=3D"code-string">"=
+FitnessMin"</span>, base.Fitness, weights=3D(<span class=3D"code-number">-1=
+.0</span>,))
+            </div>
+          </div>
+
+          <div class=3D"card" style=3D"border-left:3px solid var(--accent-g=
+old)">
+            <div style=3D"display:flex;justify-content:space-between;align-=
+items:flex-start">
+              <div>
+                <div style=3D"font-family:var(--font-mono);font-size:14px;f=
+ont-weight:700;color:var(--text-primary)">PyGAD</div>
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--text-muted)">Python Genetic Algorithm Library</div>
+              </div>
+              <span class=3D"tag tag-gold">pip install pygad</span>
+            </div>
+            <p style=3D"font-size:12px;color:var(--text-secondary);margin-t=
+op:8px">API de alto nivel para AGs. Soporte para entrenamiento de redes neu=
+ronales (PyGAD + Keras). Ideal para aprendizaje y prototipado r=C3=A1pido e=
+n el contexto del curso.</p>
+            <div class=3D"code-block" style=3D"margin-top:8px;font-size:10p=
+x">
+<span class=3D"code-keyword">import</span> pygad
+ga =3D pygad.<span class=3D"code-fn">GA</span>(num_generations=3D<span clas=
+s=3D"code-number">100</span>,
+             sol_per_pop=3D<span class=3D"code-number">50</span>,
+             fitness_func=3Dfitness_fn)
+ga.<span class=3D"code-fn">run</span>()
+            </div>
+          </div>
+
+          <div class=3D"card" style=3D"border-left:3px solid var(--accent-g=
+reen)">
+            <div style=3D"display:flex;justify-content:space-between;align-=
+items:flex-start">
+              <div>
+                <div style=3D"font-family:var(--font-mono);font-size:14px;f=
+ont-weight:700;color:var(--text-primary)">scipy.optimize</div>
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--text-muted)">SciPy =E2=80=94 differential_evolution</div>
+              </div>
+              <span class=3D"tag tag-green">scipy</span>
+            </div>
+            <p style=3D"font-size:12px;color:var(--text-secondary);margin-t=
+op:8px">Evoluci=C3=B3n diferencial para optimizaci=C3=B3n continua. Integra=
+do en el ecosistema NumPy/SciPy. Robusto, bien documentado, y adecuado para=
+ comparaciones con m=C3=A9todos cl=C3=A1sicos.</p>
+            <div class=3D"code-block" style=3D"margin-top:8px;font-size:10p=
+x">
+<span class=3D"code-keyword">from</span> scipy.optimize <span class=3D"code=
+-keyword">import</span> differential_evolution
+res =3D <span class=3D"code-fn">differential_evolution</span>(
+    himmelblau, bounds=3D[(<span class=3D"code-number">-5</span>,<span clas=
+s=3D"code-number">5</span>),(<span class=3D"code-number">-5</span>,<span cl=
+ass=3D"code-number">5</span>)])
+            </div>
+          </div>
+
+          <div class=3D"card" style=3D"border-left:3px solid var(--accent-p=
+urple)">
+            <div style=3D"display:flex;justify-content:space-between;align-=
+items:flex-start">
+              <div>
+                <div style=3D"font-family:var(--font-mono);font-size:14px;f=
+ont-weight:700;color:var(--text-primary)">Optuna</div>
+                <div style=3D"font-family:var(--font-mono);font-size:10px;c=
+olor:var(--text-muted)">Hyperparameter Optimization Framework</div>
+              </div>
+              <span class=3D"tag tag-purple">pip install optuna</span>
+            </div>
+            <p style=3D"font-size:12px;color:var(--text-secondary);margin-t=
+op:8px">Optimizaci=C3=B3n Bayesiana + b=C3=BAsqueda evolutiva para hiperpar=
+=C3=A1metros de ML. Incluye visualizaciones interactivas y soporte para mul=
+ti-objetivo. =C3=9Atil para modelos predictivos del mercado inmobiliario.</=
+p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <hr class=3D"divider">
+
+    <div class=3D"section-eyebrow">Metodolog=C3=ADa del Tablero</div>
+    <h3 class=3D"subsection-title" style=3D"margin-bottom:16px">Implementac=
+i=C3=B3n y Par=C3=A1metros del Simulador</h3>
+
+    <div class=3D"grid-2" style=3D"gap:24px">
+      <div class=3D"card">
+        <div style=3D"font-family:var(--font-mono);font-size:11px;color:var=
+(--text-muted);margin-bottom:12px;text-transform:uppercase">Par=C3=A1metros=
+ del AG Implementado</div>
+        <table class=3D"pop-table">
+          <thead><tr><th>Par=C3=A1metro</th><th>Valor</th><th>Justificaci=
+=C3=B3n</th></tr></thead>
+          <tbody>
+            <tr><td>Codificaci=C3=B3n</td><td style=3D"color:var(--accent-c=
+yan)">Binaria</td><td style=3D"color:var(--text-muted)">La Rocca (2022, ch.=
+17)</td></tr>
+            <tr><td>Selecci=C3=B3n</td><td style=3D"color:var(--accent-cyan=
+)">Ruleta Proporcional</td><td style=3D"color:var(--text-muted)">Holland (1=
+975)</td></tr>
+            <tr><td>Cruza</td><td style=3D"color:var(--accent-cyan)">Un pun=
+to (Pc=3D0.8)</td><td style=3D"color:var(--text-muted)">Goldberg (1989)</td=
+></tr>
+            <tr><td>Mutaci=C3=B3n</td><td style=3D"color:var(--accent-cyan)=
+">Flip-bit (Pm=3D1/L)</td><td style=3D"color:var(--text-muted)">Eiben &amp;=
+ Smith (2015)</td></tr>
+            <tr><td>Elitismo</td><td style=3D"color:var(--accent-cyan)">Top=
+ 1 preservado</td><td style=3D"color:var(--text-muted)">Evita p=C3=A9rdida =
+del =C3=B3ptimo</td></tr>
+            <tr><td>Precisi=C3=B3n</td><td style=3D"color:var(--accent-cyan=
+)">6 decimales (L=3D24)</td><td style=3D"color:var(--text-muted)">Especific=
+aci=C3=B3n del problema</td></tr>
+            <tr><td>Poblaci=C3=B3n</td><td style=3D"color:var(--accent-cyan=
+)">20=E2=80=93100 individuos</td><td style=3D"color:var(--text-muted)">Conf=
+igurable en simulador</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <div class=3D"card" style=3D"margin-bottom:14px">
+          <div style=3D"font-family:var(--font-mono);font-size:11px;color:v=
+ar(--text-muted);margin-bottom:12px;text-transform:uppercase">APIs y Datos =
+de Referencia</div>
+          <div style=3D"display:grid;gap:10px">
+            <div style=3D"display:flex;gap:12px;align-items:flex-start">
+              <span class=3D"tag tag-blue" style=3D"min-width:60px;text-ali=
+gn:center">INEGI</span>
+              <div style=3D"font-size:12px;color:var(--text-secondary)">API=
+ REST para indicadores econ=C3=B3micos y de construcci=C3=B3n. AGs aplicabl=
+es a optimizaci=C3=B3n de =C3=ADndices sint=C3=A9ticos con restricciones es=
+tad=C3=ADsticas.</div>
+            </div>
+            <div style=3D"display:flex;gap:12px;align-items:flex-start">
+              <span class=3D"tag tag-gold" style=3D"min-width:60px;text-ali=
+gn:center">Banxico</span>
+              <div style=3D"font-size:12px;color:var(--text-secondary)">SIE=
+ API (api.banxico.org.mx). Series de tasas de inter=C3=A9s para optimizaci=
+=C3=B3n de portafolios financieros con AG bajo restricciones regulatorias.<=
+/div>
+            </div>
+            <div style=3D"display:flex;gap:12px;align-items:flex-start">
+              <span class=3D"tag tag-green" style=3D"min-width:60px;text-al=
+ign:center">SHF</span>
+              <div style=3D"font-size:12px;color:var(--text-secondary)">=C3=
+=8Dndice SHF de Precios de Vivienda. Calibraci=C3=B3n de modelos hed=C3=B3n=
+icos v=C3=ADa AG sobre series de precios por municipio/alcald=C3=ADa.</div>
+            </div>
+            <div style=3D"display:flex;gap:12px;align-items:flex-start">
+              <span class=3D"tag tag-purple" style=3D"min-width:60px;text-a=
+lign:center">DENUE</span>
+              <div style=3D"font-size:12px;color:var(--text-secondary)">Dir=
+ectorio Nacional de Unidades Econ=C3=B3micas. Datos de localizaci=C3=B3n pa=
+ra problemas de optimizaci=C3=B3n espacial con AGs.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class=3D"card">
+          <div style=3D"font-family:var(--font-mono);font-size:11px;color:v=
+ar(--text-muted);margin-bottom:10px;text-transform:uppercase">Recursos de A=
+prendizaje</div>
+          <div style=3D"display:grid;gap:8px;font-size:12px;color:var(--tex=
+t-secondary)">
+            <div>=F0=9F=93=98 <strong style=3D"color:var(--text-primary)">J=
+ohn Holland =E2=80=94 Santa Fe Institute</strong> =E2=80=94 Conferencias so=
+bre sistemas adaptativos complejos (YouTube)</div>
+            <div>=F0=9F=93=98 <strong style=3D"color:var(--text-primary)">D=
+avid Goldberg =E2=80=94 UIUC</strong> =E2=80=94 Genetic Algorithms: From Th=
+eory to Practice (MIT OpenCourseWare)</div>
+            <div>=F0=9F=93=98 <strong style=3D"color:var(--text-primary)">D=
+EAP Documentation</strong> =E2=80=94 deap.readthedocs.io =E2=80=94 Ejemplos=
+ completos con Himmelblau</div>
+            <div>=F0=9F=93=98 <strong style=3D"color:var(--text-primary)">N=
+ature-Inspired Algorithms</strong> =E2=80=94 Yang, X-S. (2020) =E2=80=94 Wi=
+ley =E2=80=94 Comparativa AG, PSO, ACO, SA</div>
+            <div>=F0=9F=93=98 <strong style=3D"color:var(--text-primary)">J=
+EL C61</strong> =E2=80=94 Optimization Techniques; Programming Models; Dyna=
+mic Analysis =E2=80=94 Clasificaci=C3=B3n bibliogr=C3=A1fica</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class=3D"divider">
+
+    <div style=3D"text-align:center;padding:20px 0">
+      <div style=3D"font-family:var(--font-mono);font-size:10px;color:var(-=
+-text-muted);letter-spacing:0.15em;text-transform:uppercase">
+        M=C3=B3dulo 4 =C2=B7 T=C3=A9cnicas Computacionales Avanzadas =C2=B7=
+ Concentraci=C3=B3n Econom=C3=ADa Aplicada y Ciencia de Datos<br>
+        ITESM Campus Santa Fe =C2=B7 Ciudad de M=C3=A9xico =C2=B7 Feb=E2=80=
+=93Jun 2026
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+</body></html>
+------MultipartBoundary--7KQ9qXmFLGlfABwX9Z7Y28gntLd8EFIxocnbzjnU8n----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=JetBrains+Mono:wght@300;400;500;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap
+
+@charset "utf-8";
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 300; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD2OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE=
+2E-FE2F; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 300; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD_OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 300; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD4OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; =
+}
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 300; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD0OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1=
+B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 300; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD1OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, =
+U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U=
++20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 300; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD7OwGtT0rU.woff2") format("woff2"); unico=
+de-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, =
+U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, =
+U+FEFF, U+FFFD; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD2OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE=
+2E-FE2F; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD_OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD4OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; =
+}
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD0OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1=
+B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD1OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, =
+U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U=
++20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD7OwGtT0rU.woff2") format("woff2"); unico=
+de-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, =
+U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, =
+U+FEFF, U+FFFD; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 500; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD2OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE=
+2E-FE2F; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 500; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD_OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 500; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD4OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; =
+}
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 500; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD0OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1=
+B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 500; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD1OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, =
+U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U=
++20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 500; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD7OwGtT0rU.woff2") format("woff2"); unico=
+de-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, =
+U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, =
+U+FEFF, U+FFFD; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD2OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE=
+2E-FE2F; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD_OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD4OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF; =
+}
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD0OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, U+1AF-1=
+B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD1OwGtT0rU3BE.woff2") format("woff2"); un=
+icode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, =
+U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U=
++20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight=
+: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/jetbrainsm=
+ono/v24/tDbV2o-flEEny0FZhsfKu5WU4xD7OwGtT0rU.woff2") format("woff2"); unico=
+de-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, U+304, =
+U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, =
+U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Libre Baskerville"; font-style: italic; font-wei=
+ght: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/libreba=
+skerville/v24/kmKWZrc3Hgbbcjq75U4uslyuy4kn0qNccR04_RUJeby2OU36SjNDlufweKgfq=
+IfzTg.woff2") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2=
+CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+=
+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7=
+FF; }
+
+@font-face { font-family: "Libre Baskerville"; font-style: italic; font-wei=
+ght: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/libreba=
+skerville/v24/kmKWZrc3Hgbbcjq75U4uslyuy4kn0qNccR04_RUJeby2OU36SjNNlufweKgfq=
+Ic.woff2") format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-=
+2BC, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122,=
+ U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Libre Baskerville"; font-style: normal; font-wei=
+ght: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/libreba=
+skerville/v24/kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNXaxMaC82U-ro.woff2") format("w=
+off2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2F=
+F, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20=
+A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Libre Baskerville"; font-style: normal; font-wei=
+ght: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/libreba=
+skerville/v24/kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNZaxMaC82U.woff2") format("woff=
+2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2D=
+C, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212=
+, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Libre Baskerville"; font-style: normal; font-wei=
+ght: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/libreba=
+skerville/v24/kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNXaxMaC82U-ro.woff2") format("w=
+off2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2F=
+F, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20=
+A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Libre Baskerville"; font-style: normal; font-wei=
+ght: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/libreba=
+skerville/v24/kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNZaxMaC82U.woff2") format("woff=
+2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2D=
+C, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212=
+, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weig=
+ht: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXtXA-X-uE0qEE5D=
+o.woff2") format("woff2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B=
+0-4B1, U+2116; }
+
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weig=
+ht: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXt7A-X-uE0qEE5D=
+o.woff2") format("woff2"); unicode-range: U+102-103, U+110-111, U+128-129, =
+U+168-169, U+1A0-1A1, U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+=
+329, U+1EA0-1EF9, U+20AB; }
+
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weig=
+ht: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXt_A-X-uE0qEE5D=
+o.woff2") format("woff2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, =
+U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2=
+-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; =
+}
+
+@font-face { font-family: "Playfair Display"; font-style: italic; font-weig=
+ht: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTXtHA-X-uE0qEEw.=
+woff2") format("woff2"); unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC=
+, U+2C6, U+2DA, U+2DC, U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+=
+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, =
+U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20=
+AB; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, =
+U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-=
+20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 400; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2") format("woff2")=
+; unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, =
+U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U=
++2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, =
+U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20=
+AB; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, =
+U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-=
+20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 700; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2") format("woff2")=
+; unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, =
+U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U=
++2215, U+FEFF, U+FFFD; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 900; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTjYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 900; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTPYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+102-103, U+110-111, U+128-129, U+168-169, U+1A0-1A1, =
+U+1AF-1B0, U+300-301, U+303-304, U+308-309, U+323, U+329, U+1EA0-1EF9, U+20=
+AB; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 900; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTLYgEM86xRbPQ.woff2") format("woff=
+2"); unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, =
+U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-=
+20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+@font-face { font-family: "Playfair Display"; font-style: normal; font-weig=
+ht: 900; font-display: swap; src: url("https://fonts.gstatic.com/s/playfair=
+display/v40/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2") format("woff2")=
+; unicode-range: U+0-FF, U+131, U+152-153, U+2BB-2BC, U+2C6, U+2DA, U+2DC, =
+U+304, U+308, U+329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U=
++2215, U+FEFF, U+FFFD; }
+------MultipartBoundary--7KQ9qXmFLGlfABwX9Z7Y28gntLd8EFIxocnbzjnU8n----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-7a05f11d-0b1b-4dbd-97e3-6a909caf41cb@mhtml.blink
+
+@charset "utf-8";
+
+:root { --bg-deep: #040810; --bg-panel: #080f1e; --bg-card: #0c1528; --bg-h=
+over: #111e38; --border: #1a2d52; --border-bright: #2a4a7f; --accent-blue: =
+#3b82f6; --accent-cyan: #06b6d4; --accent-gold: #f59e0b; --accent-green: #1=
+0b981; --accent-red: #ef4444; --accent-purple: #8b5cf6; --text-primary: #e8=
+f0fe; --text-secondary: #94a3b8; --text-muted: #4a6490; --font-display: 'Pl=
+ayfair Display', Georgia, serif; --font-mono: 'JetBrains Mono', 'Courier Ne=
+w', monospace; --font-body: 'Libre Baskerville', Georgia, serif; }
+
+* { box-sizing: border-box; margin: 0px; padding: 0px; }
+
+body { background: var(--bg-deep); color: var(--text-primary); font-family:=
+ var(--font-body); font-size: 14px; line-height: 1.7; min-height: 100vh; ov=
+erflow-x: hidden; }
+
+body::before { content: ""; position: fixed; inset: 0px; background-image: =
+url("data:image/svg+xml,%3Csvg viewBox=3D'0 0 256 256' xmlns=3D'http://www.=
+w3.org/2000/svg'%3E%3Cfilter id=3D'noise'%3E%3CfeTurbulence type=3D'fractal=
+Noise' baseFrequency=3D'0.9' numOctaves=3D'4' stitchTiles=3D'stitch'/%3E%3C=
+/filter%3E%3Crect width=3D'100%25' height=3D'100%25' filter=3D'url(%23noise=
+)' opacity=3D'0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+
+.header { border-bottom: 1px solid var(--border); padding: 0px 40px; backgr=
+ound: rgba(4, 8, 16, 0.95); backdrop-filter: blur(20px); position: sticky; =
+top: 0px; z-index: 100; }
+
+.header-top { display: flex; align-items: center; justify-content: space-be=
+tween; padding: 16px 0px 12px; border-bottom: 1px solid var(--border); }
+
+.header-meta { font-family: var(--font-mono); font-size: 10px; color: var(-=
+-text-muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+.header-badge { background: var(--accent-blue); color: rgb(255, 255, 255); =
+font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; paddi=
+ng: 3px 10px; border-radius: 2px; text-transform: uppercase; }
+
+.header-title { padding: 0px; display: flex; align-items: center; gap: 20px=
+; }
+
+h1.main-title { font-family: var(--font-display); font-size: 26px; font-wei=
+ght: 900; color: var(--text-primary); letter-spacing: -0.02em; padding: 14p=
+x 0px; }
+
+h1.main-title span { color: var(--accent-cyan); }
+
+.tabs-nav { display: flex; gap: 0px; border-bottom: none; padding: 0px; ove=
+rflow-x: auto; }
+
+.tab-btn { background: none; border-top: none; border-right: none; border-l=
+eft: none; border-image: initial; color: var(--text-muted); font-family: va=
+r(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: up=
+percase; padding: 14px 22px; cursor: pointer; border-bottom: 2px solid tran=
+sparent; transition: 0.2s; white-space: nowrap; position: relative; }
+
+.tab-btn:hover { color: var(--text-secondary); }
+
+.tab-btn.active { color: var(--accent-cyan); border-bottom-color: var(--acc=
+ent-cyan); }
+
+.content { max-width: 1400px; margin: 0px auto; padding: 40px; position: re=
+lative; z-index: 1; }
+
+.tab-pane { display: none; animation: 0.3s ease 0s 1 normal none running fa=
+deIn; }
+
+.tab-pane.active { display: block; }
+
+@keyframes fadeIn {=20
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+
+.section-eyebrow { font-family: var(--font-mono); font-size: 10px; letter-s=
+pacing: 0.2em; text-transform: uppercase; color: var(--accent-gold); margin=
+-bottom: 10px; }
+
+h2.section-title { font-family: var(--font-display); font-size: 32px; font-=
+weight: 700; color: var(--text-primary); letter-spacing: -0.02em; line-heig=
+ht: 1.2; margin-bottom: 20px; }
+
+h3.subsection-title { font-family: var(--font-display); font-size: 20px; fo=
+nt-weight: 700; color: var(--text-primary); margin-bottom: 12px; }
+
+.card { background: var(--bg-card); border: 1px solid var(--border); border=
+-radius: 4px; padding: 24px; transition: border-color 0.2s; }
+
+.card:hover { border-color: var(--border-bright); }
+
+.card-accent { border-left: 3px solid var(--accent-blue); }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; =
+}
+
+.ga-viz-container { background: var(--bg-panel); border: 1px solid var(--bo=
+rder); border-radius: 4px; padding: 20px; margin-bottom: 24px; }
+
+canvas.ga-canvas { display: block; width: 100%; border-radius: 2px; }
+
+.chromosome { display: flex; gap: 2px; flex-wrap: wrap; margin: 8px 0px; }
+
+.bit { width: 18px; height: 18px; border-radius: 2px; display: flex; align-=
+items: center; justify-content: center; font-family: var(--font-mono); font=
+-size: 9px; font-weight: 700; transition: 0.3s; }
+
+.bit-0 { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); b=
+order: 1px solid rgba(59, 130, 246, 0.3); }
+
+.bit-1 { background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); bor=
+der: 1px solid rgba(6, 182, 212, 0.4); }
+
+.bit-mut { background: rgba(245, 158, 11, 0.3); color: var(--accent-gold); =
+border: 1px solid var(--accent-gold); }
+
+.bit-cross { background: rgba(139, 92, 246, 0.3); color: var(--accent-purpl=
+e); border: 1px solid var(--accent-purple); }
+
+.fitness-bar-container { background: rgba(255, 255, 255, 0.05); height: 8px=
+; border-radius: 4px; overflow: hidden; margin: 6px 0px; }
+
+.fitness-bar { height: 100%; border-radius: 4px; transition: width 0.5s; }
+
+.code-block { background: rgb(2, 5, 9); border: 1px solid var(--border); bo=
+rder-radius: 4px; padding: 16px; font-family: var(--font-mono); font-size: =
+12px; line-height: 1.8; color: rgb(142, 196, 240); overflow-x: auto; }
+
+.code-keyword { color: rgb(199, 146, 234); }
+
+.code-fn { color: rgb(130, 170, 255); }
+
+.code-string { color: rgb(195, 232, 141); }
+
+.code-comment { color: rgb(84, 110, 122); font-style: italic; }
+
+.code-number { color: rgb(247, 140, 108); }
+
+.step-indicator { display: flex; gap: 8px; margin-bottom: 24px; overflow-x:=
+ auto; padding-bottom: 4px; }
+
+.step-dot { width: 36px; height: 36px; border-radius: 50%; border: 2px soli=
+d var(--border); display: flex; align-items: center; justify-content: cente=
+r; font-family: var(--font-mono); font-size: 11px; font-weight: 700; cursor=
+: pointer; flex-shrink: 0; transition: 0.2s; color: var(--text-muted); }
+
+.step-dot.active { border-color: var(--accent-cyan); background: rgba(6, 18=
+2, 212, 0.15); color: var(--accent-cyan); }
+
+.step-dot.done { border-color: var(--accent-green); background: rgba(16, 18=
+5, 129, 0.1); color: var(--accent-green); }
+
+.roulette-container { display: flex; align-items: center; gap: 30px; margin=
+: 20px 0px; }
+
+.pop-table { width: 100%; border-collapse: collapse; font-family: var(--fon=
+t-mono); font-size: 11px; }
+
+.pop-table th { color: var(--text-muted); text-align: left; padding: 8px 10=
+px; border-bottom: 1px solid var(--border); font-weight: 500; letter-spacin=
+g: 0.08em; text-transform: uppercase; font-size: 10px; }
+
+.pop-table td { padding: 8px 10px; border-bottom: 1px solid rgba(26, 45, 82=
+, 0.5); color: var(--text-secondary); vertical-align: middle; }
+
+.pop-table tr:hover td { background: var(--bg-hover); }
+
+.btn { background: var(--accent-blue); color: rgb(255, 255, 255); border: n=
+one; padding: 10px 22px; font-family: var(--font-mono); font-size: 11px; le=
+tter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border-ra=
+dius: 3px; transition: 0.2s; }
+
+.btn:hover { background: rgb(37, 99, 235); transform: translateY(-1px); }
+
+.btn-gold { background: var(--accent-gold); }
+
+.btn-gold:hover { background: rgb(217, 119, 6); }
+
+.btn-green { background: var(--accent-green); }
+
+.btn-green:hover { background: rgb(5, 150, 105); }
+
+.btn-sm { padding: 6px 14px; font-size: 10px; }
+
+.metric { text-align: center; padding: 20px; }
+
+.metric-value { font-family: var(--font-mono); font-size: 28px; font-weight=
+: 700; color: var(--accent-cyan); line-height: 1; margin-bottom: 4px; }
+
+.metric-label { font-family: var(--font-mono); font-size: 10px; color: var(=
+--text-muted); text-transform: uppercase; letter-spacing: 0.12em; }
+
+.flow-steps { display: flex; gap: 0px; align-items: stretch; margin: 24px 0=
+px; }
+
+.flow-step { flex: 1 1 0%; padding: 18px 16px; background: var(--bg-card); =
+border: 1px solid var(--border); position: relative; text-align: center; }
+
+.flow-step:not(:last-child)::after { content: "=E2=86=92"; position: absolu=
+te; right: -12px; top: 50%; transform: translateY(-50%); color: var(--accen=
+t-blue); font-size: 16px; z-index: 2; background: var(--bg-deep); padding: =
+0px 2px; }
+
+.flow-step:not(:first-child) { border-left: none; }
+
+.flow-step-num { font-family: var(--font-mono); font-size: 22px; font-weigh=
+t: 700; color: var(--accent-blue); display: block; margin-bottom: 6px; }
+
+.flow-step-label { font-family: var(--font-mono); font-size: 10px; color: v=
+ar(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
+
+.flow-step-desc { font-size: 11px; color: var(--text-secondary); margin-top=
+: 6px; }
+
+.editorial-lead { font-family: var(--font-display); font-size: 18px; font-s=
+tyle: italic; color: var(--text-secondary); border-left: 3px solid var(--ac=
+cent-gold); padding-left: 20px; margin: 24px 0px; line-height: 1.6; }
+
+.tag { display: inline-block; font-family: var(--font-mono); font-size: 9px=
+; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; bord=
+er-radius: 2px; margin-right: 6px; margin-bottom: 6px; }
+
+.tag-blue { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue)=
+; border: 1px solid rgba(59, 130, 246, 0.3); }
+
+.tag-gold { background: rgba(245, 158, 11, 0.15); color: var(--accent-gold)=
+; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+.tag-green { background: rgba(16, 185, 129, 0.15); color: var(--accent-gree=
+n); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+.tag-purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-pur=
+ple); border: 1px solid rgba(139, 92, 246, 0.3); }
+
+.tag-red { background: rgba(239, 68, 68, 0.15); color: var(--accent-red); b=
+order: 1px solid rgba(239, 68, 68, 0.3); }
+
+.ref-card { background: var(--bg-card); border: 1px solid var(--border); bo=
+rder-radius: 3px; padding: 16px 18px; margin-bottom: 12px; display: flex; g=
+ap: 16px; align-items: flex-start; }
+
+.ref-num { font-family: var(--font-mono); font-size: 11px; color: var(--acc=
+ent-blue); min-width: 28px; font-weight: 700; }
+
+.ref-content { flex: 1 1 0%; }
+
+.ref-title { font-size: 13px; color: var(--text-primary); margin-bottom: 3p=
+x; font-weight: 700; }
+
+.ref-authors { font-size: 11px; color: var(--text-secondary); font-style: i=
+talic; margin-bottom: 3px; }
+
+.ref-source { font-family: var(--font-mono); font-size: 10px; color: var(--=
+text-muted); }
+
+.sim-output { background: rgb(2, 5, 9); border: 1px solid var(--border); bo=
+rder-radius: 3px; padding: 16px; font-family: var(--font-mono); font-size: =
+11px; color: rgb(110, 231, 183); max-height: 200px; overflow-y: auto; line-=
+height: 1.9; }
+
+.sim-line-gen { color: var(--accent-cyan); }
+
+.sim-line-best { color: var(--accent-gold); }
+
+.sim-line-xy { color: rgb(167, 139, 250); }
+
+.math-display { background: rgba(59, 130, 246, 0.07); border: 1px solid rgb=
+a(59, 130, 246, 0.2); border-radius: 3px; padding: 18px; text-align: center=
+; font-family: var(--font-mono); font-size: 15px; color: var(--text-primary=
+); margin: 16px 0px; letter-spacing: 0.03em; }
+
+.math-display .math-var { color: var(--accent-cyan); font-style: italic; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius=
+: 3px; }
+
+@media (max-width: 900px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .content { padding: 20px; }
+  .header { padding: 0px 20px; }
+  h2.section-title { font-size: 24px; }
+  .flow-steps { flex-direction: column; }
+  .flow-step:not(:last-child)::after { display: none; }
+  .flow-step:not(:first-child) { border-left: 1px solid var(--border); bord=
+er-top: none; }
+}
+
+.divider { border-right: none; border-bottom: none; border-left: none; bord=
+er-image: initial; border-top: 1px solid var(--border); margin: 32px 0px; }
+
+.highlight-box { background: linear-gradient(135deg, rgba(59, 130, 246, 0.0=
+8), rgba(6, 182, 212, 0.05)); border: 1px solid rgba(59, 130, 246, 0.25); b=
+order-radius: 4px; padding: 20px 24px; margin: 20px 0px; }
+
+@keyframes pulse-dot {=20
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+.pop-dot { animation: 2s ease 0s infinite normal none running pulse-dot; }
+
+.operator-row { display: flex; align-items: center; gap: 10px; margin: 10px=
+ 0px; flex-wrap: wrap; }
+
+.operator-arrow { color: var(--accent-gold); font-size: 18px; }
+
+.chart-container { position: relative; height: 260px; margin-top: 12px; }
+------MultipartBoundary--7KQ9qXmFLGlfABwX9Z7Y28gntLd8EFIxocnbzjnU8n------
