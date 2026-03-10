@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoevaluación — Algoritmos Genéticos</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=IBM+Plex+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0e0e0e;
+  --paper: #f4f1ea;
+  --paper-warm: #ede8dc;
+  --paper-deep: #e5dfd0;
+  --rule: #c8bfa8;
+  --rule-light: #ddd8cc;
+  --amber: #c17f24;
+  --amber-light: #e8a83c;
+  --amber-pale: #fdf0d5;
+  --crimson: #9b2335;
+  --crimson-pale: #fdf0f0;
+  --forest: #1e5c3a;
+  --forest-pale: #edf6f0;
+  --slate: #3d4f61;
+  --slate-light: #8496aa;
+  --slate-pale: #eef1f5;
+  --text-primary: #1a1410;
+  --text-secondary: #4a3f30;
+  --text-muted: #8a7d6a;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-accent: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--paper);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.65;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Paper texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(180,165,140,0.08) 28px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Header */
+.masthead {
+  border-bottom: 3px double var(--rule);
+  padding: 28px 60px 20px;
+  background: var(--paper);
+  position: relative;
+  z-index: 10;
+}
+
+.masthead-rule {
+  height: 1px;
+  background: var(--ink);
+  margin-bottom: 16px;
+}
+
+.masthead-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+
+.masthead-journal {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.masthead-date {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+}
+
+h1.masthead-title {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-align: center;
+  padding: 10px 0 6px;
+}
+
+h1.masthead-title em {
+  font-style: italic;
+  color: var(--amber);
+}
+
+.masthead-subtitle {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 300;
+}
+
+.masthead-bottom {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--rule);
+}
+
+.masthead-stat {
+  text-align: center;
+}
+
+.masthead-stat-num {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--amber);
+  display: block;
+}
+
+.masthead-stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Progress bar */
+.progress-strip {
+  height: 4px;
+  background: var(--rule-light);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--amber);
+  transition: width 0.5s ease;
+}
+
+/* Main */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 48px 40px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Quiz intro */
+.intro-card {
+  border: 1px solid var(--rule);
+  border-top: 4px solid var(--ink);
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  background: var(--paper-warm);
+}
+
+.intro-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.intro-card p:last-child { margin-bottom: 0; }
+
+.level-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 1px;
+}
+
+.badge-basic { background: var(--forest-pale); color: var(--forest); border: 1px solid #9ecfb4; }
+.badge-mid { background: var(--amber-pale); color: #8a5a00; border: 1px solid #e8c778; }
+.badge-adv { background: var(--crimson-pale); color: var(--crimson); border: 1px solid #d4a0a8; }
+.badge-num { background: var(--slate-pale); color: var(--slate); border: 1px solid #b8c8d8; }
+
+/* Question card */
+.question-block {
+  margin-bottom: 44px;
+  border-bottom: 1px solid var(--rule-light);
+  padding-bottom: 44px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideIn 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.question-block:nth-child(1) { animation-delay: 0.05s; }
+.question-block:nth-child(2) { animation-delay: 0.1s; }
+.question-block:nth-child(3) { animation-delay: 0.15s; }
+.question-block:nth-child(4) { animation-delay: 0.2s; }
+.question-block:nth-child(5) { animation-delay: 0.25s; }
+.question-block:nth-child(6) { animation-delay: 0.3s; }
+.question-block:nth-child(7) { animation-delay: 0.35s; }
+
+.question-block:last-child { border-bottom: none; }
+
+.question-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.question-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  min-width: 32px;
+  padding-top: 4px;
+}
+
+.question-meta {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.question-text {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.question-subtext {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-weight: 300;
+}
+
+/* Math inline */
+.math {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: rgba(0,0,0,0.05);
+  padding: 2px 6px;
+  border-radius: 2px;
+  color: var(--slate);
+}
+
+.math-block {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: rgba(0,0,0,0.04);
+  border-left: 3px solid var(--amber);
+  padding: 10px 14px;
+  margin: 10px 0;
+  color: var(--slate);
+  display: block;
+}
+
+/* Options */
+.options {
+  margin-top: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.option {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  position: relative;
+  user-select: none;
+}
+
+.option:hover:not(.answered) {
+  background: var(--paper-warm);
+  border-color: var(--amber);
+  transform: translateX(3px);
+}
+
+.option-letter {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 20px;
+  padding-top: 1px;
+  transition: color 0.18s;
+}
+
+.option-text {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  flex: 1;
+}
+
+/* Selected states */
+.option.selected-correct {
+  background: var(--forest-pale);
+  border-color: var(--forest);
+  border-width: 2px;
+}
+.option.selected-correct .option-letter { color: var(--forest); font-weight: 700; }
+.option.selected-correct .option-text { color: var(--forest); font-weight: 600; }
+
+.option.selected-wrong {
+  background: var(--crimson-pale);
+  border-color: var(--crimson);
+  border-width: 2px;
+}
+.option.selected-wrong .option-letter { color: var(--crimson); }
+.option.selected-wrong .option-text { color: var(--crimson); }
+
+.option.show-correct {
+  background: var(--forest-pale);
+  border-color: #9ecfb4;
+  opacity: 0.7;
+}
+.option.show-correct .option-letter { color: var(--forest); }
+
+.option.answered { cursor: default; transform: none !important; }
+
+.option-check {
+  margin-left: auto;
+  font-size: 16px;
+  padding-top: 1px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.option.selected-correct .option-check { opacity: 1; }
+.option.selected-wrong .option-check { opacity: 1; }
+
+/* Explanation */
+.explanation {
+  display: none;
+  margin-top: 20px;
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--amber);
+  background: var(--amber-pale);
+  padding: 20px 24px;
+  animation: fadeExp 0.4s ease;
+}
+
+@keyframes fadeExp {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.explanation.show { display: block; }
+
+.explanation-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.explanation-icon {
+  font-size: 18px;
+}
+
+.explanation-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  font-weight: 600;
+}
+
+.explanation p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 10px;
+  font-family: var(--font-display);
+}
+
+.explanation p:last-child { margin-bottom: 0; }
+
+.explanation strong { color: var(--ink); font-weight: 700; }
+.explanation em { color: var(--amber); font-style: italic; }
+
+.explanation .wrong-analysis {
+  background: var(--crimson-pale);
+  border: 1px solid #d4a0a8;
+  border-radius: 2px;
+  padding: 10px 14px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--crimson);
+}
+
+.explanation .further {
+  background: var(--slate-pale);
+  border: 1px solid #b8c8d8;
+  padding: 10px 14px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--slate);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+/* Score panel */
+#scorePanelWrapper {
+  display: none;
+  margin-top: 8px;
+}
+
+.score-panel {
+  border: 3px double var(--ink);
+  padding: 40px;
+  background: var(--paper-warm);
+  text-align: center;
+  animation: slideIn 0.5s ease;
+}
+
+.score-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.score-number {
+  font-family: var(--font-display);
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.score-number span { color: var(--amber); font-size: 40px; vertical-align: middle; }
+
+.score-grade {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 26px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  margin-bottom: 28px;
+}
+
+.score-breakdown {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.score-item {
+  text-align: center;
+}
+
+.score-item-val {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 600;
+  display: block;
+}
+
+.score-item-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.score-bars {
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+.score-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.score-bar-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  min-width: 70px;
+  text-align: right;
+}
+
+.score-bar-track {
+  flex: 1;
+  height: 6px;
+  background: var(--rule-light);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.score-bar-fill {
+  height: 100%;
+  border-radius: 1px;
+  transition: width 0.8s ease;
+}
+
+.score-feedback {
+  border-top: 1px solid var(--rule);
+  padding-top: 24px;
+  margin-top: 8px;
+}
+
+.score-feedback p {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  font-style: italic;
+}
+
+.btn-retry {
+  display: inline-block;
+  margin-top: 24px;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 12px 32px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-retry:hover {
+  background: var(--amber);
+  color: var(--ink);
+}
+
+/* Submit */
+.submit-zone {
+  text-align: center;
+  padding: 20px 0 0;
+}
+
+.btn-submit {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 14px 48px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.22s;
+  display: inline-block;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: var(--amber);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.btn-submit:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.submit-note {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  letter-spacing: 0.08em;
+}
+
+/* Footer rule */
+.page-rule {
+  border: none;
+  border-top: 3px double var(--rule);
+  margin: 40px 0 16px;
+}
+
+.page-footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  padding-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .masthead { padding: 20px 24px 16px; }
+  h1.masthead-title { font-size: 30px; }
+  .main { padding: 30px 20px 60px; }
+  .score-number { font-size: 60px; }
+  .masthead-bottom { gap: 20px; }
+}
+
+/* Highlight in explanation */
+.hl-correct { color: var(--forest); font-weight: 700; }
+.hl-wrong { color: var(--crimson); font-weight: 700; }
+.hl-key { color: var(--amber); font-weight: 700; }
+.ref-cite {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  display: block;
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-strip">
+  <div class="progress-fill" id="progressFill" style="width:0%"></div>
+</div>
+
+<!-- Masthead -->
+<div class="masthead">
+  <div class="masthead-rule"></div>
+  <div class="masthead-top">
+    <div class="masthead-journal">ITESM · Campus Santa Fe · Economía Aplicada y Ciencia de Datos</div>
+    <div class="masthead-date">Módulo 4 · Feb–Jun 2026</div>
+  </div>
+  <h1 class="masthead-title">Autoevaluación: <em>Algoritmos Genéticos</em></h1>
+  <div class="masthead-subtitle">De la teoría evolutiva a la optimización computacional avanzada</div>
+  <div class="masthead-bottom">
+    <div class="masthead-stat">
+      <span class="masthead-stat-num">7</span>
+      <span class="masthead-stat-label">Preguntas</span>
+    </div>
+    <div class="masthead-stat">
+      <span class="masthead-stat-num" id="answeredCount">0</span>
+      <span class="masthead-stat-label">Respondidas</span>
+    </div>
+    <div class="masthead-stat">
+      <span class="masthead-stat-num" id="correctCount" style="color:var(--forest)">0</span>
+      <span class="masthead-stat-label">Correctas</span>
+    </div>
+    <div class="masthead-stat">
+      <span class="masthead-stat-num" id="pctCount">—</span>
+      <span class="masthead-stat-label">Puntaje</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- Intro -->
+  <div class="intro-card">
+    <p>Este instrumento evalúa la comprensión de los <strong>Algoritmos Genéticos</strong> desde sus fundamentos conceptuales hasta sus aplicaciones en optimización económica avanzada. Las preguntas avanzan progresivamente en dificultad, exigiendo tanto memorización de definiciones como razonamiento analítico sobre el comportamiento del algoritmo.</p>
+    <p>Selecciona una opción por pregunta. La retroalimentación detallada —que incluye análisis de los distractores y referencias bibliográficas— se desplegará inmediatamente. Al final recibirás una evaluación integral con recomendaciones de estudio.</p>
+    <div class="level-badges">
+      <span class="badge badge-basic">● Básico</span>
+      <span class="badge badge-mid">● Intermedio</span>
+      <span class="badge badge-adv">● Avanzado</span>
+      <span class="badge badge-num">● Cuantitativo</span>
+    </div>
+  </div>
+
+  <!-- Questions container -->
+  <div id="questionsContainer"></div>
+
+  <!-- Submit -->
+  <div class="submit-zone" id="submitZone">
+    <button class="btn-submit" id="submitBtn" disabled onclick="submitQuiz()">
+      Evaluar Resultados
+    </button>
+    <div class="submit-note" id="submitNote">Responde todas las preguntas para evaluar</div>
+  </div>
+
+  <!-- Score panel -->
+  <div id="scorePanelWrapper"></div>
+
+  <hr class="page-rule">
+  <div class="page-footer">
+    Módulo 4 · Técnicas Computacionales Avanzadas para Modelar Fenómenos Sociales · ITESM-SF
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    id: 1,
+    level: "Básico",
+    levelClass: "badge-basic",
+    topic: "Definición",
+    text: "¿Cuál es la característica que define formalmente a un Algoritmo Genético como <em>meta-heurística</em> en contraste con los métodos de optimización clásicos?",
+    subtext: "Considera la naturaleza del proceso de búsqueda y el tipo de información requerida.",
+    options: [
+      { letter: "A", text: "Utiliza derivadas de primer y segundo orden para guiar la búsqueda hacia regiones de mayor gradiente de la función objetivo." },
+      { letter: "B", text: "Opera sobre una población de soluciones candidatas, utilizando únicamente evaluaciones de la función objetivo (caja negra) sin información analítica del problema." },
+      { letter: "C", text: "Garantiza encontrar el óptimo global de cualquier función en un número finito de evaluaciones mediante exploración exhaustiva." },
+      { letter: "D", text: "Se aplica exclusivamente a problemas combinatorios discretos donde los métodos continuos no son aplicables." }
+    ],
+    correct: 1,
+    explanation: {
+      main: `La respuesta correcta es <strong class="hl-correct">B</strong>. Un AG es una meta-heurística porque opera como <em class="hl-key">caja negra</em>: no requiere información estructural del problema (gradientes, hessiano, convexidad). Su único requisito es poder <strong>evaluar</strong> la función objetivo en un punto dado, lo que lo hace aplicable a problemas no diferenciables, discontinuos, multimodales y con restricciones complejas.`,
+      wrong: `<strong class="hl-wrong">A</strong> describe métodos de gradiente (Newton, BFGS), que son exactamente lo opuesto: requieren información de primer/segundo orden. <strong class="hl-wrong">C</strong> es incorrecta porque los AGs son heurísticos y no garantizan el óptimo global; son aproximaciones estocásticas. <strong class="hl-wrong">D</strong> es falsa: existen AGs de codificación real para espacios continuos ampliamente utilizados en calibración de modelos econométricos.`,
+      further: `La Rocca (2022, p. 628) enfatiza precisamente esta característica: los AGs "only require evaluating the fitness function", distinguiéndolos de los métodos exactos. Holland (1975) lo formuló como búsqueda en espacios de hipótesis sin suposiciones sobre la forma funcional del espacio de búsqueda.`,
+      cite: "La Rocca (2022) · Holland (1975) · Goldberg (1989, ch. 1)"
+    }
+  },
+  {
+    id: 2,
+    level: "Básico",
+    levelClass: "badge-basic",
+    topic: "Operadores",
+    text: "En el proceso de <strong>cruza en un punto</strong>, se tienen dos padres de longitud L = 8: P₁ = [1,0,1,1,0,0,1,0] y P₂ = [0,1,0,0,1,1,0,1], con punto de corte en la posición 3. ¿Cuál es el hijo H₁ resultante?",
+    subtext: "El punto de corte divide el cromosoma: los primeros 3 genes vienen del Padre 1, el resto del Padre 2.",
+    options: [
+      { letter: "A", text: "[1, 0, 1, 0, 1, 1, 0, 1]" },
+      { letter: "B", text: "[0, 1, 0, 1, 0, 0, 1, 0]" },
+      { letter: "C", text: "[1, 0, 1, 1, 0, 0, 1, 0]" },
+      { letter: "D", text: "[1, 0, 0, 0, 1, 1, 0, 1]" }
+    ],
+    correct: 0,
+    explanation: {
+      main: `La respuesta correcta es <strong class="hl-correct">A: [1, 0, 1, 0, 1, 1, 0, 1]</strong>. En la cruza en un punto con corte en posición 3, el Hijo H₁ toma los <em class="hl-key">primeros 3 bits de P₁</em> = [1, 0, 1] y los <em class="hl-key">últimos 5 bits de P₂</em> = [0, 1, 1, 0, 1], resultando en [1, 0, 1 | 0, 1, 1, 0, 1].`,
+      wrong: `<strong class="hl-wrong">B</strong> sería H₂ (el otro descendiente: bits 1-3 de P₂ y bits 4-8 de P₁). <strong class="hl-wrong">C</strong> es simplemente P₁ sin modificar, lo que ocurriría si la probabilidad de cruza no se activa (Pc no se cumple). <strong class="hl-wrong">D</strong> mezcla incorrectamente los genes sin respetar el punto de corte definido.`,
+      further: `La cruza en un punto tiene probabilidad Pc ∈ [0.6, 1.0]. Nótese que siempre se producen dos hijos: H₂ sería [0, 1, 0 | 1, 0, 0, 1, 0]. La cruza en dos puntos y la uniforme introducen mayor diversidad pero con mayor disrupción de bloques genéticos ("building blocks" en la terminología de Goldberg).`,
+      cite: "La Rocca (2022, p. 641) · Goldberg (1989, ch. 3)"
+    }
+  },
+  {
+    id: 3,
+    level: "Intermedio",
+    levelClass: "badge-mid",
+    topic: "Selección",
+    text: "Una población tiene 4 individuos con los siguientes valores de aptitud (fitness): f₁ = 20, f₂ = 5, f₃ = 50, f₄ = 25. Bajo <strong>selección por ruleta proporcional</strong>, ¿cuál es la probabilidad de selección del individuo 4, y qué implicación tiene para la presión selectiva?",
+    subtext: "p_i(t) = f_i(t) / Σf_j(t)",
+    options: [
+      { letter: "A", text: "p₄ = 0.25; todos los individuos tienen igual probabilidad en la ruleta, sin importar el fitness." },
+      { letter: "B", text: "p₄ = 25/100 = 0.25; el individuo 3 dominará la selección con p₃ = 0.50, creando riesgo de convergencia prematura si su fitness es muy superior al promedio." },
+      { letter: "C", text: "p₄ = 25/100 = 0.25; la ruleta garantiza que todos los individuos serán seleccionados al menos una vez por generación." },
+      { letter: "D", text: "p₄ = 1/(4) = 0.25; la selección proporcional normaliza todos los fitness al mismo valor para garantizar diversidad." }
+    ],
+    correct: 1,
+    explanation: {
+      main: `La respuesta correcta es <strong class="hl-correct">B</strong>. Σf = 20+5+50+25 = 100. Por tanto p₄ = 25/100 = <em class="hl-key">0.25</em>. Crucialmente, p₃ = 50/100 = 0.50: el individuo más apto tiene el doble de probabilidad que el cuarto. Esto crea un riesgo de <em class="hl-key">convergencia prematura</em> cuando existe un individuo con fitness desproporcionadamente alto, ya que puede "acaparar" la selección antes de que el algoritmo explore el espacio adecuadamente.`,
+      wrong: `<strong class="hl-wrong">A</strong> confunde la ruleta con selección uniforme aleatoria (sin fitness). <strong class="hl-wrong">C</strong> es falsa: la ruleta no garantiza que cada individuo sea seleccionado; con p₂ = 0.05, en poblaciones pequeñas puede no ser seleccionado en varias generaciones. <strong class="hl-wrong">D</strong> describe lo opuesto: normalizar al mismo valor eliminaría la presión selectiva.`,
+      further: `El Muestreo Estocástico Universal (MEU) fue diseñado específicamente para corregir el problema de acaparamiento de la ruleta. Coloca múltiples puntos igualmente espaciados en una sola rotación, garantizando representación proporcional más estable. La selección por torneo (k=2) ofrece presión selectiva controlada sin los sesgos estocásticos de la ruleta.`,
+      cite: "Eiben & Smith (2015, ch. 5) · Goldberg (1989, pp. 63–72)"
+    }
+  },
+  {
+    id: 4,
+    level: "Cuantitativo",
+    levelClass: "badge-num",
+    topic: "Codificación",
+    text: "Se desea minimizar una función f(x, y, z) con tres variables de decisión, cada una en el dominio [−10, 10], con una precisión de 4 decimales. ¿Cuál es la <strong>longitud total del cromosoma binario</strong> requerida?",
+    subtext: "L = ⌈log₂((l_sup − l_inf) × 10^precisión)⌉ por variable",
+    options: [
+      { letter: "A", text: "L_total = 60 bits (20 bits por variable)" },
+      { letter: "B", text: "L_total = 63 bits (21 bits por variable)" },
+      { letter: "C", text: "L_total = 72 bits (24 bits por variable)" },
+      { letter: "D", text: "L_total = 45 bits (15 bits por variable)" }
+    ],
+    correct: 1,
+    explanation: {
+      main: `La respuesta correcta es <strong class="hl-correct">B: 63 bits</strong>. Para cada variable: L = ⌈log₂((10 − (−10)) × 10⁴)⌉ = ⌈log₂(20 × 10,000)⌉ = ⌈log₂(200,000)⌉ = ⌈17.61⌉ = <em class="hl-key">21 bits por variable</em>. Con 3 variables: L_total = 21 × 3 = <em class="hl-key">63 bits</em>. Esto permite representar 2²¹ = 2,097,152 valores distintos por variable, con resolución de 20/2,097,151 ≈ 0.0000095, suficiente para 4 decimales.`,
+      wrong: `<strong class="hl-wrong">A</strong> (20 bits) correspondería a ⌈log₂(200,000)⌉ = 17.6 redondeado hacia abajo, error de cálculo. <strong class="hl-wrong">C</strong> (24 bits) corresponde al caso del ejemplo de clase (dominio [−5,5], precisión 6): 24 × 3 = 72, pero aquí el dominio es más amplio y la precisión menor. <strong class="hl-wrong">D</strong> (15 bits por variable) solo cubre 2¹⁵ = 32,768 puntos, insuficiente para 4 decimales en el dominio dado.`,
+      further: `La longitud del cromosoma determina directamente la resolución del fenotipo y el costo computacional. Un cromosoma de 63 bits representa un espacio de búsqueda de 2⁶³ ≈ 9.2 × 10¹⁸ posibles soluciones, evidenciando por qué los AGs son necesarios: la exploración exhaustiva sería imposible incluso con supercomputadoras.`,
+      cite: "La Rocca (2022, p. 634) · Goldberg (1989, ch. 2)"
+    }
+  },
+  {
+    id: 5,
+    level: "Intermedio",
+    levelClass: "badge-mid",
+    topic: "Convergencia Prematura",
+    text: "Un AG para calibrar parámetros de un modelo hedónico de precios de vivienda converge rápidamente a una solución con f* = 45.2, pero existe evidencia de que la solución óptima tiene f* ≈ 0. Los parámetros son similares en toda la población después de la generación 20. ¿Cuál es el diagnóstico más preciso y la intervención correcta?",
+    subtext: "Considera el balance exploración/explotación y los factores que afectan la diversidad poblacional.",
+    options: [
+      { letter: "A", text: "El modelo hedónico es incorrecto y debe reformularse; los AGs siempre convergen al óptimo global si el problema está bien definido." },
+      { letter: "B", text: "La función objetivo tiene múltiples óptimos locales; se recomienda aumentar la probabilidad de mutación al 50% para forzar exploración total del espacio." },
+      { letter: "C", text: "Se presenta convergencia prematura por pérdida de diversidad: presión selectiva excesiva homogeneizó la población. Intervenciones: reducir Pc, aumentar levemente Pm, aplicar reinicialización parcial o niching, o cambiar a selección por torneo con k menor." },
+      { letter: "D", text: "El tamaño de población es insuficiente; duplicar Nind resolverá automáticamente la convergencia prematura sin alterar otros parámetros." }
+    ],
+    correct: 2,
+    explanation: {
+      main: `La respuesta correcta es <strong class="hl-correct">C</strong>. Los síntomas son diagnósticos clásicos de <em class="hl-key">convergencia prematura por pérdida de diversidad</em>: homogenización de la población antes de alcanzar el óptimo global. La alta presión selectiva (ej. ruleta con individuos dominantes) concentra la búsqueda en un óptimo local. Las intervenciones correctas incluyen: (1) aumentar Pm moderadamente para reintroducir variabilidad, (2) aplicar <em>niching</em> o <em>sharing</em> para penalizar similitud entre individuos, (3) reinicialización parcial ("immigrants"), o (4) reducir presión selectiva con torneo de menor tamaño.`,
+      wrong: `<strong class="hl-wrong">A</strong> es incorrecta: los AGs no garantizan convergencia al óptimo global; son métodos aproximados. <strong class="hl-wrong">B</strong> tiene el diagnóstico correcto (múltiples óptimos) pero la intervención es destructiva: Pm = 50% destruiría el conocimiento acumulado, convirtiendo el AG en búsqueda aleatoria pura (Pm óptima ≈ 0.1/L). <strong class="hl-wrong">D</strong> es una condición necesaria pero no suficiente: una población grande pero con selección muy agresiva también convergería prematuramente.`,
+      further: `En el contexto de modelos hedónicos para vivienda en México (ej. análisis CDMX 2019-2023), la convergencia prematura es especialmente problemática porque el espacio de parámetros (pesos de atributos como superficie, alcaldía, tipo de inmueble) puede ser multimodal con correlaciones complejas entre variables espacialmente rezagadas.`,
+      cite: "Eiben & Smith (2015, ch. 8) · Goldberg (1989, pp. 122–130)"
+    }
+  },
+  {
+    id: 6,
+    level: "Avanzado",
+    levelClass: "badge-adv",
+    topic: "Teorema del Esquema",
+    text: "El <strong>Teorema del Esquema</strong> de Holland (1975) establece que un AG procesa implícitamente un número exponencialmente mayor de esquemas del que evalúa explícitamente. ¿Cuál de las siguientes afirmaciones describe correctamente el <em>paralelismo implícito</em> y sus condiciones para el crecimiento de esquemas de alta aptitud?",
+    subtext: "Un esquema H es una plantilla sobre el alfabeto {0, 1, *}. Su orden o(H) es el número de posiciones fijas (no *). Su longitud definidora δ(H) es la distancia entre la primera y última posición fija.",
+    options: [
+      { letter: "A", text: "Los esquemas con alto fitness crecen exponencialmente sin importar su orden ni longitud definidora, ya que la selección favorece siempre a los individuos más aptos independientemente de su estructura genética." },
+      { letter: "B", text: "Los esquemas de <em>orden bajo</em> y <em>longitud definidora corta</em> con aptitud superior al promedio crecen exponencialmente; son los bloques constructivos ('building blocks') que el AG combina para construir soluciones óptimas." },
+      { letter: "C", text: "Solo los esquemas de orden máximo (sin posiciones '*') son seleccionados, pues contienen la información completa de cada individuo; los esquemas de orden bajo son eliminados por la operación de cruza." },
+      { letter: "D", text: "El teorema del esquema garantiza que el AG encontrará siempre el óptimo global en O(n log n) evaluaciones, donde n es el tamaño de la población." }
+    ],
+    correct: 1,
+    explanation: {
+      main: `La respuesta correcta es <strong class="hl-correct">B</strong>. El Teorema del Esquema establece que el número esperado de instancias del esquema H en la generación t+1 es: <em>m(H, t+1) ≥ m(H, t) · [f(H)/f̄] · [1 − Pc · δ(H)/(L−1) − o(H) · Pm]</em>. Los esquemas de <em class="hl-key">orden bajo</em> (pocas posiciones fijas, más '*') son menos disruptados por la mutación. Los de <em class="hl-key">longitud definidora corta</em> son menos cortados por la cruza. Cuando f(H) > f̄ (aptitud suprapromeidal), estos "bloques constructivos" crecen exponencialmente: la <em>hipótesis de los bloques constructivos</em> sostiene que el AG los combina para construir soluciones progresivamente mejores.`,
+      wrong: `<strong class="hl-wrong">A</strong> ignora la condición clave: la cruza disrrupta esquemas de longitud definidora grande con probabilidad ≈ Pc·δ(H)/(L−1), por lo que el orden y la longitud sí importan. <strong class="hl-wrong">C</strong> invierte la lógica: los esquemas de orden máximo son los más disruptados (cada bit es fijo, cualquier cruza los destruye). <strong class="hl-wrong">D</strong> atribuye al teorema una garantía de completud que no existe; es una cota de crecimiento de esquemas individuales, no del algoritmo completo.`,
+      further: `El paralelismo implícito implica que con una población de n individuos de longitud L, el AG procesa implícitamente O(n·2^L) esquemas en cada generación, mucho más que las n evaluaciones explícitas. Esta es la justificación teórica fundamental de la eficiencia de los AGs. Sin embargo, la "deception" de Goldberg muestra casos donde la hipótesis de bloques constructivos falla si los óptimos locales de esquemas de orden bajo no coinciden con el óptimo global.`,
+      cite: "Holland (1975, ch. 6) · Goldberg (1989, ch. 4) · Mitchell (1996, ch. 3)"
+    }
+  },
+  {
+    id: 7,
+    level: "Avanzado",
+    levelClass: "badge-adv",
+    topic: "Optimización Multiobjetivo",
+    text: "Un economista usa un AG para optimizar la localización de 5 parques industriales en México, balanceando simultáneamente: (1) minimizar costos de transporte promedio, (2) maximizar cobertura de zonas de nearshoring, y (3) minimizar presión sobre agua subterránea. ¿Cuál es el enfoque algorítmico más riguroso para este problema, y qué representa la solución del AG?",
+    subtext: "No existe una única solución que sea óptima en los tres objetivos simultáneamente.",
+    options: [
+      { letter: "A", text: "Se debe agregar los tres objetivos en uno solo mediante una suma ponderada: f = w₁·costo + w₂·cobertura + w₃·agua, con pesos definidos a priori por el analista, obteniendo un único óptimo global." },
+      { letter: "B", text: "Un AG estándar con codificación binaria de coordenadas geográficas resuelve directamente el problema tri-objetivo sin modificaciones, ya que la selección por ruleta maneja automáticamente múltiples objetivos." },
+      { letter: "C", text: "Se requiere un AG multiobjetivo (ej. NSGA-II) que genere el <em>Frente de Pareto</em>: el conjunto de soluciones no dominadas donde mejorar un objetivo implica empeorar al menos otro. El decisor elige posteriormente según sus preferencias." },
+      { letter: "D", text: "Los problemas con más de dos objetivos son computacionalmente intratables para AGs; se debe usar programación lineal entera multi-objetivo con restricciones sobre la ubicación industrial." }
+    ],
+    correct: 2,
+    explanation: {
+      main: `La respuesta correcta es <strong class="hl-correct">C</strong>. Con tres objetivos en conflicto, no existe una solución única óptima. El enfoque correcto es NSGA-II (Non-dominated Sorting Genetic Algorithm II, Deb et al., 2002), que genera el <em class="hl-key">Frente de Pareto</em>: el conjunto de soluciones no dominadas (ninguna es peor en todos los objetivos que otra). El AG multiobjetivo usa operadores de selección especiales basados en <em>dominancia de Pareto</em> y <em>distancia de aglomeración</em> para mantener diversidad sobre todo el frente. El resultado no es una solución, sino un <em class="hl-key">conjunto de compromisos óptimos</em> que el decisor de política pública evalúa según sus preferencias.`,
+      wrong: `<strong class="hl-wrong">A</strong> (suma ponderada) es válida pero limitada: solo puede encontrar soluciones en la parte convexa del frente de Pareto, perdiendo soluciones en regiones cóncavas. Además, la elección de pesos es altamente subjetiva y politicamente sensible en localización industrial. <strong class="hl-wrong">B</strong> es incorrecta: la ruleta estándar no maneja múltiples objetivos; necesita una única función escalar de fitness. <strong class="hl-wrong">D</strong> es falsa: NSGA-II y variantes (NSGA-III para muchos objetivos) son ampliamente usados en problemas con 3–5+ objetivos en logística y planeación urbana.`,
+      further: `En el contexto de nearshoring mexicano (EJE.Mx / Eje 5: Infraestructura y Logística), la optimización de localización industrial es exactamente el tipo de problema donde los AGs multiobjetivo superan a los métodos clásicos. El Frente de Pareto ofrece a los tomadores de decisiones (SEDECO, SEMARNAT, SE) un menú de compromisos transparente entre eficiencia económica y sostenibilidad ambiental.`,
+      cite: "Deb et al. (2002) — IEEE Trans. Evolutionary Computation · Eiben & Smith (2015, ch. 10)"
+    }
+  }
+];
+
+let answers = new Array(questions.length).fill(null);
+let scores = new Array(questions.length).fill(null);
+let submitted = false;
+
+function levelColor(level) {
+  if (level === 'Básico') return '#1e5c3a';
+  if (level === 'Intermedio') return '#8a5a00';
+  if (level === 'Avanzado') return '#9b2335';
+  if (level === 'Cuantitativo') return '#3d4f61';
+  return '#4a3f30';
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = '';
+  questions.forEach((q, qi) => {
+    const block = document.createElement('div');
+    block.className = 'question-block';
+    block.id = `qblock-${qi}`;
+
+    block.innerHTML = `
+      <div class="question-header">
+        <div class="question-number">Q${String(q.id).padStart(2,'0')}</div>
+        <div style="flex:1">
+          <div class="question-meta">
+            <span class="badge ${q.levelClass}">${q.level}</span>
+            <span class="badge badge-num">${q.topic}</span>
+          </div>
+          <div class="question-text">${q.text}</div>
+          ${q.subtext ? `<div class="question-subtext">${q.subtext}</div>` : ''}
+        </div>
+      </div>
+      <div class="options" id="opts-${qi}">
+        ${q.options.map((opt, oi) => `
+          <div class="option" id="opt-${qi}-${oi}" onclick="selectOption(${qi}, ${oi})">
+            <span class="option-letter">${opt.letter}</span>
+            <span class="option-text">${opt.text}</span>
+            <span class="option-check" id="check-${qi}-${oi}"></span>
+          </div>
+        `).join('')}
+      </div>
+      <div class="explanation" id="exp-${qi}">
+        <div class="explanation-header">
+          <span class="explanation-icon" id="exp-icon-${qi}">◆</span>
+          <span class="explanation-title" id="exp-title-${qi}">Análisis de la Respuesta</span>
+        </div>
+        <p>${q.explanation.main}</p>
+        ${q.explanation.wrong ? `<div class="wrong-analysis"><strong>Análisis de distractores:</strong> ${q.explanation.wrong}</div>` : ''}
+        ${q.explanation.further ? `<div class="further">${q.explanation.further}</div>` : ''}
+        <span class="ref-cite">📖 ${q.explanation.cite}</span>
+      </div>
+    `;
+    container.appendChild(block);
+  });
+}
+
+function selectOption(qi, oi) {
+  if (answers[qi] !== null) return; // Already answered
+
+  answers[qi] = oi;
+  const isCorrect = oi === questions[qi].correct;
+  scores[qi] = isCorrect ? 1 : 0;
+
+  // Style all options
+  const opts = document.querySelectorAll(`#opts-${qi} .option`);
+  opts.forEach((opt, i) => {
+    opt.classList.add('answered');
+    if (i === oi && isCorrect) {
+      opt.classList.add('selected-correct');
+      opt.querySelector('.option-check').textContent = '✓';
+    } else if (i === oi && !isCorrect) {
+      opt.classList.add('selected-wrong');
+      opt.querySelector('.option-check').textContent = '✗';
+    } else if (i === questions[qi].correct && !isCorrect) {
+      opt.classList.add('show-correct');
+      opt.querySelector('.option-check').textContent = '✓';
+      opt.querySelector('.option-check').style.opacity = '1';
+      opt.querySelector('.option-check').style.color = '#1e5c3a';
+    }
+  });
+
+  // Show explanation
+  const exp = document.getElementById(`exp-${qi}`);
+  const icon = document.getElementById(`exp-icon-${qi}`);
+  const title = document.getElementById(`exp-title-${qi}`);
+  exp.classList.add('show');
+  if (isCorrect) {
+    exp.style.borderLeftColor = '#1e5c3a';
+    exp.style.background = '#edf6f0';
+    icon.textContent = '✓';
+    title.textContent = 'Correcto — Análisis';
+    title.style.color = '#1e5c3a';
+  } else {
+    exp.style.borderLeftColor = '#9b2335';
+    exp.style.background = '#fdf0f0';
+    icon.textContent = '✗';
+    title.textContent = 'Incorrecto — Análisis y Corrección';
+    title.style.color = '#9b2335';
+  }
+
+  // Scroll to explanation
+  setTimeout(() => {
+    exp.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }, 100);
+
+  updateStats();
+}
+
+function updateStats() {
+  const answered = answers.filter(a => a !== null).length;
+  const correct = scores.filter(s => s === 1).length;
+  document.getElementById('answeredCount').textContent = answered;
+  document.getElementById('correctCount').textContent = correct;
+  document.getElementById('pctCount').textContent = answered > 0 ? Math.round(correct/answered*100) + '%' : '—';
+
+  const progress = answered / questions.length * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+
+  const submitBtn = document.getElementById('submitBtn');
+  const submitNote = document.getElementById('submitNote');
+  if (answered === questions.length) {
+    submitBtn.disabled = false;
+    submitNote.textContent = `Respondiste ${correct}/${questions.length} correctamente — presiona para ver tu evaluación completa`;
+    submitNote.style.color = correct >= 5 ? '#1e5c3a' : correct >= 3 ? '#8a5a00' : '#9b2335';
+  } else {
+    submitNote.textContent = `Faltan ${questions.length - answered} pregunta(s) por responder`;
+  }
+}
+
+function submitQuiz() {
+  submitted = true;
+  const correct = scores.filter(s => s === 1).length;
+  const total = questions.length;
+  const pct = Math.round(correct / total * 100);
+
+  let grade, gradeColor, feedback;
+  if (pct >= 86) {
+    grade = 'Dominio Avanzado';
+    gradeColor = '#1e5c3a';
+    feedback = 'Demuestras comprensión profunda de los algoritmos genéticos, desde su fundamentación teórica (Teorema del Esquema) hasta sus aplicaciones avanzadas en optimización multiobjetivo. Estás preparado para implementar AGs en problemas complejos de economía aplicada y construir sobre esta base para algoritmos evolutivos de mayor sofisticación (ES, GP, NSGA-III).';
+  } else if (pct >= 71) {
+    grade = 'Comprensión Sólida';
+    gradeColor = '#c17f24';
+    feedback = 'Muestras un buen manejo de los conceptos fundamentales y operadores genéticos. Para consolidar, revisa los aspectos teóricos más formales: el Teorema del Esquema (Holland, 1975) y los fundamentos de la optimización multiobjetivo (Deb, 2001). La implementación práctica con DEAP o PyGAD reforzará tu comprensión operacional.';
+  } else if (pct >= 57) {
+    grade = 'Comprensión Parcial';
+    gradeColor = '#9b2335';
+    feedback = 'Tienes las bases conceptuales pero existen lagunas en aspectos cuantitativos (codificación binaria, cálculo de probabilidades de selección) y en los mecanismos de fallo del algoritmo (convergencia prematura). Recomendamos releer La Rocca (2022, cap. 17) y practicar con el simulador del tablero interactivo, ejecutando el AG completo con distintos parámetros.';
+  } else {
+    grade = 'Requiere Refuerzo';
+    gradeColor = '#9b2335';
+    feedback = 'Es necesario reforzar los fundamentos del módulo. Te recomendamos comenzar por el material de clase (flujo del AG binario, operadores genéticos) y luego avanzar hacia la comprensión del balance exploración/explotación. Los videos de David Goldberg (UIUC) disponibles en YouTube son un recurso introductorio excelente y accesible.';
+  }
+
+  // Level-wise breakdown
+  const byLevel = {};
+  questions.forEach((q, i) => {
+    if (!byLevel[q.level]) byLevel[q.level] = { correct: 0, total: 0 };
+    byLevel[q.level].total++;
+    if (scores[i] === 1) byLevel[q.level].correct++;
+  });
+
+  const barColors = {
+    'Básico': '#1e5c3a', 'Intermedio': '#c17f24',
+    'Avanzado': '#9b2335', 'Cuantitativo': '#3d4f61'
+  };
+
+  const barsHTML = Object.entries(byLevel).map(([level, data]) => `
+    <div class="score-bar-row">
+      <span class="score-bar-label">${level}</span>
+      <div class="score-bar-track">
+        <div class="score-bar-fill" style="width:${data.total > 0 ? data.correct/data.total*100 : 0}%;background:${barColors[level] || '#8a7d6a'}"></div>
+      </div>
+      <span style="font-family:var(--font-mono);font-size:10px;color:var(--text-muted);min-width:36px">${data.correct}/${data.total}</span>
+    </div>
+  `).join('');
+
+  const wrapper = document.getElementById('scorePanelWrapper');
+  wrapper.style.display = 'block';
+  wrapper.innerHTML = `
+    <div class="score-panel">
+      <div class="score-title">Resultado Final · Módulo 4</div>
+      <div class="score-number">${correct}<span> / ${total}</span></div>
+      <div class="score-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="score-breakdown">
+        <div class="score-item">
+          <span class="score-item-val" style="color:${gradeColor}">${pct}%</span>
+          <span class="score-item-label">Puntaje</span>
+        </div>
+        <div class="score-item">
+          <span class="score-item-val" style="color:#1e5c3a">${correct}</span>
+          <span class="score-item-label">Correctas</span>
+        </div>
+        <div class="score-item">
+          <span class="score-item-val" style="color:#9b2335">${total - correct}</span>
+          <span class="score-item-label">Incorrectas</span>
+        </div>
+      </div>
+      <div class="score-bars">${barsHTML}</div>
+      <div class="score-feedback">
+        <p>${feedback}</p>
+      </div>
+      <button class="btn-retry" onclick="resetQuiz()">↺ Reintentar Evaluación</button>
+    </div>
+  `;
+
+  // Animate bars
+  setTimeout(() => {
+    document.querySelectorAll('.score-bar-fill').forEach(bar => {
+      const target = bar.style.width;
+      bar.style.width = '0';
+      setTimeout(() => { bar.style.width = target; }, 50);
+    });
+  }, 100);
+
+  wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById('submitZone').style.display = 'none';
+}
+
+function resetQuiz() {
+  answers = new Array(questions.length).fill(null);
+  scores = new Array(questions.length).fill(null);
+  submitted = false;
+  document.getElementById('scorePanelWrapper').style.display = 'none';
+  document.getElementById('scorePanelWrapper').innerHTML = '';
+  document.getElementById('submitZone').style.display = 'block';
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submitNote').textContent = 'Responde todas las preguntas para evaluar';
+  document.getElementById('submitNote').style.color = '';
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('answeredCount').textContent = '0';
+  document.getElementById('correctCount').textContent = '0';
+  document.getElementById('pctCount').textContent = '—';
+  renderQuestions();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Init
+renderQuestions();
+</script>
+</body>
+</html>
