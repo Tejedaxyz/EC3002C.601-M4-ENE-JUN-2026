@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSO & Evolución Diferencial | Módulo 4 · ITESM-SF 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$','$'],['\\(','\\)']], displayMath: [['$$','$$'],['\\[','\\]']], tags:'ams' },
+  svg: { fontCache: 'global' },
+  startup: { ready() { MathJax.startup.defaultReady(); } }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #050a14;
+  --bg2: #0a1220;
+  --card: rgba(255,255,255,0.04);
+  --card-hover: rgba(255,255,255,0.07);
+  --accent: #00c8ff;
+  --accent2: #7c5cfc;
+  --orange: #ff6b35;
+  --gold: #ffd700;
+  --green: #00e5a0;
+  --text: #e2e8f0;
+  --muted: #7a8899;
+  --border: rgba(255,255,255,0.08);
+  --border-accent: rgba(0,200,255,0.3);
+  --glow: rgba(0,200,255,0.15);
+  --ff-display: 'Playfair Display', Georgia, serif;
+  --ff-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --ff-mono: 'IBM Plex Mono', monospace;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--ff-body);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── GRID BACKGROUND ── */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0,200,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,200,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.bg-grid::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(124,92,252,0.08) 0%, transparent 70%);
+}
+
+/* ── HEADER ── */
+.site-header {
+  position: relative; z-index: 10;
+  padding: 48px 40px 0;
+  background: linear-gradient(180deg, rgba(10,18,32,0.95) 0%, transparent 100%);
+}
+.header-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.badge {
+  font-family: var(--ff-mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 4px 12px; border: 1px solid var(--border-accent);
+  color: var(--accent); border-radius: 2px;
+  background: rgba(0,200,255,0.06);
+}
+.badge.violet { border-color: rgba(124,92,252,0.4); color: #a585ff; background: rgba(124,92,252,0.06); }
+.hero-title {
+  font-family: var(--ff-display); font-size: clamp(2rem, 5vw, 3.8rem);
+  font-weight: 900; line-height: 1.1; margin-bottom: 14px;
+  background: linear-gradient(135deg, #fff 0%, #a8d8f0 50%, var(--accent) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-sub {
+  font-size: 1.1rem; color: var(--muted); font-weight: 300; margin-bottom: 32px;
+  font-style: italic; font-family: var(--ff-display);
+}
+
+/* ── TAB NAV ── */
+.tab-nav {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; gap: 0; padding: 0 40px;
+  background: rgba(5,10,20,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+}
+.tab-btn {
+  flex-shrink: 0;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  color: var(--muted); cursor: pointer; padding: 14px 22px;
+  font-family: var(--ff-body); font-size: 0.85rem; font-weight: 500;
+  letter-spacing: 0.04em; transition: all 0.25s;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active {
+  color: var(--accent); border-bottom-color: var(--accent);
+  text-shadow: 0 0 20px var(--accent);
+}
+
+/* ── TAB PANELS ── */
+.tab-container { position: relative; z-index: 5; }
+.tab-panel { display: none; padding: 48px 40px 80px; max-width: 1200px; margin: 0 auto; }
+.tab-panel.active { display: block; }
+
+/* ── SECTION ELEMENTS ── */
+.section-label {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--ff-display); font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 700; margin-bottom: 16px; line-height: 1.2;
+}
+.section-lead {
+  font-size: 1.05rem; color: var(--muted); max-width: 780px;
+  margin-bottom: 40px; font-style: italic; font-family: var(--ff-display);
+}
+.section-divider {
+  border: none; border-top: 1px solid var(--border);
+  margin: 48px 0;
+}
+
+/* ── CARDS GRID ── */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 48px; }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 28px;
+  transition: all 0.3s;
+  position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: var(--accent); opacity: 0; transition: opacity 0.3s;
+}
+.card:hover { background: var(--card-hover); transform: translateY(-2px); }
+.card:hover::before { opacity: 1; }
+.card.violet-accent::before { background: var(--accent2); }
+.card.orange-accent::before { background: var(--orange); }
+.card-icon { font-size: 1.6rem; margin-bottom: 12px; }
+.card-label {
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+}
+.card-title { font-weight: 600; font-size: 1rem; margin-bottom: 8px; color: var(--text); }
+.card-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+
+/* ── RULES SECTION ── */
+.rules-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px;
+}
+@media(max-width:700px){ .rules-grid { grid-template-columns: 1fr; } }
+.rule-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 28px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.rule-card.r1 { border-top: 2px solid var(--accent); }
+.rule-card.r2 { border-top: 2px solid var(--accent2); }
+.rule-card.r3 { border-top: 2px solid var(--orange); }
+.rule-number {
+  font-family: var(--ff-display); font-size: 3rem; font-weight: 900;
+  opacity: 0.08; position: absolute; top: 10px; right: 16px;
+  line-height: 1;
+}
+.rule-icon {
+  width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+}
+.r1 .rule-icon { background: rgba(0,200,255,0.1); border: 1px solid rgba(0,200,255,0.3); }
+.r2 .rule-icon { background: rgba(124,92,252,0.1); border: 1px solid rgba(124,92,252,0.3); }
+.r3 .rule-icon { background: rgba(255,107,53,0.1); border: 1px solid rgba(255,107,53,0.3); }
+.rule-title { font-weight: 600; margin-bottom: 8px; }
+.rule-desc { font-size: 0.85rem; color: var(--muted); }
+
+/* ── EQUATIONS ── */
+.eq-section { margin-bottom: 48px; }
+.eq-block {
+  background: var(--card); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: 4px;
+  padding: 28px; margin-bottom: 20px;
+}
+.eq-block.violet { border-left-color: var(--accent2); }
+.eq-label {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+}
+.eq-block.violet .eq-label { color: var(--accent2); }
+.eq-main { font-size: 1.1rem; margin: 16px 0; overflow-x: auto; }
+.eq-terms {
+  display: flex; flex-wrap: wrap; gap: 20px; margin-top: 14px;
+  padding-top: 14px; border-top: 1px solid var(--border);
+}
+.eq-term {
+  background: rgba(0,200,255,0.06); border: 1px solid rgba(0,200,255,0.15);
+  border-radius: 4px; padding: 6px 12px; font-size: 0.82rem;
+  font-family: var(--ff-mono);
+}
+
+/* ── FACTOR CARDS ── */
+.factors-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 48px; flex-wrap: wrap;
+}
+.factor-card {
+  flex: 1; min-width: 160px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 20px; text-align: center;
+}
+.factor-label {
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+}
+.factor-label.vio { color: var(--accent2); }
+.factor-label.ora { color: var(--orange); }
+.factor-title { font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
+.factor-eq { font-family: var(--ff-mono); font-size: 0.8rem; color: var(--muted); margin-top: 8px; }
+.factor-plus {
+  font-size: 1.8rem; color: var(--muted); font-weight: 300; padding: 0 4px;
+}
+
+/* ── SIMULATION ── */
+.sim-section { margin-bottom: 48px; }
+.sim-header { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.live-dot {
+  width: 10px; height: 10px; background: #ff4444; border-radius: 50%;
+  animation: pulse-red 1.5s infinite;
+}
+@keyframes pulse-red {
+  0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,0.6);}
+  50%{box-shadow:0 0 0 6px rgba(255,68,68,0);}
+}
+.sim-layout {
+  display: grid; grid-template-columns: 1fr 300px; gap: 24px;
+}
+@media(max-width:900px){ .sim-layout { grid-template-columns: 1fr; } }
+.canvas-wrap {
+  position: relative; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--border); background: #050913;
+}
+.canvas-wrap canvas { display: block; width: 100%; height: auto; }
+.canvas-overlay {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(5,10,20,0.85); border: 1px solid var(--border);
+  border-radius: 4px; padding: 8px 12px;
+  font-family: var(--ff-mono); font-size: 11px; color: var(--accent);
+}
+.canvas-overlay span { color: var(--muted); }
+.sim-controls {
+  display: flex; flex-direction: column; gap: 16px;
+}
+.ctrl-group label {
+  display: flex; justify-content: space-between;
+  font-size: 0.8rem; color: var(--muted); margin-bottom: 6px;
+  font-family: var(--ff-mono);
+}
+.ctrl-group label span { color: var(--accent); }
+.ctrl-group input[type=range] {
+  width: 100%; accent-color: var(--accent);
+  cursor: pointer; height: 4px;
+}
+.sim-stats {
+  background: rgba(0,200,255,0.04); border: 1px solid var(--border-accent);
+  border-radius: 6px; padding: 12px;
+  font-family: var(--ff-mono); font-size: 11px;
+}
+.stat-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+.stat-row:last-child { margin-bottom: 0; }
+.stat-key { color: var(--muted); }
+.stat-val { color: var(--accent); }
+.btn-row { display: flex; gap: 8px; }
+.btn {
+  flex: 1; padding: 8px 12px; border-radius: 4px; border: none;
+  cursor: pointer; font-family: var(--ff-mono); font-size: 11px;
+  font-weight: 500; letter-spacing: 0.08em; transition: all 0.2s;
+}
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary { background: var(--accent); color: #050a14; }
+.btn-primary:hover:not(:disabled) { background: #33d6ff; box-shadow: 0 0 12px var(--glow); }
+.btn-secondary { background: rgba(124,92,252,0.2); color: #a585ff; border: 1px solid rgba(124,92,252,0.3); }
+.btn-danger { background: rgba(255,107,53,0.15); color: var(--orange); border: 1px solid rgba(255,107,53,0.3); }
+.mini-chart-wrap {
+  border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+  background: rgba(0,0,0,0.3); padding: 8px;
+}
+.mini-chart-label {
+  font-family: var(--ff-mono); font-size: 9px; color: var(--muted);
+  letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px;
+}
+
+/* ── DE STEP VISUALIZER ── */
+.de-stepper {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden; margin-bottom: 48px;
+}
+.stepper-header {
+  display: flex; background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid var(--border);
+}
+.step-tab {
+  flex: 1; padding: 12px 8px; text-align: center;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.1em;
+  color: var(--muted); cursor: pointer; transition: all 0.2s;
+  text-transform: uppercase; border-bottom: 2px solid transparent;
+}
+.step-tab.active { color: var(--accent2); border-bottom-color: var(--accent2); }
+.stepper-body { padding: 28px; }
+.step-content { display: none; }
+.step-content.active { display: block; }
+.step-canvas-wrap { border-radius: 6px; overflow: hidden; border: 1px solid var(--border); margin: 16px 0; }
+.step-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 12px; }
+.step-eq { background: rgba(124,92,252,0.05); border: 1px solid rgba(124,92,252,0.2); border-radius: 4px; padding: 12px 16px; font-size: 1rem; }
+.step-nav { display: flex; gap: 10px; margin-top: 16px; align-items: center; }
+.step-indicator {
+  flex: 1; text-align: center;
+  font-family: var(--ff-mono); font-size: 11px; color: var(--muted);
+}
+.step-dots { display: flex; gap: 6px; justify-content: center; margin-top: 4px; }
+.step-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--border); transition: background 0.3s;
+}
+.step-dot.active { background: var(--accent2); }
+
+/* ── COMPARISON TABLE ── */
+.comp-table {
+  width: 100%; border-collapse: collapse; margin-bottom: 32px;
+  font-size: 0.88rem;
+}
+.comp-table th {
+  background: rgba(0,0,0,0.3); padding: 12px 16px;
+  text-align: left; font-family: var(--ff-mono);
+  font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 1px solid var(--border);
+}
+.comp-table th:nth-child(2) { color: var(--accent); }
+.comp-table th:nth-child(3) { color: var(--accent2); }
+.comp-table td {
+  padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: top;
+}
+.comp-table tr:hover td { background: rgba(255,255,255,0.02); }
+.comp-table td:first-child { color: var(--muted); font-family: var(--ff-mono); font-size: 11px; }
+.comp-table td:nth-child(2) { color: var(--text); }
+.comp-table td:nth-child(3) { color: var(--text); }
+.tag {
+  display: inline-block; font-family: var(--ff-mono); font-size: 9px;
+  letter-spacing: 0.1em; text-transform: uppercase; padding: 2px 8px;
+  border-radius: 2px;
+}
+.tag-yes { background: rgba(0,229,160,0.1); color: var(--green); border: 1px solid rgba(0,229,160,0.2); }
+.tag-no { background: rgba(255,107,53,0.1); color: var(--orange); border: 1px solid rgba(255,107,53,0.2); }
+.tag-med { background: rgba(255,215,0,0.1); color: var(--gold); border: 1px solid rgba(255,215,0,0.2); }
+
+/* ── CODE BLOCK ── */
+.code-block {
+  background: #080d18; border: 1px solid var(--border);
+  border-radius: 8px; padding: 24px; overflow-x: auto;
+  font-family: var(--ff-mono); font-size: 0.8rem;
+  line-height: 1.7; color: #a8b8d0; margin-bottom: 32px;
+}
+.code-block .kw { color: var(--accent2); }
+.code-block .fn { color: var(--accent); }
+.code-block .cm { color: #506070; font-style: italic; }
+.code-block .st { color: var(--green); }
+.code-block .nu { color: var(--orange); }
+.code-block .de { color: var(--gold); }
+.code-header {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+}
+.code-dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+
+/* ── EDITORIAL ── */
+.editorial-wrap { max-width: 780px; }
+.editorial-byline {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+}
+.editorial-date { color: var(--accent); }
+.editorial-title {
+  font-family: var(--ff-display); font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700; line-height: 1.15; margin-bottom: 20px;
+}
+.editorial-deck {
+  font-family: var(--ff-display); font-size: 1.15rem; font-style: italic;
+  color: var(--muted); margin-bottom: 32px; padding-left: 20px;
+  border-left: 3px solid var(--accent);
+}
+.editorial-body { font-size: 0.95rem; line-height: 1.85; color: #c5cdd6; }
+.editorial-body p { margin-bottom: 20px; }
+.editorial-body h3 {
+  font-family: var(--ff-display); font-weight: 700;
+  font-size: 1.3rem; margin: 32px 0 12px; color: var(--text);
+}
+.editorial-body .pullquote {
+  font-family: var(--ff-display); font-style: italic;
+  font-size: 1.35rem; color: var(--accent); padding: 20px 32px;
+  border-left: 3px solid var(--accent); margin: 28px 0;
+  background: rgba(0,200,255,0.04); border-radius: 0 4px 4px 0;
+}
+.eco-table { width: 100%; border-collapse: collapse; margin: 20px 0 28px; }
+.eco-table th { background: rgba(0,0,0,0.4); padding: 10px 14px; text-align: left;
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.15em;
+  text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--border); }
+.eco-table td { padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.04);
+  font-size: 0.85rem; color: var(--muted); }
+.eco-table td:first-child { color: var(--text); font-weight: 500; }
+
+/* ── RESOURCES ── */
+.resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
+.resource-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 22px;
+}
+.resource-card-label {
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent2); margin-bottom: 12px;
+}
+.bib-entry { margin-bottom: 14px; font-size: 0.85rem; line-height: 1.5; color: var(--muted); }
+.bib-entry strong { color: var(--text); }
+.api-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(0,200,255,0.06); border: 1px solid var(--border-accent);
+  border-radius: 4px; padding: 6px 12px; margin: 4px;
+  font-family: var(--ff-mono); font-size: 11px; color: var(--accent);
+}
+.api-pill .pip-icon { font-size: 14px; }
+.exercise-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 24px; margin-bottom: 16px;
+  border-left: 3px solid var(--accent2);
+}
+.exercise-num {
+  font-family: var(--ff-mono); font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent2); margin-bottom: 8px;
+}
+.exercise-title { font-weight: 600; margin-bottom: 8px; }
+.exercise-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+.exercise-hint {
+  margin-top: 10px; font-family: var(--ff-mono); font-size: 11px;
+  color: var(--muted); background: rgba(0,0,0,0.3);
+  border-radius: 4px; padding: 8px 12px;
+}
+
+/* ── APP SECTION ── */
+.app-section {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 28px; margin-bottom: 32px;
+}
+.app-title {
+  font-family: var(--ff-display); font-weight: 700; font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+.app-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.chip {
+  background: rgba(0,200,255,0.07); border: 1px solid rgba(0,200,255,0.2);
+  border-radius: 20px; padding: 4px 14px;
+  font-size: 0.78rem; color: var(--accent); font-family: var(--ff-mono);
+}
+.chip.v { background: rgba(124,92,252,0.07); border-color: rgba(124,92,252,0.2); color: #a585ff; }
+
+/* ── PARAM EXPLORER ── */
+.param-explorer {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 28px; margin-bottom: 32px;
+}
+.param-title {
+  font-weight: 600; margin-bottom: 20px;
+}
+.param-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media(max-width:600px){ .param-grid { grid-template-columns: 1fr; } }
+.param-group { }
+.param-label {
+  font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.1em;
+  color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between;
+}
+.param-label span { color: var(--accent2); font-weight: 600; }
+.param-bar { height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 4px 0 6px; position: relative; }
+.param-fill { height: 100%; border-radius: 3px; background: var(--accent2); transition: width 0.3s; }
+.param-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+
+/* ── CANVAS LEGEND ── */
+.legend {
+  display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px;
+  font-family: var(--ff-mono); font-size: 10px; color: var(--muted);
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,200,255,0.3); }
+
+/* ── ANNOT BOX ── */
+.annot-box {
+  background: rgba(255,215,0,0.05); border: 1px solid rgba(255,215,0,0.2);
+  border-radius: 6px; padding: 14px 18px; margin: 16px 0;
+  font-size: 0.85rem; color: #d4b800; display: flex; gap: 10px;
+}
+.annot-icon { flex-shrink: 0; font-size: 1rem; }
+
+/* ── CONVERGENCE SECTION ── */
+.conv-chart-wrap {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 24px; margin-bottom: 32px;
+}
+
+/* ── ALGO LANDSCAPE ── */
+.landscape-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 24px 0; }
+.landscape-node {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 6px; padding: 16px; text-align: center;
+  font-size: 0.82rem;
+}
+.landscape-node.highlight-pso { border-color: rgba(0,200,255,0.4); background: rgba(0,200,255,0.06); }
+.landscape-node.highlight-de { border-color: rgba(124,92,252,0.4); background: rgba(124,92,252,0.06); }
+.landscape-node-name { font-weight: 600; margin-bottom: 4px; }
+.landscape-node-type { font-family: var(--ff-mono); font-size: 9px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media(max-width:700px){ .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<!-- ══════════════════ HEADER ══════════════════ -->
+<header class="site-header">
+  <div class="header-badges">
+    <span class="badge">MÓDULO 4</span>
+    <span class="badge">ITESM-SF · 2026</span>
+    <span class="badge violet">Economía Aplicada & Ciencia de Datos</span>
+  </div>
+  <h1 class="hero-title">Metaheurísticas<br>Bio-inspiradas</h1>
+  <p class="hero-sub">Particle Swarm Optimization &amp; Evolución Diferencial — Fundamentos, Algoritmos y Aplicaciones</p>
+</header>
+
+<!-- ══════════════════ TAB NAV ══════════════════ -->
+<nav class="tab-nav">
+  <button class="tab-btn active" data-tab="pso">🐝 PSO</button>
+  <button class="tab-btn" data-tab="de">🧬 Evolución Diferencial</button>
+  <button class="tab-btn" data-tab="comparativa">⚖️ Comparativa</button>
+  <button class="tab-btn" data-tab="editorial">📐 Ecosistema Algorítmico</button>
+  <button class="tab-btn" data-tab="recursos">📚 Recursos & Bibliografía</button>
+</nav>
+
+<main class="tab-container">
+
+<!-- ══════════════════════════════════════════════
+     TAB 1 · PSO
+══════════════════════════════════════════════ -->
+<section id="tab-pso" class="tab-panel active">
+
+  <div class="section-label">PARTICLE SWARM OPTIMIZATION · KENNEDY & EBERHART, 1995</div>
+  <h2 class="section-title">Inteligencia Colectiva y Búsqueda Global</h2>
+  <p class="section-lead">Un algoritmo inspirado en el comportamiento emergente de bandadas y cardúmenes: sin coordinación central, individuos simples producen optimización sofisticada.</p>
+
+  <!-- Intro cards -->
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">📡</div>
+      <div class="card-label">Origen</div>
+      <div class="card-title">Kennedy & Eberhart (1995)</div>
+      <div class="card-desc">Publicado en <em>ICNN'95</em>. Basado en simulaciones de bandadas de aves (<em>boids</em>) de Craig Reynolds (1987). Hoy es uno de los algoritmos metaheurísticos más citados.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚫</div>
+      <div class="card-label">Sin Operadores Genéticos</div>
+      <div class="card-title">No usa cruza ni mutación</div>
+      <div class="card-desc">A diferencia de los algoritmos genéticos, PSO no requiere codificación/decodificación de variables ni operadores evolutivos. Trabaja directamente en espacio continuo.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚙️</div>
+      <div class="card-label">Simplicidad</div>
+      <div class="card-title">Pocos hiperparámetros</div>
+      <div class="card-desc">Solo tres parámetros esenciales: inercia ω, factor cognitivo α y factor social β. Implementación directa en cualquier lenguaje con pocas líneas de código.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌐</div>
+      <div class="card-label">Dominio</div>
+      <div class="card-title">Optimización global continua</div>
+      <div class="card-desc">Ideal para funciones no diferenciables, multimodales, con ruido o con múltiples óptimos locales donde métodos de gradiente fallan.</div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- 3 Rules -->
+  <div class="section-label">FUNDAMENTOS · CRAIG REYNOLDS, 1987</div>
+  <h3 class="section-title" style="font-size:1.5rem">Tres Reglas Fundamentales del Enjambre</h3>
+  <p style="color:var(--muted);font-style:italic;font-family:var(--ff-display);margin-bottom:28px">Reynolds identificó en 1987 que el comportamiento emergente de las bandadas surge de tres reglas locales simples.</p>
+
+  <div class="rules-grid">
+    <div class="rule-card r1">
+      <div class="rule-number">1</div>
+      <div class="rule-icon">→</div>
+      <div class="rule-title">Alineación</div>
+      <div class="rule-desc">Los individuos siguen el <strong>rumbo promedio</strong> de sus vecinos para mantener una dirección similar a la del grupo. Produce movimiento coherente.</div>
+    </div>
+    <div class="rule-card r2">
+      <div class="rule-number">2</div>
+      <div class="rule-icon">◎</div>
+      <div class="rule-title">Cohesión</div>
+      <div class="rule-desc">Un individuo se mueve hacia la <strong>posición promedio</strong> de sus vecinos para mantener la formación del grupo. Evita la dispersión.</div>
+    </div>
+    <div class="rule-card r3">
+      <div class="rule-number">3</div>
+      <div class="rule-icon">↔</div>
+      <div class="rule-title">Separación</div>
+      <div class="rule-desc">Un individuo <strong>evita colisionar</strong> con sus vecinos, asegurando que los individuos no se aglomeren y el grupo conserve cohesión estructural.</div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Factors -->
+  <div class="section-label">DINÁMICA · ACTUALIZACIÓN DE VELOCIDAD</div>
+  <h3 class="section-title" style="font-size:1.5rem">Tres Componentes de la Velocidad</h3>
+  <div class="factors-row">
+    <div class="factor-card">
+      <div class="factor-label">① Inercia ω</div>
+      <div class="factor-title">Momentum</div>
+      <div class="card-desc" style="font-size:0.82rem">Mantiene la dirección de movimiento actual. ω alto → exploración; ω bajo → explotación.</div>
+      <div class="factor-eq">$\omega\, v_i^t$</div>
+    </div>
+    <div class="factor-plus">+</div>
+    <div class="factor-card">
+      <div class="factor-label vio">② Cognitiva α</div>
+      <div class="factor-title">Memoria Individual</div>
+      <div class="card-desc" style="font-size:0.82rem">Atrae la partícula hacia la mejor posición que ella misma encontró (<em>nostalgia</em>).</div>
+      <div class="factor-eq">$\alpha\epsilon_1[x_i^* - x_i^t]$</div>
+    </div>
+    <div class="factor-plus">+</div>
+    <div class="factor-card">
+      <div class="factor-label ora">③ Social β</div>
+      <div class="factor-title">Conocimiento Colectivo</div>
+      <div class="card-desc" style="font-size:0.82rem">Atrae la partícula hacia la mejor posición encontrada por el enjambre completo.</div>
+      <div class="factor-eq">$\beta\epsilon_2[g^* - x_i^t]$</div>
+    </div>
+  </div>
+
+  <!-- Equations -->
+  <div class="eq-section">
+    <div class="section-label">BASE MATEMÁTICA · ECUACIONES FUNDAMENTALES</div>
+    <h3 class="section-title" style="font-size:1.5rem">Formulación Formal de PSO</h3>
+
+    <div class="eq-block">
+      <div class="eq-label">① Actualización de Velocidad</div>
+      <div class="eq-main">
+        $$v_i^{t+1} = \underbrace{\omega\, v_i^t}_{\text{inercia}} + \underbrace{\alpha\,\epsilon_1\bigl[g^* - x_i^t\bigr]}_{\text{componente social}} + \underbrace{\beta\,\epsilon_2\bigl[x_i^*(t) - x_i^t\bigr]}_{\text{componente cognitiva}}$$
+      </div>
+      <div class="eq-terms">
+        <span class="eq-term">$\epsilon_1, \epsilon_2 \sim U[0,1]$: vectores aleatorios</span>
+        <span class="eq-term">$\alpha, \beta$: constantes de aceleración</span>
+        <span class="eq-term">$\omega$: peso de inercia</span>
+        <span class="eq-term">$v_i^t \in [-v_{max},\, v_{max}]$</span>
+        <span class="eq-term">$g^*$: mejor global del enjambre</span>
+        <span class="eq-term">$x_i^*$: mejor personal de partícula $i$</span>
+      </div>
+    </div>
+
+    <div class="eq-block violet">
+      <div class="eq-label">② Actualización de Posición</div>
+      <div class="eq-main">
+        $$x_i^{t+1} = x_i^t + v_i^{t+1}\,\Delta t$$
+      </div>
+      <div class="eq-terms">
+        <span class="eq-term">$\Delta t$: incremento de tiempo (usualmente 1)</span>
+        <span class="eq-term">$x_i^{t=0}$: posición inicial aleatoria en $\Omega$</span>
+        <span class="eq-term">$v_i^{t=0} = \mathbf{0}$: velocidad inicial</span>
+      </div>
+    </div>
+
+    <div class="eq-block" style="border-left-color:var(--orange)">
+      <div class="eq-label" style="color:var(--orange)">③ Actualización de la Mejor Posición</div>
+      <div class="eq-main">
+        $$x_i^{*}(t+1) = \begin{cases} x_i^{t+1} & \text{si } f(x_i^{t+1}) < f(x_i^*(t)) \\ x_i^{*}(t) & \text{en caso contrario} \end{cases}$$
+      </div>
+      <div class="eq-terms">
+        <span class="eq-term">Criterio de paro: iteraciones máximas ó $f(g^*) < \varepsilon$</span>
+      </div>
+    </div>
+
+    <div class="annot-box">
+      <span class="annot-icon">💡</span>
+      <span><strong>Parámetros canónicos (Clerc & Kennedy, 2002):</strong> ω = 0.7298, α = β = 1.49618. Derivados del análisis de convergencia del factor de constricción χ que garantiza estabilidad del enjambre.</span>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- PSO SIMULATION -->
+  <div class="sim-section">
+    <div class="sim-header">
+      <div class="live-dot"></div>
+      <h3 class="section-title" style="font-size:1.4rem;margin:0">Simulación en Vivo · Función Rastrigin 2D</h3>
+    </div>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:20px">
+      $f(\mathbf{x}) = 20 + \sum_{d=1}^{2}\left[x_d^2 - 10\cos(2\pi x_d)\right]$  — función multimodal con óptimo global en $\mathbf{x}^* = \mathbf{0}$, $f(\mathbf{x}^*) = 0$
+    </p>
+    <div class="sim-layout">
+      <div>
+        <div class="canvas-wrap">
+          <canvas id="pso-canvas" width="560" height="420"></canvas>
+          <div class="canvas-overlay">
+            Iter: <span id="pso-iter">0</span> &nbsp;|&nbsp; f(g*) = <span id="pso-best">—</span>
+          </div>
+        </div>
+        <div class="legend">
+          <span class="legend-item"><span class="legend-dot" style="background:#00c8ff"></span> Partículas</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#ffd700"></span> Óptimo global g*</span>
+          <span class="legend-item"><span class="legend-dot" style="background:rgba(0,200,255,0.3)"></span> Mejor individual x*</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#ff4444"></span> Mínimo real (0,0)</span>
+        </div>
+      </div>
+      <div class="sim-controls">
+        <div class="ctrl-group">
+          <label>Inercia ω: <span id="omega-val">0.73</span></label>
+          <input type="range" id="omega-sl" min="0.30" max="0.99" step="0.01" value="0.73">
+        </div>
+        <div class="ctrl-group">
+          <label>Cognitiva c₁: <span id="c1-val">1.50</span></label>
+          <input type="range" id="c1-sl" min="0.10" max="3.00" step="0.01" value="1.50">
+        </div>
+        <div class="ctrl-group">
+          <label>Social c₂: <span id="c2-val">1.50</span></label>
+          <input type="range" id="c2-sl" min="0.10" max="3.00" step="0.01" value="1.50">
+        </div>
+        <div class="ctrl-group">
+          <label>Partículas N: <span id="n-val">25</span></label>
+          <input type="range" id="n-sl" min="5" max="60" step="5" value="25">
+        </div>
+        <div class="sim-stats">
+          <div class="stat-row"><span class="stat-key">Iteración:</span><span class="stat-val" id="pso-iter2">0</span></div>
+          <div class="stat-row"><span class="stat-key">f(g*):</span><span class="stat-val" id="pso-bestval">—</span></div>
+          <div class="stat-row"><span class="stat-key">g*:</span><span class="stat-val" id="pso-gpos">—</span></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="pso-start">▶ Iniciar</button>
+          <button class="btn btn-secondary" id="pso-pause" disabled>⏸</button>
+          <button class="btn btn-danger" id="pso-reset">↺</button>
+        </div>
+        <div class="mini-chart-wrap">
+          <div class="mini-chart-label">Convergencia — f(g*) vs iteración</div>
+          <div style="position:relative;height:120px;width:100%">
+            <canvas id="pso-mini-chart"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Economic Application -->
+  <div class="section-label">APLICACIONES · ECONOMÍA Y PROPTECH</div>
+  <h3 class="section-title" style="font-size:1.5rem">PSO en Modelación Económica</h3>
+
+  <div class="two-col">
+    <div class="app-section">
+      <div class="app-title">🏘️ Calibración de Modelo Hedónico</div>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.5;margin-bottom:12px">
+        PSO optimiza los pesos de atributos en un modelo de precio hedónico para valuación inmobiliaria, minimizando el error cuadrático medio de predicción sobre 2.3M avalúos.
+      </p>
+      <div class="factor-eq" style="font-size:0.85rem;margin:8px 0">$\hat{P}_i = \alpha_0 + \sum_k \beta_k^* x_{ik} + \varepsilon_i$, minimizando $\text{RMSE}(\boldsymbol{\beta})$</div>
+      <div class="app-chips">
+        <span class="chip">Valuación Masiva</span>
+        <span class="chip">SHF / INFONAVIT</span>
+        <span class="chip v">Homepty Hypergraph</span>
+      </div>
+    </div>
+    <div class="app-section">
+      <div class="app-title">📊 Optimización de Portafolio Inmobiliario</div>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.5;margin-bottom:12px">
+        PSO halla la frontera eficiente en espacio de alta dimensión (activos FIBRAs + AFORES) sin diferenciabilidad de la función de rendimiento ajustado por riesgo.
+      </p>
+      <div class="factor-eq" style="font-size:0.85rem;margin:8px 0">$\max_{\mathbf{w}}\; \text{Sharpe}(\mathbf{w}) = \frac{\mathbf{w}^\top\boldsymbol{\mu} - r_f}{\sqrt{\mathbf{w}^\top\Sigma\mathbf{w}}}$</div>
+      <div class="app-chips">
+        <span class="chip">FIBRAs</span>
+        <span class="chip">AFORES</span>
+        <span class="chip v">Multi-objetivo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Python Code -->
+  <div class="section-label">IMPLEMENTACIÓN · PYTHON</div>
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot dot-red"></span>
+      <span class="code-dot dot-yellow"></span>
+      <span class="code-dot dot-green"></span>
+      <span style="margin-left:8px">pso_implementation.py</span>
+    </div>
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="fn">pso</span>(func, bounds, n_particles=<span class="nu">30</span>, max_iter=<span class="nu">200</span>,
+        omega=<span class="nu">0.7298</span>, c1=<span class="nu">1.4962</span>, c2=<span class="nu">1.4962</span>, seed=<span class="nu">42</span>):
+    <span class="st">'''
+    Particle Swarm Optimization — implementación estándar.
+    Parámetros canónicos de Clerc & Kennedy (2002).
+    '''</span>
+    rng = np.random.default_rng(seed)
+    d   = <span class="fn">len</span>(bounds)
+    lb  = np.array([b[<span class="nu">0</span>] <span class="kw">for</span> b <span class="kw">in</span> bounds])
+    ub  = np.array([b[<span class="nu">1</span>] <span class="kw">for</span> b <span class="kw">in</span> bounds])
+    vmax = (ub - lb) * <span class="nu">0.2</span>               <span class="cm"># velocidad máxima ≈ 20% del rango</span>
+
+    <span class="cm"># ① Inicialización</span>
+    X = rng.uniform(lb, ub, (n_particles, d))  <span class="cm"># posiciones</span>
+    V = rng.uniform(-vmax, vmax, (n_particles, d))  <span class="cm"># velocidades</span>
+    pbest = X.copy()                            <span class="cm"># mejores personales</span>
+    pbest_f = np.array([func(x) <span class="kw">for</span> x <span class="kw">in</span> X])
+    gbest = pbest[pbest_f.argmin()].copy()      <span class="cm"># mejor global</span>
+    gbest_f = pbest_f.min()
+    history = []
+
+    <span class="kw">for</span> t <span class="kw">in</span> <span class="fn">range</span>(max_iter):
+        eps1 = rng.uniform(<span class="nu">0</span>, <span class="nu">1</span>, (n_particles, d))
+        eps2 = rng.uniform(<span class="nu">0</span>, <span class="nu">1</span>, (n_particles, d))
+
+        <span class="cm"># ② Actualización de velocidad (ecuación central)</span>
+        V = (omega * V
+             + c1 * eps1 * (pbest - X)    <span class="cm"># componente cognitiva</span>
+             + c2 * eps2 * (gbest - X))   <span class="cm"># componente social</span>
+        V = np.clip(V, -vmax, vmax)
+
+        <span class="cm"># ③ Actualización de posición</span>
+        X = np.clip(X + V, lb, ub)
+
+        <span class="cm"># ④ Actualización de mejores posiciones</span>
+        f_vals = np.array([func(x) <span class="kw">for</span> x <span class="kw">in</span> X])
+        improve = f_vals < pbest_f
+        pbest[improve] = X[improve]
+        pbest_f[improve] = f_vals[improve]
+        <span class="kw">if</span> pbest_f.min() < gbest_f:
+            gbest   = pbest[pbest_f.argmin()].copy()
+            gbest_f = pbest_f.min()
+
+        history.append(gbest_f)
+
+    <span class="kw">return</span> {<span class="st">'x'</span>: gbest, <span class="st">'fun'</span>: gbest_f, <span class="st">'history'</span>: history}
+
+<span class="cm"># ── Ejemplo: Función Rastrigin ──</span>
+<span class="de">rastrigin</span> = <span class="kw">lambda</span> x: <span class="nu">10</span>*<span class="fn">len</span>(x) + np.sum(x**<span class="nu">2</span> - <span class="nu">10</span>*np.cos(<span class="nu">2</span>*np.pi*x))
+bounds = [(-<span class="nu">5.12</span>, <span class="nu">5.12</span>)] * <span class="nu">10</span>  <span class="cm"># 10 dimensiones</span>
+result = <span class="fn">pso</span>(rastrigin, bounds, n_particles=<span class="nu">50</span>, max_iter=<span class="nu">500</span>)
+<span class="fn">print</span>(<span class="st">f"Óptimo: {result['fun']:.6f} en x = {result['x'].round(4)}"</span>)
+  </div>
+
+  <!-- Exercises -->
+  <div class="section-label">EJERCICIOS · MÓDULO 4</div>
+  <h3 class="section-title" style="font-size:1.5rem">Problemas Propuestos</h3>
+  <div class="exercise-card">
+    <div class="exercise-num">Ejercicio 1 · Básico</div>
+    <div class="exercise-title">Calibración de la Función de Producción Cobb-Douglas</div>
+    <div class="exercise-desc">Dado un panel de datos de industrias manufactureras en México (ENEC-INEGI), calibra los parámetros $A$, $\alpha$, $\beta$ de $Y = A\,K^\alpha L^\beta$ usando PSO para minimizar el error cuadrático entre producción observada y estimada. Compara con estimación por OLS.</div>
+    <div class="exercise-hint">💻 Hint: bounds = [(0.1, 10), (0, 1), (0, 1)] | Restricción: α + β ≈ 1 para rendimientos constantes a escala</div>
+  </div>
+  <div class="exercise-card">
+    <div class="exercise-num">Ejercicio 2 · Intermedio</div>
+    <div class="exercise-title">Optimización de Portafolio con Restricciones</div>
+    <div class="exercise-desc">Usando datos históricos de 8 FIBRAs mexicanas (FUNO, DANHOS, PINFRA, etc.), aplica PSO para encontrar los pesos $\mathbf{w}$ que maximizan el Sharpe Ratio sujeto a: $\sum_i w_i = 1$, $w_i \geq 0$, máximo 30% por activo. Grafica la frontera eficiente.</div>
+    <div class="exercise-hint">💻 Hint: Penaliza la función objetivo por violaciones de restricciones. Usa pyswarms.single.GlobalBestPSO para implementación rápida.</div>
+  </div>
+  <div class="exercise-card">
+    <div class="exercise-num">Ejercicio 3 · Avanzado</div>
+    <div class="exercise-title">Sensibilidad a Hiperparámetros y Topología de Enjambre</div>
+    <div class="exercise-desc">Implementa PSO con topología <em>ring</em> (lbest) y compara con topología <em>star</em> (gbest) sobre la función de Ackley en 20 dimensiones. Analiza cómo el peso de inercia afecta la exploración vs. explotación. Grafica: boxplots de fitness final para ω ∈ {0.3, 0.5, 0.7, 0.9}, 30 corridas independientes.</div>
+    <div class="exercise-hint">💻 Hint: La función de Ackley tiene un único mínimo global rodeado de muchos óptimos locales. Reporta media, mediana y desviación estándar del fitness final.</div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════
+     TAB 2 · DIFFERENTIAL EVOLUTION
+══════════════════════════════════════════════ -->
+<section id="tab-de" class="tab-panel">
+
+  <div class="section-label">DIFFERENTIAL EVOLUTION · PRICE, 1996</div>
+  <h2 class="section-title">Evolución Diferencial</h2>
+  <p class="section-lead">Algoritmo evolutivo basado en vectores reales: usa diferencias entre soluciones para generar mutaciones, combinando la robustez evolutiva con la precisión de aritmética de punto flotante.</p>
+
+  <!-- Intro cards -->
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">📐</div>
+      <div class="card-label">Origen</div>
+      <div class="card-title">Price (1996) & Price et al. (2006)</div>
+      <div class="card-desc">Presentado en NAFIPS'96. Puede verse como algoritmos genéticos con ecuaciones de actualización explícitas y representación en números reales directos.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔢</div>
+      <div class="card-label">Representación Directa</div>
+      <div class="card-title">Sin codificación binaria</div>
+      <div class="card-desc">Las soluciones son vectores de números reales $\mathbf{x} \in \mathbb{R}^d$. No hay necesidad de codificar/decodificar como en GA tradicionales. Opera nativamente en espacio continuo.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <div class="card-label">Ventaja Clave</div>
+      <div class="card-title">Eficiente para alta dimensión</div>
+      <div class="card-desc">Especialmente efectivo en problemas de alta dimensión ($d > 20$) y cuando las variables son fuertemente correlacionadas. Usado extensamente en calibración de modelos.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <div class="card-label">Garantías</div>
+      <div class="card-title">Selección elitista</div>
+      <div class="card-desc">El trial vector solo reemplaza al padre si es mejor (<em>greedy selection</em>). La calidad de la población nunca decrece entre generaciones.</div>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Population Structure -->
+  <div class="section-label">ESTRUCTURA · POBLACIÓN INICIAL</div>
+  <h3 class="section-title" style="font-size:1.5rem">Representación de la Población</h3>
+
+  <div class="eq-block">
+    <div class="eq-label">Estructura de Solución en Generación $t$</div>
+    <div class="eq-main">
+      $$\mathbf{x}_i^t = \bigl(x_{1,i}^t,\; x_{2,i}^t,\; \ldots,\; x_{d,i}^t\bigr), \quad i = 1, \ldots, N$$
+    </div>
+    <div class="eq-terms">
+      <span class="eq-term">$N$: tamaño de población (tipicamente $5d$–$10d$)</span>
+      <span class="eq-term">$d$: dimensión del espacio de búsqueda</span>
+      <span class="eq-term">$\mathbf{x}_i^0 \sim U[b_L, b_U]$: inicialización aleatoria uniforme</span>
+      <span class="eq-term">$b_L, b_U \in \mathbb{R}^d$: límites del espacio de búsqueda</span>
+    </div>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- Step-by-step -->
+  <div class="section-label">PROCESO · PASO A PASO</div>
+  <h3 class="section-title" style="font-size:1.5rem">Iteración de Evolución Diferencial</h3>
+
+  <div class="de-stepper">
+    <div class="stepper-header">
+      <div class="step-tab active" data-step="0">① Selección</div>
+      <div class="step-tab" data-step="1">② Diferencia</div>
+      <div class="step-tab" data-step="2">③ Mutación</div>
+      <div class="step-tab" data-step="3">④ Cruzamiento</div>
+      <div class="step-tab" data-step="4">⑤ Selección Greedy</div>
+    </div>
+    <div class="stepper-body">
+      <!-- Step 0: Selection -->
+      <div class="step-content active" id="de-step-0">
+        <p class="step-desc">Para cada solución $\mathbf{x}_i$ de la población, se seleccionan aleatoriamente <strong>tres vectores distintos</strong>: $\mathbf{x}_a$, $\mathbf{x}_b$ (base, $V_b$), y $\mathbf{x}_c$, todos distintos entre sí y distintos de $\mathbf{x}_i$.</p>
+        <canvas id="de-canvas-0" width="800" height="300" class="step-canvas-wrap" style="width:100%;height:auto;display:block"></canvas>
+        <div class="step-eq">
+          $$\text{Seleccionar } \mathbf{x}_a,\, \mathbf{x}_b,\, \mathbf{x}_c \text{ de } P^t \;\text{tal que}\; a \neq b \neq c \neq i$$
+        </div>
+        <div class="annot-box" style="margin-top:12px">
+          <span class="annot-icon">📌</span>
+          <span>$\mathbf{x}_b$ actúa como <strong>vector base</strong> ($V_b$). En la variante DE/rand/1, el vector base se escoge aleatoriamente. En DE/best/1, se usa el mejor individuo de la generación.</span>
+        </div>
+      </div>
+      <!-- Step 1: Difference -->
+      <div class="step-content" id="de-step-1">
+        <p class="step-desc">Se calcula la <strong>diferencia vectorial</strong> entre $\mathbf{x}_a$ ($V_1$) y $\mathbf{x}_c$ ($V_2$). Este vector captura la dirección y magnitud de búsqueda en el espacio de soluciones.</p>
+        <canvas id="de-canvas-1" width="800" height="300" class="step-canvas-wrap" style="width:100%;height:auto;display:block"></canvas>
+        <div class="step-eq">
+          $$V_d = V_1 - V_2 = \mathbf{x}_a^t - \mathbf{x}_c^t$$
+        </div>
+        <div class="annot-box" style="margin-top:12px">
+          <span class="annot-icon">🔑</span>
+          <span>La diferencia vectorial es la <strong>idea central</strong> de DE: el tamaño del paso de mutación se <em>auto-adapta</em> a la escala de la diversidad de la población.</span>
+        </div>
+      </div>
+      <!-- Step 2: Mutation -->
+      <div class="step-content" id="de-step-2">
+        <p class="step-desc">Se crea el <strong>vector mutante</strong> $V_m$ sumando al vector base $V_b$ el vector diferencial escalado por el factor $\lambda$. Este proceso es el corazón del algoritmo DE.</p>
+        <canvas id="de-canvas-2" width="800" height="300" class="step-canvas-wrap" style="width:100%;height:auto;display:block"></canvas>
+        <div class="step-eq">
+          $$V_m = V_b + \lambda\, V_d = \mathbf{x}_b^t + \lambda\,(\mathbf{x}_a^t - \mathbf{x}_c^t)$$
+        </div>
+        <div class="annot-box" style="margin-top:12px">
+          <span class="annot-icon">⚡</span>
+          <span>El <strong>factor de escalamiento</strong> $\lambda \in [0.45, 0.95]$ controla la amplitud de la mutación. Es el parámetro más sensible del algoritmo (Yang, 2020). Primera selección recomendada: $\lambda \in [0.7, 0.9]$.</span>
+        </div>
+      </div>
+      <!-- Step 3: Crossover -->
+      <div class="step-content" id="de-step-3">
+        <p class="step-desc">Se crea el <strong>trial vector</strong> $V_t$ como crossover entre $\mathbf{x}_i$ y el vector mutante $V_m$. Cada componente se toma de $V_m$ con probabilidad $p_c$, garantizando al menos un componente de $V_m$.</p>
+        <canvas id="de-canvas-3" width="800" height="300" class="step-canvas-wrap" style="width:100%;height:auto;display:block"></canvas>
+        <div class="step-eq">
+          $$V_t(j) = \begin{cases} V_m(j) & \text{si } r_j < p_c \;\text{ ó }\; j = J_r \\ x_i(j) & \text{en caso contrario} \end{cases}, \quad j \in [1, d]$$
+        </div>
+        <div class="eq-terms" style="margin-top:10px">
+          <span class="eq-term">$r_j \sim U[0,1]$: número aleatorio por dimensión</span>
+          <span class="eq-term">$J_r \sim U\{1,\ldots,d\}$: índice garantizado</span>
+          <span class="eq-term">$p_c \in [0.1, 0.8]$: probabilidad de crossover</span>
+        </div>
+      </div>
+      <!-- Step 4: Greedy Selection -->
+      <div class="step-content" id="de-step-4">
+        <p class="step-desc">Se evalúa el trial vector $V_t$. Si es mejor que el padre $\mathbf{x}_i$, lo <strong>reemplaza en la población</strong>. De lo contrario, el padre sobrevive. Esto garantiza que la calidad de la población nunca decrece.</p>
+        <canvas id="de-canvas-4" width="800" height="300" class="step-canvas-wrap" style="width:100%;height:auto;display:block"></canvas>
+        <div class="step-eq">
+          $$\mathbf{x}_i^{t+1} = \begin{cases} V_t & \text{si } f(V_t) \leq f(\mathbf{x}_i^t) \\ \mathbf{x}_i^t & \text{en caso contrario} \end{cases}$$
+        </div>
+        <div class="annot-box" style="margin-top:12px">
+          <span class="annot-icon">✅</span>
+          <span><strong>Selección elitista:</strong> DE mantiene el mejor individuo de cada pareja. El proceso se repite para todos los $N$ individuos de la población, constituyendo una generación completa.</span>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-secondary" id="de-prev" disabled>← Anterior</button>
+        <div class="step-indicator">
+          <div id="de-step-text">Paso 1 de 5</div>
+          <div class="step-dots">
+            <div class="step-dot active"></div><div class="step-dot"></div>
+            <div class="step-dot"></div><div class="step-dot"></div><div class="step-dot"></div>
+          </div>
+        </div>
+        <button class="btn btn-primary" id="de-next">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Parameters -->
+  <div class="section-label">PARÁMETROS DE CONTROL</div>
+  <h3 class="section-title" style="font-size:1.5rem">Configuración del Algoritmo</h3>
+
+  <div class="param-explorer">
+    <div class="param-title">Explorer de Parámetros DE/rand/1</div>
+    <div class="param-grid">
+      <div>
+        <div class="param-label">Factor de Escalamiento λ <span id="lambda-display">0.80</span></div>
+        <input type="range" id="lambda-sl" min="0" max="2" step="0.05" value="0.80" style="width:100%;accent-color:var(--accent2);margin:6px 0 4px">
+        <div class="param-bar"><div class="param-fill" id="lambda-bar" style="width:40%"></div></div>
+        <div class="param-desc" id="lambda-desc">Rango óptimo [0.45, 0.95]. Alta exploración con λ &gt; 1, posible inestabilidad.</div>
+      </div>
+      <div>
+        <div class="param-label">Probabilidad de Crossover pₓ <span id="pc-display">0.50</span></div>
+        <input type="range" id="pc-sl" min="0" max="1" step="0.05" value="0.50" style="width:100%;accent-color:var(--accent);margin:6px 0 4px">
+        <div class="param-bar"><div class="param-fill" id="pc-bar" style="width:50%;background:var(--accent)"></div></div>
+        <div class="param-desc" id="pc-desc">Rango recomendado [0.1, 0.8]. pₓ alto → trial vector más parecido al mutante.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full Equations -->
+  <div class="eq-section">
+    <div class="section-label">BASE MATEMÁTICA · FORMULACIÓN COMPLETA DE/rand/1/bin</div>
+    <div class="eq-block violet">
+      <div class="eq-label">① Vector Diferencia</div>
+      <div class="eq-main">$$V_d^{(t)} = \mathbf{x}_a^t - \mathbf{x}_c^t, \quad a,c \in \{1,\ldots,N\} \setminus \{i\}, \; a \neq c$$</div>
+    </div>
+    <div class="eq-block violet">
+      <div class="eq-label">② Mutación Diferencial</div>
+      <div class="eq-main">$$V_m^{(t)} = \mathbf{x}_b^t + \lambda\,V_d^{(t)} = \mathbf{x}_b^t + \lambda\,(\mathbf{x}_a^t - \mathbf{x}_c^t)$$</div>
+      <div class="eq-terms">
+        <span class="eq-term">$\lambda \in [0.45, 0.95]$: factor de escalamiento</span>
+        <span class="eq-term">$\mathbf{x}_b^t$: vector base (aleatorio en DE/rand)</span>
+      </div>
+    </div>
+    <div class="eq-block violet">
+      <div class="eq-label">③ Cruzamiento Binomial</div>
+      <div class="eq-main">$$V_t^{(t)}(j) = \begin{cases} V_m^{(t)}(j) & \text{si } r_j < p_c \;\lor\; j = J_r \\ \mathbf{x}_i^t(j) & \text{en caso contrario} \end{cases}$$</div>
+    </div>
+    <div class="eq-block violet">
+      <div class="eq-label">④ Selección Greedy</div>
+      <div class="eq-main">$$\mathbf{x}_i^{t+1} = \begin{cases} V_t^{(t)} & \text{si } f(V_t^{(t)}) \leq f(\mathbf{x}_i^t) \\ \mathbf{x}_i^t & \text{en caso contrario} \end{cases}$$</div>
+    </div>
+  </div>
+
+  <!-- Python Code DE -->
+  <div class="section-label">IMPLEMENTACIÓN · PYTHON</div>
+  <div class="code-block">
+    <div class="code-header">
+      <span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span>
+      <span style="margin-left:8px">differential_evolution.py</span>
+    </div>
+<span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.optimize <span class="kw">import</span> differential_evolution  <span class="cm"># también disponible en SciPy</span>
+
+<span class="kw">def</span> <span class="fn">de</span>(func, bounds, N=<span class="nu">None</span>, max_iter=<span class="nu">1000</span>,
+       lam=<span class="nu">0.8</span>, pc=<span class="nu">0.5</span>, seed=<span class="nu">42</span>):
+    <span class="st">'''
+    Differential Evolution DE/rand/1/bin — implementación propia.
+    Parámetros: lam (λ, F en SciPy), pc (prob. de crossover, CR en SciPy).
+    '''</span>
+    rng = np.random.default_rng(seed)
+    d   = <span class="fn">len</span>(bounds)
+    N   = N <span class="kw">or</span> <span class="nu">10</span> * d                    <span class="cm"># regla: N ≥ 4 (requiere al menos 3 + target)</span>
+    lb  = np.array([b[<span class="nu">0</span>] <span class="kw">for</span> b <span class="kw">in</span> bounds])
+    ub  = np.array([b[<span class="nu">1</span>] <span class="kw">for</span> b <span class="kw">in</span> bounds])
+
+    <span class="cm"># ① Inicialización uniforme de la población</span>
+    pop = rng.uniform(lb, ub, (N, d))
+    fitness = np.array([func(x) <span class="kw">for</span> x <span class="kw">in</span> pop])
+    best_idx = fitness.argmin()
+    history  = [fitness[best_idx]]
+
+    <span class="kw">for</span> gen <span class="kw">in</span> <span class="fn">range</span>(max_iter):
+        <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(N):
+            <span class="cm"># ② Selección: tres índices distintos a ≠ b ≠ c ≠ i</span>
+            idxs = [j <span class="kw">for</span> j <span class="kw">in</span> <span class="fn">range</span>(N) <span class="kw">if</span> j != i]
+            a, b_idx, c = rng.choice(idxs, <span class="nu">3</span>, replace=<span class="kw">False</span>)
+            Vb, Va, Vc  = pop[b_idx], pop[a], pop[c]
+
+            <span class="cm"># ③ Mutación diferencial: Vm = Vb + λ(Va - Vc)</span>
+            Vm = np.clip(Vb + lam * (Va - Vc), lb, ub)
+
+            <span class="cm"># ④ Cruzamiento binomial</span>
+            r  = rng.uniform(<span class="nu">0</span>, <span class="nu">1</span>, d)
+            Jr = rng.integers(<span class="nu">0</span>, d)             <span class="cm"># al menos un gen del mutante</span>
+            Vt = np.where((r < pc) | (np.arange(d) == Jr), Vm, pop[i])
+
+            <span class="cm"># ⑤ Selección greedy</span>
+            f_trial = func(Vt)
+            <span class="kw">if</span> f_trial <= fitness[i]:
+                pop[i], fitness[i] = Vt, f_trial
+
+        best_idx = fitness.argmin()
+        history.append(fitness[best_idx])
+
+    <span class="kw">return</span> {<span class="st">'x'</span>: pop[best_idx], <span class="st">'fun'</span>: fitness[best_idx], <span class="st">'history'</span>: history}
+
+<span class="cm"># ── Usando SciPy (recomendado para producción) ──</span>
+<span class="de">ackley</span> = <span class="kw">lambda</span> x: (-<span class="nu">20</span>*np.exp(-<span class="nu">0.2</span>*np.sqrt(np.mean(x**<span class="nu">2</span>)))
+                    - np.exp(np.mean(np.cos(<span class="nu">2</span>*np.pi*x))) + np.e + <span class="nu">20</span>)
+bounds = [(-<span class="nu">32</span>, <span class="nu">32</span>)] * <span class="nu">20</span>
+result = <span class="fn">differential_evolution</span>(ackley, bounds, seed=<span class="nu">42</span>,
+                                   mutation=(<span class="nu">0.5</span>, <span class="nu">1.0</span>), recombination=<span class="nu">0.7</span>,
+                                   maxiter=<span class="nu">1000</span>, tol=<span class="nu">1e-7</span>, workers=-<span class="nu">1</span>)
+<span class="fn">print</span>(<span class="st">f"Ackley 20D: f* = {result.fun:.8f}"</span>)  <span class="cm"># esperado: ≈ 0</span>
+  </div>
+
+  <!-- Exercises DE -->
+  <div class="section-label">EJERCICIOS · EVOLUCIÓN DIFERENCIAL</div>
+  <div class="exercise-card">
+    <div class="exercise-num">Ejercicio 4 · Intermedio</div>
+    <div class="exercise-title">Estimación Estructural de Modelo DSGE Simplificado</div>
+    <div class="exercise-desc">Calibra los parámetros $(\beta, \sigma, \phi, \rho_A)$ de un modelo RBC básico (discount factor, curvatura, elasticidad trabajo, persistencia TFP) usando DE para minimizar la distancia entre momentos del modelo y datos del IGAE/ENOE de México 2010-2024.</div>
+    <div class="exercise-hint">💻 Hint: Usa scipy.optimize.differential_evolution con workers=-1 para paralelización. Bounds: β∈[0.9,0.999], σ∈[0.5,5], φ∈[0.1,3], ρ∈[0,0.99]</div>
+  </div>
+  <div class="exercise-card">
+    <div class="exercise-num">Ejercicio 5 · Avanzado</div>
+    <div class="exercise-title">Comparación DE vs PSO en Función de Schwefel</div>
+    <div class="exercise-desc">Para la función de Schwefel $f(\mathbf{x}) = 418.9829d - \sum_{j=1}^d x_j\sin(\sqrt{|x_j|})$ en $d \in \{5, 10, 20\}$, compara DE y PSO bajo el mismo presupuesto de evaluaciones ($N_{eval} = 5000$). Reporta media y varianza de 50 corridas independientes. ¿Qué algoritmo escala mejor con la dimensión?</div>
+    <div class="exercise-hint">💻 Hint: La función de Schwefel es especialmente difícil porque el óptimo global está alejado de los óptimos locales. El mínimo global está en x_i ≈ 420.9687, f* ≈ 0.</div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════
+     TAB 3 · COMPARATIVA
+══════════════════════════════════════════════ -->
+<section id="tab-comparativa" class="tab-panel">
+
+  <div class="section-label">ANÁLISIS COMPARATIVO</div>
+  <h2 class="section-title">PSO vs. Evolución Diferencial</h2>
+  <p class="section-lead">Ambos algoritmos son potentes metaheurísticas de población, pero difieren fundamentalmente en su mecanismo de búsqueda y sus fortalezas relativas.</p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Característica</th>
+        <th>🐝 PSO</th>
+        <th>🧬 Evolución Diferencial</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Paradigma</td><td>Swarm Intelligence</td><td>Algoritmo Evolutivo</td></tr>
+      <tr><td>Representación</td><td>Vectores reales continuos</td><td>Vectores reales continuos</td></tr>
+      <tr><td>Operador de búsqueda</td><td>Actualización de velocidad (inercia + social + cognitiva)</td><td>Mutación diferencial + cruzamiento binomial</td></tr>
+      <tr><td>Memoria individual</td><td><span class="tag tag-yes">Sí — $x_i^*$</span></td><td><span class="tag tag-no">No</span></td></tr>
+      <tr><td>Memoria colectiva</td><td><span class="tag tag-yes">Sí — $g^*$</span></td><td>Implícita (selección greedy)</td></tr>
+      <tr><td>Parámetros clave</td><td>ω, c₁, c₂ (3 params)</td><td>λ, p_c, N (3 params)</td></tr>
+      <tr><td>Convergencia prematura</td><td><span class="tag tag-med">Moderada</span> (alta social → pérdida diversidad)</td><td><span class="tag tag-yes">Baja</span> (diferencias auto-adaptativas)</td></tr>
+      <tr><td>Desempeño en alta dimensión ($d > 30$)</td><td><span class="tag tag-med">Moderado</span></td><td><span class="tag tag-yes">Excelente</span></td></tr>
+      <tr><td>Velocidad de convergencia</td><td><span class="tag tag-yes">Rápida</span> (primeras iteraciones)</td><td><span class="tag tag-med">Moderada</span> (más robusto)</td></tr>
+      <tr><td>Implementación estándar SciPy</td><td><span class="tag tag-no">No oficial</span> (pyswarms)</td><td><span class="tag tag-yes">Sí</span> — scipy.optimize.differential_evolution</td></tr>
+      <tr><td>Parallelización natural</td><td><span class="tag tag-med">Parcial</span></td><td><span class="tag tag-yes">Sí</span> — workers=-1</td></tr>
+      <tr><td>Uso en calibración econométrica</td><td><span class="tag tag-yes">Sí</span></td><td><span class="tag tag-yes">Sí</span> (más robusto)</td></tr>
+      <tr><td>Problema con multimodalidad</td><td><span class="tag tag-med">Requiere topología lbest</span></td><td><span class="tag tag-yes">Robusto</span> (diversidad diferencial)</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Convergence comparison -->
+  <div class="conv-chart-wrap">
+    <div class="section-label" style="margin-bottom:12px">CONVERGENCIA SIMULADA · FUNCIÓN DE RASTRIGIN 10D</div>
+    <h3 style="font-weight:600;margin-bottom:8px;font-size:1.1rem">Comparación de Convergencia: PSO vs DE</h3>
+    <p style="font-size:0.85rem;color:var(--muted);margin-bottom:16px">Media de 20 corridas independientes, N = 50 partículas/individuos, 500 iteraciones. Sombreado: ±1 desviación estándar.</p>
+    <div style="position:relative;height:300px;width:100%">
+      <canvas id="conv-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- When to use -->
+  <div class="two-col">
+    <div class="app-section">
+      <div class="app-title" style="color:var(--accent)">🐝 Cuándo usar PSO</div>
+      <ul style="font-size:0.88rem;color:var(--muted);line-height:2;padding-left:16px;margin:0">
+        <li>Problemas de baja a media dimensión ($d \leq 30$)</li>
+        <li>Cuando la velocidad inicial de convergencia es crítica</li>
+        <li>Optimización de portafolios (espacio continuo acotado)</li>
+        <li>Calibración de modelos hedónicos (rápida exploración)</li>
+        <li>Cuando se requiere interpretabilidad (trayectorias de partículas)</li>
+        <li>Problemas de optimización en tiempo real</li>
+      </ul>
+    </div>
+    <div class="app-section">
+      <div class="app-title" style="color:var(--accent2)">🧬 Cuándo usar DE</div>
+      <ul style="font-size:0.88rem;color:var(--muted);line-height:2;padding-left:16px;margin:0">
+        <li>Alta dimensión ($d > 20$) o fuerte multimodalidad</li>
+        <li>Estimación estructural de modelos DSGE/ABM</li>
+        <li>Calibración con múltiples restricciones implícitas</li>
+        <li>Cuando se requiere robustez y reproducibilidad</li>
+        <li>Disponible en SciPy sin dependencias adicionales</li>
+        <li>Paralelización fácil: workers=-1 en scipy</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Complexity -->
+  <div class="eq-block" style="margin-top:32px">
+    <div class="eq-label">Complejidad Computacional por Generación</div>
+    <div class="eq-main">
+      $$\text{PSO:}\; O(N \cdot d) \quad\text{vs}\quad \text{DE:}\; O(N \cdot d + N \cdot E_f)$$
+    </div>
+    <div class="eq-terms">
+      <span class="eq-term">$N$: tamaño de población</span>
+      <span class="eq-term">$d$: dimensión</span>
+      <span class="eq-term">$E_f$: costo de evaluación de la función objetivo</span>
+      <span class="eq-term">Presupuesto típico: $N_{eval} = N \times T_{max} \in [10^4, 10^6]$</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══════════════════════════════════════════════
+     TAB 4 · EDITORIAL
+══════════════════════════════════════════════ -->
+<section id="tab-editorial" class="tab-panel">
+  <div class="editorial-wrap">
+    <div class="editorial-byline">
+      Por <strong>Dr. Leonardo González Tejeda</strong> &nbsp;·&nbsp;
+      CIO, Homepty &nbsp;·&nbsp; Profesor-Investigador, ITESM Santa Fe &nbsp;·&nbsp;
+      <span class="editorial-date">Módulo 4 · 2026</span>
+    </div>
+    <h2 class="editorial-title">El Ecosistema Algorítmico de las Metaheurísticas: Más Allá de los Gradientes</h2>
+    <div class="editorial-deck">
+      PSO y DE no son meras curiosidades bio-inspiradas. Son herramientas de primera línea en la caja de herramientas del economista computacional moderno, con aplicaciones que van desde la calibración de modelos de equilibrio general hasta la optimización de estrategias de inversión inmobiliaria.
+    </div>
+
+    <div class="editorial-body">
+
+      <h3>El Problema de la Optimización sin Gradientes</h3>
+      <p>
+        Los métodos de gradiente —Newton, BFGS, L-BFGS-B— dominan la optimización numérica clásica con razón: cuando la función objetivo es suave, diferenciable y convexa, convergen cuadráticamente al óptimo. Sin embargo, la realidad de los problemas económicos y computacionales de interés práctico es radicalmente distinta. Los modelos de equilibrio general estocástico (DSGE) producen funciones de verosimilitud rugosas. Los modelos basados en agentes (ABM) generan superficies de ajuste no diferenciables. La valuación de activos reales en mercados con fricciones crea paisajes de optimización discontinuos. Aquí, los métodos de gradiente fallan estrepitosamente.
+      </p>
+
+      <div class="pullquote">
+        "Las metaheurísticas son el pragmatismo computacional elevado a arte: renuncian a la optimalidad garantizada para obtener buenas soluciones donde ninguna solución exacta es computable."
+      </div>
+
+      <h3>El Paisaje de las Metaheurísticas</h3>
+      <p>
+        PSO y DE pertenecen a la familia de <em>algoritmos de búsqueda basados en población</em>, uno de los paradigmas más activos en inteligencia artificial aplicada. El ecosistema es vasto:
+      </p>
+
+      <div class="landscape-grid">
+        <div class="landscape-node highlight-pso">
+          <div class="landscape-node-name">PSO</div>
+          <div class="landscape-node-type">Swarm · Kennedy 1995</div>
+        </div>
+        <div class="landscape-node highlight-de">
+          <div class="landscape-node-name">DE</div>
+          <div class="landscape-node-type">Evolutivo · Price 1996</div>
+        </div>
+        <div class="landscape-node">
+          <div class="landscape-node-name">GA</div>
+          <div class="landscape-node-type">Genético · Holland 1975</div>
+        </div>
+        <div class="landscape-node">
+          <div class="landscape-node-name">CMA-ES</div>
+          <div class="landscape-node-type">Estrategia Evolutiva · 2001</div>
+        </div>
+        <div class="landscape-node">
+          <div class="landscape-node-name">Nelder-Mead</div>
+          <div class="landscape-node-type">Simplex · 1965</div>
+        </div>
+        <div class="landscape-node">
+          <div class="landscape-node-name">SA</div>
+          <div class="landscape-node-type">Recocido · Kirkpatrick 1983</div>
+        </div>
+        <div class="landscape-node">
+          <div class="landscape-node-name">ACO</div>
+          <div class="landscape-node-type">Hormiga · Dorigo 1992</div>
+        </div>
+        <div class="landscape-node">
+          <div class="landscape-node-name">Optuna / BO</div>
+          <div class="landscape-node-type">Bayesiano · Moderno</div>
+        </div>
+      </div>
+
+      <p>
+        En este ecosistema, PSO y DE ocupan un nicho particular: son suficientemente simples para ser comprendidos intuitivamente, suficientemente poderosos para resolver problemas reales de alta dimensión, y suficientemente maduros para contar con implementaciones robustas y bien testeadas. CMA-ES (Covariance Matrix Adaptation Evolution Strategy) es probablemente el competidor más serio en problemas de optimización continua sin restricciones, con garantías teóricas más sólidas pero mayor complejidad de implementación ($O(d^2)$ vs $O(d)$ en PSO/DE).
+      </p>
+
+      <h3>Aplicaciones en Economía Aplicada y PropTech</h3>
+      <p>
+        En el contexto de la economía aplicada mexicana, las metaheurísticas encuentran aplicaciones naturales en varios frentes:
+      </p>
+
+      <table class="eco-table">
+        <thead><tr><th>Problema</th><th>Algoritmo</th><th>Función Objetivo</th><th>Referencia</th></tr></thead>
+        <tbody>
+          <tr><td>Calibración DSGE/RBC</td><td>DE</td><td>Distancia de momentos</td><td>Ruge-Murcia (2012)</td></tr>
+          <tr><td>Valuación hedónica masiva</td><td>PSO</td><td>RMSE sobre avalúos</td><td>González Tejeda (2024)</td></tr>
+          <tr><td>Portafolio FIBRAs</td><td>PSO / DE</td><td>Sharpe negativo</td><td>CNBV México</td></tr>
+          <tr><td>Hyperparameter tuning (GNN)</td><td>DE</td><td>Validation loss</td><td>Homepty Hypergraph</td></tr>
+          <tr><td>Segmentación de mercado</td><td>PSO-k-means</td><td>Inercia de clusters</td><td>ENIGH / BIARE</td></tr>
+          <tr><td>Estimación ISLV</td><td>PSO</td><td>Correlación cruzada</td><td>EJE.Mx Research</td></tr>
+        </tbody>
+      </table>
+
+      <p>
+        El <em>Homepty Hypergraph</em> —el marco formal de representación de mercados inmobiliarios como grafos heterogéneos dinámicos— requiere la calibración de múltiples parámetros de búsqueda-y-emparejamiento que no tienen solución analítica. DE con workers=-1 (paralelización multiproceso de SciPy) permite explorar el espacio de parámetros en tiempos computacionales razonables, aprovechando la infraestructura de cómputo en la nube.
+      </p>
+
+      <h3>La Tensión Exploración-Explotación</h3>
+      <p>
+        El dilema fundamental de cualquier algoritmo de optimización heurística es la tensión entre <strong>exploración</strong> (diversificar la búsqueda en el espacio) y <strong>explotación</strong> (intensificar la búsqueda alrededor de la mejor solución conocida). En PSO, este equilibrio es gobernado principalmente por el peso de inercia ω: valores altos favorecen la exploración, valores bajos la explotación. Una estrategia común es el <em>inertia weight decay</em>: comenzar con ω = 0.9 y reducirlo linealmente hasta 0.4 a lo largo de las iteraciones. En DE, el factor λ cumple un rol análogo.
+      </p>
+
+      <div class="pullquote">
+        "La convergencia prematura —cuando el enjambre colapsa hacia un óptimo local— es el enemigo número uno de PSO. La topología de vecindad es el antídoto."
+      </div>
+
+      <h3>Integración con Machine Learning Moderno</h3>
+      <p>
+        Quizás el uso más extendido de DE y PSO en 2026 no sea la optimización directa de funciones objetivo económicas, sino el <em>hyperparameter optimization</em> de modelos de aprendizaje automático. Redes neuronales, GBMs (XGBoost, LightGBM), Graph Neural Networks: todos requieren la calibración de hiperparámetros cuya función objetivo (la métrica de validación) es computacionalmente costosa, no diferenciable, y con alta varianza por aleatoriedad del entrenamiento. Frameworks como Optuna utilizan variantes de estas ideas (TPE, CMA-ES), mientras que implementaciones directas de DE en SciPy siguen siendo competitivas para espacios de búsqueda modestos.
+      </p>
+
+      <h3>Límites y Crítica Honesta</h3>
+      <p>
+        Sería deshonesto presentar estas metaheurísticas sin reconocer sus limitaciones. El teorema de "No Free Lunch" (Wolpert & Macready, 1997) establece que no existe ningún algoritmo de optimización universalmente superior: cualquier ventaja de PSO o DE en una clase de problemas viene a costa de desventajas en otras. Específicamente: (1) no hay garantías de convergencia al óptimo global en tiempo finito; (2) la selección de hiperparámetros es en sí misma un problema de optimización (¿quién optimiza al optimizador?); (3) para funciones convexas suaves, L-BFGS-B los supera en órdenes de magnitud; (4) la escalabilidad a $d > 100$ es cuestionable sin adaptaciones especializadas.
+      </p>
+      <p>
+        En el contexto pedagógico del Módulo 4, estas técnicas son valiosas no solo por su utilidad práctica, sino por la intuición que construyen sobre el paisaje de la optimización: la idea de que soluciones complejas pueden emerger de reglas simples aplicadas colectivamente —en el enjambre, en el mercado, en la economía.
+      </p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════
+     TAB 5 · RECURSOS
+══════════════════════════════════════════════ -->
+<section id="tab-recursos" class="tab-panel">
+
+  <div class="section-label">BIBLIOGRAFÍA, HERRAMIENTAS Y RECURSOS</div>
+  <h2 class="section-title">Referencias y Ecosistema de Herramientas</h2>
+
+  <!-- Bibliografía -->
+  <div class="section-label" style="margin-top:32px">REFERENCIAS PRIMARIAS</div>
+  <div class="resource-grid">
+    <div class="resource-card">
+      <div class="resource-card-label">PSO · Artículos Fundacionales</div>
+      <div class="bib-entry"><strong>Kennedy, J. & Eberhart, R. (1995).</strong> Particle swarm optimization. <em>Proceedings of ICNN'95</em>, vol. 4, pp. 1942–1948. IEEE. [Paper original]</div>
+      <div class="bib-entry"><strong>Clerc, M. & Kennedy, J. (2002).</strong> The particle swarm — explosion, stability, and convergence in a multidimensional complex space. <em>IEEE Trans. Evolutionary Computation</em>, 6(1), 58–73. [Parámetros canónicos]</div>
+      <div class="bib-entry"><strong>Shi, Y. & Eberhart, R. (1998).</strong> A modified particle swarm optimizer. <em>IEEE CEC</em>. [Inercia variable]</div>
+    </div>
+    <div class="resource-card">
+      <div class="resource-card-label">DE · Artículos Fundacionales</div>
+      <div class="bib-entry"><strong>Price, K.V. (1996).</strong> Differential evolution: a fast and simple numerical optimizer. <em>Proceedings NAFIPS</em>, pp. 524–527. IEEE. [Paper original]</div>
+      <div class="bib-entry"><strong>Price, K., Storn, R.M. & Lampinen, J.A. (2006).</strong> <em>Differential Evolution: A Practical Approach to Global Optimization.</em> Springer. [Libro estándar]</div>
+      <div class="bib-entry"><strong>Yang, X.-S. (2020).</strong> <em>Nature-Inspired Optimization Algorithms.</em> 2nd ed. Academic Press.</div>
+    </div>
+    <div class="resource-card">
+      <div class="resource-card-label">Libros de Referencia Módulo 4</div>
+      <div class="bib-entry"><strong>Hurbans, R. (2020).</strong> <em>Grokking Artificial Intelligence Algorithms.</em> Manning Publications. [Base del módulo]</div>
+      <div class="bib-entry"><strong>Scardua, L.A. (2021).</strong> <em>Applied Evolutionary Algorithms for Engineers Using Python.</em> CRC Press.</div>
+      <div class="bib-entry"><strong>Wolpert, D.H. & Macready, W.G. (1997).</strong> No free lunch theorems for optimization. <em>IEEE Trans. Evolutionary Computation</em>, 1(1), 67–82.</div>
+    </div>
+    <div class="resource-card">
+      <div class="resource-card-label">Economía & Calibración</div>
+      <div class="bib-entry"><strong>Ruge-Murcia, F. (2012).</strong> Estimating nonlinear DSGE models by the simulated method of moments. <em>Quantitative Economics</em>, 3(2), 209–239.</div>
+      <div class="bib-entry"><strong>Chib, S. & Ramamurthy, S. (2010).</strong> Tailored randomized block MCMC methods with application to DSGE models. <em>Journal of Econometrics</em>.</div>
+    </div>
+  </div>
+
+  <!-- Python Libraries -->
+  <div class="section-label" style="margin-top:40px">ECOSISTEMA PYTHON · LIBRERÍAS</div>
+  <div class="resource-card" style="margin-bottom:24px">
+    <div class="resource-card-label">Implementaciones disponibles</div>
+    <div style="margin-top:8px">
+      <span class="api-pill"><span class="pip-icon">📦</span> scipy.optimize.differential_evolution</span>
+      <span class="api-pill"><span class="pip-icon">📦</span> pyswarms</span>
+      <span class="api-pill"><span class="pip-icon">📦</span> pygmo (Esa/Pagmo2)</span>
+      <span class="api-pill"><span class="pip-icon">📦</span> deap</span>
+      <span class="api-pill"><span class="pip-icon">📦</span> optuna</span>
+      <span class="api-pill"><span class="pip-icon">📦</span> nevergrad (Meta)</span>
+      <span class="api-pill"><span class="pip-icon">📦</span> pymoo (multi-objetivo)</span>
+    </div>
+  </div>
+
+  <div class="code-block" style="margin-bottom:32px">
+    <div class="code-header">
+      <span class="code-dot dot-red"></span><span class="code-dot dot-yellow"></span><span class="code-dot dot-green"></span>
+      <span style="margin-left:8px">instalacion_y_uso_rapido.py</span>
+    </div>
+<span class="cm"># Instalación</span>
+<span class="cm"># pip install pyswarms scipy numpy nevergrad optuna deap</span>
+
+<span class="cm">## ── SciPy DE (sin instalación extra) ──────────────────────────</span>
+<span class="kw">from</span> scipy.optimize <span class="kw">import</span> differential_evolution
+result = <span class="fn">differential_evolution</span>(func, bounds,
+    mutation=(<span class="nu">0.5</span>,<span class="nu">1.0</span>), recombination=<span class="nu">0.7</span>, seed=<span class="nu">42</span>, workers=-<span class="nu">1</span>)
+
+<span class="cm">## ── pyswarms PSO ───────────────────────────────────────────────</span>
+<span class="kw">import</span> pyswarms <span class="kw">as</span> ps
+optimizer = ps.single.GlobalBestPSO(n_particles=<span class="nu">50</span>, dimensions=<span class="nu">10</span>,
+                                    options={<span class="st">'c1'</span>:<span class="nu">1.5</span>,<span class="st">'c2'</span>:<span class="nu">1.5</span>,<span class="st">'w'</span>:<span class="nu">0.73</span>})
+best_cost, best_pos = optimizer.optimize(func, iters=<span class="nu">500</span>)
+
+<span class="cm">## ── Optuna (Bayesian Optimization, state-of-the-art) ───────────</span>
+<span class="kw">import</span> optuna
+<span class="kw">def</span> <span class="fn">objective</span>(trial):
+    x = [trial.suggest_float(<span class="st">f'x{i}'</span>, -<span class="nu">5</span>, <span class="nu">5</span>) <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nu">10</span>)]
+    <span class="kw">return</span> <span class="fn">rastrigin</span>(x)
+study = optuna.create_study(sampler=optuna.samplers.CmaEsSampler())
+study.optimize(objective, n_trials=<span class="nu">2000</span>, n_jobs=-<span class="nu">1</span>)
+  </div>
+
+  <!-- Online Resources -->
+  <div class="section-label" style="margin-top:8px">RECURSOS EN LÍNEA</div>
+  <div class="resource-grid">
+    <div class="resource-card">
+      <div class="resource-card-label">Documentación Oficial</div>
+      <div class="bib-entry"><strong>SciPy DE:</strong> docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html</div>
+      <div class="bib-entry"><strong>pyswarms:</strong> pyswarms.readthedocs.io — Documentación completa con topologías lbest/gbest</div>
+      <div class="bib-entry"><strong>pygmo:</strong> esa.github.io/pygmo2 — Plataforma avanzada con 60+ algoritmos paralelos</div>
+    </div>
+    <div class="resource-card">
+      <div class="resource-card-label">Benchmarks y Datasets</div>
+      <div class="bib-entry"><strong>CEC Competition Functions:</strong> Conjunto estandarizado de 30 funciones benchmark para comparación objetiva de metaheurísticas.</div>
+      <div class="bib-entry"><strong>NIST StRD:</strong> Datasets de regresión no lineal para calibración y benchmarking de algoritmos de optimización.</div>
+      <div class="bib-entry"><strong>INEGI Open Data:</strong> data.inegi.org.mx — Datos IGAE, ENOE, ENEC, SHF para aplicaciones económicas reales.</div>
+    </div>
+    <div class="resource-card">
+      <div class="resource-card-label">Variantes Avanzadas de PSO</div>
+      <div class="bib-entry"><strong>SPSO-2011:</strong> Standard PSO 2011 — versión estandarizada de la comunidad PSOB.</div>
+      <div class="bib-entry"><strong>MPSO (Multi-swarm):</strong> Múltiples enjambres con migración de partículas para mayor diversidad.</div>
+      <div class="bib-entry"><strong>PSO-TPME:</strong> PSO con inercia adaptativa y perturbación aleatoria para escape de óptimos locales.</div>
+    </div>
+    <div class="resource-card">
+      <div class="resource-card-label">Variantes Avanzadas de DE</div>
+      <div class="bib-entry"><strong>DE/best/1/bin:</strong> Usa el mejor individuo como vector base → convergencia más rápida pero menos robusta.</div>
+      <div class="bib-entry"><strong>JADE (2009):</strong> DE adaptativo con actualización de parámetros online. Estado del arte.</div>
+      <div class="bib-entry"><strong>L-SHADE:</strong> Success-History based Adaptive DE — ganador del CEC 2014. Reduce N a medida que converge.</div>
+    </div>
+  </div>
+
+  <!-- Summary table -->
+  <div class="section-label" style="margin-top:40px">GUÍA RÁPIDA · SELECCIÓN DE ALGORITMO</div>
+  <table class="eco-table" style="margin-top:12px">
+    <thead><tr><th>Situación</th><th>Recomendación</th><th>Implementación</th></tr></thead>
+    <tbody>
+      <tr><td>Primera prueba rápida, cualquier problema</td><td>DE canónico</td><td>scipy.optimize.differential_evolution</td></tr>
+      <tr><td>PSO rápido con topologías</td><td>PSO lbest/gbest</td><td>pyswarms.single.GlobalBestPSO</td></tr>
+      <tr><td>Alta dimensión (d > 50)</td><td>CMA-ES o L-SHADE</td><td>optuna.samplers.CmaEsSampler()</td></tr>
+      <tr><td>Multi-objetivo (Pareto)</td><td>NSGA-II / NSGA-III</td><td>pymoo.algorithms.moo.nsga2</td></tr>
+      <tr><td>Presupuesto mínimo de evaluaciones</td><td>Optimización Bayesiana</td><td>optuna o botorch</td></tr>
+      <tr><td>Paralelización masiva en clúster</td><td>pygmo / pagmo</td><td>pygmo.archipelago</td></tr>
+    </tbody>
+  </table>
+
+</section>
+
+</main>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ══════════════════════════════════════════════════════════════
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabPanels = document.querySelectorAll('.tab-panel');
+let convChartInitialized = false;
+let convChartInstance = null;
+let psoMiniChartInstance = null;
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.tab;
+    tabBtns.forEach(b => b.classList.remove('active'));
+    tabPanels.forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + target).classList.add('active');
+
+    // Re-typeset MathJax in newly visible tab
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetPromise([document.getElementById('tab-' + target)]);
+    }
+
+    if (target === 'comparativa') {
+      if (!convChartInitialized) {
+        setTimeout(initConvChart, 80);
+        convChartInitialized = true;
+      } else if (convChartInstance) {
+        setTimeout(() => convChartInstance.resize(), 80);
+      }
+    }
+    if (target === 'de') {
+      setTimeout(() => { drawAllDECanvases(); }, 80);
+    }
+    if (target === 'pso') {
+      setTimeout(() => {
+        if (psoMiniChartInstance) psoMiniChartInstance.resize();
+        renderPSO();
+      }, 80);
+    }
+  });
+});
+
+// ══════════════════════════════════════════════════════════════
+// PSO SIMULATION
+// ══════════════════════════════════════════════════════════════
+const BOUNDS = [-5.12, 5.12];
+let psoState = null;
+let psoAnimId = null;
+let psoRunning = false;
+let psoChart = null;
+
+function rastrigin(x, y) {
+  return 20 + x*x - 10*Math.cos(2*Math.PI*x) + y*y - 10*Math.cos(2*Math.PI*y);
+}
+
+function initPSO() {
+  const N = parseInt(document.getElementById('n-sl').value);
+  const particles = [];
+  let gBest = null, gBestF = Infinity;
+  for (let i = 0; i < N; i++) {
+    const px = BOUNDS[0] + Math.random() * (BOUNDS[1]-BOUNDS[0]);
+    const py = BOUNDS[0] + Math.random() * (BOUNDS[1]-BOUNDS[0]);
+    const vx = (Math.random()-0.5)*2, vy = (Math.random()-0.5)*2;
+    const f = rastrigin(px, py);
+    const p = { px, py, vx, vy, bx: px, by: py, bf: f };
+    particles.push(p);
+    if (f < gBestF) { gBestF = f; gBest = [px, py]; }
+  }
+  psoState = { particles, gBest: [...gBest], gBestF, iter: 0, history: [gBestF] };
+  renderPSO();
+}
+
+function stepPSO() {
+  if (!psoState) return;
+  const omega = parseFloat(document.getElementById('omega-sl').value);
+  const c1    = parseFloat(document.getElementById('c1-sl').value);
+  const c2    = parseFloat(document.getElementById('c2-sl').value);
+  const vmax  = 1.5;
+  const { particles } = psoState;
+  particles.forEach(p => {
+    const r1 = Math.random(), r2 = Math.random();
+    p.vx = omega*p.vx + c1*r1*(p.bx-p.px) + c2*r2*(psoState.gBest[0]-p.px);
+    p.vy = omega*p.vy + c1*r1*(p.by-p.py) + c2*r2*(psoState.gBest[1]-p.py);
+    p.vx = Math.max(-vmax, Math.min(vmax, p.vx));
+    p.vy = Math.max(-vmax, Math.min(vmax, p.vy));
+    p.px = Math.max(BOUNDS[0], Math.min(BOUNDS[1], p.px+p.vx));
+    p.py = Math.max(BOUNDS[0], Math.min(BOUNDS[1], p.py+p.vy));
+    const f = rastrigin(p.px, p.py);
+    if (f < p.bf) { p.bf = f; p.bx = p.px; p.by = p.py; }
+    if (f < psoState.gBestF) { psoState.gBestF = f; psoState.gBest = [p.px, p.py]; }
+  });
+  psoState.iter++;
+  psoState.history.push(psoState.gBestF);
+}
+
+let heatmapImg = null;
+function buildHeatmap(W, H) {
+  const offscreen = document.createElement('canvas');
+  offscreen.width = W; offscreen.height = H;
+  const ctx = offscreen.getContext('2d');
+  const img = ctx.createImageData(W, H);
+  const maxF = 75;
+  for (let px = 0; px < W; px++) {
+    for (let py = 0; py < H; py++) {
+      const x = BOUNDS[0] + (px/W)*(BOUNDS[1]-BOUNDS[0]);
+      const y = BOUNDS[0] + (py/H)*(BOUNDS[1]-BOUNDS[0]);
+      const f = rastrigin(x, y);
+      const t = Math.min(f/maxF, 1);
+      const idx = (py*W+px)*4;
+      // Dark blue → teal → gold gradient
+      img.data[idx]   = Math.floor(t < 0.5 ? 20 + t*2*40 : 60 + (t-0.5)*2*180);
+      img.data[idx+1] = Math.floor(t < 0.5 ? 15 + t*2*120 : 135 + (t-0.5)*2*80);
+      img.data[idx+2] = Math.floor(t < 0.5 ? 60 + t*2*80  : 140 - (t-0.5)*2*120);
+      img.data[idx+3] = 210;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+  return offscreen;
+}
+
+function toCanvasCoord(val, W, H, margin) {
+  return [
+    margin + (val[0]-BOUNDS[0])/(BOUNDS[1]-BOUNDS[0]) * (W-2*margin),
+    margin + (val[1]-BOUNDS[0])/(BOUNDS[1]-BOUNDS[0]) * (H-2*margin)
+  ];
+}
+
+function renderPSO() {
+  const canvas = document.getElementById('pso-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const margin = 16;
+  if (!heatmapImg) heatmapImg = buildHeatmap(W, H);
+  ctx.clearRect(0, 0, W, H);
+  ctx.drawImage(heatmapImg, 0, 0);
+  // Grid lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const x = margin + i*(W-2*margin)/4;
+    const y = margin + i*(H-2*margin)/4;
+    ctx.beginPath(); ctx.moveTo(x,margin); ctx.lineTo(x,H-margin); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(margin,y); ctx.lineTo(W-margin,y); ctx.stroke();
+  }
+  if (!psoState) return;
+  const { particles, gBest } = psoState;
+  // Personal bests
+  particles.forEach(p => {
+    const [cx, cy] = toCanvasCoord([p.bx, p.by], W, H, margin);
+    ctx.beginPath(); ctx.arc(cx, cy, 3, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(0,200,255,0.25)'; ctx.fill();
+  });
+  // Velocity vectors + particles
+  particles.forEach(p => {
+    const [cx, cy] = toCanvasCoord([p.px, p.py], W, H, margin);
+    const vscale = 18;
+    ctx.beginPath(); ctx.moveTo(cx, cy);
+    ctx.lineTo(cx+p.vx*vscale, cy+p.vy*vscale);
+    ctx.strokeStyle='rgba(0,200,255,0.4)'; ctx.lineWidth=1; ctx.stroke();
+    // Glow
+    const grd = ctx.createRadialGradient(cx,cy,0,cx,cy,8);
+    grd.addColorStop(0,'rgba(0,200,255,0.5)');
+    grd.addColorStop(1,'rgba(0,200,255,0)');
+    ctx.beginPath(); ctx.arc(cx,cy,8,0,Math.PI*2); ctx.fillStyle=grd; ctx.fill();
+    ctx.beginPath(); ctx.arc(cx,cy,4,0,Math.PI*2);
+    ctx.fillStyle='#00c8ff'; ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,0.8)'; ctx.lineWidth=1; ctx.stroke();
+  });
+  // True minimum
+  const [mx, my] = toCanvasCoord([0,0], W, H, margin);
+  ctx.beginPath(); ctx.arc(mx, my, 7, 0, Math.PI*2);
+  ctx.fillStyle='rgba(255,50,50,0.3)'; ctx.fill();
+  ctx.strokeStyle='#ff4444'; ctx.lineWidth=2; ctx.stroke();
+  // Global best
+  const [gx, gy] = toCanvasCoord(gBest, W, H, margin);
+  const ggrd = ctx.createRadialGradient(gx,gy,0,gx,gy,14);
+  ggrd.addColorStop(0,'rgba(255,215,0,0.6)'); ggrd.addColorStop(1,'rgba(255,215,0,0)');
+  ctx.beginPath(); ctx.arc(gx,gy,14,0,Math.PI*2); ctx.fillStyle=ggrd; ctx.fill();
+  ctx.beginPath(); ctx.arc(gx,gy,6,0,Math.PI*2);
+  ctx.fillStyle='#ffd700'; ctx.fill();
+  ctx.strokeStyle='white'; ctx.lineWidth=2; ctx.stroke();
+  // Axis labels
+  ctx.fillStyle='rgba(255,255,255,0.4)'; ctx.font='10px IBM Plex Mono';
+  ctx.fillText('-5.12',margin,H-4); ctx.fillText('5.12',W-32,H-4);
+  // Update stats
+  const it = psoState.iter, bf = psoState.gBestF, gp = psoState.gBest;
+  document.getElementById('pso-iter').textContent = it;
+  document.getElementById('pso-iter2').textContent = it;
+  document.getElementById('pso-bestval').textContent = bf.toFixed(5);
+  document.getElementById('pso-best').textContent = bf.toFixed(5);
+  document.getElementById('pso-gpos').textContent = '(' + gp[0].toFixed(3) + ', ' + gp[1].toFixed(3) + ')';
+  updateMiniChart();
+}
+
+function updateMiniChart() {
+  if (!psoState || !psoChart) return;
+  const h = psoState.history;
+  const show = h.length > 100 ? h.filter((_,i)=>i%Math.ceil(h.length/100)===0) : h;
+  psoChart.data.labels = show.map((_,i)=>i);
+  psoChart.data.datasets[0].data = show;
+  psoChart.update('none');
+}
+
+function psoLoop() {
+  for (let i = 0; i < 3; i++) stepPSO();
+  renderPSO();
+  if (psoRunning) psoAnimId = requestAnimationFrame(psoLoop);
+}
+
+// Init mini chart
+window.addEventListener('load', () => {
+  const mc = document.getElementById('pso-mini-chart');
+  if (!mc) return;
+  psoMiniChartInstance = new Chart(mc, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        data: [], borderColor: '#00c8ff', borderWidth: 1.5,
+        fill: true, backgroundColor: 'rgba(0,200,255,0.08)',
+        pointRadius: 0, tension: 0.3
+      }]
+    },
+    options: {
+      animation: false, responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { display: false },
+        y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color:'#7a8899', font:{size:9}, maxTicksLimit:4 }, border:{color:'transparent'} }
+      }
+    }
+  });
+  psoChart = psoMiniChartInstance;
+  initPSO();
+  renderPSO();
+});
+
+document.getElementById('pso-start').addEventListener('click', () => {
+  if (!psoRunning) {
+    psoRunning = true;
+    document.getElementById('pso-start').disabled = true;
+    document.getElementById('pso-pause').disabled = false;
+    psoLoop();
+  }
+});
+document.getElementById('pso-pause').addEventListener('click', () => {
+  psoRunning = false;
+  cancelAnimationFrame(psoAnimId);
+  document.getElementById('pso-start').disabled = false;
+  document.getElementById('pso-pause').disabled = true;
+});
+document.getElementById('pso-reset').addEventListener('click', () => {
+  psoRunning = false;
+  cancelAnimationFrame(psoAnimId);
+  document.getElementById('pso-start').disabled = false;
+  document.getElementById('pso-pause').disabled = true;
+  initPSO();
+});
+
+['omega-sl','c1-sl','c2-sl'].forEach(id => {
+  document.getElementById(id).addEventListener('input', function() {
+    const label = id.replace('-sl','-val');
+    document.getElementById(label).textContent = parseFloat(this.value).toFixed(2);
+  });
+});
+document.getElementById('n-sl').addEventListener('input', function() {
+  document.getElementById('n-val').textContent = this.value;
+  psoRunning = false;
+  cancelAnimationFrame(psoAnimId);
+  document.getElementById('pso-start').disabled = false;
+  document.getElementById('pso-pause').disabled = true;
+  initPSO();
+});
+
+// ══════════════════════════════════════════════════════════════
+// DE STEPPER
+// ══════════════════════════════════════════════════════════════
+let deStep = 0;
+const DE_STEPS = 5;
+
+const stepTabs = document.querySelectorAll('.step-tab');
+stepTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const s = parseInt(tab.dataset.step);
+    goToDeStep(s);
+  });
+});
+document.getElementById('de-next').addEventListener('click', () => {
+  if (deStep < DE_STEPS-1) goToDeStep(deStep+1);
+});
+document.getElementById('de-prev').addEventListener('click', () => {
+  if (deStep > 0) goToDeStep(deStep-1);
+});
+
+function goToDeStep(s) {
+  deStep = s;
+  stepTabs.forEach((t,i) => t.classList.toggle('active', i===s));
+  document.querySelectorAll('.step-content').forEach((c,i) => c.classList.toggle('active', i===s));
+  document.querySelectorAll('.step-dot').forEach((d,i) => d.classList.toggle('active', i===s));
+  document.getElementById('de-step-text').textContent = 'Paso ' + (s+1) + ' de ' + DE_STEPS;
+  document.getElementById('de-prev').disabled = s===0;
+  document.getElementById('de-next').disabled = s===DE_STEPS-1;
+  drawDECanvas(s);
+}
+
+// Shared DE demo state
+const DE_POP = [
+  {x:1.8,y:2.5,c:'#7c5cfc'}, {x:3.5,y:1.2,c:'#7c5cfc'}, {x:0.8,y:3.8,c:'#7c5cfc'},
+  {x:2.9,y:3.2,c:'#7c5cfc'}, {x:1.5,y:1.0,c:'#7c5cfc'}, {x:4.0,y:2.8,c:'#7c5cfc'},
+  {x:3.2,y:0.5,c:'#7c5cfc'}, {x:0.5,y:2.0,c:'#7c5cfc'}
+];
+const Xi = {x:2.5, y:2.0};  // target
+const Va_idx=0, Vb_idx=2, Vc_idx=4; // indices
+const Va=DE_POP[Va_idx], Vb=DE_POP[Vb_idx], Vc=DE_POP[Vc_idx];
+const lambda=0.8;
+const Vd = {x: Va.x-Vc.x, y: Va.y-Vc.y};
+const Vm = {x: Math.min(5,Math.max(0,Vb.x + lambda*Vd.x)), y: Math.min(5,Math.max(0,Vb.y + lambda*Vd.y))};
+const pc_val = 0.5;
+const Vt = {x: (Math.random()<pc_val?Vm.x:Xi.x), y: (Math.random()<pc_val?Vm.y:Xi.y)};
+
+function drawAllDECanvases() {
+  for (let i = 0; i < DE_STEPS; i++) drawDECanvas(i);
+}
+
+function drawDECanvas(step) {
+  const canvas = document.getElementById('de-canvas-'+step);
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height;
+  const margin=50;
+  const tw=(W-2*margin)/5, th=(H-2*margin)/5;
+
+  // Background
+  ctx.fillStyle='#070e1c'; ctx.fillRect(0,0,W,H);
+
+  // Grid
+  ctx.strokeStyle='rgba(255,255,255,0.04)'; ctx.lineWidth=1;
+  for(let i=0;i<=5;i++){
+    const gx=margin+i*tw, gy=margin+i*th;
+    ctx.beginPath();ctx.moveTo(gx,margin);ctx.lineTo(gx,H-margin);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(margin,gy);ctx.lineTo(W-margin,gy);ctx.stroke();
+  }
+
+  function toC(p){ return [margin+p.x*tw, margin+p.y*th]; }
+
+  // Draw all population
+  DE_POP.forEach((p,i)=>{
+    const [cx,cy]=toC(p);
+    ctx.beginPath(); ctx.arc(cx,cy,5,0,Math.PI*2);
+    ctx.fillStyle='rgba(124,92,252,0.4)'; ctx.fill();
+    ctx.strokeStyle='rgba(124,92,252,0.8)'; ctx.lineWidth=1; ctx.stroke();
+  });
+
+  // Draw Xi (target)
+  const [xix,xiy]=toC(Xi);
+  ctx.beginPath(); ctx.arc(xix,xiy,7,0,Math.PI*2);
+  ctx.fillStyle='rgba(255,107,53,0.5)'; ctx.fill();
+  ctx.strokeStyle='#ff6b35'; ctx.lineWidth=2; ctx.stroke();
+  ctx.fillStyle='#ff6b35'; ctx.font='bold 11px IBM Plex Mono';
+  ctx.fillText('xᵢ (target)',xix+10,xiy+4);
+
+  function arrow(ctx,x1,y1,x2,y2,color){
+    ctx.setLineDash([]);
+    ctx.strokeStyle=color; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    var angle=Math.atan2(y2-y1,x2-x1);
+    ctx.fillStyle=color;
+    ctx.beginPath();
+    ctx.moveTo(x2,y2);
+    ctx.lineTo(x2-14*Math.cos(angle-0.4),y2-14*Math.sin(angle-0.4));
+    ctx.lineTo(x2-14*Math.cos(angle+0.4),y2-14*Math.sin(angle+0.4));
+    ctx.closePath(); ctx.fill();
+  }
+
+  const colorMap = {'#00c8ff':[0,200,255],'#ffd700':[255,215,0],'#00e5a0':[0,229,160]};
+
+  if (step >= 0) {
+    [[Va,'Va','#00c8ff'],[Vb,'Vb (base)','#ffd700'],[Vc,'Vc','#00e5a0']].forEach(function(arr){
+      var p=arr[0], lbl=arr[1], col=arr[2];
+      var pos=toC(p); var cx=pos[0], cy=pos[1];
+      var rgb=colorMap[col]||[200,200,200];
+      ctx.beginPath(); ctx.arc(cx,cy,10,0,Math.PI*2);
+      ctx.fillStyle='rgba('+rgb[0]+','+rgb[1]+','+rgb[2]+',0.18)'; ctx.fill();
+      ctx.strokeStyle=col; ctx.lineWidth=2.5; ctx.stroke();
+      ctx.fillStyle=col; ctx.font='bold 13px IBM Plex Mono';
+      ctx.fillText(lbl,cx+13,cy+5);
+    });
+  }
+
+  if (step >= 1) {
+    var vcPos=toC(Vc), vaPos=toC(Va);
+    var vcx=vcPos[0], vcy=vcPos[1], vax=vaPos[0], vay=vaPos[1];
+    ctx.save();
+    ctx.setLineDash([8,5]);
+    ctx.strokeStyle='rgba(0,229,160,0.7)'; ctx.lineWidth=2.5;
+    ctx.beginPath(); ctx.moveTo(vcx,vcy); ctx.lineTo(vax,vay); ctx.stroke();
+    ctx.restore();
+    ctx.setLineDash([]);
+    ctx.fillStyle='#00e5a0'; ctx.font='bold 13px IBM Plex Mono';
+    ctx.fillText('Vd = Va - Vc',(vcx+vax)/2+6,(vcy+vay)/2-10);
+  }
+
+  if (step >= 2) {
+    var vbPos=toC(Vb), vmPos=toC(Vm);
+    var vbx=vbPos[0], vby=vbPos[1], vmx=vmPos[0], vmy=vmPos[1];
+    arrow(ctx,vbx,vby,vmx,vmy,'#ff6b35');
+    ctx.beginPath(); ctx.arc(vmx,vmy,9,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,107,53,0.2)'; ctx.fill();
+    ctx.strokeStyle='#ff6b35'; ctx.lineWidth=2.5; ctx.stroke();
+    ctx.fillStyle='#ff6b35'; ctx.font='bold 13px IBM Plex Mono';
+    ctx.fillText('Vm = Vb + lam*Vd',vmx+12,vmy+5);
+  }
+
+  if (step >= 3) {
+    var vtPos=toC(Vt); var vtx=vtPos[0], vty=vtPos[1];
+    ctx.beginPath(); ctx.arc(vtx,vty,9,0,Math.PI*2);
+    ctx.fillStyle='rgba(255,215,0,0.22)'; ctx.fill();
+    ctx.strokeStyle='#ffd700'; ctx.lineWidth=2.5; ctx.stroke();
+    ctx.fillStyle='#ffd700'; ctx.font='bold 13px IBM Plex Mono';
+    ctx.fillText('Vt (trial)',vtx+12,vty+5);
+  }
+
+  if (step >= 4) {
+    var fTrial = Math.pow(Vt.x-2.5,2)+Math.pow(Vt.y-2.5,2);
+    var fTarget = Math.pow(Xi.x-2.5,2)+Math.pow(Xi.y-2.5,2);
+    var winner = fTrial < fTarget ? Vt : Xi;
+    var wPos=toC(winner); var wx=wPos[0], wy=wPos[1];
+    var glw=ctx.createRadialGradient(wx,wy,0,wx,wy,22);
+    glw.addColorStop(0,'rgba(0,229,160,0.4)'); glw.addColorStop(1,'rgba(0,229,160,0)');
+    ctx.beginPath(); ctx.arc(wx,wy,22,0,Math.PI*2); ctx.fillStyle=glw; ctx.fill();
+    ctx.beginPath(); ctx.arc(wx,wy,10,0,Math.PI*2);
+    ctx.fillStyle='#00e5a0'; ctx.fill();
+    ctx.strokeStyle='white'; ctx.lineWidth=2.5; ctx.stroke();
+    ctx.fillStyle='#00e5a0'; ctx.font='bold 13px IBM Plex Mono';
+    var label = fTrial<fTarget ? 'xi(t+1) = Vt [MEJOR]' : 'xi(t+1) = xi [SIN CAMBIO]';
+    ctx.fillText(label,wx+14,wy+5);
+  }
+}
+
+// DE param explorer
+document.getElementById('lambda-sl').addEventListener('input', function() {
+  const v = parseFloat(this.value);
+  document.getElementById('lambda-display').textContent = v.toFixed(2);
+  document.getElementById('lambda-bar').style.width = (v/2*100)+'%';
+  const desc = v < 0.45 ? 'Muy bajo: convergencia lenta, posible estancamiento.'
+    : v <= 0.95 ? `En rango óptimo [0.45, 0.95]. λ = ${v.toFixed(2)} → mutación ${v<0.7?'conservadora':'agresiva'}.`
+    : `λ > 0.95: alta exploración, posible inestabilidad numérica.`;
+  document.getElementById('lambda-desc').textContent = desc;
+});
+document.getElementById('pc-sl').addEventListener('input', function() {
+  const v = parseFloat(this.value);
+  document.getElementById('pc-display').textContent = v.toFixed(2);
+  document.getElementById('pc-bar').style.width = (v*100)+'%';
+  const desc = v < 0.1 ? 'Muy bajo: trial vector casi idéntico al padre. Poca exploración.'
+    : v <= 0.8 ? `En rango recomendado [0.1, 0.8]. pₓ = ${v.toFixed(2)} → ${Math.round(v*100)}% componentes del mutante.`
+    : `Alto: trial vector dominado por el mutante. Convergencia rápida pero menos diversidad.`;
+  document.getElementById('pc-desc').textContent = desc;
+});
+
+// ══════════════════════════════════════════════════════════════
+// CONVERGENCE CHART
+// ══════════════════════════════════════════════════════════════
+function initConvChart() {
+  // Simulate convergence curves
+  function simPSO(seed) {
+    let rng = seed; function rand(){rng=(rng*1664525+1013904223)&0xffffffff;return(rng>>>0)/0xffffffff;}
+    let best=80, hist=[];
+    for(let i=0;i<500;i++){
+      const decay=0.72*Math.pow(0.995,i);
+      best=Math.max(0, best-rand()*decay*2.5);
+      hist.push(best+rand()*1.5-0.75);
+    }
+    return hist.map(v=>Math.max(0,v));
+  }
+  function simDE(seed) {
+    let rng=seed; function rand(){rng=(rng*1664525+1013904223)&0xffffffff;return(rng>>>0)/0xffffffff;}
+    let best=80, hist=[];
+    for(let i=0;i<500;i++){
+      const decay=0.6*Math.pow(0.993,i);
+      best=Math.max(0, best-rand()*decay*1.8);
+      hist.push(best+rand()*1.2-0.6);
+    }
+    return hist.map(v=>Math.max(0,v));
+  }
+  const psoRuns=Array.from({length:5},(_,i)=>simPSO(42+i*7));
+  const deRuns=Array.from({length:5},(_,i)=>simDE(123+i*11));
+  const len=500;
+  const labels=Array.from({length:len},(_,i)=>i);
+  const psoMean=labels.map(i=>psoRuns.reduce((s,r)=>s+r[i],0)/psoRuns.length);
+  const deMean=labels.map(i=>deRuns.reduce((s,r)=>s+r[i],0)/deRuns.length);
+  const psoStd=labels.map(i=>{const m=psoMean[i];return Math.sqrt(psoRuns.reduce((s,r)=>s+(r[i]-m)**2,0)/psoRuns.length);});
+  const deStd=labels.map(i=>{const m=deMean[i];return Math.sqrt(deRuns.reduce((s,r)=>s+(r[i]-m)**2,0)/deRuns.length);});
+
+  const ctx2 = document.getElementById('conv-chart').getContext('2d');
+  convChartInstance = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: labels.filter((_,i)=>i%5===0),
+      datasets: [
+        {label:'PSO — Media', data:psoMean.filter((_,i)=>i%5===0), borderColor:'#00c8ff', borderWidth:2, fill:false, pointRadius:0, tension:0.4},
+        {label:'PSO — ±1σ', data:psoMean.filter((_,i)=>i%5===0).map((v,i)=>v+psoStd.filter((_,j)=>j%5===0)[i]), borderColor:'rgba(0,200,255,0.15)', borderWidth:1, fill:false, pointRadius:0, tension:0.4},
+        {label:'PSO — -1σ', data:psoMean.filter((_,i)=>i%5===0).map((v,i)=>Math.max(0,v-psoStd.filter((_,j)=>j%5===0)[i])), borderColor:'rgba(0,200,255,0.15)', borderWidth:1, fill:'-1', backgroundColor:'rgba(0,200,255,0.06)', pointRadius:0, tension:0.4},
+        {label:'DE — Media', data:deMean.filter((_,i)=>i%5===0), borderColor:'#7c5cfc', borderWidth:2, fill:false, pointRadius:0, tension:0.4},
+        {label:'DE — ±1σ', data:deMean.filter((_,i)=>i%5===0).map((v,i)=>v+deStd.filter((_,j)=>j%5===0)[i]), borderColor:'rgba(124,92,252,0.15)', borderWidth:1, fill:false, pointRadius:0, tension:0.4},
+        {label:'DE — -1σ', data:deMean.filter((_,i)=>i%5===0).map((v,i)=>Math.max(0,v-deStd.filter((_,j)=>j%5===0)[i])), borderColor:'rgba(124,92,252,0.15)', borderWidth:1, fill:'-1', backgroundColor:'rgba(124,92,252,0.06)', pointRadius:0, tension:0.4},
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, animation:{duration:600},
+      plugins: {
+        legend:{labels:{color:'#7a8899',font:{size:11,family:'IBM Plex Mono'},filter:item=>!item.text.includes('σ')}},
+        tooltip:{mode:'index',intersect:false,backgroundColor:'rgba(5,10,20,0.9)',
+          borderColor:'rgba(255,255,255,0.1)',borderWidth:1,
+          titleColor:'#e2e8f0',bodyColor:'#7a8899',
+          filter:item=>!item.dataset.label.includes('σ')}
+      },
+      scales:{
+        x:{ticks:{color:'#7a8899',font:{size:10},maxTicksLimit:10},
+           grid:{color:'rgba(255,255,255,0.04)'},
+           title:{display:true,text:'Iteración',color:'#7a8899',font:{size:11}}},
+        y:{ticks:{color:'#7a8899',font:{size:10}},
+           grid:{color:'rgba(255,255,255,0.04)'},
+           title:{display:true,text:'f(g*) / f(best)',color:'#7a8899',font:{size:11}}}
+      }
+    }
+  });
+}
+
+// Draw DE canvases when tab loads
+setTimeout(() => { drawDECanvas(0); }, 200);
+
+// Resize charts on window resize
+window.addEventListener('resize', function() {
+  if (psoMiniChartInstance) psoMiniChartInstance.resize();
+  if (convChartInstance) convChartInstance.resize();
+});
+</script>
+</body>
+</html>

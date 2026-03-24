@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evaluación · PSO & Evolución Diferencial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+MathJax = {
+  tex: { inlineMath:[['$','$'],['\\(','\\)']], displayMath:[['$$','$$'],['\\[','\\]']] },
+  svg: { fontCache:'global' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#06080f;
+  --surface:#0c1120;
+  --surface2:#111827;
+  --border:rgba(255,255,255,0.07);
+  --accent:#00d4ff;
+  --accent2:#7c5cfc;
+  --green:#00e5a0;
+  --red:#ff4d6d;
+  --gold:#fbbf24;
+  --text:#e8edf4;
+  --muted:#6b7a8d;
+  --ff-d:'Playfair Display',Georgia,serif;
+  --ff-b:'IBM Plex Sans',system-ui,sans-serif;
+  --ff-m:'IBM Plex Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--ff-b);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ── GRID BG ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,255,0.025) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 100% 50% at 50% 0%,rgba(124,92,252,0.07) 0%,transparent 65%);
+}
+
+/* ── LAYOUT ── */
+.wrapper{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:40px 24px 100px}
+
+/* ── HEADER ── */
+.quiz-header{text-align:center;margin-bottom:48px;animation:fadeDown 0.6s ease}
+.quiz-eyebrow{
+  font-family:var(--ff-m);font-size:10px;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:16px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.eyebrow-line{flex:1;max-width:80px;height:1px;background:rgba(0,212,255,0.25)}
+.quiz-title{
+  font-family:var(--ff-d);font-size:clamp(2rem,5vw,3rem);font-weight:900;
+  line-height:1.1;margin-bottom:12px;
+  background:linear-gradient(135deg,#fff 0%,#b8d8f0 40%,var(--accent) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.quiz-sub{font-family:var(--ff-d);font-style:italic;color:var(--muted);font-size:1rem}
+
+/* ── PROGRESS ── */
+.progress-wrap{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:20px 24px;margin-bottom:32px;
+  display:flex;align-items:center;gap:20px;
+}
+.progress-track{
+  flex:1;height:6px;background:rgba(255,255,255,0.06);
+  border-radius:3px;overflow:hidden;
+}
+.progress-fill{
+  height:100%;border-radius:3px;
+  background:linear-gradient(90deg,var(--accent2),var(--accent));
+  transition:width 0.5s cubic-bezier(.4,0,.2,1);
+}
+.progress-meta{
+  font-family:var(--ff-m);font-size:11px;color:var(--muted);
+  white-space:nowrap;
+}
+.progress-meta strong{color:var(--accent);font-size:13px}
+
+/* ── SCORE PILLS ── */
+.score-pills{
+  display:flex;gap:10px;justify-content:center;margin-bottom:28px;
+  font-family:var(--ff-m);font-size:11px;
+}
+.pill{
+  padding:5px 14px;border-radius:20px;letter-spacing:.06em;
+}
+.pill-correct{background:rgba(0,229,160,0.1);border:1px solid rgba(0,229,160,0.25);color:var(--green)}
+.pill-wrong{background:rgba(255,77,109,0.1);border:1px solid rgba(255,77,109,0.25);color:var(--red)}
+.pill-pending{background:rgba(255,255,255,0.04);border:1px solid var(--border);color:var(--muted)}
+
+/* ── LEVEL BADGE ── */
+.level-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--ff-m);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  padding:3px 10px;border-radius:2px;margin-bottom:12px;
+}
+.level-1{background:rgba(0,229,160,0.08);border:1px solid rgba(0,229,160,0.2);color:var(--green)}
+.level-2{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);color:var(--accent)}
+.level-3{background:rgba(124,92,252,0.08);border:1px solid rgba(124,92,252,0.3);color:#a585ff}
+.level-4{background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.25);color:var(--gold)}
+.level-5{background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.25);color:var(--red)}
+
+/* ── QUESTION CARD ── */
+.q-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;overflow:hidden;margin-bottom:24px;
+  animation:slideUp 0.4s ease;
+}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+.q-header{
+  padding:24px 28px 20px;border-bottom:1px solid var(--border);
+}
+.q-num{
+  font-family:var(--ff-m);font-size:9px;letter-spacing:.2em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.q-text{
+  font-size:1.05rem;font-weight:500;line-height:1.55;color:var(--text);
+}
+.q-eq{
+  margin:12px 0 0;padding:12px 16px;
+  background:rgba(0,0,0,0.3);border:1px solid var(--border);
+  border-radius:6px;font-size:1rem;overflow-x:auto;
+}
+
+/* ── OPTIONS ── */
+.options{padding:20px 28px;display:flex;flex-direction:column;gap:10px}
+.opt-btn{
+  display:flex;align-items:flex-start;gap:14px;
+  background:rgba(255,255,255,0.02);border:1px solid var(--border);
+  border-radius:8px;padding:14px 16px;cursor:pointer;
+  transition:all 0.2s;text-align:left;width:100%;
+  font-family:var(--ff-b);font-size:0.92rem;color:var(--text);
+  line-height:1.45;
+}
+.opt-btn:hover:not(:disabled){
+  background:rgba(0,212,255,0.05);
+  border-color:rgba(0,212,255,0.25);
+  transform:translateX(3px);
+}
+.opt-btn:disabled{cursor:default;transform:none!important}
+.opt-key{
+  flex-shrink:0;width:26px;height:26px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  font-family:var(--ff-m);font-size:11px;font-weight:600;color:var(--muted);
+  transition:all 0.2s;
+}
+.opt-btn.selected .opt-key{background:rgba(0,212,255,0.15);border-color:var(--accent);color:var(--accent)}
+.opt-btn.correct{background:rgba(0,229,160,0.07);border-color:rgba(0,229,160,0.35)}
+.opt-btn.correct .opt-key{background:rgba(0,229,160,0.2);border-color:var(--green);color:var(--green)}
+.opt-btn.wrong{background:rgba(255,77,109,0.06);border-color:rgba(255,77,109,0.3)}
+.opt-btn.wrong .opt-key{background:rgba(255,77,109,0.15);border-color:var(--red);color:var(--red)}
+.opt-btn.missed{border-color:rgba(0,229,160,0.25)}
+.opt-icon{margin-left:auto;flex-shrink:0;font-size:14px;opacity:0;transition:opacity 0.2s}
+.opt-btn.correct .opt-icon,.opt-btn.wrong .opt-icon{opacity:1}
+
+/* ── SUBMIT / NAV ── */
+.q-footer{
+  padding:16px 28px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.btn-submit{
+  padding:10px 28px;border-radius:6px;border:none;cursor:pointer;
+  font-family:var(--ff-m);font-size:11px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:var(--accent);color:#06080f;
+  transition:all 0.2s;
+}
+.btn-submit:hover:not(:disabled){background:#33dcff;box-shadow:0 0 16px rgba(0,212,255,0.3)}
+.btn-submit:disabled{opacity:.35;cursor:not-allowed}
+.btn-next{
+  padding:10px 24px;border-radius:6px;border:1px solid var(--border);cursor:pointer;
+  font-family:var(--ff-m);font-size:11px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;color:var(--muted);
+  transition:all 0.2s;
+}
+.btn-next:hover{border-color:var(--accent);color:var(--accent)}
+.hint-text{font-family:var(--ff-m);font-size:10px;color:var(--muted)}
+
+/* ── SOLUTION PANEL ── */
+.solution{
+  display:none;margin:0 28px 24px;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;overflow:hidden;
+  animation:slideUp 0.35s ease;
+}
+.solution.show{display:block}
+.solution-header{
+  padding:14px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.solution-verdict{
+  font-family:var(--ff-m);font-size:10px;letter-spacing:.15em;
+  text-transform:uppercase;font-weight:600;
+}
+.verdict-correct{color:var(--green)}
+.verdict-wrong{color:var(--red)}
+.solution-body{padding:20px}
+.step-list{display:flex;flex-direction:column;gap:14px}
+.step{
+  display:flex;gap:14px;align-items:flex-start;
+}
+.step-num{
+  flex-shrink:0;width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(124,92,252,0.15);border:1px solid rgba(124,92,252,0.3);
+  font-family:var(--ff-m);font-size:10px;font-weight:600;color:#a585ff;
+}
+.step-content{font-size:0.88rem;line-height:1.65;color:#b0bdc9}
+.step-content strong{color:var(--text);font-weight:600}
+.step-content em{color:var(--accent);font-style:normal}
+.step-eq{
+  margin:8px 0;padding:10px 14px;
+  background:rgba(0,0,0,0.4);border:1px solid rgba(124,92,252,0.2);
+  border-radius:4px;font-size:0.95rem;overflow-x:auto;display:inline-block;width:100%;
+}
+.key-insight{
+  margin-top:14px;padding:12px 16px;
+  background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);
+  border-radius:6px;font-size:0.84rem;color:var(--muted);
+  display:flex;gap:10px;align-items:flex-start;
+}
+.key-insight-icon{font-size:14px;flex-shrink:0}
+
+/* ── FINAL SCORE CARD ── */
+.final-card{
+  display:none;text-align:center;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:16px;padding:52px 40px;
+  animation:slideUp 0.5s ease;
+}
+.final-card.show{display:block}
+.score-ring{
+  width:140px;height:140px;margin:0 auto 28px;
+  position:relative;
+}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring-bg{fill:none;stroke:rgba(255,255,255,0.05);stroke-width:8}
+.score-ring-fill{fill:none;stroke-width:8;stroke-linecap:round;
+  stroke-dasharray:376;stroke-dashoffset:376;
+  transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
+.score-number{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.score-pts{font-family:var(--ff-d);font-size:2.8rem;font-weight:900;line-height:1}
+.score-of{font-family:var(--ff-m);font-size:10px;color:var(--muted);letter-spacing:.1em;margin-top:4px}
+.final-title{font-family:var(--ff-d);font-size:1.8rem;font-weight:700;margin-bottom:8px}
+.final-sub{color:var(--muted);font-style:italic;font-family:var(--ff-d);margin-bottom:32px}
+.final-breakdown{
+  display:flex;justify-content:center;gap:24px;margin-bottom:32px;flex-wrap:wrap;
+}
+.breakdown-item{
+  background:rgba(255,255,255,0.03);border:1px solid var(--border);
+  border-radius:8px;padding:16px 20px;min-width:100px;
+}
+.breakdown-val{font-family:var(--ff-d);font-size:2rem;font-weight:700;line-height:1}
+.breakdown-lbl{font-family:var(--ff-m);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.btn-restart{
+  padding:12px 36px;border-radius:6px;border:none;cursor:pointer;
+  font-family:var(--ff-m);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff;
+  transition:all 0.2s;
+}
+.btn-restart:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,212,255,0.2)}
+
+/* question number nav dots */
+.q-nav{
+  display:flex;justify-content:center;gap:8px;margin-bottom:28px;flex-wrap:wrap;
+}
+.q-dot{
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-m);font-size:10px;font-weight:600;
+  border:1px solid var(--border);color:var(--muted);
+  background:rgba(255,255,255,0.02);
+  transition:all 0.25s;cursor:default;
+}
+.q-dot.active{border-color:var(--accent);color:var(--accent);background:rgba(0,212,255,0.08)}
+.q-dot.done-c{border-color:rgba(0,229,160,0.4);color:var(--green);background:rgba(0,229,160,0.07)}
+.q-dot.done-w{border-color:rgba(255,77,109,0.4);color:var(--red);background:rgba(255,77,109,0.06)}
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HEADER -->
+  <header class="quiz-header">
+    <div class="quiz-eyebrow">
+      <span class="eyebrow-line"></span>
+      MÓDULO 4 · ITESM Santa Fe · 2026
+      <span class="eyebrow-line"></span>
+    </div>
+    <h1 class="quiz-title">Evaluación Formativa</h1>
+    <p class="quiz-sub">PSO & Evolución Diferencial — Básico a Avanzado</p>
+  </header>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap">
+    <div class="progress-track">
+      <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+    </div>
+    <div class="progress-meta">
+      Pregunta <strong id="prog-num">1</strong> de <strong>7</strong>
+    </div>
+  </div>
+
+  <!-- SCORE PILLS -->
+  <div class="score-pills">
+    <span class="pill pill-correct">✓ <span id="cnt-c">0</span> correctas</span>
+    <span class="pill pill-wrong">✗ <span id="cnt-w">0</span> incorrectas</span>
+    <span class="pill pill-pending">◌ <span id="cnt-p">7</span> pendientes</span>
+  </div>
+
+  <!-- Q NAV DOTS -->
+  <div class="q-nav" id="q-nav"></div>
+
+  <!-- QUESTIONS CONTAINER -->
+  <div id="q-container"></div>
+
+  <!-- FINAL CARD -->
+  <div class="final-card" id="final-card">
+    <div class="score-ring">
+      <svg viewBox="0 0 120 120" width="140" height="140">
+        <circle class="score-ring-bg" cx="60" cy="60" r="54"/>
+        <circle class="score-ring-fill" id="ring-fill" cx="60" cy="60" r="54"/>
+      </svg>
+      <div class="score-number">
+        <div class="score-pts" id="final-pts">0</div>
+        <div class="score-of">de 7</div>
+      </div>
+    </div>
+    <h2 class="final-title" id="final-title">—</h2>
+    <p class="final-sub" id="final-sub">—</p>
+    <div class="final-breakdown">
+      <div class="breakdown-item">
+        <div class="breakdown-val" style="color:var(--green)" id="bd-c">0</div>
+        <div class="breakdown-lbl">Correctas</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-val" style="color:var(--red)" id="bd-w">0</div>
+        <div class="breakdown-lbl">Incorrectas</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="breakdown-val" style="color:var(--gold)" id="bd-pct">0%</div>
+        <div class="breakdown-lbl">Calificación</div>
+      </div>
+    </div>
+    <button class="btn-restart" onclick="restart()">↺ Reiniciar evaluación</button>
+  </div>
+
+</div>
+
+<script>
+// ════════════════════════════════════════════
+// QUIZ DATA — 7 preguntas, básico → avanzado
+// ════════════════════════════════════════════
+const QUESTIONS = [
+{
+  id:1,
+  level:1, levelLabel:'Básico',
+  topic:'PSO · Historia',
+  text:'¿En qué año y por quiénes fue publicado el algoritmo original de Particle Swarm Optimization (PSO)?',
+  eq:null,
+  opts:[
+    {k:'A', t:'Holland & Goldberg, 1975', correct:false},
+    {k:'B', t:'Kennedy & Eberhart, 1995', correct:true},
+    {k:'C', t:'Price & Storn, 1996', correct:false},
+    {k:'D', t:'Dorigo & Gambardella, 1992', correct:false},
+  ],
+  solution:{
+    verdict:'Kennedy & Eberhart (1995) en <em>ICNN\'95</em> es la respuesta correcta.',
+    steps:[
+      {n:1, html:'<strong>Descarta Holland & Goldberg (1975):</strong> Holland creó los <em>Algoritmos Genéticos</em> (GA) en su libro <em>Adaptation in Natural and Artificial Systems</em>. Goldberg popularizó los GA. No tienen relación directa con PSO.'},
+      {n:2, html:'<strong>Descarta Price & Storn (1996):</strong> Estos son los autores de la <em>Evolución Diferencial</em> (DE), presentada en NAFIPS\'96, un año después de PSO y con mecanismos muy distintos.'},
+      {n:3, html:'<strong>Descarta Dorigo & Gambardella (1992):</strong> Dorigo es el padre de <em>Ant Colony Optimization</em> (ACO), otra metaheurística bio-inspirada basada en feromonas, no en bandadas.'},
+      {n:4, html:'<strong>Confirma Kennedy & Eberhart (1995):</strong> James Kennedy (psicólogo social) y Russell Eberhart (ingeniero eléctrico) combinaron observaciones del comportamiento de bandadas de aves con modelos computacionales. El paper original se llama <em>"Particle Swarm Optimization"</em>, Proceedings of ICNN\'95, vol. 4, pp. 1942–1948.'},
+    ],
+    insight:'La colaboración interdisciplinaria Kennedy-Eberhart es un ejemplo paradigmático: un psicólogo y un ingeniero crearon uno de los algoritmos de optimización más influyentes del siglo XX.'
+  }
+},
+{
+  id:2,
+  level:1, levelLabel:'Básico',
+  topic:'PSO · Reglas de Reynolds',
+  text:'Craig Reynolds identificó en 1987 que el comportamiento emergente de las bandadas surge de reglas locales simples. ¿Cuáles son las tres reglas correctas?',
+  eq:null,
+  opts:[
+    {k:'A', t:'Mutación, Cruzamiento, Selección', correct:false},
+    {k:'B', t:'Inercia, Componente cognitiva, Componente social', correct:false},
+    {k:'C', t:'Alineación, Cohesión, Separación', correct:true},
+    {k:'D', t:'Exploración, Explotación, Convergencia', correct:false},
+  ],
+  solution:{
+    verdict:'Las tres reglas de Reynolds son <em>Alineación, Cohesión y Separación</em>.',
+    steps:[
+      {n:1, html:'<strong>Descarta Mutación / Cruzamiento / Selección:</strong> Son operadores de los <em>Algoritmos Genéticos</em> (GA). No tienen nada que ver con el modelo de bandadas de Reynolds.'},
+      {n:2, html:'<strong>Descarta Inercia / Componente cognitiva / Componente social:</strong> Estos son los <em>tres componentes de la ecuación de velocidad de PSO</em> (Clerc & Kennedy, 2002), que derivan de las reglas de Reynolds, pero no son las reglas en sí mismas.'},
+      {n:3, html:'<strong>Descarta Exploración / Explotación / Convergencia:</strong> Conceptos generales de teoría de optimización heurística, no las reglas específicas de Reynolds.'},
+      {n:4, html:'<strong>Confirma Alineación, Cohesión, Separación:</strong> <br>• <strong>Alineación</strong>: seguir el rumbo promedio de los vecinos.<br>• <strong>Cohesión</strong>: moverse hacia la posición promedio del grupo.<br>• <strong>Separación</strong>: evitar colisionar con vecinos inmediatos.<br>Publicadas en <em>"Flocks, Herds and Schools: A Distributed Behavioral Model"</em>, SIGGRAPH \'87.'},
+    ],
+    insight:'Reynolds llamó a sus agentes "boids" (bird-oids). Kennedy y Eberhart tradujeron estas tres reglas sociales en los tres términos de la ecuación de velocidad de PSO.'
+  }
+},
+{
+  id:3,
+  level:2, levelLabel:'Básico-Intermedio',
+  topic:'PSO · Ecuación de Velocidad',
+  text:'La ecuación central de PSO actualiza la velocidad de cada partícula. ¿Cuál de las siguientes opciones es la formulación correcta?',
+  eq:'Selecciona la ecuación correcta de actualización de velocidad.',
+  opts:[
+    {k:'A', t:'v_i(t+1) = ω·v_i(t) + α·ε₁·[x_i*(t) − x_i(t)] + β·ε₂·[g* − x_i(t)]', correct:true},
+    {k:'B', t:'v_i(t+1) = ω·x_i(t) + α·ε₁·[g* − v_i(t)]', correct:false},
+    {k:'C', t:'x_i(t+1) = x_i(t) + α·[g* − x_i(t)] + ε·σ', correct:false},
+    {k:'D', t:'v_i(t+1) = V_b + λ·(V_a − V_c)', correct:false},
+  ],
+  solution:{
+    verdict:'La opción A es la ecuación completa y correcta de PSO.',
+    steps:[
+      {n:1, html:'<strong>Descarta opción B:</strong> Confunde posición con velocidad: usa $x_i(t)$ donde debería ir $v_i(t)$, y elimina el término cognitivo (memoria del mejor personal $x_i^*$). Es estructuralmente incorrecta.'},
+      {n:2, html:'<strong>Descarta opción C:</strong> Esta es la forma simplificada de un <em>gradiente estocástico</em> o de un algoritmo de búsqueda directa, no de PSO. Actualiza posición (no velocidad) y no tiene término inercial.'},
+      {n:3, html:'<strong>Descarta opción D:</strong> Esta es exactamente la ecuación de <em>Mutación Diferencial</em> de DE: $V_m = V_b + \\lambda(V_a - V_c)$. Es un distractor muy plausible pero corresponde al algoritmo equivocado.'},
+      {n:4, html:'<strong>Confirma opción A:</strong> La ecuación correcta es:'},
+      {n:5, html:'<div class="step-eq">$$v_i^{t+1} = \\underbrace{\\omega v_i^t}_{\\text{inercia}} + \\underbrace{\\alpha\\epsilon_1[x_i^* - x_i^t]}_{\\text{cognitiva (memoria)}} + \\underbrace{\\beta\\epsilon_2[g^* - x_i^t]}_{\\text{social (enjambre)}}$$</div>donde $\\epsilon_1, \\epsilon_2 \\sim U[0,1]$ son números aleatorios que introducen estocasticidad en cada componente.'},
+    ],
+    insight:'El orden de los términos importa conceptualmente: primero la inercia (qué hacía la partícula), luego la memoria individual (lo mejor que ha visto), finalmente la influencia social (lo mejor que vio el enjambre).'
+  }
+},
+{
+  id:4,
+  level:2, levelLabel:'Intermedio',
+  topic:'DE · Mutación Diferencial',
+  text:'En el esquema DE/rand/1, para crear el vector mutante V_m a partir de un individuo objetivo x_i, ¿cuántos vectores distintos se seleccionan aleatoriamente de la población y cuál es su rol?',
+  eq:null,
+  opts:[
+    {k:'A', t:'Dos vectores: uno como base y otro como diferencia', correct:false},
+    {k:'B', t:'Tres vectores: V_b (base), V_a y V_c (para calcular la diferencia)', correct:true},
+    {k:'C', t:'Un vector: el mejor individuo de la generación (best)', correct:false},
+    {k:'D', t:'Cuatro vectores: dos pares para calcular dos diferencias escaladas', correct:false},
+  ],
+  solution:{
+    verdict:'Son <em>tres vectores distintos</em>: un vector base $V_b$ y dos para calcular la diferencia $V_a - V_c$.',
+    steps:[
+      {n:1, html:'<strong>Descarta dos vectores:</strong> Con solo dos vectores se puede calcular una diferencia, pero no se tiene un vector base independiente. El esquema /rand/1 requiere explícitamente tres índices distintos: $a \\neq b \\neq c \\neq i$.'},
+      {n:2, html:'<strong>Descarta un vector (best):</strong> Eso describiría el esquema <em>DE/best/1</em>, donde el vector base es el mejor individuo. En DE/rand/1 el vector base también es aleatorio, no el mejor.'},
+      {n:3, html:'<strong>Descarta cuatro vectores:</strong> El esquema que usa dos diferencias se llama DE/rand/2 y su fórmula es $V_m = V_b + \\lambda_1(V_{a1}-V_{c1}) + \\lambda_2(V_{a2}-V_{c2})$. No es DE/rand/1.'},
+      {n:4, html:'<strong>Confirma tres vectores:</strong> La operación de mutación DE/rand/1 es:'},
+      {n:5, html:'<div class="step-eq">$$V_m = \\underbrace{V_b}_{\\text{vector base}} + \\lambda \\cdot \\underbrace{(V_a - V_c)}_{\\text{vector diferencia}}$$con $a, b, c \\in \\{1,\\ldots,N\\} \\setminus \\{i\\}$, todos distintos entre sí.</div>El requisito $N \\geq 4$ (3 vectores + el objetivo) es la restricción mínima del tamaño de población en DE.'},
+    ],
+    insight:'La nomenclatura DE/rand/1/bin se lee: DE = Differential Evolution, rand = vector base aleatorio, 1 = una diferencia vectorial, bin = cruzamiento binomial. Cada parte del nombre especifica exactamente la variante del algoritmo.'
+  }
+},
+{
+  id:5,
+  level:3, levelLabel:'Intermedio',
+  topic:'DE · Parámetros de Control',
+  text:'Dado el siguiente código en Python, ¿qué problema fundamental tiene la configuración de parámetros?',
+  eq:'result = differential_evolution(func, bounds, mutation=1.8, recombination=0.95, popsize=3)',
+  opts:[
+    {k:'A', t:'No hay ningún problema: mutation=1.8 y recombination=0.95 están en rango válido', correct:false},
+    {k:'B', t:'mutation=1.8 está fuera del rango óptimo [0.45, 0.95] y popsize=3 puede ser insuficiente (requiere N ≥ 4)', correct:true},
+    {k:'C', t:'El parámetro correcto es "lambda" no "mutation"; recombination debe ser entero', correct:false},
+    {k:'D', t:'Solo popsize=3 es un problema; mutation=1.8 es válido para búsqueda global agresiva', correct:false},
+  ],
+  solution:{
+    verdict:'Hay <em>dos problemas simultáneos</em>: factor de mutación fuera de rango óptimo y tamaño de población insuficiente.',
+    steps:[
+      {n:1, html:'<strong>Problema 1 — mutation=1.8 fuera del rango óptimo:</strong> Yang (2020) establece que el rango efectivo para $\\lambda$ (llamado <em>mutation</em> o <em>F</em> en SciPy) es $[0.45, 0.95]$. Valores superiores a 1 producen vectores mutantes que pueden saltar fuera de los límites del espacio de búsqueda, generando inestabilidad y convergencia errática.'},
+      {n:2, html:'<strong>Problema 2 — popsize=3 insuficiente:</strong> En SciPy, <em>popsize</em> es un multiplicador: $N = popsize \\times d$. Para $d=1$ esto da $N=3$. Pero DE/rand/1 requiere <em>mínimo</em> $N \\geq 4$ (el individuo objetivo + 3 vectores distintos). Con $N=3$, el algoritmo no puede muestrear tres vectores distintos al objetivo y falla o produce resultados degenerados.'},
+      {n:3, html:'<strong>Descarta opción A:</strong> mutation=1.8 está técnicamente fuera del rango óptimo documentado $[0.45, 0.95]$. SciPy acepta el valor sin error pero el comportamiento es sub-óptimo o inestable.'},
+      {n:4, html:'<strong>Descarta opción C:</strong> En SciPy <em>mutation</em> es el nombre correcto del parámetro (equivale a $F$ o $\\lambda$). <em>recombination</em> (equivalente a $CR$ o $p_c$) debe ser un float en $[0,1]$, no un entero.'},
+      {n:5, html:'<strong>Configuración recomendada:</strong><div class="step-eq">differential_evolution(func, bounds, mutation=(0.5, 1.0), recombination=0.7, popsize=15, seed=42, workers=-1)</div>Nota: SciPy acepta una tupla para <em>mutation</em> que activa la estrategia dithering: $\\lambda \\sim U[0.5, 1.0]$ en cada generación.'},
+    ],
+    insight:'El "dithering" de $\\lambda$ (pasar una tupla en SciPy) es una heurística muy efectiva: mantiene diversidad en la escala de mutación a lo largo de las generaciones, especialmente útil en problemas multimodales.'
+  }
+},
+{
+  id:6,
+  level:4, levelLabel:'Avanzado',
+  topic:'PSO · Convergencia y Parámetros',
+  text:'Los parámetros canónicos de Clerc & Kennedy (2002) — ω = 0.7298, α = β = 1.49618 — se derivan del análisis de convergencia mediante el factor de constricción χ. ¿Cuál es la condición matemática que deben satisfacer α y β para garantizar la convergencia del enjambre?',
+  eq:'¿Qué condición sobre φ = α + β (con φ > 4) garantiza convergencia?',
+  opts:[
+    {k:'A', t:'φ = α + β < 4  (la suma de los factores de aceleración debe ser menor que 4)', correct:false},
+    {k:'B', t:'φ = α + β > 4  con  χ = 2/(φ − 2 − √(φ²−4φ)), lo que produce ω = χ ≈ 0.7298', correct:true},
+    {k:'C', t:'α = β exactamente (simetría cognitiva-social es condición necesaria de convergencia)', correct:false},
+    {k:'D', t:'ω > 1 siempre (la inercia debe ser mayor que 1 para evitar colapso del enjambre)', correct:false},
+  ],
+  solution:{
+    verdict:'La condición correcta es $\\phi > 4$ con el factor de constricción $\\chi = \\frac{2}{|\\phi - 2 - \\sqrt{\\phi^2 - 4\\phi}|}$.',
+    steps:[
+      {n:1, html:'<strong>Contexto — ¿por qué se necesita análisis de convergencia?</strong> Sin control, la velocidad de las partículas puede crecer indefinidamente (explosión), o el enjambre puede colapsar al óptimo antes de explorar el espacio. El factor de constricción χ fue introducido por Clerc (1999) para garantizar convergencia matemática.'},
+      {n:2, html:'<strong>Derivación del factor χ:</strong> Modelando la dinámica de una sola dimensión como un sistema lineal de segundo orden, se obtiene que la condición de estabilidad requiere $\\phi = \\alpha + \\beta > 4$. El factor de constricción es:'},
+      {n:3, html:'<div class="step-eq">$$\\chi = \\frac{2}{\\left|\\phi - 2 - \\sqrt{\\phi^2 - 4\\phi}\\right|}$$</div>Con $\\phi = 1.49618 + 1.49618 = 2.9924 \\times 2 = $ ... espera. El valor correcto: $\\alpha = \\beta = 1.49618$, por lo tanto $\\phi = 2 \\times 1.49618 = 2.9924$... ¡pero esto viola $\\phi > 4$!'},
+      {n:4, html:'<strong>Aclaración importante:</strong> Los parámetros canónicos de Clerc & Kennedy usan $c_1 = c_2 = 2.05$ (no 1.49618 directamente), dando $\\phi = 4.1 > 4$. El factor $\\chi = 0.7298$ se aplica multiplicando toda la ecuación de velocidad, lo que equivale a los valores que vemos: $\\omega = \\chi = 0.7298$, $c_1 = c_2 = \\chi \\times 2.05 = 1.49618$.'},
+      {n:5, html:'<strong>Descarta φ < 4:</strong> Es exactamente la condición opuesta. Con φ < 4 la raíz $\\sqrt{\\phi^2 - 4\\phi}$ es imaginaria y el sistema no converge al origen.<br><strong>Descarta α = β:</strong> La simetría cognitiva-social no es una condición de convergencia; solo es la elección estándar por simplicidad. Se puede tener $\\alpha \\neq \\beta$ y aun así converger.<br><strong>Descarta ω > 1:</strong> Valores ω > 1 producen velocidades divergentes; se requiere ω < 1 para convergencia.'},
+    ],
+    insight:'La derivación de Clerc & Kennedy unificó dos enfoques previos (peso de inercia de Shi-Eberhart y el factor de constricción original de Clerc) en una sola familia de parámetros verificablemente convergentes. Este resultado teórico convirtió a PSO de heurística empírica en algoritmo con garantías analíticas.'
+  }
+},
+{
+  id:7,
+  level:5, levelLabel:'Avanzado',
+  topic:'No Free Lunch & Comparativa',
+  text:'El Teorema de No Free Lunch (Wolpert & Macready, 1997) tiene implicaciones directas para comparar PSO vs DE. ¿Cuál de las siguientes afirmaciones lo interpreta correctamente en el contexto de estas metaheurísticas?',
+  eq:null,
+  opts:[
+    {k:'A', t:'NFL prueba que PSO siempre supera a DE en funciones continuas porque fue diseñado específicamente para ese dominio', correct:false},
+    {k:'B', t:'NFL establece que promediando sobre todas las posibles funciones objetivo, PSO y DE tienen el mismo rendimiento esperado; las ventajas observadas son siempre dominio-específicas', correct:true},
+    {k:'C', t:'NFL no aplica a metaheurísticas porque estas no realizan búsqueda exhaustiva del espacio', correct:false},
+    {k:'D', t:'NFL implica que ningún algoritmo puede superar a la búsqueda aleatoria en promedio, por lo que PSO y DE son teóricamente equivalentes a muestreo aleatorio', correct:false},
+  ],
+  solution:{
+    verdict:'NFL establece equivalencia <em>promediada sobre todas las funciones</em>; las ventajas son siempre específicas al dominio o clase de problema.',
+    steps:[
+      {n:1, html:'<strong>Enunciado formal del NFL (Wolpert & Macready, 1997):</strong> Para cualquier par de algoritmos de optimización $A_1$ y $A_2$, si se promedian sus rendimientos sobre <em>todas las posibles funciones objetivo</em>, ambos obtienen exactamente el mismo rendimiento esperado. Formalmente: $$\\sum_f P(d_y^m | f, m, A_1) = \\sum_f P(d_y^m | f, m, A_2)$$donde $d_y^m$ es la secuencia de valores de fitness observados en $m$ evaluaciones.'},
+      {n:2, html:'<strong>¿Qué implica prácticamente?</strong> Que cualquier ventaja de PSO sobre DE (o viceversa) es necesariamente específica a la <em>distribución de problemas del dominio</em>. PSO funciona bien en optimización continua con landscapes suaves porque los problemas del mundo real de ese tipo son una subclase sesgada, no la distribución uniforme sobre todas las funciones.'},
+      {n:3, html:'<strong>Descarta opción A:</strong> NFL prohíbe exactamente esta afirmación. No existe superioridad universal de ningún algoritmo. PSO puede ser mejor que DE en algunos problemas y peor en otros.'},
+      {n:4, html:'<strong>Descarta opción C:</strong> NFL aplica a <em>cualquier</em> algoritmo de optimización basado en muestras, incluyendo metaheurísticas. La condición es que el algoritmo evalúe la función objetivo en puntos del espacio, lo cual es exactamente lo que hacen PSO y DE.'},
+      {n:5, html:'<strong>Descarta opción D:</strong> Esta es una sobre-interpretación común. NFL dice equivalencia al <em>promediar sobre todas las funciones</em>, pero en la práctica trabajamos con clases específicas de problemas donde sí existen diferencias reales. NFL no convierte a PSO/DE en equivalentes a búsqueda aleatoria en su dominio específico de aplicación.'},
+      {n:6, html:'<strong>Implicación para el diseño de experimentos:</strong> NFL exige que cualquier comparación entre algoritmos especifique claramente la clase de problemas estudiada. Benchmark suites como CEC 2014 (30 funciones) no cubren "todas" las funciones, sino una muestra representativa de un nicho específico.'},
+    ],
+    insight:'El corolario práctico del NFL para el economista computacional: no busques el "mejor algoritmo para todo". Busca el algoritmo mejor calibrado para la clase de problemas de tu dominio. Para mercados inmobiliarios con funciones hedónicas rugosas y alta dimensión, DE suele ganar. Para calibración rápida con pocas evaluaciones, PSO compite bien.'
+  }
+}
+];
+
+// ════════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════════
+let state = {
+  current: 0,
+  answers: new Array(QUESTIONS.length).fill(null), // null | {chosen, correct}
+  score: 0
+};
+
+// ════════════════════════════════════════════
+// RENDER
+// ════════════════════════════════════════════
+function buildNavDots() {
+  const nav = document.getElementById('q-nav');
+  nav.innerHTML = '';
+  QUESTIONS.forEach((q, i) => {
+    const d = document.createElement('div');
+    d.className = 'q-dot';
+    d.textContent = i + 1;
+    d.id = 'dot-' + i;
+    nav.appendChild(d);
+  });
+  updateDots();
+}
+
+function updateDots() {
+  QUESTIONS.forEach((q, i) => {
+    const d = document.getElementById('dot-' + i);
+    if (!d) return;
+    d.className = 'q-dot';
+    if (i === state.current) d.classList.add('active');
+    const ans = state.answers[i];
+    if (ans) {
+      d.classList.add(ans.correct ? 'done-c' : 'done-w');
+      d.textContent = ans.correct ? '✓' : '✗';
+    } else {
+      d.textContent = i + 1;
+    }
+  });
+}
+
+function updateProgress() {
+  const answered = state.answers.filter(a => a !== null).length;
+  const pct = Math.round((answered / QUESTIONS.length) * 100);
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('prog-num').textContent = state.current + 1;
+  const c = state.answers.filter(a => a && a.correct).length;
+  const w = state.answers.filter(a => a && !a.correct).length;
+  document.getElementById('cnt-c').textContent = c;
+  document.getElementById('cnt-w').textContent = w;
+  document.getElementById('cnt-p').textContent = QUESTIONS.length - answered;
+}
+
+const LEVEL_CLASSES = ['','level-1','level-2','level-3','level-4','level-5'];
+const LEVEL_ICONS   = ['','🟢','🔵','🟣','🟡','🔴'];
+
+function renderQuestion(idx) {
+  const container = document.getElementById('q-container');
+  container.innerHTML = '';
+  const q = QUESTIONS[idx];
+  const ans = state.answers[idx];
+  const answered = ans !== null;
+
+  const card = document.createElement('div');
+  card.className = 'q-card';
+  card.id = 'qcard-' + idx;
+
+  // Header
+  const hdr = document.createElement('div');
+  hdr.className = 'q-header';
+  hdr.innerHTML = `
+    <div class="q-num">
+      <span class="level-badge ${LEVEL_CLASSES[q.level]}">${LEVEL_ICONS[q.level]} Nivel ${q.level} — ${q.levelLabel}</span>
+      <span style="font-family:var(--ff-m);font-size:9px;letter-spacing:.1em;color:var(--muted)">${q.topic}</span>
+    </div>
+    <div class="q-text">${q.text}</div>
+    ${q.eq ? `<div class="q-eq"><code style="font-family:var(--ff-m);font-size:0.88rem;color:#a8d8f0">${q.eq}</code></div>` : ''}
+  `;
+  card.appendChild(hdr);
+
+  // Options
+  const optsDiv = document.createElement('div');
+  optsDiv.className = 'options';
+  q.opts.forEach((opt, oi) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.disabled = answered;
+    let icon = '';
+    if (answered) {
+      if (opt.correct) { btn.classList.add('correct'); icon = '✓'; }
+      else if (ans.chosen === oi) { btn.classList.add('wrong'); icon = '✗'; }
+      else { btn.classList.add('missed'); }
+    }
+    if (!answered) btn.addEventListener('click', () => selectOption(idx, oi, btn, optsDiv));
+    btn.innerHTML = `
+      <span class="opt-key">${opt.k}</span>
+      <span style="flex:1">${opt.t}</span>
+      <span class="opt-icon">${icon}</span>
+    `;
+    optsDiv.appendChild(btn);
+  });
+  card.appendChild(optsDiv);
+
+  // Footer
+  const footer = document.createElement('div');
+  footer.className = 'q-footer';
+
+  const hint = document.createElement('span');
+  hint.className = 'hint-text';
+  hint.textContent = answered ? '' : 'Selecciona una opción para responder';
+  footer.appendChild(hint);
+
+  const submitBtn = document.createElement('button');
+  submitBtn.className = 'btn-submit';
+  submitBtn.id = 'btn-submit-' + idx;
+  submitBtn.textContent = 'Confirmar respuesta';
+  submitBtn.disabled = true;
+  if (answered) submitBtn.style.display = 'none';
+  footer.appendChild(submitBtn);
+
+  if (answered) {
+    const nextBtn = document.createElement('button');
+    nextBtn.className = 'btn-next';
+    if (idx < QUESTIONS.length - 1) {
+      nextBtn.textContent = 'Siguiente →';
+      nextBtn.addEventListener('click', () => goTo(idx + 1));
+    } else {
+      nextBtn.textContent = 'Ver resultados →';
+      nextBtn.style.borderColor = 'var(--gold)';
+      nextBtn.style.color = 'var(--gold)';
+      nextBtn.addEventListener('click', showFinal);
+    }
+    footer.appendChild(nextBtn);
+  }
+  card.appendChild(footer);
+  container.appendChild(card);
+
+  // Solution
+  if (answered) {
+    renderSolution(idx, container, q, ans);
+  }
+
+  updateProgress();
+  updateDots();
+
+  // Typeset MathJax
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise([container]);
+  }
+}
+
+function selectOption(qIdx, optIdx, clickedBtn, optsDiv) {
+  // Deselect all
+  optsDiv.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  clickedBtn.classList.add('selected');
+  // Enable submit
+  const submitBtn = document.getElementById('btn-submit-' + qIdx);
+  submitBtn.disabled = false;
+  submitBtn.onclick = () => confirmAnswer(qIdx, optIdx, optsDiv);
+}
+
+function confirmAnswer(qIdx, optIdx, optsDiv) {
+  const q = QUESTIONS[qIdx];
+  const correct = q.opts[optIdx].correct;
+  state.answers[qIdx] = { chosen: optIdx, correct };
+  if (correct) state.score++;
+  renderQuestion(qIdx);
+}
+
+function renderSolution(idx, container, q, ans) {
+  const sol = document.createElement('div');
+  sol.className = 'solution show';
+
+  const isCorrect = ans.correct;
+  sol.innerHTML = `
+    <div class="solution-header">
+      <span style="font-size:18px">${isCorrect ? '✅' : '❌'}</span>
+      <span class="solution-verdict ${isCorrect ? 'verdict-correct' : 'verdict-wrong'}">
+        ${isCorrect ? 'Respuesta correcta' : 'Respuesta incorrecta'}
+      </span>
+      <span style="font-family:var(--ff-m);font-size:10px;color:var(--muted);margin-left:auto">
+        ${isCorrect ? '+1 punto' : '0 puntos'}
+      </span>
+    </div>
+    <div class="solution-body">
+      <div style="font-family:var(--ff-m);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px">
+        ▸ Solución paso a paso
+      </div>
+      <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px;font-style:italic">${q.solution.verdict}</p>
+      <div class="step-list">
+        ${q.solution.steps.map(s => `
+          <div class="step">
+            <div class="step-num">${s.n}</div>
+            <div class="step-content">${s.html}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="key-insight">
+        <span class="key-insight-icon">💡</span>
+        <span><strong style="color:var(--accent);font-weight:600">Concepto clave: </strong>${q.solution.insight}</span>
+      </div>
+    </div>
+  `;
+  container.appendChild(sol);
+}
+
+function goTo(idx) {
+  state.current = idx;
+  renderQuestion(idx);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showFinal() {
+  document.getElementById('q-container').style.display = 'none';
+  document.getElementById('final-card').classList.add('show');
+  document.querySelector('.q-nav').style.display = 'none';
+
+  const score = state.score;
+  const total = QUESTIONS.length;
+  const pct = Math.round((score / total) * 100);
+
+  document.getElementById('final-pts').textContent = score;
+  document.getElementById('bd-c').textContent = score;
+  document.getElementById('bd-w').textContent = total - score;
+  document.getElementById('bd-pct').textContent = pct + '%';
+
+  let title, sub;
+  if (pct === 100) { title = '¡Perfecto!'; sub = 'Dominio completo de PSO y Evolución Diferencial.'; }
+  else if (pct >= 85) { title = 'Excelente'; sub = 'Comprensión sólida. Revisa los detalles técnicos avanzados.'; }
+  else if (pct >= 70) { title = 'Bien'; sub = 'Fundamentos claros. Refuerza la teoría de convergencia.'; }
+  else if (pct >= 50) { title = 'Suficiente'; sub = 'Bases establecidas. Releer las secciones de ecuaciones y parámetros.'; }
+  else { title = 'Insuficiente'; sub = 'Revisar la infografía completa antes de re-intentar.'; }
+
+  document.getElementById('final-title').textContent = title;
+  document.getElementById('final-sub').textContent = sub;
+
+  // Score ring animation
+  const ring = document.getElementById('ring-fill');
+  const circumference = 2 * Math.PI * 54; // ≈ 339.3
+  const offset = circumference * (1 - score / total);
+  const color = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--gold)' : 'var(--red)';
+  ring.style.stroke = color;
+  ring.style.strokeDasharray = circumference;
+  setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
+
+  document.getElementById('final-pts').style.color = color;
+
+  updateProgress();
+}
+
+function restart() {
+  state = { current: 0, answers: new Array(QUESTIONS.length).fill(null), score: 0 };
+  document.getElementById('final-card').classList.remove('show');
+  document.getElementById('q-container').style.display = 'block';
+  document.querySelector('.q-nav').style.display = 'flex';
+  buildNavDots();
+  goTo(0);
+}
+
+// ════════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════════
+buildNavDots();
+renderQuestion(0);
+</script>
+</body>
+</html>
