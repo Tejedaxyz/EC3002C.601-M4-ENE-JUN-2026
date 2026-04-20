@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDIAM · Test de Evaluación · Módulo 4 ITESM-SF</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* ═══════════════════════════════════════════
+   DESIGN SYSTEM — Deep Slate × Phosphor Green × Bone
+═══════════════════════════════════════════ */
+:root {
+  --bg:      #0e1117;
+  --bg2:     #131720;
+  --bg3:     #181e2a;
+  --bg4:     #1f2636;
+  --surface: #242c3d;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --phos:    #00e5a0;
+  --phos-d:  #007a50;
+  --phos-dim: rgba(0,229,160,0.12);
+  --bone:    #e8e2d5;
+  --bone2:   #c8c0b0;
+  --amber:   #f59e0b;
+  --amber-d: #92600a;
+  --red:     #ef4444;
+  --red-d:   rgba(239,68,68,0.15);
+  --blue:    #60a5fa;
+  --text:    #d4cfc8;
+  --text-dim:#6b7280;
+  --text-mid:#9ca3af;
+  --ff-d: 'DM Serif Display', Georgia, serif;
+  --ff-m: 'JetBrains Mono', monospace;
+  --ff-b: 'Lora', Georgia, serif;
+  /* Levels */
+  --l1: #22c55e; --l2: #84cc16; --l3: #eab308;
+  --l4: #f97316; --l5: #ef4444;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--ff-b);
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--phos-d); border-radius: 3px; }
+
+/* ═══ PROGRESS ═══ */
+#bar {
+  position: fixed; top: 0; left: 0; z-index: 999;
+  height: 2px; width: 0%;
+  background: var(--phos);
+  transition: width 0.3s;
+  box-shadow: 0 0 10px var(--phos);
+}
+
+/* ═══ HEADER ═══ */
+.header {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border2);
+  padding: 0 5vw;
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(16px);
+}
+
+.header-inner {
+  max-width: 1060px; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  height: 56px;
+}
+
+.header-brand {
+  font-family: var(--ff-m);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--phos);
+}
+
+.header-meta {
+  display: flex; gap: 24px; align-items: center;
+}
+
+.hm-item {
+  font-family: var(--ff-m);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+}
+
+.hm-item span { color: var(--bone2); }
+
+/* ═══ HERO ═══ */
+.hero {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 64px 5vw 56px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse at 80% 50%, rgba(0,229,160,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(245,158,11,0.04) 0%, transparent 50%);
+}
+
+.hero-inner {
+  max-width: 1060px; margin: 0 auto;
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
+}
+
+.hero-tag {
+  font-family: var(--ff-m);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--phos);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+
+.hero-tag::before { content: ''; width: 28px; height: 1px; background: var(--phos); }
+
+.hero h1 {
+  font-family: var(--ff-d);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  color: var(--bone);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--phos);
+}
+
+.hero-desc {
+  font-size: 14px;
+  color: var(--text-mid);
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.hero-stats {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 3px;
+  min-width: 220px;
+}
+
+.hstat {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 18px;
+  text-align: center;
+}
+
+.hstat-v {
+  font-family: var(--ff-d);
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.hstat-l {
+  font-family: var(--ff-m);
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* ═══ LEVEL LEGEND ═══ */
+.legend {
+  max-width: 1060px; margin: 32px auto;
+  padding: 0 5vw;
+}
+
+.legend-inner {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 18px 24px;
+  display: flex; flex-wrap: wrap; gap: 20px; align-items: center;
+}
+
+.legend-label {
+  font-family: var(--ff-m);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-right: 8px;
+}
+
+.lv-pill {
+  display: flex; align-items: center; gap: 7px;
+  font-family: var(--ff-m);
+  font-size: 11px;
+}
+
+.lv-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+
+/* ═══ MAIN CONTAINER ═══ */
+.main {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 5vw 80px;
+}
+
+/* ═══ QUESTION CARD ═══ */
+.q-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 28px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.q-card.answered { border-color: var(--border2); }
+.q-card.correct  { border-color: rgba(0,229,160,0.4); }
+.q-card.wrong    { border-color: rgba(239,68,68,0.4); }
+
+/* ── Question Header ── */
+.q-head {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 24px 28px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.q-num-wrap {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex-shrink: 0;
+}
+
+.q-num {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--bg4);
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--ff-m);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bone2);
+}
+
+.q-level {
+  font-family: var(--ff-m);
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.q-body { flex: 1; }
+
+.q-topic {
+  font-family: var(--ff-m);
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.q-text {
+  font-family: var(--ff-b);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--bone);
+  font-weight: 500;
+}
+
+.q-text code {
+  font-family: var(--ff-m);
+  font-size: 12px;
+  background: var(--bg4);
+  color: var(--phos);
+  padding: 1px 6px;
+  border-radius: 2px;
+  border: 1px solid var(--border2);
+}
+
+/* ── Math Display ── */
+.q-math {
+  background: var(--bg4);
+  border-left: 3px solid var(--amber);
+  padding: 14px 20px;
+  margin: 14px 0;
+  font-family: var(--ff-m);
+  font-size: 13px;
+  line-height: 2;
+  color: var(--amber);
+  overflow-x: auto;
+}
+
+/* ── Options ── */
+.q-options {
+  padding: 20px 28px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.opt {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px;
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+.opt:hover:not(.disabled) {
+  border-color: var(--border2);
+  background: var(--surface);
+}
+
+.opt.disabled { cursor: default; }
+
+.opt-key {
+  font-family: var(--ff-m);
+  font-size: 11px;
+  font-weight: 700;
+  width: 26px; height: 26px;
+  border-radius: 4px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-dim);
+  transition: all 0.2s;
+}
+
+.opt-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-mid);
+  transition: color 0.2s;
+  padding-top: 2px;
+}
+
+.opt-text code {
+  font-family: var(--ff-m);
+  font-size: 11px;
+  background: rgba(255,255,255,0.06);
+  padding: 0 5px;
+  border-radius: 2px;
+}
+
+/* States */
+.opt.selected {
+  border-color: var(--phos-d);
+  background: rgba(0,229,160,0.05);
+}
+.opt.selected .opt-key {
+  background: var(--phos-d);
+  border-color: var(--phos);
+  color: var(--phos);
+}
+.opt.selected .opt-text { color: var(--bone); }
+
+.opt.correct-opt {
+  border-color: var(--phos) !important;
+  background: rgba(0,229,160,0.08) !important;
+}
+.opt.correct-opt .opt-key {
+  background: var(--phos);
+  color: #000;
+  border-color: var(--phos);
+}
+.opt.correct-opt .opt-text { color: var(--bone); }
+
+.opt.wrong-opt {
+  border-color: var(--red) !important;
+  background: rgba(239,68,68,0.08) !important;
+}
+.opt.wrong-opt .opt-key {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+.opt.wrong-opt .opt-text { color: var(--bone); }
+
+/* ── Submit Btn ── */
+.q-footer {
+  padding: 0 28px 22px;
+  display: flex; align-items: center; gap: 16px;
+}
+
+.btn-submit {
+  font-family: var(--ff-m);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  background: var(--phos-d);
+  border: 1px solid var(--phos);
+  color: var(--phos);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-submit:hover:not(:disabled) {
+  background: var(--phos);
+  color: #000;
+  box-shadow: 0 0 20px rgba(0,229,160,0.3);
+}
+
+.btn-submit:disabled {
+  opacity: 0.35; cursor: default;
+}
+
+.q-status-icon {
+  font-size: 20px;
+  display: none;
+}
+
+/* ── Discussion Panel ── */
+.discussion {
+  margin: 0 28px 24px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 4px;
+  overflow: hidden;
+  display: none;
+  animation: slideDown 0.35s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.disc-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg3);
+}
+
+.disc-badge {
+  font-family: var(--ff-m);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+}
+
+.disc-badge.correct-b {
+  background: rgba(0,229,160,0.15);
+  color: var(--phos);
+  border: 1px solid rgba(0,229,160,0.3);
+}
+
+.disc-badge.wrong-b {
+  background: rgba(239,68,68,0.12);
+  color: var(--red);
+  border: 1px solid rgba(239,68,68,0.3);
+}
+
+.disc-correct-label {
+  font-family: var(--ff-m);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.disc-correct-val {
+  font-family: var(--ff-m);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--phos);
+}
+
+.disc-body {
+  padding: 20px 24px;
+}
+
+.disc-section {
+  margin-bottom: 20px;
+}
+
+.disc-section:last-child { margin-bottom: 0; }
+
+.disc-section-title {
+  font-family: var(--ff-m);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.disc-section-title::after {
+  content: '';
+  flex: 1; height: 1px;
+  background: rgba(245,158,11,0.2);
+}
+
+.disc-text {
+  font-size: 13.5px;
+  line-height: 1.75;
+  color: var(--text-mid);
+}
+
+.disc-text strong { color: var(--bone); font-weight: 600; }
+.disc-text em { font-style: italic; color: var(--phos); }
+
+.disc-math {
+  background: var(--bg);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--phos);
+  padding: 12px 18px;
+  margin: 12px 0;
+  font-family: var(--ff-m);
+  font-size: 12.5px;
+  line-height: 2;
+  color: var(--phos);
+  overflow-x: auto;
+  border-radius: 0 3px 3px 0;
+}
+
+.disc-why-wrong {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 3px;
+  padding: 12px 16px;
+  margin-top: 10px;
+}
+
+.disc-why-wrong-title {
+  font-family: var(--ff-m);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+.disc-why-wrong p {
+  font-size: 13px;
+  color: rgba(239,68,68,0.8);
+  line-height: 1.6;
+}
+
+.disc-ref {
+  background: var(--bg3);
+  border-radius: 3px;
+  padding: 10px 14px;
+  font-family: var(--ff-m);
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  margin-top: 12px;
+  border-left: 2px solid var(--text-dim);
+}
+
+.disc-ref span { color: var(--bone2); }
+
+/* ═══ SCORE PANEL ═══ */
+#scorePanel {
+  display: none;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 6px;
+  padding: 48px;
+  text-align: center;
+  margin-top: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+#scorePanel::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(0,229,160,0.07) 0%, transparent 60%);
+}
+
+.score-tag {
+  font-family: var(--ff-m);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--phos);
+  margin-bottom: 16px;
+}
+
+.score-val {
+  font-family: var(--ff-d);
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--bone);
+  margin-bottom: 8px;
+}
+
+.score-label {
+  font-size: 14px;
+  color: var(--text-mid);
+  margin-bottom: 36px;
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 3px;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.score-dot {
+  height: 8px;
+  border-radius: 2px;
+  transition: background 0.3s;
+}
+
+.score-dot.c { background: var(--phos); box-shadow: 0 0 6px rgba(0,229,160,0.5); }
+.score-dot.w { background: var(--red); }
+.score-dot.u { background: var(--bg4); border: 1px solid var(--border); }
+
+.score-breakdown {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px,1fr));
+  gap: 12px;
+  max-width: 700px;
+  margin: 0 auto 32px;
+}
+
+.sb-item {
+  background: var(--bg4);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.sb-val {
+  font-family: var(--ff-d);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.sb-lab {
+  font-family: var(--ff-m);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.score-chart-wrap {
+  max-width: 480px;
+  margin: 0 auto 32px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.score-chart-title {
+  font-family: var(--ff-m);
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.btn-retry {
+  font-family: var(--ff-m);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 12px 32px;
+  background: transparent;
+  border: 1px solid var(--phos);
+  color: var(--phos);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-retry:hover {
+  background: var(--phos);
+  color: #000;
+  box-shadow: 0 0 24px rgba(0,229,160,0.25);
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:680px){
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-stats { display: none; }
+  .q-head { flex-direction: column; }
+  .q-options { padding: 16px 18px; }
+  .discussion { margin: 0 18px 18px; }
+  .q-footer { padding: 0 18px 16px; }
+  .score-grid { grid-template-columns: repeat(5,1fr); }
+  #scorePanel { padding: 32px 20px; }
+  .score-breakdown { grid-template-columns: repeat(3,1fr); }
+}
+
+/* Level colors */
+.lv1 { background: rgba(34,197,94,0.15); color: var(--l1); border: 1px solid rgba(34,197,94,0.3); }
+.lv2 { background: rgba(132,204,22,0.15); color: var(--l2); border: 1px solid rgba(132,204,22,0.3); }
+.lv3 { background: rgba(234,179,8,0.15);  color: var(--l3); border: 1px solid rgba(234,179,8,0.3); }
+.lv4 { background: rgba(249,115,22,0.15); color: var(--l4); border: 1px solid rgba(249,115,22,0.3); }
+.lv5 { background: rgba(239,68,68,0.15);  color: var(--l5); border: 1px solid rgba(239,68,68,0.3); }
+
+.q-num.c-lv1 { border-color: var(--l1); color: var(--l1); }
+.q-num.c-lv2 { border-color: var(--l2); color: var(--l2); }
+.q-num.c-lv3 { border-color: var(--l3); color: var(--l3); }
+.q-num.c-lv4 { border-color: var(--l4); color: var(--l4); }
+.q-num.c-lv5 { border-color: var(--l5); color: var(--l5); }
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<!-- ═══ HEADER ═══ -->
+<header class="header">
+  <div class="header-inner">
+    <span class="header-brand">EDIAM · Evaluación</span>
+    <div class="header-meta">
+      <span class="hm-item">Módulo <span>4</span></span>
+      <span class="hm-item">ITESM-SF <span>2026</span></span>
+      <span class="hm-item">Score: <span id="hScore">—</span></span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">Evaluación Formativa</div>
+      <h1>Test de Comprensión<br><em>EDIAM</em></h1>
+      <p class="hero-desc">Diez reactivos de opción múltiple que cubren desde la problemática del cambio climático hasta la especificación matemática del modelo, la calibración algorítmica y la optimización de políticas. Cada respuesta incluye análisis científico.</p>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="hstat-v" style="color:var(--phos)">10</div><div class="hstat-l">Reactivos</div></div>
+      <div class="hstat"><div class="hstat-v" style="color:var(--amber)">5</div><div class="hstat-l">Niveles</div></div>
+      <div class="hstat"><div class="hstat-v" style="color:var(--bone2)">40</div><div class="hstat-l">Pts máx</div></div>
+      <div class="hstat"><div class="hstat-v" style="color:var(--text-mid)">∞</div><div class="hstat-l">Intentos</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ LEGEND ═══ -->
+<div class="legend">
+  <div class="legend-inner">
+    <span class="legend-label">Nivel</span>
+    <div class="lv-pill"><div class="lv-dot" style="background:var(--l1)"></div><span style="color:var(--l1);font-family:var(--ff-m);font-size:11px">Básico</span></div>
+    <div class="lv-pill"><div class="lv-dot" style="background:var(--l2)"></div><span style="color:var(--l2);font-family:var(--ff-m);font-size:11px">Elemental</span></div>
+    <div class="lv-pill"><div class="lv-dot" style="background:var(--l3)"></div><span style="color:var(--l3);font-family:var(--ff-m);font-size:11px">Intermedio</span></div>
+    <div class="lv-pill"><div class="lv-dot" style="background:var(--l4)"></div><span style="color:var(--l4);font-family:var(--ff-m);font-size:11px">Avanzado</span></div>
+    <div class="lv-pill"><div class="lv-dot" style="background:var(--l5)"></div><span style="color:var(--l5);font-family:var(--ff-m);font-size:11px">Experto</span></div>
+    <span style="margin-left:auto;font-family:var(--ff-m);font-size:10px;color:var(--text-dim)">Cada reactivo vale <span style="color:var(--amber)">4 pts</span></span>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main" id="quizMain"></main>
+
+<!-- ═══ SCORE PANEL ═══ -->
+<div class="main">
+<div id="scorePanel">
+  <div class="score-tag">Resultado Final</div>
+  <div class="score-val" id="scoreVal">—</div>
+  <div class="score-label" id="scoreLabel"></div>
+  <div class="score-grid" id="scoreDots"></div>
+  <div class="score-breakdown" id="scoreBreak"></div>
+  <div class="score-chart-wrap">
+    <div class="score-chart-title">Desempeño por Nivel</div>
+    <canvas id="scoreChart" height="220"></canvas>
+  </div>
+  <button class="btn-retry" onclick="retryAll()">↺ Reintentar Quiz</button>
+</div>
+</div>
+
+<!-- ══════════════════ DATA + LOGIC ══════════════════ -->
+<script>
+// ─────────────────────────────────────────
+// QUESTION BANK
+// ─────────────────────────────────────────
+const QUESTIONS = [
+{
+  id: 1,
+  level: 1, levelLabel: "Básico",
+  topic: "Contexto · Cambio Climático",
+  text: "Según el IPCC AR6, ¿cuál de las siguientes afirmaciones describe correctamente la principal causa del calentamiento global observado desde el período preindustrial?",
+  options: [
+    { key:"A", text:"Variabilidad solar natural y erupciones volcánicas en ciclos de 100 años." },
+    { key:"B", text:"La influencia humana ha calentado inequívocamente el clima, siendo las emisiones de CO₂ por quema de combustibles fósiles el forzamiento radiativo dominante." },
+    { key:"C", text:"El ciclo de Milankovitch modificó la órbita terrestre en el siglo XX generando más calor." },
+    { key:"D", text:"La deforestación tropical redujo la evapotranspiración local elevando temperaturas únicamente en el trópico." }
+  ],
+  correct: "B",
+  discussion: {
+    core: "La respuesta correcta es <strong>B</strong>. El IPCC AR6 (2021) establece con grado de confianza <em>inequívoco</em> que la influencia humana ha calentado el sistema climático. El forzamiento radiativo positivo neto desde 1750 es de aproximadamente +2.72 W/m², dominado por el CO₂ (+1.68 W/m²) y metano (+0.50 W/m²). Las simulaciones que incluyen solo forzamientos naturales (solar + volcánico) no replican el calentamiento observado de ~1.1°C, mientras que las que suman forzamientos antropogénicos sí lo hacen.",
+    math: "Forzamiento radiativo CO₂: ΔF = 5.35 · ln(C/C₀) [W/m²]\nC₀ = 278 ppm (preindustrial) → C₂₀₂₃ ≈ 420 ppm\n⟹ ΔF ≈ 5.35 · ln(420/278) ≈ 2.24 W/m²",
+    wrongAnalysis: "La opción A describe variabilidad natural real pero de magnitud insuficiente para explicar la tasa de calentamiento post-1950. La opción C confunde escala temporal: Milankovitch opera en 20,000–100,000 años, no siglos. La opción D es un efecto real pero regional y secundario.",
+    ref: "IPCC AR6 WGI (2021) · Chapter 3: Human influence on the climate system · Acemoglu et al. contextualizan este hecho en el marco de EDIAM como motivación del modelo."
+  }
+},
+{
+  id: 2,
+  level: 1, levelLabel: "Básico",
+  topic: "DMDU · Fundamentos",
+  text: "En el marco DMDU (Decision Making Under Deep Uncertainty), ¿cuál es la diferencia fundamental entre incertidumbre probabilística (riesgo) e incertidumbre profunda (deep uncertainty)?",
+  options: [
+    { key:"A", text:"En riesgo el tomador de decisiones conoce o puede estimar probabilidades; en deep uncertainty ni siquiera existe acuerdo sobre el modelo que genera los resultados." },
+    { key:"B", text:"El riesgo se aplica únicamente a sistemas financieros; la incertidumbre profunda es exclusiva de modelos climáticos." },
+    { key:"C", text:"Ambos conceptos son intercambiables; la diferencia es puramente terminológica entre escuelas de estadística bayesiana y frecuentista." },
+    { key:"D", text:"La incertidumbre profunda implica que hay más de una variable de decisión, mientras que el riesgo aplica a problemas univariados." }
+  ],
+  correct: "A",
+  discussion: {
+    core: "La respuesta correcta es <strong>A</strong>. La distinción es epistemológica y operacionalmente crucial. En problemas de riesgo estándar —seguros, mercados financieros— existe una distribución de probabilidad conocida o estimable. En DMDU (Marchau et al., 2019), los tomadores de decisiones no pueden acordar ni el modelo causal correcto ni las distribuciones de los parámetros. En el contexto EDIAM, por ejemplo, la sensibilidad climática β presenta un rango [2.0, 4.5]°C/duplicación de CO₂ pero <em>no</em> hay consenso sobre qué valor puntual usar — lo que invalida la optimización esperada clásica.",
+    math: "Riesgo: max E[U] = max Σ p_i · U(x_i)   [p_i conocidas]\nDMDU:  no existe distribución p_i acordada\n⟹ Criterio alternativo: minimizar el máximo 'arrepentimiento'\n  min_x  max_s [ U*(s) − U(x,s) ]",
+    wrongAnalysis: "B es falsa: DMDU aplica a cualquier dominio con incertidumbre estructural profunda. C es falsa: la distinción es fundamental y operacionalmente diferente — define el método analítico a usar. D es falsa: el número de variables no determina el tipo de incertidumbre.",
+    ref: "Marchau, Walker, Bloemen & Popper (Eds., 2019) · Decision Making under Deep Uncertainty · Springer Open · Capítulo 1."
+  }
+},
+{
+  id: 3,
+  level: 2, levelLabel: "Elemental",
+  topic: "Matriz XLRM · Estructura",
+  text: "En la Matriz XLRM aplicada al EDIAM, ¿cuál de los siguientes elementos pertenece correctamente a la dimensión de Policy Levers (L) y NO a Uncertainties (X)?",
+  options: [
+    { key:"A", text:"La sensibilidad climática β (°C por duplicación de CO₂)." },
+    { key:"B", text:"La elasticidad de sustitución ε entre energía sostenible y fósil." },
+    { key:"C", text:"El subsidio en I+D para tecnologías de energía sostenible en la región avanzada: q^A." },
+    { key:"D", text:"La tasa de descuento ρ aplicada a la utilidad intertemporal." }
+  ],
+  correct: "C",
+  discussion: {
+    core: "La respuesta correcta es <strong>C</strong>. La distinción XLRM entre X (incertidumbres) y L (palancas de política) es ontológica: las palancas son variables que el <em>tomador de decisiones puede controlar</em>, mientras que las incertidumbres son exógenas al modelo de decisión. El subsidio <code>q^A</code> es un instrumento de política explícito — el gobierno puede fijarlo. En contraste, β es un parámetro del sistema climático físico (incierto), ε es una característica estructural de la economía (incierta), y ρ refleja preferencias sociales sobre el futuro (también tratada como incertidumbre en EDIAM con 5 escenarios).",
+    math: "Dominio de los policy levers en EDIAM:\nτ^A, τ^E, h^A, h^E, q^A, q^E ∈ [0, 1]\n\nDominio de uncertainties clave:\nβ ∈ [2.0, 4.5],  ε ∈ [0.5, 5.0],  ρ ∈ [0.001, 0.05]\n→ 12 dimensiones de incertidumbre total",
+    wrongAnalysis: "A, B y D son incertidumbres (dimensión X): son propiedades del sistema sobre las que el tomador de decisiones no tiene control directo. EDIAM construye una grilla de 12 × 10 × 5 = 600 combinaciones de estos parámetros para explorar el espacio completo.",
+    ref: "Bryant & Lempert (2010) · Thinking Inside the Box · TF&SC 77(1) · Molina-Perez (2016) Capítulo 3 — especificación XLRM del EDIAM."
+  }
+},
+{
+  id: 4,
+  level: 2, levelLabel: "Elemental",
+  topic: "Mecanismo R&D · Efectos",
+  text: "En el mecanismo de inversión en I+D del EDIAM (Mecanismo 1), el <strong>efecto tamaño de mercado</strong> está representado por el cociente L^k_se(t) / L^k_fe(t). ¿Cuál es la interpretación económica correcta de este efecto?",
+  options: [
+    { key:"A", text:"Dirige la investigación hacia el sector con precios de energía más altos, maximizando la ganancia del inventor." },
+    { key:"B", text:"Incentiva la I+D en el sector que reduce costos de producción más rápidamente por efecto de aprendizaje." },
+    { key:"C", text:"Dirige el I+D hacia el sector con mayor demanda actual, porque los innovadores pueden vender más unidades de su tecnología y recuperar más rápido la inversión." },
+    { key:"D", text:"Mide la productividad relativa de cada sector y concentra la innovación donde el stock de conocimiento ya es más avanzado." }
+  ],
+  correct: "C",
+  discussion: {
+    core: "La respuesta correcta es <strong>C</strong>. En el modelo de cambio tecnológico dirigido de Acemoglu (2002), el efecto tamaño de mercado captura el incentivo de un innovador a desarrollar tecnologías que pueden venderse a un mayor número de usuarios. Si el mercado de energía fósil es mayor que el renovable (L^k_fe > L^k_se), los innovadores tienen mayor retorno potencial en fósil — generando una inercia tecnológica que perpetúa la dependencia de combustibles sucios incluso sin externalidades ambientales. Esto fundamenta la necesidad de subsidios que corrijan artificialmente el tamaño relativo del mercado renovable.",
+    math: "Efecto en la ratio de ganancias:\n  Π^k_set / Π^k_fet ∝ L^k_se(t) / L^k_fe(t)\n\nSi τ^A > 0 (impuesto al carbono):\n  → L^k_fe encoge, L^k_se crece\n  → Ratio > 1 ⟹ I+D fluye hacia renovables\n  → Efecto mercado refuerza la transición",
+    wrongAnalysis: "A describe el efecto precio (p^k_se/p^k_fe). B describe el efecto experiencia (ψ_fe/ψ_se). D describe el efecto directo en productividad (A^k_se/A^k_fe). Los cinco efectos operan simultáneamente en la ecuación de Mecanismo 1.",
+    ref: "Acemoglu, D. (2002) · Directed Technical Change · RES 69(4) · Acemoglu et al. (2012) AER 102(1) — derivación formal del efecto tamaño de mercado en p. 136–138."
+  }
+},
+{
+  id: 5,
+  level: 3, levelLabel: "Intermedio",
+  topic: "Dinámica del Modelo · EDOs",
+  text: "El sistema dinámico del EDIAM incluye la ecuación diferencial para la calidad ambiental: <code>dS/dt = −ξ(Y^A_fe + Y^E_fe) + δS</code>. ¿Qué condición sobre δ y ξ garantiza que exista un nivel de equilibrio positivo S* > 0 en ausencia de energía fósil?",
+  math: "dS/dt = −ξ(Y^A_fe + Y^E_fe) + δS\n\nS* = ? bajo condición Y_fe → 0",
+  options: [
+    { key:"A", text:"δ < 0 (degradación natural neta), para que S decrezca hacia cero." },
+    { key:"B", text:"Con Y_fe = 0, la ecuación se reduce a dS/dt = δS. Si δ > 0, S crece exponencialmente sin límite; si δ < 0, S decae a cero. No existe equilibrio positivo finito en esta especificación lineal." },
+    { key:"C", text:"δ > ξ garantiza que la regeneración supere el daño y S converge a S = δ/ξ." },
+    { key:"D", text:"La condición S* > 0 requiere que las emisiones sean iguales a la tasa de regeneración: ξ(Y_fe) = δS, dando S* = ξ·Y_fe/δ." }
+  ],
+  correct: "B",
+  discussion: {
+    core: "La respuesta correcta es <strong>B</strong>. Esta pregunta requiere analizar la dinámica lineal con rigor matemático. Cuando Y_fe → 0, la EDO se convierte en <em>dS/dt = δS</em>, que es una ecuación de crecimiento/decaimiento exponencial puro. La solución es S(t) = S(0)·e^(δt). Si δ > 0, S crece sin cota — lo que no tiene sentido físico para calidad ambiental y sugiere que en la especificación completa del modelo existe una saturación o S tiene un techo implícito. Si δ < 0, S decae a cero. En la especificación lineal de EDIAM, <em>no existe un equilibrio positivo finito y estable</em> con Y_fe = 0 y δ > 0 — la calidad ambiental simplemente continúa mejorando mientras no hay emisiones.",
+    math: "Con Y_fe = 0:\n  dS/dt = δS  →  S(t) = S₀ · e^(δt)\n\nCon Y_fe > 0 (equilibrio S*):\n  0 = −ξ · Y_fe + δS*\n  ⟹  S* = ξ · Y_fe / δ\n\nCondición de estabilidad: δ > 0 y Y_fe > 0\nTrayectoria convergente solo si Y_fe es constante.",
+    wrongAnalysis: "C es incorrecta: S = δ/ξ no tiene las unidades correctas ni deriva de la EDO. D es la expresión correcta del <em>equilibrio estacionario</em> cuando Y_fe > 0 y dS/dt = 0, lo cual es una situación diferente a la preguntada (Y_fe → 0).",
+    ref: "Molina-Perez (2016) · Sección 3.2 — Dinámica ambiental del EDIAM · Ecuación (1) sistema completo."
+  }
+},
+{
+  id: 6,
+  level: 3, levelLabel: "Intermedio",
+  topic: "Calibración · Evolución Diferencial",
+  text: "En la calibración del EDIAM mediante Evolución Diferencial, el problema minimiza MSEN + MSES con 8 parámetros en [0.001, 0.12]. ¿Por qué se prefiere la Evolución Diferencial (DE) sobre el método de gradiente estándar (ej. L-BFGS-B) para este problema específico?",
+  options: [
+    { key:"A", text:"L-BFGS-B no puede manejar restricciones de caja (box constraints), mientras que DE sí." },
+    { key:"B", text:"La función objetivo MSE_N + MSE_S es no convexa y multimodal porque el EDIAM es un sistema no lineal de EDOs; el gradiente puede quedar atrapado en mínimos locales, mientras que DE es un método estocástico global robusto a esta topología." },
+    { key:"C", text:"DE siempre converge más rápido en número de evaluaciones de la función objetivo que L-BFGS-B para cualquier problema." },
+    { key:"D", text:"L-BFGS-B requiere derivadas analíticas exactas de la función objetivo, que son imposibles de calcular para cualquier modelo con EDOs." }
+  ],
+  correct: "B",
+  discussion: {
+    core: "La respuesta correcta es <strong>B</strong>. La razón fundamental es la <em>topología de la función objetivo</em>. Cuando se integra numéricamente un sistema de EDOs no lineales (con no-linealidades en potencias η, productos entre variables de estado), la función MSE resultante sobre los parámetros es no convexa y potencialmente multimodal — tiene múltiples mínimos locales de calidad similar. Los métodos de gradiente convergen al mínimo local más cercano al punto inicial. DE, siendo un método poblacional y estocástico, explora simultáneamente múltiples regiones del espacio de parámetros y escapa de mínimos locales a través de mutación diferencial.",
+    math: "Operador de mutación DE (estrategia best/1/bin):\n  v_i = x_best + F · (x_r1 − x_r2)\n  F ∈ [0,1]: escala de perturbación\n\nOperador de cruce:\n  u_ij = v_ij  si rand < CR   (CR = tasa de recombinación)\n         x_ij  en otro caso\n\nSelección: si f(u_i) < f(x_i)  →  x_i ← u_i",
+    wrongAnalysis: "A es falsa: L-BFGS-B tiene implementaciones con bounds constraints eficientes (e.g., scipy.optimize.minimize). C es falsa: DE generalmente requiere <em>más</em> evaluaciones por converger que gradiente en funciones convexas suaves — su ventaja es en multimodalidad. D es parcialmente falsa: se pueden calcular gradientes numéricos o usar diferenciación automática incluso con EDOs.",
+    ref: "Storn & Price (1997) · Differential Evolution · Journal of Global Optimization 11(4) · Price, Storn & Lampinen (2005) libro completo sobre DE."
+  }
+},
+{
+  id: 7,
+  level: 4, levelLabel: "Avanzado",
+  topic: "NSGA-II · Optimización Multi-objetivo",
+  text: "En NSGA-II aplicado al EDIAM, el operador de <strong>crowding distance</strong> cumple un rol específico en la selección. ¿Cuál es su función matemática y por qué es indispensable para obtener un frente de Pareto bien distribuido?",
+  options: [
+    { key:"A", text:"Mide la distancia euclidiana entre soluciones y elimina las más cercanas para evitar redundancia computacional, reduciendo el tamaño de la población." },
+    { key:"B", text:"Estima el perímetro del hipercuboide formado por los vecinos inmediatos de cada solución en el espacio de objetivos; actúa como medida de densidad que favorece soluciones en regiones menos exploradas del frente, garantizando diversidad geométrica." },
+    { key:"C", text:"Calcula la probabilidad de que una solución sea dominada por otras en la siguiente generación, actuando como factor de penalización." },
+    { key:"D", text:"Ordena las soluciones del frente por su valor en el primer objetivo, rompiendo empates con el segundo — equivalente a una lexicografía ponderada." }
+  ],
+  correct: "B",
+  discussion: {
+    core: "La respuesta correcta es <strong>B</strong>. Dentro del mismo frente de Pareto (soluciones con igual rango de no-dominancia), NSGA-II necesita un desempate que favorezca la <em>diversidad</em>. El crowding distance de la solución i en el objetivo m se calcula como la diferencia normalizada entre los valores de sus vecinos inmediatos i+1 e i-1: cd_m(i) = [f_m(i+1) − f_m(i-1)] / (f_m^max − f_m^min). La distancia total es la suma sobre todos los objetivos. Una distancia grande significa que la solución está en una región poco poblada del frente — y por tanto es preferida para mantener cobertura geométrica uniforme del frente de Pareto.",
+    math: "Crowding distance para solución i en objetivo m:\n  cd_m(i) = [ f_m(i+1) − f_m(i−1) ] / [ f_m^max − f_m^min ]\n\nDistancia total:\n  CD(i) = Σ_m  cd_m(i)\n\nRegla de selección (torneo binario):\n  i ≻ j  ssi  rank(i) < rank(j)  O\n             (rank(i) = rank(j)  Y  CD(i) > CD(j))",
+    wrongAnalysis: "A describe una operación diferente (clustering o niching), no crowding distance. C describe conceptos de probabilidad de dominancia que no existen en NSGA-II estándar. D describe una agregación lexicográfica, que precisamente es lo que NSGA-II evita al no ponderar objetivos.",
+    ref: "Deb, Pratap, Agarwal & Meyarivan (2002) · NSGA-II · IEEE TEC 6(2) · Demostración de convergencia del crowding distance en pp. 186–188."
+  }
+},
+{
+  id: 8,
+  level: 4, levelLabel: "Avanzado",
+  topic: "Transferencia Tecnológica · Ecuación M3",
+  text: "En la ecuación de transferencia tecnológica del EDIAM: <code>dA^E_j/dt = ν_j · γ_j · (A^E_j)^θ^E_j · (A^A_j − A^E_j)</code>, ¿qué implicación tiene el término <strong>(A^A_j − A^E_j)</strong> sobre la velocidad de convergencia cuando la brecha tecnológica se acerca a cero?",
+  math: "dA^E_j/dt = ν_j · γ_j · (A^E_j)^(θ^E_j) · (A^A_j − A^E_j)",
+  options: [
+    { key:"A", text:"La velocidad de adopción tecnológica se mantiene constante independientemente de la brecha, generando convergencia lineal." },
+    { key:"B", text:"Cuando A^E_j → A^A_j, el término brecha → 0, haciendo que dA^E_j/dt → 0. La convergencia es asintótica: la región emergente nunca alcanza completamente a la avanzada, modelando correctamente la trampa de capacidad de absorción." },
+    { key:"C", text:"Cuando A^E_j = A^A_j, la ecuación genera un punto inestable: cualquier perturbación positiva hace que la región emergente supere indefinidamente a la avanzada." },
+    { key:"D", text:"El término brecha garantiza convergencia exponencial al nivel A^A_j en tiempo finito, con tasa determinada únicamente por ν_j." }
+  ],
+  correct: "B",
+  discussion: {
+    core: "La respuesta correcta es <strong>B</strong>. Esta ecuación es formalmente análoga al modelo de convergencia condicional de Solow-Swan, pero aplicada a productividad tecnológica sectorial. El término (A^A_j − A^E_j) actúa como fuerza restauradora que disminuye conforme la brecha se cierra. Matemáticamente, si ignoramos el término (A^E_j)^θ por simplificación, obtenemos dA^E/dt ≈ ν·γ·(A^A − A^E), cuya solución es A^E(t) = A^A − (A^A − A^E_0)·e^(−ν·γ·t) — convergencia asintótica exponencial, nunca completa en tiempo finito. Este resultado modela correctamente la observación empírica de que los países en desarrollo nunca alcanzan completamente la frontera tecnológica.",
+    math: "Simplificando θ^E = 0 (linealización local):\n  dA^E/dt = ν·γ·(A^A − A^E)\n\nSolución:\n  A^E(t) = A^A − (A^A − A^E₀) · exp(−ν·γ·t)\n\nBrecha:\n  Gap(t) = A^A − A^E(t) = Gap₀ · exp(−ν·γ·t) → 0\n  pero Gap(t) > 0  ∀ t < ∞\n\nVelocidad de convergencia: proporcional a ν_j y γ_j",
+    wrongAnalysis: "A es incorrecta: la velocidad no es constante sino proporcional a la brecha. C es incorrecta: A^E = A^A es un punto de equilibrio <em>estable</em>, no inestable — cualquier perturbación regresa al equilibrio. D es parcialmente correcta en la forma de la solución pero incorrecta en el diagnóstico: la convergencia es asintótica (tiempo infinito), no en tiempo finito.",
+    ref: "Molina-Perez (2016) · Ecuación (1), tercer componente · Analogía con modelo de crecimiento de Cohen & Levinthal (1990) sobre capacidad de absorción."
+  }
+},
+{
+  id: 9,
+  level: 5, levelLabel: "Experto",
+  topic: "Problema de Optimización · Utilidad Intertemporal",
+  text: "El EDIAM maximiza la suma de utilidades intertemporales descontadas: <code>max Σ^T_{t=0} [1/(1+ρ)^t] · (u^A + u^E)</code>. Si la tasa de descuento ρ → 0, ¿qué efecto tiene sobre el portafolio de política óptimo y por qué esto es un debate central en economía del cambio climático?",
+  math: "max Σ_{t=0}^{T}  (1+ρ)^{−t} · (u^A + u^E)\ns.t.  τ^A, τ^E, h^A, h^E, q^A, q^E ∈ [0,1]",
+  options: [
+    { key:"A", text:"ρ → 0 implica que el planificador da igual peso al bienestar de todas las generaciones; esto tiende a justificar políticas de mitigación más agresivas hoy porque el daño futuro evitado no se descuenta." },
+    { key:"B", text:"ρ → 0 reduce el valor presente de los costos futuros a cero, haciendo óptimo no actuar hoy y posponer toda política climática a generaciones futuras." },
+    { key:"C", text:"La tasa de descuento solo afecta la distribución temporal del consumo pero no tiene impacto sobre la elección del portafolio de política óptimo." },
+    { key:"D", text:"Con ρ → 0, la suma Σ (1+ρ)^{-t} diverge, haciendo el problema de optimización matemáticamente inviable para horizontes infinitos." }
+  ],
+  correct: "A",
+  discussion: {
+    core: "La respuesta correcta es <strong>A</strong>. La tasa de descuento ρ es quizás el parámetro más políticamente cargado en la economía del cambio climático. Un ρ bajo (~0.1%, Stern Review) asigna casi igual peso al bienestar de generaciones futuras que al presente — el daño de un aumento de temperatura en 2100 tiene valor presente casi tan alto como un daño equivalente hoy. Esto justifica políticas agresivas <em>ahora</em>. Un ρ alto (~3%, Nordhaus DICE) descuenta fuertemente el futuro, haciendo que los costos futuros del cambio climático parezcan pequeños y sugiriendo posponer acción costosa. En EDIAM, esto es modelado explícitamente con 5 escenarios de ρ ∈ [0.001, 0.05] como incertidumbre de segundo orden.",
+    math: "Factor de descuento a t=75 años (año 2100):\n  ρ = 0.001:  (1+ρ)^{−75} ≈ 0.928  [Stern]\n  ρ = 0.030:  (1+ρ)^{−75} ≈ 0.107  [Nordhaus]\n  ρ = 0.050:  (1+ρ)^{−75} ≈ 0.023  [Alta preferencia presente]\n\nRatio de valoración relativa año 2100 / año 2025:\n  Stern/Nordhaus ≈ 8.7x → diferencia de política radical",
+    wrongAnalysis: "B comete el error inverso: ρ → 0 maximiza, no elimina, el valor presente del futuro. C es falsa: numerosos estudios demuestran que ρ tiene impacto cuantitativo masivo sobre el portafolio óptimo (diferencia entre impuesto de $30/tCO₂ y $200/tCO₂). D es parcialmente correcta para ρ = 0 exacto con T → ∞, pero irrelevante para valores ρ > 0 pequeños con horizonte finito T.",
+    ref: "Stern, N. (2006) · Stern Review on the Economics of Climate Change · Nordhaus, W. (2008) · A Question of Balance · Debate Weitzman (2007) en JEL sobre tasa de descuento · Molina-Perez trata ρ como uncertainty (X) en EDIAM."
+  }
+},
+{
+  id: 10,
+  level: 5, levelLabel: "Experto",
+  topic: "Ecosistema Algorítmico · Integración",
+  text: "Considere el pipeline completo del EDIAM: DE calibra parámetros → LHS muestrea incertidumbres → Emulador GP acelera evaluación → NSGA-II construye frente Pareto → PRIM identifica vulnerabilidades. ¿Cuál es la limitación estructural más significativa de usar un emulador GP como sustituto del EDIAM en la fase de NSGA-II, y cómo afecta la validez del frente de Pareto resultante?",
+  options: [
+    { key:"A", text:"El GP no puede manejar espacios de entrada de más de 3 dimensiones sin degradación severa de rendimiento." },
+    { key:"B", text:"El emulador GP introduce error de aproximación ε_GP en la evaluación de objetivos. En zonas del espacio de políticas donde el EDIAM es altamente no lineal (especialmente cerca del umbral ΔT_disaster = 6°C), el error puede ser suficientemente grande para que soluciones no-dominadas en el espacio emulado sean dominadas en el espacio real, generando un frente de Pareto 'falso positivo' que no representa políticas verdaderamente robustas." },
+    { key:"C", text:"El emulador GP solo puede modelar funciones unimodales; si los objetivos del EDIAM son multimodales en el espacio de políticas, el GP converge a un único óptimo local incorrecto." },
+    { key:"D", text:"El GP requiere que los datos de entrenamiento sean normalmente distribuidos, condición que rara vez se cumple en simulaciones de EDIAM." }
+  ],
+  correct: "B",
+  discussion: {
+    core: "La respuesta correcta es <strong>B</strong>. Este es un problema de validación de emuladores conocido como <em>error de Pareto inducido por sustituto</em> (surrogate-induced Pareto error). El GP aproxima f(x) ≈ f̂(x) ± σ_GP(x), donde σ_GP(x) es la desviación estándar predictiva del proceso gaussiano. En regiones del espacio de políticas donde el EDIAM es altamente no lineal —especialmente cerca de los umbrales de catástrofe, cambios de régimen tecnológico, o interacciones no lineales entre impuesto al carbono y brecha tecnológica— σ_GP puede ser 0.3–0.5°C, suficiente para reordenar la dominancia de Pareto. La solución estándar es: (1) validación del emulador con held-out set, (2) acquisition functions bayesianas tipo Expected Improvement para exploración activa, y (3) re-evaluación con el EDIAM completo de las soluciones del frente final.",
+    math: "Error emulador GP en zona no lineal:\n  f̂(x) = μ_GP(x) ± z_{0.95}·σ_GP(x)\n\nSolución A domina B en emulador si:\n  μ_GP(f₁^A) < μ_GP(f₁^B)  Y  μ_GP(f₂^A) < μ_GP(f₂^B)\n\nPero en EDIAM real puede ocurrir:\n  f₁^A + ε₁ > f₁^B − ε₂  →  A NO domina B\n\n⟹ Frente de Pareto emulado ≠ Frente real\n  Error máximo: O(σ_GP · max |∇f|)",
+    wrongAnalysis: "A es falsa: GPs con kernels ARD (Automatic Relevance Determination) manejan bien dimensionalidades de 6–20, que es el caso EDIAM. C es falsa: el GP puede capturar multimodalidad con kernels apropiados (Matérn 5/2, periodic); además NSGA-II es poblacional y no converge a un único óptimo. D es falsa: el GP no requiere normalidad de los datos, sino de los errores del modelo (i.e., del proceso de ruido).",
+    ref: "Razaaly & Congedo (2020) · Surrogate-Based Pareto Set Estimation · SIAM · Molina-Perez & Esquivel-Flores (2020) discuten validación del emulador en Frontiers in Robotics and AI 7:111."
+  }
+}
+];
+
+// ─────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────
+let answers = {};
+let answered = {};
+
+// ─────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────
+function getLevelClass(l) {
+  return ['','lv1','lv2','lv3','lv4','lv5'][l];
+}
+
+function renderAll() {
+  const container = document.getElementById('quizMain');
+  container.innerHTML = '';
+  answers = {}; answered = {};
+  QUESTIONS.forEach(q => container.appendChild(buildCard(q)));
+  updateHeader();
+  window.scrollTo(0,0);
+}
+
+function buildCard(q) {
+  const div = document.createElement('div');
+  div.className = 'q-card';
+  div.id = `qcard-${q.id}`;
+
+  const lvClass = getLevelClass(q.level);
+  const lvNumClass = `c-lv${q.level}`;
+
+  div.innerHTML = `
+    <div class="q-head">
+      <div class="q-num-wrap">
+        <div class="q-num ${lvNumClass}">${q.id}</div>
+        <span class="q-level ${lvClass}">${q.levelLabel}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-topic">${q.topic}</div>
+        <div class="q-text">${q.text}</div>
+        ${q.math ? `<div class="q-math">${q.math}</div>` : ''}
+      </div>
+    </div>
+    <div class="q-options" id="opts-${q.id}">
+      ${q.options.map(o => `
+        <div class="opt" id="opt-${q.id}-${o.key}" onclick="selectOpt(${q.id},'${o.key}')">
+          <div class="opt-key">${o.key}</div>
+          <div class="opt-text">${o.text}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div class="q-footer">
+      <button class="btn-submit" id="btn-${q.id}" onclick="submitAnswer(${q.id})" disabled>
+        Confirmar respuesta
+      </button>
+      <span class="q-status-icon" id="icon-${q.id}"></span>
+    </div>
+    <div class="discussion" id="disc-${q.id}"></div>
+  `;
+  return div;
+}
+
+function selectOpt(qId, key) {
+  if (answered[qId]) return;
+  answers[qId] = key;
+  // Clear all options
+  document.querySelectorAll(`#opts-${qId} .opt`).forEach(el => {
+    el.classList.remove('selected');
+  });
+  document.getElementById(`opt-${qId}-${key}`).classList.add('selected');
+  document.getElementById(`btn-${qId}`).disabled = false;
+}
+
+function submitAnswer(qId) {
+  if (answered[qId]) return;
+  const q = QUESTIONS.find(x => x.id === qId);
+  const chosen = answers[qId];
+  if (!chosen) return;
+
+  answered[qId] = chosen;
+  const isCorrect = chosen === q.correct;
+  const card = document.getElementById(`qcard-${qId}`);
+  card.classList.add('answered', isCorrect ? 'correct' : 'wrong');
+
+  // Disable all opts
+  document.querySelectorAll(`#opts-${qId} .opt`).forEach(el => {
+    el.classList.add('disabled');
+  });
+
+  // Mark options
+  document.getElementById(`opt-${qId}-${q.correct}`).classList.add('correct-opt');
+  if (!isCorrect) {
+    document.getElementById(`opt-${qId}-${chosen}`).classList.remove('selected');
+    document.getElementById(`opt-${qId}-${chosen}`).classList.add('wrong-opt');
+  }
+
+  // Status icon
+  const icon = document.getElementById(`icon-${qId}`);
+  icon.style.display = 'block';
+  icon.textContent = isCorrect ? '✓' : '✗';
+  icon.style.color = isCorrect ? 'var(--phos)' : 'var(--red)';
+
+  // Hide submit btn
+  document.getElementById(`btn-${qId}`).style.display = 'none';
+
+  // Show discussion
+  renderDiscussion(q, isCorrect, chosen);
+  updateHeader();
+  checkAllAnswered();
+}
+
+function renderDiscussion(q, isCorrect, chosen) {
+  const disc = document.getElementById(`disc-${q.id}`);
+  const badgeClass = isCorrect ? 'correct-b' : 'wrong-b';
+  const badgeText  = isCorrect ? '✓ Correcto' : '✗ Incorrecto';
+
+  disc.innerHTML = `
+    <div class="disc-head">
+      <span class="disc-badge ${badgeClass}">${badgeText}</span>
+      <span class="disc-correct-label">Respuesta correcta:</span>
+      <span class="disc-correct-val">${q.correct} — ${q.options.find(o=>o.key===q.correct).text.substring(0,60)}…</span>
+    </div>
+    <div class="disc-body">
+      <div class="disc-section">
+        <div class="disc-section-title">Análisis Científico</div>
+        <div class="disc-text">${q.discussion.core}</div>
+        ${q.discussion.math ? `<div class="disc-math">${q.discussion.math}</div>` : ''}
+      </div>
+      ${!isCorrect ? `
+      <div class="disc-section">
+        <div class="disc-section-title">Por qué las otras opciones son incorrectas</div>
+        <div class="disc-why-wrong">
+          <div class="disc-why-wrong-title">↗ Análisis de distractores</div>
+          <p>${q.discussion.wrongAnalysis}</p>
+        </div>
+      </div>` : `
+      <div class="disc-section">
+        <div class="disc-section-title">Contexto adicional</div>
+        <div class="disc-text">${q.discussion.wrongAnalysis}</div>
+      </div>`}
+      <div class="disc-ref">📚 ${q.discussion.ref}</div>
+    </div>
+  `;
+  disc.style.display = 'block';
+
+  // Scroll to discussion
+  setTimeout(() => disc.scrollIntoView({behavior:'smooth', block:'nearest'}), 100);
+}
+
+function updateHeader() {
+  const done = Object.keys(answered).length;
+  const correct = Object.values(answered).filter((v,i) => {
+    const qid = Object.keys(answered)[i];
+    return v === QUESTIONS.find(q => q.id == qid)?.correct;
+  }).length;
+  const score = Object.entries(answered).filter(([qid, v]) =>
+    v === QUESTIONS.find(q => q.id == qid)?.correct
+  ).length * 4;
+  document.getElementById('hScore').textContent = done > 0 ? `${score}/40` : '—';
+
+  // Progress bar
+  const pct = done / QUESTIONS.length * 100;
+  document.getElementById('bar').style.width = pct + '%';
+}
+
+function checkAllAnswered() {
+  if (Object.keys(answered).length === QUESTIONS.length) {
+    setTimeout(showScore, 600);
+  }
+}
+
+function showScore() {
+  const panel = document.getElementById('scorePanel');
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth'});
+
+  const correctList = QUESTIONS.map(q => ({
+    id: q.id,
+    level: q.level,
+    correct: answered[q.id] === q.correct
+  }));
+
+  const total = correctList.filter(x=>x.correct).length;
+  const score = total * 4;
+  const pct = (score/40*100).toFixed(0);
+
+  document.getElementById('scoreVal').textContent = `${score}/40`;
+  document.getElementById('hScore').textContent = `${score}/40`;
+
+  let grade='', col='';
+  if(score>=36){grade='Sobresaliente — Dominio experto del EDIAM';col='var(--phos)';}
+  else if(score>=28){grade='Notable — Comprensión sólida del ecosistema algorítmico';col='var(--amber)';}
+  else if(score>=20){grade='Suficiente — Base conceptual establecida, profundizar en aspectos formales';col='var(--l3)';}
+  else{grade='Insuficiente — Se recomienda revisar material base del Módulo 4';col='var(--red)';}
+
+  document.getElementById('scoreLabel').textContent = grade;
+  document.getElementById('scoreLabel').style.color = col;
+
+  // Dots
+  const dotsEl = document.getElementById('scoreDots');
+  dotsEl.innerHTML = correctList.map(x =>
+    `<div class="score-dot ${x.correct?'c':'w'}"></div>`
+  ).join('');
+
+  // Breakdown
+  const byLevel = [1,2,3,4,5].map(l => {
+    const qs = correctList.filter(x=>x.level===l);
+    const c = qs.filter(x=>x.correct).length;
+    return {l, c, t: qs.length};
+  });
+  const lvLabels = ['','Básico','Elemental','Intermedio','Avanzado','Experto'];
+  const lvColors = ['','var(--l1)','var(--l2)','var(--l3)','var(--l4)','var(--l5)'];
+
+  document.getElementById('scoreBreak').innerHTML = byLevel.map(b => `
+    <div class="sb-item">
+      <div class="sb-val" style="color:${lvColors[b.l]}">${b.c}/${b.t}</div>
+      <div class="sb-lab">${lvLabels[b.l]}</div>
+    </div>
+  `).join('');
+
+  // Chart
+  Chart.defaults.color = 'rgba(255,255,255,0.4)';
+  Chart.defaults.borderColor = 'rgba(255,255,255,0.07)';
+  Chart.defaults.font.family = 'JetBrains Mono';
+  Chart.defaults.font.size = 10;
+
+  const ctx = document.getElementById('scoreChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ['Básico','Elemental','Intermedio','Avanzado','Experto'],
+      datasets: [{
+        label: 'Aciertos',
+        data: byLevel.map(b => b.t > 0 ? (b.c/b.t)*100 : 0),
+        borderColor: 'var(--phos)',
+        backgroundColor: 'rgba(0,229,160,0.1)',
+        borderWidth: 2,
+        pointBackgroundColor: 'var(--phos)',
+        pointRadius: 4
+      },{
+        label: 'Máximo',
+        data: [100,100,100,100,100],
+        borderColor: 'rgba(255,255,255,0.1)',
+        backgroundColor: 'transparent',
+        borderWidth: 1,
+        pointRadius: 0,
+        borderDash: [4,4]
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        r: {
+          min: 0, max: 100,
+          grid: { color: 'rgba(255,255,255,0.07)' },
+          angleLines: { color: 'rgba(255,255,255,0.07)' },
+          ticks: { display: false },
+          pointLabels: {
+            color: 'rgba(255,255,255,0.5)',
+            font: { size: 11, family: 'JetBrains Mono' }
+          }
+        }
+      },
+      plugins: { legend: { display: false } }
+    }
+  });
+}
+
+function retryAll() {
+  document.getElementById('scorePanel').style.display = 'none';
+  renderAll();
+}
+
+// Scroll progress
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const done = Object.keys(answered).length;
+  if (done < QUESTIONS.length) {
+    const pct = done / QUESTIONS.length * 100;
+    document.getElementById('bar').style.width = pct + '%';
+  }
+});
+
+// Init
+renderAll();
+</script>
+</body>
+</html>
