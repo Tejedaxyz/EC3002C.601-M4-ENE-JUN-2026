@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autoevaluación · Economía conductual en el ecosistema algorítmico | ITESM</title>
+<meta name="author" content="Leonardo González Tejeda">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,500;1,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,strict:false});"></script>
+
+<style>
+:root{
+  --bg:#07101F;
+  --bg-2:#0B1728;
+  --surface:#111F35;
+  --surface-2:#16253E;
+  --line:rgba(212,175,55,.14);
+  --line-soft:rgba(148,163,184,.09);
+  --gold:#D4AF37;
+  --gold-soft:#B8941F;
+  --teal:#2DD4BF;
+  --teal-deep:#0D9488;
+  --coral:#F97066;
+  --coral-soft:#DC3545;
+  --amber:#F59E0B;
+  --violet:#A78BFA;
+  --lime:#A3E635;
+  --ink:#E8EDF5;
+  --ink-2:#B8C5D6;
+  --ink-3:#7A8CA6;
+  --ink-4:#4A5C76;
+  --ff-display:'Playfair Display',Georgia,serif;
+  --ff-editorial:'Cormorant Garamond',Georgia,serif;
+  --ff-body:'IBM Plex Sans',-apple-system,system-ui,sans-serif;
+  --ff-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:var(--ff-body);font-weight:300;line-height:1.65;font-size:15px;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%,rgba(212,175,55,.06),transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 15%,rgba(45,212,191,.04),transparent 60%);
+  background-attachment:fixed;
+}
+body::before{
+  content:"";position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.8 0 0 0 0 0.3 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1;opacity:.4;
+}
+.wrap{max-width:1100px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+
+/* ─── MASTHEAD ─── */
+.masthead{
+  border-top:3px solid var(--gold);
+  border-bottom:1px solid var(--line);
+  padding:22px 0 18px;
+  background:linear-gradient(180deg,rgba(11,23,40,.95),rgba(7,16,31,.6));
+  backdrop-filter:blur(8px);
+  position:sticky;top:0;z-index:100;
+}
+.masthead-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;max-width:1100px;margin:0 auto;padding:0 32px}
+.brand{display:flex;align-items:center;gap:16px}
+.brand-mark{
+  width:46px;height:46px;
+  background:radial-gradient(circle at 30% 30%,var(--gold),var(--gold-soft));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-display);font-weight:900;font-size:22px;color:#1a1a1a;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.brand-text{display:flex;flex-direction:column;gap:2px}
+.brand-title{font-family:var(--ff-display);font-size:17px;font-weight:700;letter-spacing:.01em;line-height:1}
+.brand-sub{font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+.mast-meta{display:flex;gap:24px;font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;flex-wrap:wrap;align-items:center}
+.mast-meta b{color:var(--gold);font-weight:600}
+
+/* ─── HERO ─── */
+.hero{padding:64px 0 32px;position:relative}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--ff-mono);font-size:11px;color:var(--gold);
+  letter-spacing:.22em;text-transform:uppercase;margin-bottom:24px;
+}
+.hero-eyebrow::before{content:"";width:48px;height:1px;background:var(--gold)}
+.hero-eyebrow::after{content:"";width:10px;height:10px;border:1px solid var(--gold);transform:rotate(45deg)}
+.hero h1{
+  font-family:var(--ff-display);
+  font-size:clamp(34px,5.2vw,60px);
+  font-weight:900;line-height:1.02;letter-spacing:-.02em;
+  margin-bottom:22px;
+}
+.hero h1 em{font-style:italic;font-family:var(--ff-editorial);font-weight:500;color:var(--gold)}
+.hero-deck{
+  font-family:var(--ff-editorial);font-size:20px;font-weight:500;font-style:italic;
+  color:var(--ink-2);line-height:1.55;max-width:800px;
+  border-left:2px solid var(--gold);padding-left:22px;margin-bottom:36px;
+}
+
+/* ─── INSTRUCTIONS ─── */
+.instruct{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;
+  background:var(--line);border:1px solid var(--line);margin:20px 0 40px;
+}
+@media(max-width:760px){.instruct{grid-template-columns:repeat(2,1fr)}}
+.instruct-cell{background:var(--bg-2);padding:20px}
+.instruct-k{font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.instruct-v{font-family:var(--ff-display);font-size:26px;font-weight:900;color:var(--ink);line-height:1;margin-bottom:6px}
+.instruct-d{font-size:12px;color:var(--ink-3);line-height:1.4}
+
+/* ─── DIFFICULTY LEGEND ─── */
+.diff-legend{
+  display:flex;gap:14px;flex-wrap:wrap;margin:24px 0;
+  font-family:var(--ff-mono);font-size:10.5px;letter-spacing:.08em;color:var(--ink-3);
+}
+.diff-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--line)}
+.diff-chip .dt{width:8px;height:8px}
+.diff-chip.basic .dt{background:var(--teal)}
+.diff-chip.inter .dt{background:var(--amber)}
+.diff-chip.adv .dt{background:var(--coral)}
+
+/* ─── QUESTION ─── */
+.q{
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,var(--surface),var(--bg-2));
+  padding:32px;margin-bottom:24px;position:relative;
+  transition:border-color .3s;
+}
+.q.answered{border-color:rgba(212,175,55,.3)}
+.q.correct{border-color:var(--teal);box-shadow:inset 3px 0 0 var(--teal)}
+.q.wrong{border-color:var(--coral);box-shadow:inset 3px 0 0 var(--coral)}
+
+.q-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap;gap:12px}
+.q-num{display:flex;align-items:baseline;gap:12px}
+.q-n{font-family:var(--ff-display);font-size:32px;font-weight:900;color:var(--gold);line-height:1}
+.q-n::before{content:"Q";font-size:14px;color:var(--ink-3);letter-spacing:.1em;font-family:var(--ff-mono);font-weight:400;margin-right:4px;vertical-align:top}
+.q-cat{font-family:var(--ff-mono);font-size:10px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+
+.q-badges{display:flex;gap:8px;flex-wrap:wrap}
+.q-badge{
+  font-family:var(--ff-mono);font-size:9.5px;padding:3px 10px;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+}
+.q-badge.basic{background:rgba(45,212,191,.1);color:var(--teal);border:1px solid rgba(45,212,191,.3)}
+.q-badge.inter{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.3)}
+.q-badge.adv{background:rgba(249,112,102,.1);color:var(--coral);border:1px solid rgba(249,112,102,.3)}
+.q-badge.bloom{background:transparent;color:var(--ink-3);border:1px solid var(--line)}
+
+.q-stem{
+  font-family:var(--ff-display);font-size:19px;font-weight:400;color:var(--ink);
+  line-height:1.45;margin-bottom:24px;letter-spacing:-.005em;
+}
+.q-stem em{font-style:italic;color:var(--gold);font-family:var(--ff-editorial);font-size:1.08em}
+.q-stem code{font-family:var(--ff-mono);font-size:.88em;color:var(--teal);background:rgba(45,212,191,.06);padding:2px 6px}
+
+/* ─── OPTIONS ─── */
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:14px 18px;border:1px solid var(--line-soft);
+  background:rgba(11,23,40,.4);cursor:pointer;
+  transition:all .2s cubic-bezier(.2,.7,.3,1);position:relative;
+}
+.opt:hover{background:rgba(212,175,55,.04);border-color:var(--line)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt-mark{
+  width:24px;height:24px;min-width:24px;
+  border:1.5px solid var(--ink-4);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-mono);font-size:11px;font-weight:600;
+  color:var(--ink-3);letter-spacing:0;
+  transition:all .2s;
+}
+.opt-txt{font-size:14.5px;color:var(--ink-2);line-height:1.55;flex:1}
+.opt:hover .opt-mark{border-color:var(--gold);color:var(--gold)}
+.opt.selected{background:rgba(212,175,55,.08);border-color:var(--gold)}
+.opt.selected .opt-mark{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.opt.selected .opt-txt{color:var(--ink)}
+
+/* graded states */
+.graded .opt{cursor:default}
+.graded .opt:hover{background:rgba(11,23,40,.4)}
+.graded .opt.correct{background:rgba(45,212,191,.08);border-color:var(--teal)}
+.graded .opt.correct .opt-mark{background:var(--teal);color:var(--bg);border-color:var(--teal)}
+.graded .opt.correct .opt-txt{color:var(--ink)}
+.graded .opt.correct::after{
+  content:"✓ CORRECTA";position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  font-family:var(--ff-mono);font-size:10px;color:var(--teal);letter-spacing:.14em;font-weight:600;
+}
+.graded .opt.wrong{background:rgba(249,112,102,.06);border-color:var(--coral)}
+.graded .opt.wrong .opt-mark{background:var(--coral);color:var(--bg);border-color:var(--coral)}
+.graded .opt.wrong::after{
+  content:"✕ TU RESPUESTA";position:absolute;right:14px;top:50%;transform:translateY(-50%);
+  font-family:var(--ff-mono);font-size:10px;color:var(--coral);letter-spacing:.14em;font-weight:600;
+}
+
+/* ─── DISCUSSION ─── */
+.disc{
+  max-height:0;overflow:hidden;
+  transition:max-height .5s cubic-bezier(.2,.7,.3,1),margin-top .3s,padding .3s;
+}
+.q.graded .disc{max-height:2000px;margin-top:24px;padding-top:24px;border-top:1px dashed var(--line)}
+.disc h5{
+  font-family:var(--ff-mono);font-size:10px;color:var(--gold);
+  letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;
+  padding-bottom:6px;border-bottom:1px solid var(--line-soft);
+}
+.disc-body{font-size:14px;color:var(--ink-2);line-height:1.7;margin-bottom:16px}
+.disc-body p + p{margin-top:10px}
+.disc-body b{color:var(--ink);font-weight:500}
+.disc-body em{color:var(--gold);font-style:italic;font-family:var(--ff-editorial);font-size:1.05em}
+.disc-body .katex{font-size:1em}
+
+.disc-formula{
+  font-family:var(--ff-mono);font-size:12px;color:var(--teal);
+  background:rgba(13,148,136,.06);padding:10px 14px;
+  border-left:2px solid var(--teal);margin:12px 0;overflow-x:auto;
+}
+.disc-ref{
+  font-family:var(--ff-mono);font-size:11px;color:var(--ink-3);
+  padding:10px 14px;background:rgba(212,175,55,.04);
+  border-left:2px solid var(--gold);
+}
+.disc-ref b{color:var(--gold);font-weight:500}
+.disc-ref a{color:var(--teal);text-decoration:none;border-bottom:1px dotted var(--teal-deep)}
+.disc-ref a:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ─── ACTIONS ─── */
+.actions{
+  display:flex;gap:12px;justify-content:space-between;align-items:center;
+  padding:28px 0 40px;flex-wrap:wrap;
+  border-top:1px solid var(--line);margin-top:20px;
+}
+.progress{
+  font-family:var(--ff-mono);font-size:11px;color:var(--ink-3);
+  letter-spacing:.1em;text-transform:uppercase;
+}
+.progress b{color:var(--gold);font-size:16px;font-weight:600}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;border:none;cursor:pointer;
+  font-family:var(--ff-mono);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;font-weight:500;transition:all .2s;
+}
+.btn-primary{background:var(--gold);color:var(--bg);border:2px solid var(--gold)}
+.btn-primary:hover{background:var(--gold-soft);border-color:var(--gold-soft)}
+.btn-primary:disabled{background:var(--ink-4);color:var(--ink-3);border-color:var(--ink-4);cursor:not-allowed}
+.btn-ghost{background:transparent;color:var(--gold);border:1px solid var(--gold)}
+.btn-ghost:hover{background:var(--gold);color:var(--bg)}
+
+/* ─── RESULTS ─── */
+.results{
+  display:none;margin-bottom:40px;
+  border:1px solid var(--gold);
+  background:linear-gradient(135deg,var(--surface-2),var(--surface));
+  padding:40px;position:relative;overflow:hidden;
+}
+.results::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);
+}
+.results.show{display:block}
+.results-head{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center;margin-bottom:28px}
+@media(max-width:700px){.results-head{grid-template-columns:1fr;text-align:center}}
+.gauge-wrap{position:relative;width:160px;height:160px}
+.gauge-wrap svg{transform:rotate(-90deg)}
+.gauge-val{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.gauge-num{font-family:var(--ff-display);font-size:46px;font-weight:900;color:var(--gold);line-height:1}
+.gauge-tot{font-family:var(--ff-mono);font-size:11px;color:var(--ink-3);letter-spacing:.14em;margin-top:4px}
+.results-body h3{font-family:var(--ff-display);font-size:28px;font-weight:700;margin-bottom:8px;line-height:1.15}
+.results-body h3 em{color:var(--gold);font-style:italic;font-family:var(--ff-editorial);font-weight:500}
+.results-body .verdict{font-family:var(--ff-editorial);font-size:18px;font-style:italic;color:var(--ink-2);line-height:1.55;max-width:560px}
+
+.results-breakdown{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  background:var(--line);margin-top:22px;
+}
+@media(max-width:600px){.results-breakdown{grid-template-columns:1fr}}
+.rb-cell{background:var(--bg-2);padding:16px 18px}
+.rb-k{font-family:var(--ff-mono);font-size:9.5px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.rb-v{font-family:var(--ff-display);font-size:22px;font-weight:700;color:var(--ink)}
+.rb-v .pct{font-family:var(--ff-mono);font-size:13px;color:var(--ink-3);margin-left:6px;font-weight:400}
+.rb-cell.ok .rb-v{color:var(--teal)}
+.rb-cell.no .rb-v{color:var(--coral)}
+
+/* results mini-grid */
+.results-grid{
+  margin-top:22px;padding-top:22px;border-top:1px solid var(--line);
+  display:grid;grid-template-columns:repeat(10,1fr);gap:6px;
+}
+@media(max-width:700px){.results-grid{grid-template-columns:repeat(5,1fr)}}
+.rg-cell{
+  aspect-ratio:1;background:var(--surface);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-mono);font-size:12px;font-weight:600;color:var(--ink-3);
+  cursor:pointer;transition:all .15s;text-decoration:none;
+}
+.rg-cell:hover{transform:scale(1.08)}
+.rg-cell.ok{background:rgba(45,212,191,.14);color:var(--teal);border:1px solid var(--teal)}
+.rg-cell.no{background:rgba(249,112,102,.1);color:var(--coral);border:1px solid var(--coral)}
+
+/* ─── FOOTER ─── */
+footer{
+  margin-top:72px;padding:48px 0 32px;
+  border-top:3px solid var(--gold);
+  background:linear-gradient(180deg,var(--bg),rgba(7,16,31,.6));
+  text-align:center;
+}
+.foot-txt{font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.12em;text-transform:uppercase}
+.foot-txt b{color:var(--gold);font-weight:500}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg-2)}
+::-webkit-scrollbar-thumb{background:var(--line)}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+
+.q{scroll-margin-top:100px}
+</style>
+</head>
+<body>
+
+<!-- ─── MASTHEAD ─── -->
+<header class="masthead">
+  <div class="masthead-row">
+    <div class="brand">
+      <div class="brand-mark">L</div>
+      <div class="brand-text">
+        <div class="brand-title">González Tejeda Research</div>
+        <div class="brand-sub">ITESM · Campus Santa Fe · Instrumento</div>
+      </div>
+    </div>
+    <div class="mast-meta">
+      <span>Autoevaluación · <b>Econ. conductual</b></span>
+      <span>Form. <b>AE-01/2026</b></span>
+      <span><b>Dur.</b> 15–25 min</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="hero-eyebrow">Instrumento de autoevaluación formativa</div>
+  <h1>Diez <em>reactivos</em> · de lo básico a lo avanzado</h1>
+  <p class="hero-deck">Test de opción múltiple alineado con la infografía "Economía conductual en el ecosistema algorítmico". Progresión taxonómica Bloom: recordar → comprender → aplicar → analizar → evaluar. Cada reactivo incluye discusión académica completa, formalización matemática cuando aplica y referencia bibliográfica verificable.</p>
+
+  <div class="instruct">
+    <div class="instruct-cell">
+      <div class="instruct-k">Reactivos</div>
+      <div class="instruct-v">10</div>
+      <div class="instruct-d">Opción múltiple · cuatro alternativas con un distractor conceptual.</div>
+    </div>
+    <div class="instruct-cell">
+      <div class="instruct-k">Niveles</div>
+      <div class="instruct-v">3</div>
+      <div class="instruct-d">Básico (recordar), intermedio (aplicar), avanzado (evaluar).</div>
+    </div>
+    <div class="instruct-cell">
+      <div class="instruct-k">Aprobatorio</div>
+      <div class="instruct-v">7<span style="font-size:14px;color:var(--ink-3)">/10</span></div>
+      <div class="instruct-d">Umbral docente sugerido para dominio conceptual aceptable.</div>
+    </div>
+    <div class="instruct-cell">
+      <div class="instruct-k">Cobertura</div>
+      <div class="instruct-v">§1–§11</div>
+      <div class="instruct-d">Secciones teóricas, CPT, hypernudges, dark patterns, meta-evidencia.</div>
+    </div>
+  </div>
+
+  <div class="diff-legend">
+    <div class="diff-chip basic"><span class="dt"></span>BÁSICO · recordar/comprender</div>
+    <div class="diff-chip inter"><span class="dt"></span>INTERMEDIO · aplicar/analizar</div>
+    <div class="diff-chip adv"><span class="dt"></span>AVANZADO · evaluar/crear</div>
+  </div>
+</section>
+
+<!-- ─── RESULTS (appears after grading) ─── -->
+<section class="results" id="results">
+  <div class="results-head">
+    <div class="gauge-wrap">
+      <svg width="160" height="160" viewBox="0 0 160 160">
+        <circle cx="80" cy="80" r="66" fill="none" stroke="rgba(148,163,184,.12)" stroke-width="12"/>
+        <circle id="gaugeCircle" cx="80" cy="80" r="66" fill="none" stroke="#D4AF37" stroke-width="12" stroke-linecap="butt" stroke-dasharray="0 414.7" />
+      </svg>
+      <div class="gauge-val">
+        <div class="gauge-num" id="gaugeNum">0</div>
+        <div class="gauge-tot">DE 10 REACTIVOS</div>
+      </div>
+    </div>
+    <div class="results-body">
+      <h3>Diagnóstico <em id="verdictWord">—</em></h3>
+      <p class="verdict" id="verdictText">—</p>
+      <div class="results-breakdown" id="breakdown"></div>
+    </div>
+  </div>
+  <div class="results-grid" id="resultsGrid"></div>
+</section>
+
+<!-- ─── QUESTIONS ─── -->
+<div id="questions"></div>
+
+<!-- ─── ACTIONS ─── -->
+<div class="actions">
+  <div class="progress">Progreso · <b><span id="answered">0</span>/10</b> reactivos respondidos</div>
+  <div style="display:flex;gap:12px;flex-wrap:wrap">
+    <button class="btn btn-ghost" id="btnReset" onclick="resetQuiz()" style="display:none">↻ Nuevo intento</button>
+    <button class="btn btn-primary" id="btnGrade" onclick="gradeQuiz()" disabled>Calificar ↓</button>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <div class="wrap">
+    <div class="foot-txt">© 2026 · <b>Dr. Leonardo González Tejeda</b> · ITESM Campus Santa Fe · CC BY-NC-SA 4.0</div>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   QUIZ DATA
+   ════════════════════════════════════════ */
+const quiz = [
+  {
+    level:'basic',bloom:'Recordar',cat:'Historia del pensamiento',
+    stem:'¿Qué autor introdujo el concepto de <em>racionalidad limitada</em> (bounded rationality) como crítica al agente maximizador de la economía neoclásica?',
+    opts:[
+      'Daniel Kahneman, en "Prospect theory" (1979)',
+      'Herbert A. Simon, en "A behavioral model of rational choice" (1955)',
+      'Richard Thaler, en "Nudge" (2008)',
+      'Vilfredo Pareto, en el "Manuale di economia politica" (1906)'
+    ],
+    ans:1,
+    body:'<p><b>Herbert A. Simon (1955)</b> publicó en el <i>Quarterly Journal of Economics</i> el artículo que introdujo formalmente la racionalidad limitada. Su tesis central: los humanos no <em>maximizan</em>, <em>satisfacen</em> (<i>satisficing</i>); no computan distribuciones óptimas sobre estados futuros, usan heurísticas bajo restricciones cognitivas. Simon obtuvo el Nobel en 1978 precisamente por este programa.</p><p>La cadena conceptual del programa conductual es <b>Simon → Tversky/Kahneman → Thaler</b>: Simon abrió el espacio teórico (1955), Tversky y Kahneman (1974, 1979) formalizaron las heurísticas específicas y la función de valor, Thaler y Sunstein (2008) tradujeron el marco descriptivo en un dispositivo normativo de política pública.</p>',
+    ref:'<b>Simon, H. A.</b> (1955). A behavioral model of rational choice. <i>QJE</i>, 69(1), 99–118. <a href="https://doi.org/10.2307/1884852" target="_blank" rel="noopener">10.2307/1884852</a>'
+  },
+  {
+    level:'basic',bloom:'Comprender',cat:'Heurísticas y sesgos',
+    stem:'Un portal inmobiliario exhibe deliberadamente un precio de lista alto para que las contraofertas subsecuentes parezcan razonables por comparación. ¿Qué sesgo cognitivo se está explotando?',
+    opts:[
+      'Sesgo de confirmación (confirmation bias)',
+      'Efecto marco (framing effect)',
+      'Anclaje (anchoring)',
+      'Descuento hiperbólico (present bias)'
+    ],
+    ans:2,
+    body:'<p>El <b>anclaje</b> (Tversky & Kahneman, 1974) es el peso desproporcionado que el primer valor numérico presentado ejerce sobre los juicios posteriores, incluso cuando el ancla es arbitraria o sin relación causal con el valor a estimar. En experimentos clásicos, el último dígito del número de seguridad social de los participantes predecía significativamente su disposición a pagar por bienes subastados.</p><p>En el mercado inmobiliario, el precio listado ancla cognitivamente al comprador: una contraoferta al 90% del ancla se percibe como "razonable" aunque el valor fundamental sea el 70%. <b>Genesove & Mayer (2001, QJE)</b> documentaron empíricamente este efecto en condominios de Boston post-recesión: propietarios con pérdida nominal fijan precios de reserva con coeficientes de 25–35% sobre el nivel competitivo.</p>',
+    ref:'<b>Tversky & Kahneman</b> (1974). <i>Science</i>, 185, 1124–1131. <a href="https://doi.org/10.1126/science.185.4157.1124" target="_blank" rel="noopener">10.1126/science.185.4157.1124</a> · <b>Genesove & Mayer</b> (2001). <i>QJE</i>. <a href="https://doi.org/10.1162/003355301753265561" target="_blank" rel="noopener">10.1162/003355301753265561</a>'
+  },
+  {
+    level:'basic',bloom:'Recordar',cat:'Parámetros canónicos CPT',
+    stem:'En la calibración canónica de la Teoría de Perspectivas Acumulativa de Tversky & Kahneman (1992), el coeficiente de aversión a la pérdida $\\lambda$ es aproximadamente:',
+    opts:[
+      '$\\lambda = 1.00$ (indica neutralidad al riesgo)',
+      '$\\lambda \\approx 0.88$ (curvatura de la función de valor)',
+      '$\\lambda \\approx 2.25$ (las pérdidas duelen ~2.25× más que el placer de ganancias equivalentes)',
+      '$\\lambda \\approx 4.50$ (asimetría extrema propia de decisiones de salud)'
+    ],
+    ans:2,
+    body:'<p>Tversky & Kahneman (1992) estimaron mediante elicitación experimental el parámetro <b>λ ≈ 2.25</b>. Interpretación operativa: una pérdida monetaria de $100 genera una desutilidad psicológica equivalente a la utilidad de $225 ganados. Este parámetro es el corazón cuantitativo de la aversión a la pérdida —el hallazgo empírico más robusto y replicado de toda la economía conductual.</p><p>Los distractores son trampas deliberadas: <b>0.88</b> es el parámetro de curvatura de la función de valor ($\\alpha = \\beta$), no de aversión a la pérdida; <b>1.0</b> implicaría simetría total (utilidad esperada estándar); <b>4.50</b> es un valor observado ocasionalmente en decisiones de alto compromiso (salud, familiares), pero no es la calibración canónica de referencia.</p><div class="disc-formula">$ \\lambda = -v(-x)/v(x) \\approx 2.25 $ para $ x > 0 $ · Tversky & Kahneman (1992)</div><p>Estimaciones de meta-análisis posteriores sitúan λ en [1.8, 2.5] según dominio; Rabin (2000) demostró que sin λ > 1, la aversión al riesgo en apuestas pequeñas implicaría niveles absurdos de aversión en apuestas grandes (<i>calibration theorem</i>).</p>',
+    ref:'<b>Tversky & Kahneman</b> (1992). Advances in prospect theory. <i>J. Risk Uncertainty</i>, 5, 297–323. <a href="https://doi.org/10.1007/BF00122574" target="_blank" rel="noopener">10.1007/BF00122574</a>'
+  },
+  {
+    level:'inter',bloom:'Analizar',cat:'Geometría de la función de valor',
+    stem:'La función de valor $v(x)$ de la Teoría de Perspectivas exhibe, en su forma canónica, las siguientes propiedades geométricas:',
+    opts:[
+      'Lineal en todo su dominio (consistente con utilidad esperada estándar)',
+      'Cóncava en ganancias y cóncava en pérdidas, con pendiente simétrica',
+      'Cóncava en ganancias, convexa en pérdidas, con ponderación asimétrica $\\lambda > 1$',
+      'Convexa en ganancias, cóncava en pérdidas, con ponderación $\\lambda < 1$'
+    ],
+    ans:2,
+    body:'<p>La geometría canónica de $v(x)$ es la célebre <em>S-shape</em>: <b>cóncava en el dominio de ganancias</b> ($\\alpha < 1$), lo que implica aversión al riesgo en ganancias (preferencia por $50 seguros sobre una lotería con valor esperado $50); y <b>convexa en el dominio de pérdidas</b> ($\\beta < 1$), lo que implica búsqueda de riesgo en pérdidas (preferencia por una lotería que pueda cancelar la pérdida sobre una pérdida segura del mismo valor esperado).</p><div class="disc-formula">$ v(x) = \\begin{cases} x^{\\alpha} & x \\geq 0 \\\\ -\\lambda(-x)^{\\beta} & x < 0 \\end{cases},\\ \\alpha=\\beta\\approx 0.88,\\ \\lambda \\approx 2.25 $</div><p>La <b>asimetría $\\lambda > 1$</b> hace que la rama negativa descienda más abruptamente que la ascendente, de modo que $|v(-x)| > |v(x)|$ para todo $x > 0$. Esta estructura —cóncavo+convexo+asimétrico— es distintiva: sólo ella simultáneamente explica los cuatro fenómenos que Kahneman & Tversky (1979) identificaron como anomalías respecto de la utilidad esperada: <i>reflection effect</i>, <i>isolation effect</i>, <i>certainty effect</i> y aversión a la pérdida.</p>',
+    ref:'<b>Kahneman & Tversky</b> (1979). Prospect theory. <i>Econometrica</i>, 47, 263–291. <a href="https://doi.org/10.2307/1914185" target="_blank" rel="noopener">10.2307/1914185</a>'
+  },
+  {
+    level:'inter',bloom:'Aplicar',cat:'Ponderación de probabilidades',
+    stem:'Según la función $w(p)$ de Tversky & Kahneman (1992) con $\\gamma \\approx 0.61$, ¿qué fenómeno empírico explica la forma de S-invertida de esta función?',
+    opts:[
+      'Las probabilidades bajas son subponderadas y las altas sobreponderadas',
+      'Las probabilidades bajas son sobreponderadas y las altas subponderadas (simultáneo)',
+      'La ponderación es lineal: $w(p) = p$ para todo $p \\in [0,1]$',
+      'Las probabilidades se ponderan por su valor esperado monetario $p \\cdot x$'
+    ],
+    ans:1,
+    body:'<p>La función $w(p)$ con $\\gamma < 1$ adopta una forma de <b>S invertida</b>: eventos raros ($p$ pequeña) son <em>sobreponderados</em> y eventos frecuentes ($p$ alta) son <em>subponderados</em>. Este patrón, empíricamente robusto, resuelve una aparente contradicción conductual: el mismo individuo compra <b>billetes de lotería</b> (sobreponderando la ínfima probabilidad de ganar) <em>y</em> <b>pólizas de seguros</b> contra eventos improbables (sobreponderando la ínfima probabilidad de catástrofe).</p><div class="disc-formula">$ w(p) = \\dfrac{p^{\\gamma}}{(p^{\\gamma} + (1-p)^{\\gamma})^{1/\\gamma}},\\ \\gamma^+ \\approx 0.61,\\ \\gamma^- \\approx 0.69 $</div><p>Numéricamente: con $\\gamma = 0.61$, una probabilidad objetiva del <b>1%</b> se percibe subjetivamente como ≈ <b>6.2%</b> —un factor de sobreponderación de ~6×. Inversamente, $p = 0.95$ se percibe como ≈0.82. Esta distorsión sistemática sostiene el <b>efecto Allais (1953)</b> y hoy es explotada industrialmente por mercados de predicción, microapuestas deportivas en vivo y opciones binarias. Prelec (1998) ofrece una formulación alternativa con mejor fundamentación axiomática.</p>',
+    ref:'<b>Tversky & Kahneman</b> (1992). <a href="https://doi.org/10.1007/BF00122574" target="_blank" rel="noopener">10.1007/BF00122574</a> · <b>Prelec, D.</b> (1998). The probability weighting function. <i>Econometrica</i>, 66, 497–527.'
+  },
+  {
+    level:'inter',bloom:'Aplicar',cat:'Descuento intertemporal',
+    stem:'En el modelo quasi-hiperbólico $\\beta\\text{-}\\delta$ de Laibson (1997), ¿cuál parámetro captura específicamente el <em>sesgo del presente</em> (present bias)?',
+    opts:[
+      '$\\delta$, con $\\delta < 1$ (descuento exponencial)',
+      '$\\beta$, con $\\beta < 1$ (salto discreto entre hoy y mañana)',
+      '$k$, con $k > 0$ (tasa hiperbólica continua)',
+      'Ambos $\\beta$ y $\\delta$ simultáneamente, sin distinción'
+    ],
+    ans:1,
+    body:'<p>En la formulación $D(t) = \\beta \\delta^t$ (para $t > 0$, con $D(0)=1$), <b>$\\delta$</b> es el factor de descuento exponencial estándar (empíricamente ≈ 0.96 mensual), que modela la paciencia intertemporal "racional". <b>$\\beta$</b> (empíricamente ≈ 0.7) captura específicamente el <em>sesgo del presente</em>: un <em>salto discreto</em> entre el momento actual y cualquier momento futuro.</p><div class="disc-formula">$ D(t) = \\begin{cases} 1 & t = 0 \\\\ \\beta \\delta^t & t > 0 \\end{cases},\\ \\beta \\in (0, 1] $</div><p>Esta estructura resuelve una anomalía clásica que el descuento exponencial puro no puede explicar: la <b>inconsistencia dinámica</b>. Un agente β-δ puede preferir $110 dentro de 31 días sobre $100 dentro de 30 días, pero preferir $100 <em>hoy</em> sobre $110 <em>mañana</em>. Cuando $t=0$ entra en juego, $\\beta$ "aplasta" el futuro completo por igual.</p><p>El modelo β-δ tiene implicaciones operativas directas: compras por impulso, procrastinación, subahorro, adicción. Los ecosistemas algorítmicos explotan sistemáticamente esta curvatura mediante <em>BNPL</em> (buy-now-pay-later), notificaciones push, <em>infinite scroll</em> y contadores regresivos falsos. El distractor <b>$k$</b> corresponde a la forma hiperbólica pura $D(t) = 1/(1+kt)$ de Ainslie (1975), una alternativa conceptualmente relacionada pero formalmente distinta.</p>',
+    ref:'<b>Laibson, D.</b> (1997). Golden eggs and hyperbolic discounting. <i>QJE</i>, 112, 443–477. <a href="https://doi.org/10.1162/003355397555253" target="_blank" rel="noopener">10.1162/003355397555253</a>'
+  },
+  {
+    level:'adv',bloom:'Evaluar',cat:'Arquitectura algorítmica de elecciones',
+    stem:'El término <em>hypernudge</em>, acuñado por Karen Yeung (2017), se distingue del <em>nudge</em> clásico de Thaler-Sunstein por tres características simultáneas. ¿Cuáles son?',
+    opts:[
+      'Estático, universal y transparente (vs. opacidad del nudge original)',
+      'Visible, prohibido por ley en la UE y reversible',
+      'Dinámico, personalizado y reactivo a datos conductuales en tiempo real',
+      'Benigno, voluntario y justificado por libertarian paternalism clásico'
+    ],
+    ans:2,
+    body:'<p>Karen Yeung (2017), en "Hypernudge: Big data as a mode of regulation by design" (<i>Information, Communication & Society</i>), argumenta que los sistemas algorítmicos de recomendación representan una mutación cualitativa —no sólo cuantitativa— del nudge original. El hypernudge es simultáneamente:</p><ul style="margin:12px 0 12px 24px;color:var(--ink-2);font-size:13.5px;line-height:1.7"><li><b>Dinámico</b>: se reconfigura en cada refresh/interacción, no es un arreglo estático de la arquitectura de elección.</li><li><b>Personalizado</b>: explota perfiles psicográficos individuales (ver Matz et al., 2017, PNAS: targeting por Big-Five aumenta CTR en 40%).</li><li><b>Opaco / Reactivo</b>: el sujeto no puede auditar qué nudge recibe ni cómo se formó —la "arquitectura de elecciones" es ella misma producto de un modelo entrenado con el comportamiento pasado del propio agente y de millones de otros.</li></ul><p>Esta transformación desafía la justificación normativa original del <em>libertarian paternalism</em> de Thaler-Sunstein, que presupone transparencia sobre la arquitectura de la elección. Si el sujeto no puede inspeccionar el nudge, la línea entre personalización legítima y manipulación se vuelve conceptualmente indefendible —argumento recogido posteriormente por Sunstein (2019) en <i>The cost-benefit revolution</i>.</p>',
+    ref:'<b>Yeung, K.</b> (2017). Hypernudge. <i>Information, Communication & Society</i>, 20, 118–136. <a href="https://doi.org/10.1080/1369118X.2016.1186713" target="_blank" rel="noopener">10.1080/1369118X.2016.1186713</a>'
+  },
+  {
+    level:'adv',bloom:'Analizar',cat:'Evidencia empírica dark patterns',
+    stem:'Mathur, Acar, Friedman <i>et al.</i> (2019, <i>Proc. ACM HCI</i>) desplegaron un crawler automatizado sobre ~11,000 sitios de comercio electrónico. ¿Qué porcentaje aproximado presentó al menos un <em>dark pattern</em>?',
+    opts:[
+      'Aproximadamente <code>1%</code> (fenómeno marginal, casos aislados)',
+      'Aproximadamente <code>11%</code> (1,254 sitios con 1,818 instancias de 15 tipos)',
+      'Aproximadamente <code>50%</code> (presencia masiva y normalizada)',
+      'Aproximadamente <code>90%</code> (práctica casi universal en e-commerce)'
+    ],
+    ans:1,
+    body:'<p>Mathur <i>et al.</i> (2019) desarrollaron un crawler escalable sobre una muestra de 11,000 sitios obtenidos del ranking Alexa top-sitios-de-compras. Identificaron <b>1,818 instancias de 15 tipos distintos de dark patterns en 1,254 sitios únicos</b>, lo que representa el <b>11.1% de la muestra</b>. El estudio es metodológicamente <em>seminal</em>: fue la primera auditoría a gran escala con clasificación taxonómica automatizada —combina scraping con detección por patrones de interfaz.</p><p>Distribución por categoría detectada: <em>urgencia</em> (countdowns, "oferta termina en..."), <em>escasez</em> ("sólo quedan 3"), <em>prueba social</em> ("12 personas están viendo esto" —a menudo fabricada), <em>obstrucción</em> (cancelación difícil), <em>sneaking</em> (cargos ocultos en checkout) y <em>confirm shaming</em>. Importante: el 11% es <b>cota inferior</b> porque el crawler sólo detectaba patrones textuales/estructurales claramente tipificados; variantes sutiles (jerarquía visual sesgada, A/B testing oculto) no fueron capturadas.</p><p>El estudio tuvo impacto regulatorio directo: fue citado extensivamente en la justificación del <b>Digital Services Act</b> (UE, Art. 25), en las guías de la <b>FTC</b> estadounidense (2022) y en la <b>Loi SREN</b> francesa (2024). Luguri & Strahilevitz (2021, RCT con n=1,963) demostraron posteriormente que la exposición a dark patterns aumenta la aceptación de ofertas indeseadas en un factor de <b>2.2×</b>.</p>',
+    ref:'<b>Mathur et al.</b> (2019). Dark patterns at scale. <i>Proc. ACM HCI</i>, 3(CSCW). <a href="https://doi.org/10.1145/3359183" target="_blank" rel="noopener">10.1145/3359183</a>'
+  },
+  {
+    level:'adv',bloom:'Evaluar',cat:'Crisis de validez externa',
+    stem:'DellaVigna & Linos (2022, <i>Econometrica</i>) realizaron un meta-análisis crítico comparando 126 RCTs de <em>nudge units</em> gubernamentales con la literatura académica publicada. Su hallazgo central fue:',
+    opts:[
+      'Los efectos en nudge units son estadísticamente indistinguibles de los académicos (replicación satisfactoria)',
+      'Los efectos en nudge units son sustancialmente <em>mayores</em> que los académicos (escalabilidad positiva)',
+      'Los efectos en nudge units son sustancialmente <em>menores</em> (~1.4pp vs ~8.7pp), sugiriendo sesgo de publicación',
+      'Los efectos son imposibles de comparar por heterogeneidad metodológica irreducible'
+    ],
+    ans:2,
+    body:'<p>DellaVigna & Linos (2022), en uno de los artículos más citados de la literatura conductual contemporánea, analizaron 126 RCTs reales ejecutados por dos <em>nudge units</em> gubernamentales de EEUU —la <b>OES</b> (Office of Evaluation Sciences) y la unidad de Carolina del Norte. El efecto promedio fue de <b>1.4 puntos porcentuales</b>, frente a los <b>8.7 pp</b> reportados en meta-análisis de la literatura académica publicada: una <b>brecha aproximada 6×</b>.</p><p>Los autores exploran varias explicaciones no mutuamente excluyentes:</p><ul style="margin:12px 0 12px 24px;color:var(--ink-2);font-size:13.5px;line-height:1.7"><li><b>Sesgo de publicación</b>: efectos pequeños en estudios académicos permanecen no publicados; los nudge units reportan sistemáticamente todos los RCTs.</li><li><b>Menor poder estadístico</b> en estudios académicos (muestras más pequeñas ⇒ sólo efectos grandes alcanzan significancia).</li><li><b>Diferencias de implementación</b>: en políticas reales, los nudges se aplican en poblaciones más heterogéneas y con fricciones operativas mayores.</li><li><b>Criterios de selección</b>: las nudge units eligen intervenciones conservadoras ex ante.</li></ul><p>La implicación crítica es normativa: extrapolar directamente efectos de laboratorio o experimentos de campo académicos a política pública es epistemológicamente arriesgado. Esto conecta con la <b>crisis de replicabilidad</b> más amplia en psicología y economía experimental (Open Science Collaboration 2015; Camerer et al. 2018). El artículo marca un punto de inflexión: la economía conductual aplicada debe asumir cautela bayesiana al extrapolar de <em>efficacy</em> a <em>effectiveness</em>.</p>',
+    ref:'<b>DellaVigna & Linos</b> (2022). RCTs to scale. <i>Econometrica</i>, 90(1), 81–116. <a href="https://doi.org/10.3982/ECTA18709" target="_blank" rel="noopener">10.3982/ECTA18709</a>'
+  },
+  {
+    level:'adv',bloom:'Evaluar',cat:'Endogeneidad en sistemas PropTech',
+    stem:'En un mercado inmobiliario digitalizado donde los <em>Automated Valuation Models</em> (AVMs) estiman precios incorporando los propios precios listados como predictor, ¿qué fenómeno emerge sistemáticamente?',
+    opts:[
+      'El precio converge inmediatamente al valor fundamental por eficiencia informacional',
+      'El sesgo de anclaje se neutraliza por agregación estadística a escala',
+      'Emerge un bucle de retroalimentación (circularidad): el anclaje se convierte en un <em>punto fijo dinámico</em> del sistema',
+      'Los AVMs son conductualmente neutros porque usan datos objetivos'
+    ],
+    ans:2,
+    body:'<p>Cuando un AVM usa precios listados como <i>feature</i> de entrenamiento o como predictor directo, se establece un <b>bucle de retroalimentación positiva</b> entre decisión humana y decisión algorítmica:</p><div class="disc-formula">$ \\hat{p}_{t+1} = f(\\text{listados}_t, X_t) \\to \\text{ancla}_{t+1} \\to \\text{listados}_{t+2} = g(\\text{ancla}_{t+1}) \\to \\hat{p}_{t+2} = f(\\text{listados}_{t+2},\\cdot)\\cdots $</div><p>El precio listado <b>ancla cognitivamente</b> a comprador y vendedor (mecanismo conductual documentado por Tversky & Kahneman 1974 y Genesove & Mayer 2001); el AVM, al incorporar ese precio como <i>feature</i>, lo <b>valida computacionalmente</b>; el valor "algorítmicamente justificado" refuerza la ancla. El resultado no es convergencia al valor fundamental sino un <em>atractor dinámico</em> —un punto fijo del sistema endógeno.</p><p>Este tipo de circularidad está en el núcleo del <b>Homepty Hypergraph</b> (Villalobos & González Tejeda, 2026) con función de convergencia $\\Phi(t)$: el mercado CDMX formal exhibe $\\Phi(t) \\approx 12.8\\%$, con parámetros $\\rho^* = 0.960$ y $t^* = 31$ períodos para alcanzar el atractor. Metodológicamente, esto exige:</p><ul style="margin:12px 0 12px 24px;color:var(--ink-2);font-size:13.5px;line-height:1.7"><li><b>Instrumentos exógenos</b> en la estimación de AVMs (variables no contaminadas por precios listados: atributos físicos, distancia a equipamiento, datos cadastrales).</li><li><b>Modelos espaciales</b> (Spatial Durbin Model, $\\rho = 0.887$ en el caso de CDMX con 2.3M avalúos SHF sobre matrices H3).</li><li><b>Auditorías contrafactuales</b>: comparar AVMs entrenados con vs. sin precios listados como feature.</li></ul><p>Los distractores reflejan errores conceptuales comunes: (A) supuesto de eficiencia informacional tipo Fama que colapsa bajo anclaje; (B) la agregación no cancela sesgos sistemáticos (solo los aleatorios); (D) la "objetividad" de los datos no es propiedad de los datos sino de su generación —y los datos de listados están generados por agentes sesgados.</p>',
+    ref:'<b>Genesove & Mayer</b> (2001). <i>QJE</i>, 116(4). <a href="https://doi.org/10.1162/003355301753265561" target="_blank" rel="noopener">10.1162/003355301753265561</a> · <b>Villalobos & González Tejeda</b> (2026). Homepty Hypergraph. WP-2026-STRAT-01.'
+  }
+];
+
+/* ════════════════════════════════════════
+   RENDER & STATE
+   ════════════════════════════════════════ */
+let state = Array(quiz.length).fill(null);
+let graded = false;
+const qWrap = document.getElementById('questions');
+
+function levelLabel(l){return {basic:'BÁSICO',inter:'INTERMEDIO',adv:'AVANZADO'}[l]}
+function renderQuiz(){
+  qWrap.innerHTML = quiz.map((q,i)=>{
+    const optsHTML = q.opts.map((o,j)=>`
+      <label class="opt" data-qi="${i}" data-oi="${j}" onclick="pick(${i},${j})">
+        <input type="radio" name="q${i}" value="${j}">
+        <span class="opt-mark">${String.fromCharCode(65+j)}</span>
+        <span class="opt-txt">${o}</span>
+      </label>`).join('');
+    return `
+      <article class="q" id="q${i}">
+        <div class="q-head">
+          <div class="q-num"><div class="q-n">${String(i+1).padStart(2,'0')}</div><div class="q-cat">${q.cat}</div></div>
+          <div class="q-badges">
+            <span class="q-badge ${q.level}">${levelLabel(q.level)}</span>
+            <span class="q-badge bloom">Bloom · ${q.bloom}</span>
+          </div>
+        </div>
+        <div class="q-stem">${q.stem}</div>
+        <div class="opts" id="opts${i}">${optsHTML}</div>
+        <div class="disc" id="disc${i}">
+          <h5>Discusión académica</h5>
+          <div class="disc-body">${q.body}</div>
+          <div class="disc-ref"><b>Referencia · </b>${q.ref}</div>
+        </div>
+      </article>`;
+  }).join('');
+  if(window.renderMathInElement){window.renderMathInElement(qWrap,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false,strict:false})}
+}
+
+function pick(qi, oi){
+  if(graded) return;
+  state[qi] = oi;
+  // update UI
+  const opts = document.querySelectorAll(`#opts${qi} .opt`);
+  opts.forEach((el,j)=>{ el.classList.toggle('selected', j===oi) });
+  document.getElementById(`q${qi}`).classList.add('answered');
+  const answered = state.filter(s=>s!==null).length;
+  document.getElementById('answered').textContent = answered;
+  document.getElementById('btnGrade').disabled = answered < quiz.length;
+}
+
+function gradeQuiz(){
+  if(state.includes(null)) return;
+  graded = true;
+  let correct = 0;
+  const byLevel = {basic:[0,0],inter:[0,0],adv:[0,0]};
+  quiz.forEach((q,i)=>{
+    const isRight = state[i] === q.ans;
+    if(isRight) correct++;
+    byLevel[q.level][1]++;
+    if(isRight) byLevel[q.level][0]++;
+    const qEl = document.getElementById(`q${i}`);
+    qEl.classList.add('graded');
+    qEl.classList.add(isRight ? 'correct' : 'wrong');
+    const opts = qEl.querySelectorAll('.opt');
+    opts.forEach((el,j)=>{
+      el.classList.remove('selected');
+      if(j === q.ans) el.classList.add('correct');
+      if(j === state[i] && !isRight) el.classList.add('wrong');
+    });
+  });
+  renderResults(correct, byLevel);
+  document.getElementById('btnGrade').style.display = 'none';
+  document.getElementById('btnReset').style.display = 'inline-flex';
+  setTimeout(()=>document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'}), 150);
+}
+
+function renderResults(correct, byLevel){
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  document.getElementById('gaugeNum').textContent = correct;
+  const circ = 2*Math.PI*66; // ≈414.7
+  const frac = correct/10;
+  const dash = frac*circ;
+  document.getElementById('gaugeCircle').setAttribute('stroke-dasharray', `${dash} ${circ-dash}`);
+  // color based on score
+  let color = '#F97066'; // coral
+  if(correct >= 9) color = '#2DD4BF';
+  else if(correct >= 7) color = '#D4AF37';
+  else if(correct >= 5) color = '#F59E0B';
+  document.getElementById('gaugeCircle').setAttribute('stroke', color);
+  document.querySelector('.gauge-num').style.color = color;
+
+  // verdict
+  let v = {w:'—',t:''};
+  if(correct===10) v = {w:'sobresaliente', t:'Dominio conceptual pleno del corpus teórico y empírico. Señal compatible con capacidad para producir investigación original en la intersección de economía conductual y sistemas algorítmicos.'};
+  else if(correct>=8) v = {w:'consolidado', t:'Dominio sólido de los fundamentos y de la literatura contemporánea. Las áreas con error merecen revisión dirigida para cerrar la brecha.'};
+  else if(correct>=7) v = {w:'aprobatorio', t:'Umbral docente alcanzado. Se recomienda profundizar en los reactivos marcados en coral, particularmente los de nivel avanzado.'};
+  else if(correct>=5) v = {w:'incipiente', t:'Comprensión parcial. Se recomienda releer §3–§5 (formalización CPT) y §8–§9 (dark patterns y meta-evidencia) antes de un segundo intento.'};
+  else v = {w:'inicial', t:'Recorrido recomendado: leer secuencialmente la infografía de §1 a §9, reintentar el test enfocándose primero en los reactivos básicos e intermedios.'};
+  document.getElementById('verdictWord').textContent = v.w;
+  document.getElementById('verdictText').textContent = v.t;
+
+  // breakdown
+  const bd = document.getElementById('breakdown');
+  const mkCell = (k,sc)=>{
+    const pct = Math.round(100*sc[0]/sc[1]);
+    const cls = sc[0]===sc[1] ? 'ok' : (sc[0]===0 ? 'no' : '');
+    return `<div class="rb-cell ${cls}"><div class="rb-k">${k}</div><div class="rb-v">${sc[0]}/${sc[1]}<span class="pct">${pct}%</span></div></div>`;
+  };
+  bd.innerHTML = mkCell('Básico', byLevel.basic) + mkCell('Intermedio', byLevel.inter) + mkCell('Avanzado', byLevel.adv);
+
+  // grid
+  const rg = document.getElementById('resultsGrid');
+  rg.innerHTML = quiz.map((q,i)=>{
+    const ok = state[i] === q.ans;
+    return `<a href="#q${i}" class="rg-cell ${ok?'ok':'no'}" title="Reactivo ${i+1} · ${ok?'correcto':'incorrecto'}">${String(i+1).padStart(2,'0')}</a>`;
+  }).join('');
+}
+
+function resetQuiz(){
+  state = Array(quiz.length).fill(null);
+  graded = false;
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('btnGrade').style.display = 'inline-flex';
+  document.getElementById('btnGrade').disabled = true;
+  document.getElementById('btnReset').style.display = 'none';
+  document.getElementById('answered').textContent = '0';
+  renderQuiz();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* initial render */
+renderQuiz();
+</script>
+</body>
+</html>

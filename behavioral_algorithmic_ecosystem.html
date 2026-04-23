@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Economía Conductual en el Ecosistema Algorítmico | ITESM · Dr. Leonardo González Tejeda</title>
+<meta name="author" content="Leonardo González Tejeda">
+<meta name="description" content="Infografía interactiva científica sobre la convergencia entre economía conductual y sistemas algorítmicos. ITESM Campus Santa Fe.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous" onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}],throwOnError:false,strict:false});"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<style>
+:root{
+  --bg:#07101F;
+  --bg-2:#0B1728;
+  --surface:#111F35;
+  --surface-2:#16253E;
+  --line:rgba(212,175,55,.14);
+  --line-soft:rgba(148,163,184,.09);
+  --gold:#D4AF37;
+  --gold-soft:#B8941F;
+  --teal:#2DD4BF;
+  --teal-deep:#0D9488;
+  --coral:#F97066;
+  --amber:#F59E0B;
+  --violet:#A78BFA;
+  --lime:#A3E635;
+  --ink:#E8EDF5;
+  --ink-2:#B8C5D6;
+  --ink-3:#7A8CA6;
+  --ink-4:#4A5C76;
+  --ff-display:'Playfair Display',Georgia,serif;
+  --ff-editorial:'Cormorant Garamond',Georgia,serif;
+  --ff-body:'IBM Plex Sans',-apple-system,system-ui,sans-serif;
+  --ff-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--ff-body);
+  font-weight:300;
+  line-height:1.65;
+  font-size:15px;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%,rgba(212,175,55,.06),transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 15%,rgba(45,212,191,.04),transparent 60%),
+    radial-gradient(ellipse 40% 30% at 10% 80%,rgba(167,139,250,.03),transparent 60%);
+  background-attachment:fixed;
+}
+
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.8 0 0 0 0 0.3 0 0 0 0.03 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1;opacity:.4;
+}
+
+.wrap{max-width:1320px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+
+/* ───────────── MASTHEAD ───────────── */
+.masthead{
+  border-top:3px solid var(--gold);
+  border-bottom:1px solid var(--line);
+  padding:22px 0 18px;
+  background:linear-gradient(180deg,rgba(11,23,40,.95),rgba(7,16,31,.6));
+  backdrop-filter:blur(8px);
+  position:sticky;top:0;z-index:100;
+}
+.masthead-row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:16px}
+.brand-mark{
+  width:46px;height:46px;
+  background:radial-gradient(circle at 30% 30%,var(--gold),var(--gold-soft));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-display);font-weight:900;font-size:22px;color:#1a1a1a;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.brand-text{display:flex;flex-direction:column;gap:2px}
+.brand-title{font-family:var(--ff-display);font-size:17px;font-weight:700;letter-spacing:.01em;line-height:1}
+.brand-sub{font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.14em;text-transform:uppercase}
+.mast-meta{display:flex;gap:24px;font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;flex-wrap:wrap;align-items:center}
+.mast-meta b{color:var(--gold);font-weight:600}
+
+/* ───────────── HERO ───────────── */
+.hero{padding:72px 0 48px;position:relative}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:14px;
+  font-family:var(--ff-mono);font-size:11px;color:var(--gold);
+  letter-spacing:.22em;text-transform:uppercase;margin-bottom:28px;
+}
+.hero-eyebrow::before{content:"";width:48px;height:1px;background:var(--gold)}
+.hero-eyebrow::after{content:"";width:10px;height:10px;border:1px solid var(--gold);transform:rotate(45deg)}
+.hero h1{
+  font-family:var(--ff-display);
+  font-size:clamp(40px,6.2vw,78px);
+  font-weight:900;
+  line-height:.98;
+  letter-spacing:-.02em;
+  margin-bottom:28px;
+  max-width:1100px;
+}
+.hero h1 em{
+  font-style:italic;font-family:var(--ff-editorial);font-weight:500;
+  color:var(--gold);letter-spacing:-.01em;
+}
+.hero h1 .amp{color:var(--teal);font-style:italic;font-family:var(--ff-editorial);font-weight:500}
+.hero-deck{
+  font-family:var(--ff-editorial);font-size:clamp(18px,2vw,23px);
+  font-weight:500;font-style:italic;
+  color:var(--ink-2);line-height:1.55;max-width:900px;
+  border-left:2px solid var(--gold);padding-left:22px;margin-bottom:40px;
+}
+.hero-byline{
+  display:flex;gap:32px;flex-wrap:wrap;
+  padding-top:24px;border-top:1px solid var(--line-soft);
+  font-family:var(--ff-mono);font-size:11px;color:var(--ink-3);letter-spacing:.12em;text-transform:uppercase;
+}
+.hero-byline > div{display:flex;flex-direction:column;gap:4px}
+.hero-byline b{color:var(--ink);font-weight:500}
+
+/* ───────────── TOC ───────────── */
+.toc{
+  margin:64px 0 80px;
+  padding:32px;
+  border:1px solid var(--line);
+  background:linear-gradient(135deg,var(--surface),var(--bg-2));
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;
+  position:relative;
+}
+.toc::before{content:"ÍNDICE · TABLA DE CONTENIDOS";position:absolute;top:-10px;left:24px;background:var(--bg);padding:0 12px;font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.2em}
+.toc a{
+  display:flex;gap:14px;padding:14px 16px;
+  text-decoration:none;color:var(--ink-2);
+  font-family:var(--ff-body);font-size:13px;font-weight:400;
+  border:1px solid transparent;transition:all .25s;
+}
+.toc a:hover{background:rgba(212,175,55,.06);border-color:var(--line);color:var(--gold)}
+.toc a .num{font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.08em;min-width:28px}
+
+/* ───────────── SECTION ───────────── */
+.section{padding:72px 0;border-top:1px solid var(--line-soft);position:relative}
+.section-num{
+  display:inline-flex;align-items:baseline;gap:14px;
+  font-family:var(--ff-mono);font-size:11px;color:var(--gold);
+  letter-spacing:.22em;text-transform:uppercase;margin-bottom:20px;
+}
+.section-num .dig{font-family:var(--ff-display);font-size:48px;font-weight:900;color:var(--gold);letter-spacing:-.02em;line-height:1}
+.section-num .lbl{padding-bottom:6px}
+.section h2{
+  font-family:var(--ff-display);font-size:clamp(30px,3.8vw,46px);font-weight:700;
+  letter-spacing:-.01em;line-height:1.1;margin-bottom:22px;max-width:1000px;
+}
+.section h2 em{font-style:italic;font-family:var(--ff-editorial);font-weight:500;color:var(--gold)}
+.lede{
+  font-family:var(--ff-editorial);font-size:21px;font-style:italic;font-weight:500;
+  color:var(--ink-2);line-height:1.55;max-width:850px;margin-bottom:40px;
+}
+.lede::first-letter{
+  font-family:var(--ff-display);font-weight:900;font-size:64px;float:left;
+  line-height:.85;padding:8px 14px 0 0;color:var(--gold);font-style:normal;
+}
+.prose{font-size:15.5px;line-height:1.75;color:var(--ink-2);max-width:780px;margin-bottom:28px}
+.prose p + p{margin-top:18px}
+.prose b{color:var(--ink);font-weight:500}
+.prose em{color:var(--gold);font-style:italic;font-family:var(--ff-editorial);font-size:1.05em}
+
+h3.sub{font-family:var(--ff-display);font-size:22px;font-weight:700;margin:36px 0 16px;color:var(--ink)}
+h4.sub{font-family:var(--ff-mono);font-size:11px;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+
+/* ───────────── CARDS ───────────── */
+.card{
+  background:linear-gradient(135deg,var(--surface),var(--bg-2));
+  border:1px solid var(--line);
+  padding:28px;position:relative;
+}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+.card-head h3{font-family:var(--ff-display);font-size:20px;font-weight:700}
+.card-head .tag{font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase}
+
+/* ───────────── BIAS TAXONOMY ───────────── */
+.bias-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
+.bias{
+  background:var(--bg-2);padding:24px;cursor:pointer;
+  transition:all .3s cubic-bezier(.2,.7,.3,1);position:relative;overflow:hidden;
+}
+.bias::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s;
+}
+.bias:hover{background:var(--surface)}
+.bias:hover::before{transform:scaleX(1)}
+.bias.active{background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--gold)}
+.bias.active::before{transform:scaleX(1)}
+.bias-hdr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.bias-nm{font-family:var(--ff-display);font-size:17px;font-weight:700;color:var(--ink)}
+.bias-key{font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.14em}
+.bias-en{font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.04em;margin-bottom:12px;font-style:italic}
+.bias-def{font-size:13.5px;color:var(--ink-2);line-height:1.55}
+.bias-details{
+  max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.2,.7,.3,1);
+  margin-top:0;
+}
+.bias.active .bias-details{max-height:600px;margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+.bias-details h5{font-family:var(--ff-mono);font-size:9.5px;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px;margin-top:12px}
+.bias-details h5:first-child{margin-top:0}
+.bias-details p{font-size:12.5px;color:var(--ink-2);line-height:1.55}
+.bias-details .formula{
+  font-family:var(--ff-mono);font-size:11.5px;color:var(--teal);
+  background:rgba(13,148,136,.07);padding:8px 12px;border-left:2px solid var(--teal);
+  margin:8px 0;overflow-x:auto;
+}
+.bias-ref{font-family:var(--ff-mono);font-size:10px;color:var(--ink-3);font-style:italic;margin-top:10px}
+
+/* ───────────── SIMULATOR ───────────── */
+.sim{
+  display:grid;grid-template-columns:320px 1fr;gap:0;
+  border:1px solid var(--line);
+  background:var(--bg-2);
+  margin:32px 0;overflow:hidden;
+}
+@media(max-width:900px){.sim{grid-template-columns:1fr}}
+.sim-controls{
+  background:linear-gradient(180deg,var(--surface),var(--bg-2));
+  padding:28px;border-right:1px solid var(--line);
+}
+@media(max-width:900px){.sim-controls{border-right:none;border-bottom:1px solid var(--line)}}
+.sim-controls h3{font-family:var(--ff-display);font-size:17px;font-weight:700;margin-bottom:6px}
+.sim-controls .sim-sub{font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;margin-bottom:20px}
+.slider-group{margin-bottom:22px}
+.slider-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.slider-name{font-family:var(--ff-mono);font-size:11.5px;color:var(--ink-2);letter-spacing:.02em}
+.slider-name .k{color:var(--gold);font-weight:600}
+.slider-val{font-family:var(--ff-mono);font-size:13px;color:var(--teal);font-weight:500}
+input[type=range]{
+  width:100%;height:4px;background:var(--line);
+  -webkit-appearance:none;appearance:none;outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;background:var(--gold);border:2px solid var(--bg);border-radius:50%;cursor:pointer;transition:transform .2s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+input[type=range]::-moz-range-thumb{width:14px;height:14px;background:var(--gold);border:2px solid var(--bg);border-radius:50%;cursor:pointer;border:none}
+.slider-range{display:flex;justify-content:space-between;margin-top:4px;font-family:var(--ff-mono);font-size:9.5px;color:var(--ink-4);letter-spacing:.02em}
+.slider-desc{font-size:11.5px;color:var(--ink-3);line-height:1.5;margin-top:6px;font-style:italic;font-family:var(--ff-editorial);font-size:13px}
+.sim-readout{
+  background:rgba(45,212,191,.05);
+  border-left:2px solid var(--teal);
+  padding:14px;margin-top:20px;
+}
+.sim-readout h5{font-family:var(--ff-mono);font-size:9.5px;color:var(--teal);letter-spacing:.18em;text-transform:uppercase;margin-bottom:8px}
+.sim-readout p{font-size:12px;color:var(--ink-2);line-height:1.55}
+.sim-readout .val{font-family:var(--ff-mono);color:var(--gold);font-weight:500}
+.sim-canvas{padding:28px;min-height:420px;position:relative}
+.sim-legend{
+  display:flex;gap:20px;flex-wrap:wrap;padding:0 28px 20px;
+  font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.04em;
+}
+.sim-legend .dot{display:inline-block;width:10px;height:2px;vertical-align:middle;margin-right:6px}
+.sim-reset{
+  display:inline-block;margin-top:18px;padding:8px 14px;
+  background:transparent;border:1px solid var(--gold);color:var(--gold);
+  font-family:var(--ff-mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  cursor:pointer;transition:all .2s;
+}
+.sim-reset:hover{background:var(--gold);color:var(--bg)}
+
+/* ───────────── FORMULA BLOCK ───────────── */
+.formula-block{
+  background:linear-gradient(135deg,rgba(212,175,55,.04),rgba(45,212,191,.03));
+  border:1px solid var(--line);
+  padding:24px 28px;margin:24px 0;position:relative;
+}
+.formula-block::before{content:"FORMALIZACIÓN";position:absolute;top:-10px;left:20px;background:var(--bg);padding:0 10px;font-family:var(--ff-mono);font-size:9.5px;color:var(--gold);letter-spacing:.2em}
+.formula-block .ref{font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);margin-top:10px;font-style:italic}
+
+/* ───────────── DARK PATTERNS ───────────── */
+.dp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
+.dp{background:var(--bg-2);padding:22px;transition:all .25s;border-top:2px solid transparent}
+.dp:hover{background:var(--surface);border-top-color:var(--coral)}
+.dp-cat{font-family:var(--ff-mono);font-size:9.5px;color:var(--coral);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.dp h4{font-family:var(--ff-display);font-size:16px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.dp p{font-size:12.5px;color:var(--ink-2);line-height:1.55;margin-bottom:8px}
+.dp-prev{font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);font-style:italic}
+
+/* ───────────── EVIDENCE MATRIX ───────────── */
+.evidence{
+  border:1px solid var(--line);background:var(--bg-2);margin:28px 0;overflow:hidden;
+}
+.evidence-head{
+  display:grid;grid-template-columns:2.2fr 1.3fr .8fr 1.4fr 1fr;
+  background:linear-gradient(180deg,var(--surface-2),var(--surface));
+  border-bottom:1px solid var(--gold);
+  padding:14px 22px;gap:18px;
+}
+.evidence-head span{font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.16em;text-transform:uppercase}
+.evidence-row{
+  display:grid;grid-template-columns:2.2fr 1.3fr .8fr 1.4fr 1fr;
+  padding:16px 22px;border-bottom:1px solid var(--line-soft);
+  gap:18px;align-items:center;transition:background .2s;
+}
+.evidence-row:hover{background:rgba(212,175,55,.03)}
+.evidence-row:last-child{border-bottom:none}
+.ev-study{font-family:var(--ff-body);font-size:13px;color:var(--ink);font-weight:400}
+.ev-study i{color:var(--ink-3);font-style:italic;font-size:12px;display:block;margin-top:2px}
+.ev-topic{font-family:var(--ff-mono);font-size:10.5px;color:var(--teal);letter-spacing:.06em}
+.ev-n{font-family:var(--ff-mono);font-size:12px;color:var(--ink-2)}
+.ev-effect{font-family:var(--ff-mono);font-size:11.5px;color:var(--gold)}
+.ev-effect b{color:var(--ink);font-weight:600}
+.ev-doi a{font-family:var(--ff-mono);font-size:10px;color:var(--ink-3);letter-spacing:.04em;text-decoration:none;border-bottom:1px dotted var(--ink-4)}
+.ev-doi a:hover{color:var(--gold);border-color:var(--gold)}
+@media(max-width:900px){
+  .evidence-head{display:none}
+  .evidence-row{grid-template-columns:1fr;gap:6px;padding:18px 22px}
+  .ev-topic::before{content:"Tema · ";color:var(--ink-3)}
+  .ev-n::before{content:"n · ";color:var(--ink-3)}
+  .ev-effect::before{content:"Efecto · ";color:var(--ink-3)}
+}
+
+/* ───────────── APIs ───────────── */
+.api-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2px;background:var(--line);border:1px solid var(--line)}
+.api{background:var(--bg-2);padding:24px;transition:all .25s}
+.api:hover{background:var(--surface)}
+.api-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.api-name{font-family:var(--ff-display);font-size:17px;font-weight:700;color:var(--ink)}
+.api-type{font-family:var(--ff-mono);font-size:9.5px;padding:3px 8px;letter-spacing:.12em;text-transform:uppercase}
+.api-type.free{background:rgba(45,212,191,.1);color:var(--teal);border:1px solid rgba(45,212,191,.3)}
+.api-type.freemium{background:rgba(245,158,11,.1);color:var(--amber);border:1px solid rgba(245,158,11,.3)}
+.api-type.auth{background:rgba(167,139,250,.1);color:var(--violet);border:1px solid rgba(167,139,250,.3)}
+.api-desc{font-size:12.5px;color:var(--ink-2);line-height:1.55;margin-bottom:12px}
+.api-endpoint{
+  font-family:var(--ff-mono);font-size:10.5px;color:var(--gold);
+  background:rgba(212,175,55,.05);padding:8px 10px;
+  border-left:2px solid var(--gold);
+  word-break:break-all;
+}
+
+/* ───────────── QUOTE / PULL ───────────── */
+.pull{
+  font-family:var(--ff-editorial);font-style:italic;font-weight:500;
+  font-size:clamp(22px,3vw,32px);line-height:1.3;
+  color:var(--gold);
+  padding:36px 0;border-top:2px solid var(--gold);border-bottom:1px solid var(--line);
+  margin:40px 0;max-width:900px;position:relative;
+}
+.pull::before{content:"“";font-family:var(--ff-display);font-size:90px;position:absolute;top:-20px;left:-60px;color:var(--gold);opacity:.2;line-height:1}
+.pull cite{display:block;font-family:var(--ff-mono);font-size:11px;font-style:normal;color:var(--ink-3);letter-spacing:.12em;text-transform:uppercase;margin-top:18px}
+
+/* ───────────── STATS ───────────── */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin:32px 0}
+.stat{background:var(--bg-2);padding:24px}
+.stat-v{font-family:var(--ff-display);font-size:42px;font-weight:900;color:var(--gold);line-height:1;letter-spacing:-.02em}
+.stat-v .u{font-family:var(--ff-mono);font-size:14px;color:var(--ink-3);font-weight:400;margin-left:4px}
+.stat-l{font-family:var(--ff-body);font-size:12.5px;color:var(--ink-2);margin-top:10px;line-height:1.5}
+.stat-s{font-family:var(--ff-mono);font-size:9.5px;color:var(--ink-4);letter-spacing:.1em;text-transform:uppercase;margin-top:8px}
+
+/* ───────────── COLUMN GRIDS ───────────── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:40px;margin:32px 0}
+@media(max-width:800px){.two-col{grid-template-columns:1fr}}
+
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--line);border:1px solid var(--line);margin:28px 0}
+@media(max-width:800px){.three-col{grid-template-columns:1fr}}
+.three-col > div{background:var(--bg-2);padding:24px}
+.three-col h4{font-family:var(--ff-display);font-size:18px;font-weight:700;margin-bottom:10px}
+.three-col .ic{font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.18em;margin-bottom:10px;text-transform:uppercase}
+.three-col p{font-size:13px;color:var(--ink-2);line-height:1.6}
+
+/* ───────────── HICK'S LAW ───────────── */
+.hicks{
+  display:grid;grid-template-columns:280px 1fr;gap:0;
+  border:1px solid var(--line);background:var(--bg-2);margin:24px 0;
+}
+@media(max-width:800px){.hicks{grid-template-columns:1fr}}
+.hicks-ctrl{padding:24px;border-right:1px solid var(--line);background:linear-gradient(180deg,var(--surface),var(--bg-2))}
+@media(max-width:800px){.hicks-ctrl{border-right:none;border-bottom:1px solid var(--line)}}
+.hicks-viz{padding:24px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;min-height:240px}
+.hicks-opt{
+  width:40px;height:40px;background:var(--surface);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--ff-mono);font-size:11px;color:var(--ink-3);
+  transition:all .2s;
+}
+.hicks-opt:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.hicks-rt{font-family:var(--ff-display);font-size:36px;font-weight:900;color:var(--gold);margin-top:18px}
+
+/* ───────────── REFERENCES ───────────── */
+.refs{margin:32px 0;counter-reset:refn}
+.ref-item{
+  counter-increment:refn;
+  padding:14px 0 14px 50px;border-bottom:1px solid var(--line-soft);
+  position:relative;font-size:13px;color:var(--ink-2);line-height:1.6;
+}
+.ref-item::before{
+  content:"[" counter(refn) "]";
+  position:absolute;left:0;top:14px;
+  font-family:var(--ff-mono);font-size:10.5px;color:var(--gold);letter-spacing:.04em;
+}
+.ref-item b{color:var(--ink);font-weight:500}
+.ref-item i{font-style:italic;font-family:var(--ff-editorial);color:var(--ink)}
+.ref-item a{color:var(--teal);text-decoration:none;border-bottom:1px dotted var(--teal-deep)}
+.ref-item a:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ───────────── FOOTER ───────────── */
+footer{
+  margin-top:80px;padding:60px 0 40px;
+  border-top:3px solid var(--gold);
+  background:linear-gradient(180deg,var(--bg),rgba(7,16,31,.6));
+}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:40px}
+@media(max-width:800px){.foot-grid{grid-template-columns:1fr;gap:32px}}
+.foot-col h5{font-family:var(--ff-mono);font-size:10.5px;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;margin-bottom:16px}
+.foot-col p{font-size:13px;color:var(--ink-2);line-height:1.7}
+.foot-col ul{list-style:none}
+.foot-col li{font-size:13px;color:var(--ink-3);margin-bottom:6px;font-family:var(--ff-mono)}
+.foot-bottom{
+  padding-top:28px;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+  font-family:var(--ff-mono);font-size:10.5px;color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;
+}
+
+.hr-orn{display:flex;align-items:center;gap:14px;margin:40px 0;color:var(--gold);opacity:.5}
+.hr-orn::before,.hr-orn::after{content:"";flex:1;height:1px;background:currentColor;opacity:.5}
+.hr-orn span{font-family:var(--ff-mono);font-size:10px;letter-spacing:.2em}
+
+/* ───────────── PROPTECH APPL ───────────── */
+.proptech-flow{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:1px solid var(--line);margin:28px 0;
+}
+@media(max-width:800px){.proptech-flow{grid-template-columns:1fr}}
+.pt-step{background:var(--bg-2);padding:22px;position:relative}
+.pt-step .st-n{font-family:var(--ff-display);font-size:28px;font-weight:900;color:var(--gold);line-height:1}
+.pt-step h5{font-family:var(--ff-display);font-size:16px;font-weight:700;margin:8px 0 10px;color:var(--ink)}
+.pt-step .bias-tag{display:inline-block;font-family:var(--ff-mono);font-size:9.5px;color:var(--teal);background:rgba(45,212,191,.07);padding:3px 8px;margin-bottom:10px;letter-spacing:.08em}
+.pt-step p{font-size:12px;color:var(--ink-2);line-height:1.55}
+
+/* ───────────── REGULATION ───────────── */
+.reg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);margin:28px 0}
+.reg{background:var(--bg-2);padding:24px}
+.reg-flag{font-family:var(--ff-mono);font-size:11px;color:var(--violet);letter-spacing:.14em;margin-bottom:8px;text-transform:uppercase}
+.reg h4{font-family:var(--ff-display);font-size:17px;font-weight:700;margin-bottom:8px}
+.reg .art{font-family:var(--ff-mono);font-size:10.5px;color:var(--gold);margin-bottom:10px}
+.reg p{font-size:12.5px;color:var(--ink-2);line-height:1.6}
+
+/* Scroll bar */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--bg-2)}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:0}
+::-webkit-scrollbar-thumb:hover{background:var(--gold)}
+
+/* anchors */
+.section{scroll-margin-top:90px}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ MASTHEAD ═══════════════ -->
+<header class="masthead">
+  <div class="wrap masthead-row">
+    <div class="brand">
+      <div class="brand-mark">L</div>
+      <div class="brand-text">
+        <div class="brand-title">González Tejeda Research</div>
+        <div class="brand-sub">ITESM · Campus Santa Fe · Cátedra</div>
+      </div>
+    </div>
+    <div class="mast-meta">
+      <span>Módulo especial · <b>Economía conductual</b></span>
+      <span>Vol. <b>I</b> · Ed. 2026</span>
+      <span><b>ES</b> · CDMX</span>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Infografía científica interactiva · Edición docente</div>
+    <h1>Economía <em>conductual</em> <span class="amp">en</span> el ecosistema <em>algorítmico</em></h1>
+    <p class="hero-deck">Cuando la teoría de Simon, Kahneman, Tversky y Thaler se encuentra con los sistemas de recomendación, los modelos de decisión automatizada y la arquitectura algorítmica de elecciones. Un recorrido formal por la anatomía cognitiva del <em>homo oeconomicus digitalis</em> —con simuladores paramétricos, taxonomía de sesgos, evidencia empírica y aplicaciones PropTech.</p>
+    <div class="hero-byline">
+      <div><span>Autor</span><b>Dr. Leonardo González Tejeda</b></div>
+      <div><span>Afiliación</span><b>ITESM · EGADE · Homepty Research</b></div>
+      <div><span>Campo</span><b>Behavioral Econ × AlgoGov</b></div>
+      <div><span>Serie</span><b>Lecturas computacionales avanzadas</b></div>
+      <div><span>DOI</span><b>10.homepty/BE-ALGO-2026.01</b></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+<!-- ═══════════════ TOC ═══════════════ -->
+<nav class="toc" aria-label="Índice">
+  <a href="#s1"><span class="num">§1</span>Marco teórico</a>
+  <a href="#s2"><span class="num">§2</span>Taxonomía de sesgos</a>
+  <a href="#s3"><span class="num">§3</span>Teoría de perspectivas (CPT)</a>
+  <a href="#s4"><span class="num">§4</span>Ponderación de probabilidades</a>
+  <a href="#s5"><span class="num">§5</span>Descuento hiperbólico</a>
+  <a href="#s6"><span class="num">§6</span>Arquitectura de elecciones</a>
+  <a href="#s7"><span class="num">§7</span>Recomendadores y amplificación</a>
+  <a href="#s8"><span class="num">§8</span>Dark patterns</a>
+  <a href="#s9"><span class="num">§9</span>Evidencia empírica</a>
+  <a href="#s10"><span class="num">§10</span>PropTech aplicado</a>
+  <a href="#s11"><span class="num">§11</span>Regulación y ética</a>
+  <a href="#s12"><span class="num">§12</span>APIs y recursos</a>
+  <a href="#s13"><span class="num">§13</span>Referencias</a>
+</nav>
+
+<!-- ═══════════════ §1 MARCO ═══════════════ -->
+<section class="section" id="s1">
+  <div class="section-num"><span class="dig">01</span><span class="lbl">Marco teórico</span></div>
+  <h2>De la <em>racionalidad limitada</em> al sistema socio-técnico algorítmico</h2>
+  <p class="lede">La economía conductual nació como una corrección empírica de la axiomática neoclásica; el ecosistema algorítmico la convierte, dos generaciones después, en una tecnología operativa de poder sobre la decisión —y en un objeto urgente de regulación.</p>
+
+  <div class="prose">
+    <p>En 1955 Herbert Simon introdujo la <b>racionalidad limitada</b> (<i>bounded rationality</i>) como respuesta al agente maximizador de la teoría de utilidad esperada: los humanos no optimizan, <em>satisfacen</em>; no computan distribuciones, <em>usan heurísticas</em>. Dos décadas después, <b>Tversky y Kahneman (1974)</b> formalizaron tres heurísticas —disponibilidad, representatividad y anclaje— que dieron cuerpo empírico al programa. La <b>teoría de perspectivas</b> (1979) y su versión acumulativa (1992) culminaron el andamiaje matemático, mientras <b>Thaler y Sunstein (2008)</b> lo tradujeron en un dispositivo normativo: la <em>arquitectura de elecciones</em>.</p>
+    <p>El giro algorítmico del siglo XXI no desmonta ese andamiaje: lo <b>instrumentaliza</b>. Los sistemas de recomendación de plataformas, los motores de <i>dynamic pricing</i>, los <i>feeds</i> curados por aprendizaje automático y las interfaces de e-commerce constituyen hoy la <em>arquitectura de elecciones por defecto</em> de miles de millones de decisiones diarias —y explotan, de forma endógena y a menudo no supervisada, las mismas debilidades cognitivas que la literatura conductual identificó.</p>
+    <p>Karen Yeung (2017) acuñó el término <em>hypernudge</em> para capturar esta mutación: no se trata ya de un nudge estático (empaquetar la decisión de una forma u otra), sino de uno <b>dinámico, personalizado y reactivo</b> —alimentado por datos conductuales en tiempo real. La pregunta central de este módulo es doble: <b>(i)</b> ¿qué estructura matemática preserva la decisión cuando el entorno de elección es endógeno al comportamiento pasado del agente? y <b>(ii)</b> ¿cuál es la frontera normativa entre personalización legítima y manipulación algorítmica?</p>
+  </div>
+
+  <blockquote class="pull">
+    "El mercado, cuando está mediado por algoritmos que aprenden de nuestras propias debilidades, no es ya un árbitro neutral entre preferencias: es una tecnología de formación de preferencias."
+    <cite>— Adaptación de Yeung (2017) y Sunstein (2019)</cite>
+  </blockquote>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-v">≈ 2.25<span class="u">λ</span></div><div class="stat-l">Coeficiente de aversión a la pérdida (mediana)</div><div class="stat-s">Tversky & Kahneman 1992</div></div>
+    <div class="stat"><div class="stat-v">0.88<span class="u">α, β</span></div><div class="stat-l">Curvatura del valor en ganancias y pérdidas</div><div class="stat-s">CPT, calibración clásica</div></div>
+    <div class="stat"><div class="stat-v">0.61<span class="u">γ⁺</span></div><div class="stat-l">Elasticidad de ponderación probabilística</div><div class="stat-s">dominio de ganancias</div></div>
+    <div class="stat"><div class="stat-v">70<span class="u">%</span></div><div class="stat-l">Reproducciones en YouTube originadas por recomendación algorítmica</div><div class="stat-s">Pew Research 2018</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ §2 BIAS TAXONOMY ═══════════════ -->
+<section class="section" id="s2">
+  <div class="section-num"><span class="dig">02</span><span class="lbl">Taxonomía de sesgos cognitivos</span></div>
+  <h2>Doce <em>piedras angulares</em> del comportamiento económico</h2>
+  <p class="lede">Una clasificación operativa de los sesgos más robustamente documentados, con su manifestación algorítmica correspondiente. Haga clic en cualquier tarjeta para desplegar su formalización, evidencia y manifestación algorítmica.</p>
+
+  <div class="bias-grid" id="bias-grid">
+    <!-- Bias cards injected by JS for cleanliness -->
+  </div>
+
+  <h4 class="sub">Notas clasificatorias</h4>
+  <div class="prose">
+    <p>La lista no es exhaustiva. El <b>Cognitive Bias Codex</b> (Manoogian & Benson, 2016) documenta más de 180 sesgos, muchos de los cuales son reformulaciones o interacciones de los aquí presentados. La selección obedece a tres criterios: <em>(i)</em> robustez metaanalítica, <em>(ii)</em> relevancia para decisiones económicas y <em>(iii)</em> evidencia documentada de explotación algorítmica.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ §3 PROSPECT THEORY ═══════════════ -->
+<section class="section" id="s3">
+  <div class="section-num"><span class="dig">03</span><span class="lbl">Teoría de perspectivas — CPT</span></div>
+  <h2>La función de valor <em>S-shape</em>: aversión a la pérdida formalizada</h2>
+  <p class="lede">Kahneman y Tversky demostraron que el agente real no evalúa estados terminales de riqueza sino <em>variaciones</em> respecto de un punto de referencia —y que las pérdidas duelen, en promedio, 2.25 veces más que placer equivalente aportan las ganancias.</p>
+
+  <div class="formula-block">
+    <p style="margin-bottom:12px;font-size:13px;color:var(--ink-3)">Función de valor de la <b>Teoría de Perspectivas Acumulativa (CPT)</b> — Tversky & Kahneman (1992):</p>
+    $$v(x) = \begin{cases} x^{\alpha} & \text{si } x \geq 0 \quad (\text{dominio de ganancias}) \\ -\lambda(-x)^{\beta} & \text{si } x < 0 \quad (\text{dominio de pérdidas})\end{cases}$$
+    <p class="ref">Parámetros canónicos: α ≈ β ≈ 0.88 (curvatura cóncava en ganancias, convexa en pérdidas); λ ≈ 2.25 (aversión a la pérdida).</p>
+  </div>
+
+  <div class="sim">
+    <div class="sim-controls">
+      <h3>Simulador <em style="color:var(--gold);font-family:var(--ff-editorial)">v(x)</em></h3>
+      <div class="sim-sub">Calibración paramétrica</div>
+
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">α</span> · Curvatura ganancias</span><span class="slider-val" id="vAlphaV">0.88</span></div>
+        <input type="range" id="vAlpha" min="0.1" max="1.5" step="0.01" value="0.88">
+        <div class="slider-range"><span>0.1</span><span>1.5</span></div>
+        <div class="slider-desc">α&lt;1 ⇒ concavidad en ganancias (aversión al riesgo).</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">β</span> · Curvatura pérdidas</span><span class="slider-val" id="vBetaV">0.88</span></div>
+        <input type="range" id="vBeta" min="0.1" max="1.5" step="0.01" value="0.88">
+        <div class="slider-range"><span>0.1</span><span>1.5</span></div>
+        <div class="slider-desc">β&lt;1 ⇒ convexidad en pérdidas (búsqueda de riesgo en el dominio negativo).</div>
+      </div>
+
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">λ</span> · Aversión a la pérdida</span><span class="slider-val" id="vLamV">2.25</span></div>
+        <input type="range" id="vLam" min="1" max="5" step="0.01" value="2.25">
+        <div class="slider-range"><span>1 (neutral)</span><span>5</span></div>
+        <div class="slider-desc">λ&gt;1 ⇒ asimetría entre ganancias y pérdidas.</div>
+      </div>
+
+      <div class="sim-readout">
+        <h5>Lectura interpretativa</h5>
+        <p id="vReadout">Con λ = <span class="val">2.25</span>, una pérdida de $100 genera un malestar equivalente al bienestar de una ganancia de <span class="val">$225</span>.</p>
+      </div>
+      <button class="sim-reset" onclick="resetV()">Reset calibración canónica</button>
+    </div>
+    <div>
+      <div class="sim-canvas"><canvas id="valueChart"></canvas></div>
+      <div class="sim-legend"><span><span class="dot" style="background:var(--gold)"></span>v(x) — función de valor</span><span><span class="dot" style="background:var(--ink-4);border-top:1px dashed var(--ink-4)"></span>Utilidad lineal (referencia)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ §4 PROB WEIGHTING ═══════════════ -->
+<section class="section" id="s4">
+  <div class="section-num"><span class="dig">04</span><span class="lbl">Ponderación de probabilidades</span></div>
+  <h2>La <em>función w(p)</em>: por qué compramos lotería y seguros a la vez</h2>
+  <p class="lede">Los agentes no tratan las probabilidades de manera lineal. Eventos raros (p pequeña) son <b>sobreponderados</b>; probabilidades moderadas y altas, <b>subponderadas</b>. La función <em>w(p)</em> captura esta distorsión sistemática.</p>
+
+  <div class="formula-block">
+    $$w(p) = \frac{p^{\gamma}}{\left(p^{\gamma} + (1-p)^{\gamma}\right)^{1/\gamma}}$$
+    <p class="ref">Formulación de Tversky & Kahneman (1992). Parámetros estimados: γ⁺ ≈ 0.61 (ganancias), γ⁻ ≈ 0.69 (pérdidas). Alternativas: Prelec (1998), w(p) = exp(−(−ln p)^γ).</p>
+  </div>
+
+  <div class="sim">
+    <div class="sim-controls">
+      <h3>Simulador <em style="color:var(--gold);font-family:var(--ff-editorial)">w(p)</em></h3>
+      <div class="sim-sub">Elasticidad subjetiva</div>
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">γ</span> · Elasticidad de ponderación</span><span class="slider-val" id="wGamV">0.61</span></div>
+        <input type="range" id="wGam" min="0.25" max="1.5" step="0.01" value="0.61">
+        <div class="slider-range"><span>0.25 (distorsión fuerte)</span><span>1 (lineal)</span></div>
+        <div class="slider-desc">γ&lt;1 ⇒ curva en forma de S invertida: sobreponderación de eventos raros y subponderación de eventos frecuentes.</div>
+      </div>
+      <div class="sim-readout">
+        <h5>Efecto <em>Allais</em></h5>
+        <p id="wReadout">Con γ = <span class="val">0.61</span>, una probabilidad objetiva de <span class="val">1%</span> es percibida subjetivamente como <span class="val">6.2%</span> — explica por qué las loterías prosperan.</p>
+      </div>
+      <button class="sim-reset" onclick="resetW()">Reset (γ = 0.61)</button>
+    </div>
+    <div>
+      <div class="sim-canvas"><canvas id="probChart"></canvas></div>
+      <div class="sim-legend"><span><span class="dot" style="background:var(--teal)"></span>w(p) — ponderación subjetiva</span><span><span class="dot" style="background:var(--ink-4);border-top:1px dashed var(--ink-4)"></span>Lineal (p = w(p))</span></div>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>La distorsión <em>w(p)</em> sostiene fenómenos aparentemente contradictorios: el mismo individuo compra un <b>billete de lotería</b> (sobreponderando la minúscula probabilidad de ganar) y una <b>póliza de seguros contra un evento improbable</b> (sobreponderando la minúscula probabilidad de catástrofe). En el ecosistema algorítmico, <em>mercados de predicción</em>, <em>microapuestas deportivas en vivo</em> y <em>trading de opciones binarias</em> explotan sistemáticamente esta anomalía.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ §5 HYPERBOLIC DISCOUNTING ═══════════════ -->
+<section class="section" id="s5">
+  <div class="section-num"><span class="dig">05</span><span class="lbl">Descuento hiperbólico</span></div>
+  <h2>El sesgo del <em>presente</em>: por qué el yo de hoy traiciona al yo de mañana</h2>
+  <p class="lede">La teoría neoclásica asume descuento exponencial (δ<sup>t</sup>), pero la evidencia muestra descuentos hiperbólicos: el agente es impaciente a corto plazo y paciente a largo plazo —una inconsistencia dinámica que Laibson (1997) formalizó y que los ecosistemas de consumo instantáneo explotan deliberadamente.</p>
+
+  <div class="formula-block">
+    $$\text{Exponencial:} \quad D(t) = \delta^{t} \qquad \text{Hiperbólico:} \quad D(t) = \frac{1}{1 + kt} \qquad \text{Cuasi-hiperbólico:} \quad D(t) = \begin{cases} 1 & t=0 \\ \beta \delta^{t} & t>0 \end{cases}$$
+    <p class="ref">Modelo β-δ de Laibson (1997). Estimaciones empíricas típicas: β ≈ 0.7 (sesgo presente), δ ≈ 0.96 (paciencia a largo plazo).</p>
+  </div>
+
+  <div class="sim">
+    <div class="sim-controls">
+      <h3>Simulador <em style="color:var(--gold);font-family:var(--ff-editorial)">D(t)</em></h3>
+      <div class="sim-sub">Descuento intertemporal</div>
+
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">δ</span> · Factor exponencial</span><span class="slider-val" id="dDeltV">0.96</span></div>
+        <input type="range" id="dDelt" min="0.7" max="0.999" step="0.001" value="0.96">
+        <div class="slider-range"><span>0.7</span><span>1 (total paciencia)</span></div>
+      </div>
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">β</span> · Sesgo del presente</span><span class="slider-val" id="dBetV">0.70</span></div>
+        <input type="range" id="dBet" min="0.3" max="1" step="0.01" value="0.70">
+        <div class="slider-range"><span>0.3 (impaciencia fuerte)</span><span>1 (exponencial puro)</span></div>
+      </div>
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">k</span> · Tasa hiperbólica</span><span class="slider-val" id="dKV">0.25</span></div>
+        <input type="range" id="dK" min="0.01" max="1" step="0.01" value="0.25">
+        <div class="slider-range"><span>0.01</span><span>1</span></div>
+      </div>
+      <div class="sim-readout">
+        <h5>Aplicación directa</h5>
+        <p id="dReadout">Ofertas "compre ahora" con contadores regresivos, planes BNPL, notificaciones push y <em>infinite scroll</em> explotan sistemáticamente la curvatura β-δ con estimaciones típicas de <span class="val">β ≈ 0.7</span>.</p>
+      </div>
+      <button class="sim-reset" onclick="resetD()">Reset parámetros canónicos</button>
+    </div>
+    <div>
+      <div class="sim-canvas"><canvas id="discountChart"></canvas></div>
+      <div class="sim-legend">
+        <span><span class="dot" style="background:var(--gold)"></span>Exponencial δ<sup>t</sup></span>
+        <span><span class="dot" style="background:var(--teal)"></span>Hiperbólico 1/(1+kt)</span>
+        <span><span class="dot" style="background:var(--coral)"></span>Cuasi-hiperbólico β-δ</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ §6 CHOICE ARCHITECTURE ═══════════════ -->
+<section class="section" id="s6">
+  <div class="section-num"><span class="dig">06</span><span class="lbl">Arquitectura de elecciones</span></div>
+  <h2>De los <em>nudges</em> de Thaler a los <em>hypernudges</em> algorítmicos</h2>
+  <p class="lede">Un <em>nudge</em> —en la definición canónica de Thaler y Sunstein (2008)— es cualquier aspecto de la arquitectura de elección que altera el comportamiento de forma predecible sin prohibir opciones ni alterar sustancialmente los incentivos económicos. El algoritmo lo convierte en un dispositivo dinámico, personalizado y de escala masiva.</p>
+
+  <div class="three-col">
+    <div>
+      <div class="ic">Nudge clásico</div>
+      <h4>Estático · Universal</h4>
+      <p>Una opción por defecto (p. ej. inscripción automática en planes de pensión), un orden de cafetería que favorece fruta, una etiqueta nutricional en semáforo. <b>Mismo nudge para todos.</b></p>
+      <p style="margin-top:10px;font-family:var(--ff-mono);font-size:10.5px;color:var(--gold)">→ Thaler & Sunstein (2008)</p>
+    </div>
+    <div>
+      <div class="ic">Nudge personalizado</div>
+      <h4>Individualizado · Reactivo</h4>
+      <p>Recomendaciones ajustadas al perfil psicográfico (<i>Big-Five</i>) del usuario, <i>copy</i> generado dinámicamente para maximizar <i>click-through</i>, descuentos que aparecen cuando el cursor se aleja del botón "comprar".</p>
+      <p style="margin-top:10px;font-family:var(--ff-mono);font-size:10.5px;color:var(--gold)">→ Matz et al. (2017); PNAS</p>
+    </div>
+    <div>
+      <div class="ic">Hypernudge</div>
+      <h4>Dinámico · Continuo · Opaco</h4>
+      <p>Feeds algorítmicos que recomponen la arquitectura de elección en cada <i>refresh</i>, en función del comportamiento del usuario <b>y de millones de otros usuarios</b>. Opacidad estructural: el agente no puede conocer qué nudge recibe.</p>
+      <p style="margin-top:10px;font-family:var(--ff-mono);font-size:10.5px;color:var(--gold)">→ Yeung (2017)</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Hick–Hyman: la física de la elección</h3>
+  <div class="prose">
+    <p>La <b>Ley de Hick–Hyman</b> (Hick, 1952; Hyman, 1953) establece que el tiempo de reacción en una decisión crece logarítmicamente con el número de alternativas equiprobables: $RT = a + b \cdot \log_2(n+1)$. En interfaces algorítmicas esto implica que <em>la curaduría es una forma de poder</em>: reducir las n opciones visibles no sólo acelera la decisión, la <b>altera sistemáticamente</b>.</p>
+  </div>
+
+  <div class="hicks">
+    <div class="hicks-ctrl">
+      <h3 style="font-family:var(--ff-display);font-size:16px;margin-bottom:6px">Simulador Hick–Hyman</h3>
+      <div style="font-family:var(--ff-mono);font-size:10px;color:var(--gold);letter-spacing:.14em;margin-bottom:16px">TIEMPO DE REACCIÓN</div>
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">n</span> · Número de alternativas</span><span class="slider-val" id="hkNV">8</span></div>
+        <input type="range" id="hkN" min="2" max="40" step="1" value="8">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label"><span class="slider-name"><span class="k">b</span> · Pendiente (ms/bit)</span><span class="slider-val" id="hkBV">150</span></div>
+        <input type="range" id="hkB" min="50" max="400" step="10" value="150">
+        <div class="slider-desc">Empíricamente b ∈ [150, 200] ms/bit en decisiones visuales.</div>
+      </div>
+      <div class="hicks-rt">RT ≈ <span id="hkRT">450</span> ms</div>
+    </div>
+    <div class="hicks-viz" id="hkViz"></div>
+  </div>
+
+  <blockquote class="pull">
+    "Cuando la arquitectura de elecciones es algorítmica, dinámica y opaca, la línea entre <em>libertarian paternalism</em> y manipulación se vuelve conceptualmente indefendible."
+    <cite>— Parafraseando a Sunstein (2019)</cite>
+  </blockquote>
+</section>
+
+<!-- ═══════════════ §7 RECOMMENDERS ═══════════════ -->
+<section class="section" id="s7">
+  <div class="section-num"><span class="dig">07</span><span class="lbl">Recomendadores y amplificación</span></div>
+  <h2>El <em>efecto Mateo</em> computacional: cómo el algoritmo amplifica sesgos</h2>
+  <p class="lede">Los sistemas de recomendación introducen una retroalimentación positiva entre exposición, adopción y recomendación futura —un proceso stigmérgico que amplifica sesgos preexistentes y genera polarización, filter bubbles y homofilia algorítmica.</p>
+
+  <div class="formula-block">
+    <p style="margin-bottom:12px;font-size:13px;color:var(--ink-3)">Bucle estilizado (<i>collaborative filtering</i>) con retroalimentación:</p>
+    $$p_{i,t+1}(a) = \underbrace{\lambda \cdot u_{i,t}(a)}_{\text{preferencia propia}} + \underbrace{(1-\lambda) \cdot s\!\left(\mathbf{N}_i, a, t\right)}_{\text{señal algorítmica}}, \qquad s \propto \sum_{j \in \mathbf{N}_i} p_{j,t}(a)$$
+    <p class="ref">Cuando λ es bajo, la decisión del agente i en t+1 está dominada por las decisiones pasadas de su vecindario computacional N<sub>i</sub>. La homofilia emerge como atractor dinámico. Ver Pariser (2011); Nguyen et al. (2014).</p>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-head"><h3>Efecto Mateo algorítmico</h3><span class="tag">power law</span></div>
+      <p class="prose" style="margin-bottom:0">"Al que tiene se le dará, y al que no tiene, aun lo que tiene le será quitado" (Mt 25, 29). En sistemas de recomendación, la probabilidad de ser recomendado es proporcional al número previo de exposiciones; esto genera <b>distribuciones power-law</b> en las que un pequeño conjunto de contenidos captura la mayor parte de la atención, con coeficiente de Gini típico &gt; 0.9.</p>
+    </div>
+    <div class="card">
+      <div class="card-head"><h3>Filter bubble &amp; homofilia</h3><span class="tag">Pariser 2011</span></div>
+      <p class="prose" style="margin-bottom:0">La personalización algorítmica reduce la exposición a información disonante. Sunstein (2017) argumenta que esto erosiona el <em>common ground</em> deliberativo. La evidencia empírica es sin embargo heterogénea: Bakshy et al. (<i>Science</i>, 2015) estiman que en Facebook el sesgo está más en la selección del usuario que en el algoritmo.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Sesgos amplificables por retroalimentación</h3>
+  <div class="three-col">
+    <div>
+      <div class="ic">Popularidad</div>
+      <h4>Popularity bias</h4>
+      <p>El sistema sobre-recomienda ítems ya populares, perpetuando la desigualdad del catálogo. Afecta con especial intensidad a editoriales, música y plataformas de streaming.</p>
+    </div>
+    <div>
+      <div class="ic">Confirmación</div>
+      <h4>Echo chambers</h4>
+      <p>El engagement-maximizing recomienda contenido alineado con creencias previas; la exposición sesgada refuerza la creencia; el ciclo se auto-intensifica.</p>
+    </div>
+    <div>
+      <div class="ic">Frío</div>
+      <h4>Cold-start &amp; equidad</h4>
+      <p>Nuevos entrantes al catálogo carecen de señales; se les asigna prioridad baja, perpetuando oligopolios de oferta y comprometiendo la equidad competitiva.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ §8 DARK PATTERNS ═══════════════ -->
+<section class="section" id="s8">
+  <div class="section-num"><span class="dig">08</span><span class="lbl">Dark patterns</span></div>
+  <h2>La <em>industrialización</em> de la manipulación cognitiva</h2>
+  <p class="lede">Patrones de interfaz diseñados deliberadamente para inducir decisiones contrarias al interés del usuario. Mathur et al. (2019) auditaron 11,000 sitios de comercio electrónico y encontraron <b>1,818 instancias de 15 tipos distintos</b> de dark patterns en 1,254 sitios —el 11.1% de la muestra.</p>
+
+  <div class="dp-grid">
+    <div class="dp"><div class="dp-cat">Escasez</div><h4>Countdown timer</h4><p>Temporizador falso o artificial que invoca urgencia.</p><div class="dp-prev">"Oferta termina en 00:02:47"</div></div>
+    <div class="dp"><div class="dp-cat">Escasez</div><h4>Low-stock message</h4><p>"Quedan 3" —a menudo estático, fabricado o no verificable.</p><div class="dp-prev">"¡Sólo quedan 2 habitaciones!"</div></div>
+    <div class="dp"><div class="dp-cat">Prueba social</div><h4>Activity messages</h4><p>Notificaciones de actividad que no pueden ser auditadas.</p><div class="dp-prev">"12 personas están viendo este producto"</div></div>
+    <div class="dp"><div class="dp-cat">Forzamiento</div><h4>Forced continuity</h4><p>Suscripción que inicia tras un periodo gratuito sin aviso suficiente.</p><div class="dp-prev">"Prueba 7 días gratis"</div></div>
+    <div class="dp"><div class="dp-cat">Obstrucción</div><h4>Roach motel</h4><p>Fácil entrar, difícil salir (cancelar es más arduo que suscribirse).</p><div class="dp-prev">Cancelar por teléfono únicamente</div></div>
+    <div class="dp"><div class="dp-cat">Coerción emocional</div><h4>Confirm shaming</h4><p>Opción de rechazo redactada para culpar al usuario.</p><div class="dp-prev">"No, prefiero pagar precio completo"</div></div>
+    <div class="dp"><div class="dp-cat">Interfaz</div><h4>Disguised ad</h4><p>Publicidad camuflada como contenido editorial.</p><div class="dp-prev">"Recomendado para ti"</div></div>
+    <div class="dp"><div class="dp-cat">Engaño</div><h4>Sneaking</h4><p>Cargos adicionales revelados sólo al final del proceso.</p><div class="dp-prev">Cargos por conveniencia en checkout</div></div>
+    <div class="dp"><div class="dp-cat">Urgencia</div><h4>Limited-time message</h4><p>Plazo artificial o recurrente para precipitar compra.</p><div class="dp-prev">"Hasta medianoche"</div></div>
+    <div class="dp"><div class="dp-cat">Pregunta trampa</div><h4>Trick questions</h4><p>Checkboxes con doble negación o redacción confusa.</p><div class="dp-prev">"No desmarque para no recibir"</div></div>
+    <div class="dp"><div class="dp-cat">Visual</div><h4>Visual interference</h4><p>Jerarquía visual que esconde la opción pro-usuario.</p><div class="dp-prev">Botón "rechazar cookies" 4× más pequeño</div></div>
+    <div class="dp"><div class="dp-cat">Engaño</div><h4>Misdirection</h4><p>Foco dirigido a una decisión mientras otra se cuela.</p><div class="dp-prev">Pre-seleccionado en seguros de viaje</div></div>
+  </div>
+
+  <div class="prose">
+    <p>La <b>FTC</b> (EEUU), el <b>Reglamento de Servicios Digitales</b> (DSA, UE 2022) y la <b>ley francesa SREN</b> (2024) han comenzado a tipificar los dark patterns como prácticas desleales. La evidencia económica (Luguri & Strahilevitz, 2021) muestra que aumentan la aceptación de ofertas indeseadas en un factor de <em>2.2×</em> incluso bajo exposición leve.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ §9 EVIDENCE ═══════════════ -->
+<section class="section" id="s9">
+  <div class="section-num"><span class="dig">09</span><span class="lbl">Evidencia empírica</span></div>
+  <h2>Estudios seminales con <em>efectos</em> cuantificados</h2>
+  <p class="lede">Una selección de investigaciones de referencia con tamaño muestral, efecto reportado y DOI verificable. La validez externa de la economía conductual es objeto de debate vivo: Open Science Collaboration (2015), Many Labs (Klein et al., 2014; 2018), y más recientemente DellaVigna & Linos (2022) sobre la "productivity" de los nudges en el mundo real.</p>
+
+  <div class="evidence">
+    <div class="evidence-head">
+      <span>Estudio</span><span>Tema</span><span>n</span><span>Efecto principal</span><span>DOI</span>
+    </div>
+    <div class="evidence-row"><div class="ev-study">Kahneman &amp; Tversky (1979)<i>Econometrica</i></div><div class="ev-topic">Prospect Theory</div><div class="ev-n">~150</div><div class="ev-effect"><b>λ ≈ 2.25</b></div><div class="ev-doi"><a href="https://doi.org/10.2307/1914185" target="_blank" rel="noopener">10.2307/1914185</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Tversky &amp; Kahneman (1992)<i>J. Risk Uncertainty</i></div><div class="ev-topic">CPT</div><div class="ev-n">25 × 2</div><div class="ev-effect"><b>α=β=0.88</b></div><div class="ev-doi"><a href="https://doi.org/10.1007/BF00122574" target="_blank" rel="noopener">10.1007/BF00122574</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Madrian &amp; Shea (2001)<i>QJE</i></div><div class="ev-topic">Default effect 401(k)</div><div class="ev-n">~200,000</div><div class="ev-effect">Inscripción <b>49% → 86%</b></div><div class="ev-doi"><a href="https://doi.org/10.1162/003355301753265543" target="_blank" rel="noopener">10.1162/003355301753265543</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Thaler &amp; Benartzi (2004)<i>JPE</i></div><div class="ev-topic">SMarT (Save More Tomorrow)</div><div class="ev-n">3,500</div><div class="ev-effect">Ahorro <b>3.5% → 13.6%</b></div><div class="ev-doi"><a href="https://doi.org/10.1086/380085" target="_blank" rel="noopener">10.1086/380085</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Matz, Kosinski et al. (2017)<i>PNAS</i></div><div class="ev-topic">Psychological targeting</div><div class="ev-n">3.5M impr.</div><div class="ev-effect">CTR <b>+40%</b>; conv. <b>+50%</b></div><div class="ev-doi"><a href="https://doi.org/10.1073/pnas.1710966114" target="_blank" rel="noopener">10.1073/pnas.1710966114</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Mathur et al. (2019)<i>CSCW</i></div><div class="ev-topic">Dark patterns (crawl)</div><div class="ev-n">11,000 sitios</div><div class="ev-effect"><b>11.1%</b> con al menos un DP</div><div class="ev-doi"><a href="https://doi.org/10.1145/3359183" target="_blank" rel="noopener">10.1145/3359183</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Luguri &amp; Strahilevitz (2021)<i>J. Legal Anal.</i></div><div class="ev-topic">Efecto causal de dark patterns</div><div class="ev-n">1,963 (RCT)</div><div class="ev-effect">Aceptación <b>×2.2</b></div><div class="ev-doi"><a href="https://doi.org/10.1093/jla/laaa006" target="_blank" rel="noopener">10.1093/jla/laaa006</a></div></div>
+    <div class="evidence-row"><div class="ev-study">DellaVigna &amp; Linos (2022)<i>Econometrica</i></div><div class="ev-topic">Meta-análisis nudges en campo</div><div class="ev-n">126 RCTs</div><div class="ev-effect">Efecto <b>1.4pp</b> (vs 8.7pp académico)</div><div class="ev-doi"><a href="https://doi.org/10.3982/ECTA18709" target="_blank" rel="noopener">10.3982/ECTA18709</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Bakshy, Messing &amp; Adamic (2015)<i>Science</i></div><div class="ev-topic">Filter bubble en Facebook</div><div class="ev-n">10.1M usuarios</div><div class="ev-effect">Algoritmo &lt; selección del usuario</div><div class="ev-doi"><a href="https://doi.org/10.1126/science.aaa1160" target="_blank" rel="noopener">10.1126/science.aaa1160</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Kramer, Guillory &amp; Hancock (2014)<i>PNAS</i></div><div class="ev-topic">Contagio emocional algorítmico</div><div class="ev-n">689,003</div><div class="ev-effect">Transferencia afectiva significativa</div><div class="ev-doi"><a href="https://doi.org/10.1073/pnas.1320040111" target="_blank" rel="noopener">10.1073/pnas.1320040111</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Allcott et al. (2020)<i>AER</i></div><div class="ev-topic">Welfare effects Facebook deact.</div><div class="ev-n">2,743</div><div class="ev-effect">Bienestar <b>+ 0.09σ</b></div><div class="ev-doi"><a href="https://doi.org/10.1257/aer.20190658" target="_blank" rel="noopener">10.1257/aer.20190658</a></div></div>
+    <div class="evidence-row"><div class="ev-study">Mullainathan &amp; Shafir (2013)</div><div class="ev-topic">Escasez cognitiva</div><div class="ev-n">~3,000</div><div class="ev-effect">Caída de CI <b>13 pts</b> bajo escasez</div><div class="ev-doi"><a href="https://doi.org/10.1126/science.1238041" target="_blank" rel="noopener">10.1126/science.1238041</a></div></div>
+  </div>
+
+  <div class="prose">
+    <p><b>Nota metodológica crítica.</b> El meta-análisis de DellaVigna & Linos (2022) revela una "<em>brecha de publicación</em>" significativa: los efectos de los nudges publicados en la literatura académica son ~6 veces mayores que los observados en Nudge Units gubernamentales (EEUU, Reino Unido). Esto sugiere que la extrapolación directa de hallazgos conductuales a la política pública debe hacerse con cautela bayesiana.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ §10 PROPTECH ═══════════════ -->
+<section class="section" id="s10">
+  <div class="section-num"><span class="dig">10</span><span class="lbl">PropTech aplicado</span></div>
+  <h2>Economía conductual en el mercado inmobiliario <em>digitalizado</em></h2>
+  <p class="lede">El mercado de vivienda concentra las condiciones óptimas para la amplificación de sesgos: decisiones de alta magnitud, baja frecuencia, elevada asimetría de información, intangibilidad del bien durante la búsqueda y mediación algorítmica creciente en toda la cadena de valor.</p>
+
+  <div class="proptech-flow">
+    <div class="pt-step">
+      <div class="st-n">01</div>
+      <h5>Fijación de precio</h5>
+      <span class="bias-tag">Anclaje</span>
+      <p>El primer precio listado ancla las expectativas; los Automated Valuation Models (AVMs) pueden reforzar el anclaje si toman el precio listado como predictor, creando circularidad.</p>
+    </div>
+    <div class="pt-step">
+      <div class="st-n">02</div>
+      <h5>Búsqueda &amp; filtrado</h5>
+      <span class="bias-tag">Hick-Hyman · Choice overload</span>
+      <p>Portales con &gt;10,000 listados obligan al uso de filtros algorítmicos. El orden de resultados —aparentemente neutral— determina &gt;80% de las visitas físicas efectivas.</p>
+    </div>
+    <div class="pt-step">
+      <div class="st-n">03</div>
+      <h5>Negociación</h5>
+      <span class="bias-tag">Aversión a la pérdida</span>
+      <p>Propietarios exhiben precios de reserva 20–30% por encima del valor fundamental estimado por AVM (Genesove &amp; Mayer, 2001); las pérdidas nominales duelen más que las reales.</p>
+    </div>
+    <div class="pt-step">
+      <div class="st-n">04</div>
+      <h5>Financiamiento</h5>
+      <span class="bias-tag">Sesgo del presente · CAT</span>
+      <p>Ofertas "hipoteca fácil" con CAT oculta, mensualidades crecientes o periodos de gracia explotan el descuento hiperbólico; el <b>CUCR</b> (Costo de Uso del Capital Residencial) ofrece una medida normativa neutralizada.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Caso canónico: Genesove &amp; Mayer (2001)</h3>
+  <div class="prose">
+    <p>Los autores estudian el mercado condominial de Boston entre 1990 y 1997 (periodo de recesión post-boom). Encuentran que los propietarios que enfrentan una pérdida nominal (precio de mercado &lt; precio de compra) fijan su precio de reserva sistemáticamente por encima del nivel competitivo —con <b>coeficientes de 25–35% de la pérdida potencial</b>— y experimentan tiempos de permanencia en el mercado significativamente mayores. Esta es una de las evidencias más robustas de aversión a la pérdida en mercados reales, no experimentales.</p>
+    <p>La implicación algorítmica contemporánea es directa: plataformas inmobiliarias que muestran <em>"cambio respecto al precio inicial"</em> o <em>"días en el mercado"</em> construyen un marco conductual —reference dependence— que afecta tanto a compradores como a vendedores. La <b>elasticidad ingreso de la demanda por vivienda</b> documentada para México (González Tejeda &amp; Adamuz, 2016; &theta; ≈ 0.98) opera dentro de este marco conductual, no en el vacío clásico.</p>
+  </div>
+
+  <blockquote class="pull">
+    "En un mercado inmobiliario mediado por AVMs, el precio es endógeno a las decisiones algorítmicas que lo estiman; el anclaje se convierte en un punto fijo dinámico del sistema."
+    <cite>— González Tejeda (WP-2026-DVH); Homepty Hypergraph</cite>
+  </blockquote>
+</section>
+
+<!-- ═══════════════ §11 REGULATION ═══════════════ -->
+<section class="section" id="s11">
+  <div class="section-num"><span class="dig">11</span><span class="lbl">Regulación y ética</span></div>
+  <h2>El marco normativo <em>emergente</em></h2>
+  <p class="lede">La regulación algorítmica transita de principios éticos (OCDE 2019, UNESCO 2021) a instrumentos jurídicos vinculantes (UE, California, Brasil, México). La economía conductual proporciona el lenguaje técnico para identificar prácticas manipulativas en términos cognitivos —no sólo formales.</p>
+
+  <div class="reg-grid">
+    <div class="reg">
+      <div class="reg-flag">UE</div>
+      <h4>AI Act (Reg. 2024/1689)</h4>
+      <div class="art">Art. 5.1(a) · Prohibiciones</div>
+      <p>Prohíbe sistemas de IA que desplieguen "técnicas subliminales, manipulativas o engañosas" dirigidas a distorsionar materialmente el comportamiento de una persona en forma que cause daño. Vigencia escalonada 2025–2027.</p>
+    </div>
+    <div class="reg">
+      <div class="reg-flag">UE</div>
+      <h4>Digital Services Act</h4>
+      <div class="art">Art. 25 · Interfaces online</div>
+      <p>Prohíbe a las plataformas diseñar, organizar u operar sus interfaces de manera que engañen, manipulen o distorsionen la capacidad de los usuarios para tomar decisiones libres e informadas (VLOPs y VLOSEs).</p>
+    </div>
+    <div class="reg">
+      <div class="reg-flag">EEUU</div>
+      <h4>FTC Act §5</h4>
+      <div class="art">"Unfair or deceptive acts"</div>
+      <p>La FTC ha publicado guías explícitas sobre dark patterns (2022) y ha sancionado casos (Epic Games, $520M en 2022) bajo la doctrina de prácticas desleales. Aplicable también a modelos generativos engañosos.</p>
+    </div>
+    <div class="reg">
+      <div class="reg-flag">FR</div>
+      <h4>Loi SREN (2024)</h4>
+      <div class="art">Espacio digital francés</div>
+      <p>Tipifica explícitamente "patrones sombríos" (<i>design trompeur</i>) y otorga a la Arcom competencias de auditoría algorítmica. Marco pionero a nivel de Estado-miembro europeo.</p>
+    </div>
+    <div class="reg">
+      <div class="reg-flag">MX</div>
+      <h4>LFPDPPP &amp; LFPC</h4>
+      <div class="art">PROFECO + INAI</div>
+      <p>La Ley Federal de Protección al Consumidor sanciona prácticas comerciales abusivas; la LFPDPPP regula tratamiento de datos. Aún sin régimen específico para manipulación algorítmica —frontera regulatoria abierta.</p>
+    </div>
+    <div class="reg">
+      <div class="reg-flag">BR</div>
+      <h4>LGPD + Marco Legal IA</h4>
+      <div class="art">PL 2338/2023</div>
+      <p>Proyecto de Ley del Senado brasileño (aprobado dic. 2024) introduce categorías de riesgo y obligaciones de transparencia algorítmica alineadas con el AI Act europeo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ §12 APIs ═══════════════ -->
+<section class="section" id="s12">
+  <div class="section-num"><span class="dig">12</span><span class="lbl">APIs, fuentes y recursos</span></div>
+  <h2>Infraestructura de datos para investigación <em>conductual-algorítmica</em></h2>
+  <p class="lede">Un conjunto curado de APIs y repositorios útiles para ejercicios empíricos, replicaciones y trabajos de curso. Clasificados por costo de acceso y relevancia temática.</p>
+
+  <h4 class="sub">Literatura científica &amp; bibliometría</h4>
+  <div class="api-grid">
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">OpenAlex</div><span class="api-type free">gratis · sin auth</span></div>
+      <div class="api-desc">Grafo bibliográfico abierto con &gt;250M obras, citaciones, autores e instituciones. Reemplazo libre de Microsoft Academic Graph.</div>
+      <div class="api-endpoint">GET https://api.openalex.org/works?search=prospect+theory</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">Semantic Scholar</div><span class="api-type freemium">freemium · API key</span></div>
+      <div class="api-desc">Corpus semántico de Allen AI. Útil para embeddings de papers, extracción de TLDRs y grafo de citaciones contextual.</div>
+      <div class="api-endpoint">GET https://api.semanticscholar.org/graph/v1/paper/search</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">CrossRef</div><span class="api-type free">gratis</span></div>
+      <div class="api-desc">API canónica para resolver DOIs y metadatos bibliográficos. Base del sistema de citación moderno.</div>
+      <div class="api-endpoint">GET https://api.crossref.org/works/{DOI}</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">SSRN / NBER</div><span class="api-type free">acceso abierto parcial</span></div>
+      <div class="api-desc">Repositorios de working papers en economía conductual. NBER Working Paper Series es gratuita para universidades.</div>
+      <div class="api-endpoint">https://www.nber.org/api/v1/</div>
+    </div>
+  </div>
+
+  <h4 class="sub">Datos macro &amp; mercados</h4>
+  <div class="api-grid">
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">Banxico SIE</div><span class="api-type free">gratis · token</span></div>
+      <div class="api-desc">Sistema de Información Económica del Banco de México: IGAE, INPC, Encuesta de Expectativas, tasas, TC, SHF-IGEV.</div>
+      <div class="api-endpoint">GET https://www.banxico.org.mx/SieAPIRest/service/v1/series/{id}/datos</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">INEGI API</div><span class="api-type free">gratis · token</span></div>
+      <div class="api-desc">Indicadores oficiales México: ENOE, ENCO, INPC, Censos, Encuestas Nacionales. Consulta por indicador BIE.</div>
+      <div class="api-endpoint">GET https://www.inegi.org.mx/app/api/indicadores/desarrolladores/jsonxml/INDICATOR/</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">OEC BotMarket</div><span class="api-type auth">token · créditos</span></div>
+      <div class="api-desc">The Observatory of Economic Complexity — datos de comercio internacional, laborales y fiscales (BACI, ILO, OECD) en formato JSON unificado.</div>
+      <div class="api-endpoint">GET https://api-v2.oec.world/tesseract/data.jsonrecords?cube=labor-global-ilostat-key-metrics&ref_area=MEX</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">World Bank Data</div><span class="api-type free">gratis</span></div>
+      <div class="api-desc">WDI, International Debt Statistics, PovcalNet. Indicadores macro para comparativos cross-country.</div>
+      <div class="api-endpoint">GET https://api.worldbank.org/v2/country/MEX/indicator/NY.GDP.MKTP.CD</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">FRED (St. Louis Fed)</div><span class="api-type freemium">API key gratis</span></div>
+      <div class="api-desc">&gt;800,000 series económicas; benchmark para ejercicios de descuento intertemporal y expectativas.</div>
+      <div class="api-endpoint">GET https://api.stlouisfed.org/fred/series/observations</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">OECD SDMX</div><span class="api-type free">gratis</span></div>
+      <div class="api-desc">Servicio SDMX para datos OCDE: Better Life Index, PISA, Wellbeing, Behavioural Insights reports.</div>
+      <div class="api-endpoint">GET https://sdmx.oecd.org/public/rest/data/OECD.SDD.TPS,DSD_PISA</div>
+    </div>
+  </div>
+
+  <h4 class="sub">Comportamiento digital &amp; plataformas</h4>
+  <div class="api-grid">
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">Google Trends</div><span class="api-type free">gratis (no oficial)</span></div>
+      <div class="api-desc">Índice de atención pública. <i>pytrends</i>/<i>gtrends</i> como wrappers. Útil para medir salience algorítmico ex post.</div>
+      <div class="api-endpoint">pypi: pytrends.TrendReq().build_payload(...)</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">Wikipedia Pageviews</div><span class="api-type free">gratis</span></div>
+      <div class="api-desc">Vistas diarias por artículo; proxy de atención pública &amp; salience. Alternativa libre a Trends.</div>
+      <div class="api-endpoint">GET https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">Reddit Pushshift / PRAW</div><span class="api-type freemium">rate-limited</span></div>
+      <div class="api-desc">Análisis de subreddits para economía conductual aplicada: r/personalfinance, r/wallstreetbets, r/realestate.</div>
+      <div class="api-endpoint">praw.Reddit(client_id=...).subreddit('wallstreetbets').new()</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">Common Crawl</div><span class="api-type free">gratis · S3</span></div>
+      <div class="api-desc">Corpus web abierto (PB de datos). Base para auditorías de dark patterns a escala (cf. Mathur et al. 2019).</div>
+      <div class="api-endpoint">s3://commoncrawl/crawl-data/CC-MAIN-{ID}/</div>
+    </div>
+  </div>
+
+  <h4 class="sub">Plataformas experimentales &amp; replicación</h4>
+  <div class="api-grid">
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">Prolific / MTurk</div><span class="api-type auth">costo por participante</span></div>
+      <div class="api-desc">Reclutamiento de muestras para experimentos online. Prolific se ha convertido en estándar académico por calidad demográfica.</div>
+      <div class="api-endpoint">https://docs.prolific.com/docs/api</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">oTree / PsychoPy</div><span class="api-type free">open-source</span></div>
+      <div class="api-desc">Frameworks para experimentos de economía conductual y psicología, self-hosted. oTree integra con Heroku, AWS.</div>
+      <div class="api-endpoint">pip install otree</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">OSF (Open Science)</div><span class="api-type free">gratis</span></div>
+      <div class="api-desc">Registro de preanálisis, datos abiertos, código de replicación. Estándar en la crisis de replicabilidad post-2015.</div>
+      <div class="api-endpoint">https://api.osf.io/v2/</div>
+    </div>
+    <div class="api">
+      <div class="api-hdr"><div class="api-name">BIT (UK)</div><span class="api-type free">informes abiertos</span></div>
+      <div class="api-desc">Behavioural Insights Team. Biblioteca pública de RCTs aplicados y la EAST Framework (Easy, Attractive, Social, Timely).</div>
+      <div class="api-endpoint">https://www.bi.team/publications/</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ §13 REFERENCES ═══════════════ -->
+<section class="section" id="s13">
+  <div class="section-num"><span class="dig">13</span><span class="lbl">Referencias</span></div>
+  <h2>Bibliografía de referencia <em>académica</em></h2>
+  <p class="lede">Selección anotada en formato APA-7 ampliada; DOIs verificables. El corpus cubre tanto la teoría canónica (1955–2008) como el frente activo de investigación sobre economía conductual algorítmica (2015–2025).</p>
+
+  <ol class="refs">
+    <li class="ref-item"><b>Simon, H. A.</b> (1955). A behavioral model of rational choice. <i>Quarterly Journal of Economics</i>, 69(1), 99–118. <a href="https://doi.org/10.2307/1884852" target="_blank" rel="noopener">10.2307/1884852</a></li>
+    <li class="ref-item"><b>Tversky, A., &amp; Kahneman, D.</b> (1974). Judgment under uncertainty: Heuristics and biases. <i>Science</i>, 185(4157), 1124–1131. <a href="https://doi.org/10.1126/science.185.4157.1124" target="_blank" rel="noopener">10.1126/science.185.4157.1124</a></li>
+    <li class="ref-item"><b>Kahneman, D., &amp; Tversky, A.</b> (1979). Prospect theory: An analysis of decision under risk. <i>Econometrica</i>, 47(2), 263–291. <a href="https://doi.org/10.2307/1914185" target="_blank" rel="noopener">10.2307/1914185</a></li>
+    <li class="ref-item"><b>Tversky, A., &amp; Kahneman, D.</b> (1992). Advances in prospect theory: Cumulative representation of uncertainty. <i>Journal of Risk and Uncertainty</i>, 5(4), 297–323. <a href="https://doi.org/10.1007/BF00122574" target="_blank" rel="noopener">10.1007/BF00122574</a></li>
+    <li class="ref-item"><b>Laibson, D.</b> (1997). Golden eggs and hyperbolic discounting. <i>Quarterly Journal of Economics</i>, 112(2), 443–477. <a href="https://doi.org/10.1162/003355397555253" target="_blank" rel="noopener">10.1162/003355397555253</a></li>
+    <li class="ref-item"><b>Prelec, D.</b> (1998). The probability weighting function. <i>Econometrica</i>, 66(3), 497–527. <a href="https://doi.org/10.2307/2998573" target="_blank" rel="noopener">10.2307/2998573</a></li>
+    <li class="ref-item"><b>Rabin, M.</b> (2000). Risk aversion and expected-utility theory: A calibration theorem. <i>Econometrica</i>, 68(5), 1281–1292. <a href="https://doi.org/10.1111/1468-0262.00158" target="_blank" rel="noopener">10.1111/1468-0262.00158</a></li>
+    <li class="ref-item"><b>Genesove, D., &amp; Mayer, C.</b> (2001). Loss aversion and seller behavior: Evidence from the housing market. <i>Quarterly Journal of Economics</i>, 116(4), 1233–1260. <a href="https://doi.org/10.1162/003355301753265561" target="_blank" rel="noopener">10.1162/003355301753265561</a></li>
+    <li class="ref-item"><b>Madrian, B. C., &amp; Shea, D. F.</b> (2001). The power of suggestion: Inertia in 401(k) participation and savings behavior. <i>Quarterly Journal of Economics</i>, 116(4), 1149–1187. <a href="https://doi.org/10.1162/003355301753265543" target="_blank" rel="noopener">10.1162/003355301753265543</a></li>
+    <li class="ref-item"><b>Camerer, C. F.</b> (2003). <i>Behavioral game theory: Experiments in strategic interaction</i>. Princeton University Press.</li>
+    <li class="ref-item"><b>Thaler, R. H., &amp; Benartzi, S.</b> (2004). Save more tomorrow: Using behavioral economics to increase employee saving. <i>Journal of Political Economy</i>, 112(S1), S164–S187. <a href="https://doi.org/10.1086/380085" target="_blank" rel="noopener">10.1086/380085</a></li>
+    <li class="ref-item"><b>Thaler, R. H., &amp; Sunstein, C. R.</b> (2008). <i>Nudge: Improving decisions about health, wealth, and happiness</i>. Yale University Press.</li>
+    <li class="ref-item"><b>Gigerenzer, G.</b> (2008). Why heuristics work. <i>Perspectives on Psychological Science</i>, 3(1), 20–29. <a href="https://doi.org/10.1111/j.1745-6916.2008.00058.x" target="_blank" rel="noopener">10.1111/j.1745-6916.2008.00058.x</a></li>
+    <li class="ref-item"><b>Kahneman, D.</b> (2011). <i>Thinking, fast and slow</i>. Farrar, Straus and Giroux.</li>
+    <li class="ref-item"><b>Pariser, E.</b> (2011). <i>The filter bubble: What the internet is hiding from you</i>. Penguin.</li>
+    <li class="ref-item"><b>Mullainathan, S., &amp; Shafir, E.</b> (2013). <i>Scarcity: Why having too little means so much</i>. Times Books.</li>
+    <li class="ref-item"><b>Kramer, A. D. I., Guillory, J. E., &amp; Hancock, J. T.</b> (2014). Experimental evidence of massive-scale emotional contagion through social networks. <i>PNAS</i>, 111(24), 8788–8790. <a href="https://doi.org/10.1073/pnas.1320040111" target="_blank" rel="noopener">10.1073/pnas.1320040111</a></li>
+    <li class="ref-item"><b>Bakshy, E., Messing, S., &amp; Adamic, L. A.</b> (2015). Exposure to ideologically diverse news and opinion on Facebook. <i>Science</i>, 348(6239), 1130–1132. <a href="https://doi.org/10.1126/science.aaa1160" target="_blank" rel="noopener">10.1126/science.aaa1160</a></li>
+    <li class="ref-item"><b>Acquisti, A., Brandimarte, L., &amp; Loewenstein, G.</b> (2015). Privacy and human behavior in the age of information. <i>Science</i>, 347(6221), 509–514. <a href="https://doi.org/10.1126/science.aaa1465" target="_blank" rel="noopener">10.1126/science.aaa1465</a></li>
+    <li class="ref-item"><b>González Tejeda, L., &amp; Adamuz Peña, M.</b> (2016). La demanda de vivienda en México: Una estimación por cuantiles. <i>El Trimestre Económico</i>, 83(332), 771–810.</li>
+    <li class="ref-item"><b>Yeung, K.</b> (2017). "Hypernudge": Big data as a mode of regulation by design. <i>Information, Communication &amp; Society</i>, 20(1), 118–136. <a href="https://doi.org/10.1080/1369118X.2016.1186713" target="_blank" rel="noopener">10.1080/1369118X.2016.1186713</a></li>
+    <li class="ref-item"><b>Matz, S. C., Kosinski, M., Nave, G., &amp; Stillwell, D. J.</b> (2017). Psychological targeting as an effective approach to digital mass persuasion. <i>PNAS</i>, 114(48), 12714–12719. <a href="https://doi.org/10.1073/pnas.1710966114" target="_blank" rel="noopener">10.1073/pnas.1710966114</a></li>
+    <li class="ref-item"><b>Sunstein, C. R.</b> (2017). <i>#Republic: Divided democracy in the age of social media</i>. Princeton University Press.</li>
+    <li class="ref-item"><b>Mathur, A., Acar, G., Friedman, M. J., Lucherini, E., Mayer, J., Chetty, M., &amp; Narayanan, A.</b> (2019). Dark patterns at scale: Findings from a crawl of 11K shopping websites. <i>Proceedings of the ACM on Human-Computer Interaction</i>, 3(CSCW), 1–32. <a href="https://doi.org/10.1145/3359183" target="_blank" rel="noopener">10.1145/3359183</a></li>
+    <li class="ref-item"><b>Sunstein, C. R.</b> (2019). <i>The cost-benefit revolution</i>. MIT Press.</li>
+    <li class="ref-item"><b>Allcott, H., Braghieri, L., Eichmeyer, S., &amp; Gentzkow, M.</b> (2020). The welfare effects of social media. <i>American Economic Review</i>, 110(3), 629–676. <a href="https://doi.org/10.1257/aer.20190658" target="_blank" rel="noopener">10.1257/aer.20190658</a></li>
+    <li class="ref-item"><b>Luguri, J., &amp; Strahilevitz, L. J.</b> (2021). Shining a light on dark patterns. <i>Journal of Legal Analysis</i>, 13(1), 43–109. <a href="https://doi.org/10.1093/jla/laaa006" target="_blank" rel="noopener">10.1093/jla/laaa006</a></li>
+    <li class="ref-item"><b>DellaVigna, S., &amp; Linos, E.</b> (2022). RCTs to scale: Comprehensive evidence from two nudge units. <i>Econometrica</i>, 90(1), 81–116. <a href="https://doi.org/10.3982/ECTA18709" target="_blank" rel="noopener">10.3982/ECTA18709</a></li>
+    <li class="ref-item"><b>Unión Europea</b> (2022). Reglamento (UE) 2022/2065 del Parlamento Europeo y del Consejo, relativo a un mercado único de servicios digitales (Digital Services Act). <i>DOUE L 277/1</i>.</li>
+    <li class="ref-item"><b>Unión Europea</b> (2024). Reglamento (UE) 2024/1689 por el que se establecen normas armonizadas en materia de inteligencia artificial (AI Act). <i>DOUE L</i>.</li>
+    <li class="ref-item"><b>Narayanan, A., Mathur, A., Chetty, M., &amp; Kshirsagar, M.</b> (2020). Dark patterns: Past, present, and future. <i>Communications of the ACM</i>, 63(9), 42–47. <a href="https://doi.org/10.1145/3397884" target="_blank" rel="noopener">10.1145/3397884</a></li>
+    <li class="ref-item"><b>González Tejeda, L., &amp; Villalobos, E.</b> (2026). The Homepty Hypergraph: A stochastic process over dynamic heterogeneous graphs with Bayesian sectorized learning. <i>Working Paper WP-2026-STRAT-01</i>. Homepty Research.</li>
+  </ol>
+
+  <div class="hr-orn"><span>FIN DEL MÓDULO</span></div>
+</section>
+
+</div><!-- /.wrap -->
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <h5>Sobre esta infografía</h5>
+        <p>Material docente preparado para el módulo especial de Economía Conductual del programa de posgrado del ITESM, Campus Santa Fe. Integra formalización matemática, simuladores paramétricos Chart.js y un corpus bibliográfico verificable con DOIs. Se distribuye bajo licencia Creative Commons BY-NC-SA 4.0 para uso docente y de investigación.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Stack técnico</h5>
+        <ul>
+          <li>· Chart.js 4.4</li>
+          <li>· KaTeX 0.16</li>
+          <li>· IBM Plex · Playfair</li>
+          <li>· Vanilla JS · HTML5</li>
+          <li>· CSS custom properties</li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>Citar como</h5>
+        <p style="font-family:var(--ff-mono);font-size:11.5px;line-height:1.6">González Tejeda, L. (2026). <i>Economía conductual en el ecosistema algorítmico</i>. Material docente ITESM · Homepty Research Series. DOI: 10.homepty/BE-ALGO-2026.01</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 · Dr. Leonardo González Tejeda</span>
+      <span>ITESM · Campus Santa Fe · CDMX</span>
+      <span>Vol. I · Ed. 2026 · <b style="color:var(--gold)">CC BY-NC-SA 4.0</b></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════════════════
+   BIAS TAXONOMY DATA & RENDER
+   ════════════════════════════════════════ */
+const biases = [
+  {key:'01',nm:'Anclaje',en:'Anchoring',def:'Peso desproporcionado del primer valor numérico presentado en la formación de juicios posteriores.',formula:'J = \\alpha \\cdot A + (1-\\alpha) \\cdot E,\\ \\alpha \\approx 0.5',evid:'Tversky & Kahneman, 1974; Mussweiler et al., 2000',algo:'Precios listados en portales inmobiliarios, "precio de lista" en e-commerce, precios sugeridos en dynamic pricing.'},
+  {key:'02',nm:'Aversión a la pérdida',en:'Loss aversion',def:'Las pérdidas psicológicas duelen ~2.25× más que el placer equivalente de las ganancias.',formula:'\\lambda = -v(-x)/v(x) \\approx 2.25',evid:'Kahneman & Tversky, 1979; Genesove & Mayer, 2001',algo:'Framing de pérdidas en churn prevention, "perderás tu racha" en gamificación, gain-loss framing en notificaciones.'},
+  {key:'03',nm:'Disponibilidad',en:'Availability',def:'Probabilidad subjetiva de un evento se estima por la facilidad con que ejemplos vienen a la mente.',formula:'P_s(E) \\propto 1/t_{retrieval}(E)',evid:'Tversky & Kahneman, 1973',algo:'Trending topics, "noticias más leídas", recomendaciones basadas en recencia.'},
+  {key:'04',nm:'Representatividad',en:'Representativeness',def:'Juzgar la probabilidad de pertenencia a una categoría por similitud a un estereotipo, ignorando tasas base.',formula:'P(A|B) \\neq \\frac{P(B|A)P(A)}{P(B)}',evid:'Kahneman & Tversky, 1972; falacia de Linda',algo:'Targeting psicográfico por similitud a perfiles prototípicos (lookalike audiences).'},
+  {key:'05',nm:'Statu quo',en:'Status quo bias',def:'Preferencia excesiva por la opción por defecto o el estado actual de las cosas.',formula:'U(\\text{default}) += \\omega,\\ \\omega>0',evid:'Samuelson & Zeckhauser, 1988; Madrian & Shea, 2001',algo:'Auto-renovación de suscripciones, opt-out en lugar de opt-in, permisos preactivados.'},
+  {key:'06',nm:'Confirmación',en:'Confirmation bias',def:'Búsqueda selectiva e interpretación sesgada de información que confirma creencias previas.',formula:'P(e|H)\\ \\text{sobre-muestreo de}\\ H\\ \\text{propio}',evid:'Wason, 1960; Nickerson, 1998',algo:'Filter bubbles, echo chambers en redes sociales, recomendación de noticias por similitud ideológica.'},
+  {key:'07',nm:'Efecto dotación',en:'Endowment effect',def:'WTP/WTA asimetría: exigimos más por vender algo que lo que pagaríamos por comprarlo.',formula:'WTA/WTP \\approx 2\\ \\text{a}\\ 3',evid:'Knetsch, 1989; Kahneman et al., 1990',algo:'Trials "gratis" que convierten a paga, prueba de producto, free tier con lock-in.'},
+  {key:'08',nm:'Sesgo del presente',en:'Present bias',def:'Descuento desproporcionado de utilidad futura; impaciencia a corto plazo inconsistente con paciencia a largo plazo.',formula:'D(t) = \\beta\\delta^t,\\ \\beta<1',evid:'Laibson, 1997; Frederick et al., 2002',algo:'BNPL, notificaciones push, infinite scroll, contenido efímero.'},
+  {key:'09',nm:'Efecto marco',en:'Framing effect',def:'Decisiones idénticas en contenido pero distintas en presentación producen respuestas diferentes.',formula:'v(\\text{"90\\% supervivencia"}) \\neq v(\\text{"10\\% mortalidad"})',evid:'Tversky & Kahneman, 1981; efecto Asian disease',algo:'A/B testing de copy, personalización de framing por perfil, spinning algorítmico de headlines.'},
+  {key:'10',nm:'Sobreconfianza',en:'Overconfidence',def:'Sobrestimación sistemática de la precisión del propio juicio o habilidad.',formula:'\\hat{p} - p_{real} > 0',evid:'Alpert & Raiffa, 1982; Moore & Healy, 2008',algo:'Trading retail gamificado, apuestas deportivas en vivo, robo-advisors con interfaces "de experto".'},
+  {key:'11',nm:'Ilusión de control',en:'Illusion of control',def:'Sobrestimación de la influencia propia sobre resultados esencialmente aleatorios.',formula:'P_s(\\text{causalidad}) > P(\\text{causalidad})',evid:'Langer, 1975',algo:'Interfaces con "ritualización" (elegir número, tocar antes de girar), tragaperras digitales, gamification financiera.'},
+  {key:'12',nm:'Efecto halo',en:'Halo effect',def:'Una impresión positiva en un atributo se generaliza a otros atributos no relacionados.',formula:'\\text{cov}(eval_i, eval_j) \\gg 0\\ \\forall i,j',evid:'Thorndike, 1920; Nisbett & Wilson, 1977',algo:'Reviews agregadas con peso desproporcionado de calificación global, "verified" badges, influencer endorsement.'},
+];
+const bg = document.getElementById('bias-grid');
+bg.innerHTML = biases.map(b=>`
+  <div class="bias" onclick="this.classList.toggle('active')">
+    <div class="bias-hdr"><div class="bias-nm">${b.nm}</div><div class="bias-key">${b.key}</div></div>
+    <div class="bias-en">${b.en}</div>
+    <div class="bias-def">${b.def}</div>
+    <div class="bias-details">
+      <h5>Formalización</h5>
+      <div class="formula">$ ${b.formula} $</div>
+      <h5>Manifestación algorítmica</h5>
+      <p>${b.algo}</p>
+      <div class="bias-ref">${b.evid}</div>
+    </div>
+  </div>
+`).join('');
+
+/* ════════════════════════════════════════
+   CHART.JS GLOBAL CONFIG
+   ════════════════════════════════════════ */
+Chart.defaults.font.family = "'IBM Plex Mono','IBM Plex Sans',monospace";
+Chart.defaults.color = '#7A8CA6';
+Chart.defaults.borderColor = 'rgba(148,163,184,.1)';
+Chart.defaults.font.size = 11;
+
+const gold = '#D4AF37';
+const teal = '#2DD4BF';
+const coral = '#F97066';
+const ink4 = '#4A5C76';
+
+/* ════════════════════════════════════════
+   §3 PROSPECT THEORY VALUE FUNCTION
+   ════════════════════════════════════════ */
+function valueData(alpha,beta,lambda){
+  const xs=[], vs=[], lin=[];
+  for(let x=-100;x<=100;x+=2){
+    xs.push(x);
+    if(x>=0){vs.push(Math.pow(x,alpha))}
+    else{vs.push(-lambda*Math.pow(-x,beta))}
+    lin.push(x);
+  }
+  return{xs,vs,lin};
+}
+const vCtx=document.getElementById('valueChart').getContext('2d');
+let vData=valueData(0.88,0.88,2.25);
+const vChart=new Chart(vCtx,{
+  type:'line',
+  data:{labels:vData.xs,datasets:[
+    {label:'v(x)',data:vData.vs,borderColor:gold,backgroundColor:'rgba(212,175,55,.1)',borderWidth:2.5,fill:true,pointRadius:0,tension:.2},
+    {label:'lineal',data:vData.lin,borderColor:ink4,borderWidth:1,borderDash:[4,4],pointRadius:0}
+  ]},
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#0B1728',borderColor:gold,borderWidth:1,titleColor:gold,bodyColor:'#E8EDF5',titleFont:{family:"'IBM Plex Mono'",size:11}}},
+    scales:{
+      x:{title:{display:true,text:'x (variación respecto al punto de referencia)',color:'#B8C5D6'},grid:{color:'rgba(148,163,184,.06)'},ticks:{maxTicksLimit:11,callback:v=>(vData.xs[v]!==undefined?vData.xs[v]:'')}},
+      y:{title:{display:true,text:'v(x) · valor subjetivo',color:'#B8C5D6'},grid:{color:'rgba(148,163,184,.06)'}}
+    }
+  }
+});
+function updateV(){
+  const a=parseFloat(document.getElementById('vAlpha').value);
+  const b=parseFloat(document.getElementById('vBeta').value);
+  const l=parseFloat(document.getElementById('vLam').value);
+  document.getElementById('vAlphaV').textContent=a.toFixed(2);
+  document.getElementById('vBetaV').textContent=b.toFixed(2);
+  document.getElementById('vLamV').textContent=l.toFixed(2);
+  vData=valueData(a,b,l);
+  vChart.data.datasets[0].data=vData.vs;
+  vChart.update('none');
+  const pain100=Math.round(l*100);
+  document.getElementById('vReadout').innerHTML=`Con λ = <span class="val">${l.toFixed(2)}</span>, una pérdida de $100 genera un malestar equivalente al bienestar de una ganancia de <span class="val">$${pain100}</span>.`;
+}
+['vAlpha','vBeta','vLam'].forEach(id=>document.getElementById(id).addEventListener('input',updateV));
+function resetV(){document.getElementById('vAlpha').value=0.88;document.getElementById('vBeta').value=0.88;document.getElementById('vLam').value=2.25;updateV()}
+
+/* ════════════════════════════════════════
+   §4 PROBABILITY WEIGHTING
+   ════════════════════════════════════════ */
+function wData(g){
+  const ps=[],ws=[],lin=[];
+  for(let p=0;p<=1;p+=0.01){
+    ps.push(p.toFixed(2));
+    if(p===0){ws.push(0)}
+    else if(p===1){ws.push(1)}
+    else{
+      const num=Math.pow(p,g);
+      const denom=Math.pow(Math.pow(p,g)+Math.pow(1-p,g),1/g);
+      ws.push(num/denom);
+    }
+    lin.push(p);
+  }
+  return{ps,ws,lin};
+}
+const wCtx=document.getElementById('probChart').getContext('2d');
+let wDat=wData(0.61);
+const wChart=new Chart(wCtx,{
+  type:'line',
+  data:{labels:wDat.ps,datasets:[
+    {label:'w(p)',data:wDat.ws,borderColor:teal,backgroundColor:'rgba(45,212,191,.1)',borderWidth:2.5,fill:true,pointRadius:0,tension:.2},
+    {label:'lineal',data:wDat.lin,borderColor:ink4,borderWidth:1,borderDash:[4,4],pointRadius:0}
+  ]},
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#0B1728',borderColor:teal,borderWidth:1,titleColor:teal,bodyColor:'#E8EDF5'}},
+    scales:{
+      x:{title:{display:true,text:'p · probabilidad objetiva',color:'#B8C5D6'},grid:{color:'rgba(148,163,184,.06)'},ticks:{maxTicksLimit:11,callback:(v,i)=>i%10===0?wDat.ps[i]:''}},
+      y:{title:{display:true,text:'w(p) · ponderación subjetiva',color:'#B8C5D6'},grid:{color:'rgba(148,163,184,.06)'},min:0,max:1}
+    }
+  }
+});
+function updateW(){
+  const g=parseFloat(document.getElementById('wGam').value);
+  document.getElementById('wGamV').textContent=g.toFixed(2);
+  wDat=wData(g);
+  wChart.data.datasets[0].data=wDat.ws;
+  wChart.update('none');
+  const p01=0.01;
+  const w01=Math.pow(p01,g)/Math.pow(Math.pow(p01,g)+Math.pow(1-p01,g),1/g);
+  document.getElementById('wReadout').innerHTML=`Con γ = <span class="val">${g.toFixed(2)}</span>, una probabilidad objetiva de <span class="val">1%</span> es percibida subjetivamente como <span class="val">${(w01*100).toFixed(1)}%</span> — explica por qué las loterías prosperan.`;
+}
+document.getElementById('wGam').addEventListener('input',updateW);
+function resetW(){document.getElementById('wGam').value=0.61;updateW()}
+
+/* ════════════════════════════════════════
+   §5 DISCOUNTING
+   ════════════════════════════════════════ */
+function discData(delta,beta,k){
+  const ts=[],exp=[],hyp=[],qhp=[];
+  for(let t=0;t<=24;t++){
+    ts.push(t);
+    exp.push(Math.pow(delta,t));
+    hyp.push(1/(1+k*t));
+    qhp.push(t===0?1:beta*Math.pow(delta,t));
+  }
+  return{ts,exp,hyp,qhp};
+}
+const dCtx=document.getElementById('discountChart').getContext('2d');
+let dDat=discData(0.96,0.70,0.25);
+const dChart=new Chart(dCtx,{
+  type:'line',
+  data:{labels:dDat.ts,datasets:[
+    {label:'Exp δᵗ',data:dDat.exp,borderColor:gold,borderWidth:2.3,pointRadius:0,tension:.15,fill:false},
+    {label:'Hiperbólico',data:dDat.hyp,borderColor:teal,borderWidth:2.3,pointRadius:0,tension:.15,fill:false},
+    {label:'β-δ',data:dDat.qhp,borderColor:coral,borderWidth:2.3,pointRadius:0,tension:0,fill:false}
+  ]},
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{backgroundColor:'#0B1728',borderColor:gold,borderWidth:1,titleColor:gold,bodyColor:'#E8EDF5'}},
+    scales:{
+      x:{title:{display:true,text:'t · períodos (meses)',color:'#B8C5D6'},grid:{color:'rgba(148,163,184,.06)'}},
+      y:{title:{display:true,text:'D(t) · factor de descuento',color:'#B8C5D6'},grid:{color:'rgba(148,163,184,.06)'},min:0,max:1}
+    }
+  }
+});
+function updateD(){
+  const d=parseFloat(document.getElementById('dDelt').value);
+  const b=parseFloat(document.getElementById('dBet').value);
+  const k=parseFloat(document.getElementById('dK').value);
+  document.getElementById('dDeltV').textContent=d.toFixed(3);
+  document.getElementById('dBetV').textContent=b.toFixed(2);
+  document.getElementById('dKV').textContent=k.toFixed(2);
+  dDat=discData(d,b,k);
+  dChart.data.datasets[0].data=dDat.exp;
+  dChart.data.datasets[1].data=dDat.hyp;
+  dChart.data.datasets[2].data=dDat.qhp;
+  dChart.update('none');
+  document.getElementById('dReadout').innerHTML=`Ofertas "compre ahora" con contadores regresivos, planes BNPL, notificaciones push y <em>infinite scroll</em> explotan sistemáticamente la curvatura β-δ con β = <span class="val">${b.toFixed(2)}</span>.`;
+}
+['dDelt','dBet','dK'].forEach(id=>document.getElementById(id).addEventListener('input',updateD));
+function resetD(){document.getElementById('dDelt').value=0.96;document.getElementById('dBet').value=0.70;document.getElementById('dK').value=0.25;updateD()}
+
+/* ════════════════════════════════════════
+   §6 HICK-HYMAN
+   ════════════════════════════════════════ */
+function updateHicks(){
+  const n=parseInt(document.getElementById('hkN').value);
+  const b=parseInt(document.getElementById('hkB').value);
+  const a=200;
+  const rt=Math.round(a+b*Math.log2(n+1));
+  document.getElementById('hkNV').textContent=n;
+  document.getElementById('hkBV').textContent=b;
+  document.getElementById('hkRT').textContent=rt;
+  const viz=document.getElementById('hkViz');
+  let html='';
+  const cols=Math.min(n,8);
+  for(let i=1;i<=n;i++)html+=`<div class="hicks-opt">${i}</div>`;
+  viz.innerHTML=html;
+}
+document.getElementById('hkN').addEventListener('input',updateHicks);
+document.getElementById('hkB').addEventListener('input',updateHicks);
+updateHicks();
+
+/* initial renders */
+updateV();updateW();updateD();
+</script>
+</body>
+</html>
