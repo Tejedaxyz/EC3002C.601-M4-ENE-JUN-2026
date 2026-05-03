@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test de Autoevaluación · Economía Experimental Algorítmica · ITESM</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0c1a2e;
+  --navy-mid:#1a2f4a;
+  --teal:#1a9b8a;
+  --teal-light:#24c4b0;
+  --teal-bg:#e8f7f5;
+  --gold:#c08c2a;
+  --gold-light:#e0b050;
+  --gold-bg:#fdf6e3;
+  --paper:#f7f6f2;
+  --ink:#1c2b3a;
+  --ink-mid:#3d5068;
+  --ink-light:#6b8099;
+  --border:#ddd9ce;
+  --red:#c0392b;
+  --red-bg:#fdf0ee;
+  --green:#16a34a;
+  --green-bg:#f0fdf4;
+  --sans:'IBM Plex Sans',sans-serif;
+  --serif:'Playfair Display',Georgia,serif;
+  --mono:'IBM Plex Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--paper);
+  color:var(--ink);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* ─── HEADER ─── */
+header{
+  width:100%;
+  background:var(--navy);
+  padding:32px 0 28px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+header::before{
+  content:'';
+  position:absolute;
+  left:50%;top:-80px;
+  transform:translateX(-50%);
+  width:600px;height:300px;
+  background:radial-gradient(ellipse,rgba(26,155,138,.12) 0%,transparent 70%);
+  pointer-events:none;
+}
+.header-kicker{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.16em;
+  color:var(--teal-light);
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+header h1{
+  font-family:var(--serif);
+  font-size:30px;
+  color:#fff;
+  line-height:1.15;
+  margin-bottom:6px;
+}
+header h1 span{color:var(--gold-light)}
+.header-sub{
+  font-size:13px;
+  color:rgba(255,255,255,.5);
+  font-style:italic;
+}
+
+/* ─── PROGRESS STRIP ─── */
+#progress-strip{
+  width:100%;
+  max-width:780px;
+  padding:20px 24px 0;
+}
+.strip-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+.strip-label{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--ink-light);
+}
+.strip-counter{
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--teal);
+  font-weight:500;
+}
+.progress-track{
+  height:5px;
+  background:var(--border);
+  border-radius:3px;
+  overflow:hidden;
+}
+.progress-fill{
+  height:100%;
+  background:linear-gradient(90deg,var(--teal),var(--gold-light));
+  border-radius:3px;
+  transition:width .5s cubic-bezier(.4,0,.2,1);
+}
+
+/* ─── MAIN CARD ─── */
+#quiz-wrap{
+  width:100%;
+  max-width:780px;
+  padding:20px 24px 60px;
+}
+
+/* ─── QUESTION CARD ─── */
+.q-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:0;
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .35s ease,transform .35s ease;
+}
+.q-card.visible{opacity:1;transform:translateY(0)}
+
+.q-header{
+  background:var(--navy);
+  padding:20px 24px 18px;
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+}
+.q-num-badge{
+  flex-shrink:0;
+  width:36px;height:36px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  border:1.5px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:500;
+  color:var(--teal-light);
+  margin-top:2px;
+}
+.q-header-right{flex:1}
+.q-level-badge{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:3px 8px;
+  border-radius:3px;
+  margin-bottom:8px;
+  font-weight:500;
+}
+.level-basico{background:rgba(26,155,138,.2);color:var(--teal-light)}
+.level-intermedio{background:rgba(192,140,42,.2);color:var(--gold-light)}
+.level-avanzado{background:rgba(192,57,43,.2);color:#f39c82}
+.q-text{
+  font-family:var(--serif);
+  font-size:17px;
+  color:#fff;
+  line-height:1.45;
+}
+.q-text sup{font-size:11px;opacity:.7}
+
+/* ─── OPTIONS ─── */
+.q-options{
+  padding:20px 24px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.opt{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:13px 16px;
+  border:1.5px solid var(--border);
+  border-radius:8px;
+  cursor:pointer;
+  background:#fff;
+  transition:border-color .18s,background .18s,transform .12s;
+  text-align:left;
+  width:100%;
+  font-family:var(--sans);
+}
+.opt:hover:not(:disabled){
+  border-color:var(--teal);
+  background:var(--teal-bg);
+  transform:translateX(3px);
+}
+.opt:disabled{cursor:default;transform:none}
+.opt-letter{
+  flex-shrink:0;
+  width:26px;height:26px;
+  border-radius:50%;
+  background:var(--paper);
+  border:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  color:var(--ink-mid);
+  transition:all .18s;
+  margin-top:1px;
+}
+.opt-text{
+  font-size:14px;
+  color:var(--ink);
+  line-height:1.55;
+}
+
+/* ─── OPTION STATES ─── */
+.opt.selected{border-color:var(--teal);background:var(--teal-bg)}
+.opt.selected .opt-letter{background:var(--teal);border-color:var(--teal);color:#fff}
+.opt.correct{border-color:var(--green)!important;background:var(--green-bg)!important}
+.opt.correct .opt-letter{background:var(--green)!important;border-color:var(--green)!important;color:#fff!important}
+.opt.correct .opt-text{color:var(--green)}
+.opt.wrong{border-color:var(--red)!important;background:var(--red-bg)!important}
+.opt.wrong .opt-letter{background:var(--red)!important;border-color:var(--red)!important;color:#fff!important}
+.opt.wrong .opt-text{color:var(--red)}
+.opt.dimmed{opacity:.45}
+
+/* ─── EXPLANATION ─── */
+.explanation{
+  margin:0 24px 20px;
+  border-radius:8px;
+  overflow:hidden;
+  display:none;
+}
+.explanation.show{display:block;animation:fadeUp .35s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.expl-head{
+  padding:13px 18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+  font-size:13px;
+}
+.expl-head.correct-head{background:var(--green);color:#fff}
+.expl-head.wrong-head{background:var(--red);color:#fff}
+.expl-body{
+  padding:16px 18px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 8px 8px;
+}
+.expl-body p{
+  font-size:13.5px;
+  color:var(--ink-mid);
+  line-height:1.7;
+  margin-bottom:10px;
+}
+.expl-body p:last-child{margin-bottom:0}
+.expl-body strong{color:var(--navy)}
+.expl-body .formula{
+  font-family:var(--mono);
+  font-size:12px;
+  background:var(--navy);
+  color:#a8d5ce;
+  padding:10px 14px;
+  border-radius:5px;
+  margin:10px 0;
+  display:block;
+  line-height:1.8;
+}
+.expl-body .cite{
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--teal);
+  border-top:1px solid var(--border);
+  padding-top:10px;
+  margin-top:10px;
+}
+
+/* ─── FOOTER ACTIONS ─── */
+.q-footer{
+  padding:0 24px 20px;
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+.btn{
+  padding:10px 22px;
+  border-radius:6px;
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  border:none;
+  transition:all .18s;
+}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-primary:hover{background:var(--navy-mid)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.btn-next{background:var(--teal);color:#fff}
+.btn-next:hover{background:#148f7e}
+
+/* ─── RESULTS CARD ─── */
+#results-card{
+  display:none;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  animation:fadeUp .5s ease both;
+}
+.results-banner{
+  background:var(--navy);
+  padding:36px 32px;
+  text-align:center;
+}
+.results-score-ring{
+  width:120px;height:120px;
+  border-radius:50%;
+  margin:0 auto 20px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  border:4px solid rgba(255,255,255,.12);
+  position:relative;
+}
+.score-num{
+  font-family:var(--mono);
+  font-size:38px;
+  font-weight:500;
+  color:var(--teal-light);
+  line-height:1;
+}
+.score-denom{
+  font-size:12px;
+  color:rgba(255,255,255,.4);
+  font-family:var(--mono);
+  margin-top:2px;
+}
+.results-banner h2{
+  font-family:var(--serif);
+  font-size:24px;
+  color:#fff;
+  margin-bottom:6px;
+}
+.results-banner p{
+  font-size:13px;
+  color:rgba(255,255,255,.55);
+  font-style:italic;
+}
+.results-body{padding:28px 32px}
+.results-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:28px;
+}
+.r-stat{
+  background:var(--paper);
+  border-radius:8px;
+  padding:16px;
+  text-align:center;
+}
+.r-stat .val{
+  font-family:var(--mono);
+  font-size:26px;
+  font-weight:500;
+  display:block;
+  margin-bottom:4px;
+}
+.r-stat .lbl{font-size:11px;color:var(--ink-light)}
+.r-stat.correct .val{color:var(--green)}
+.r-stat.wrong .val{color:var(--red)}
+.r-stat.pct .val{color:var(--teal)}
+
+.results-breakdown{margin-bottom:24px}
+.rb-title{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--ink-light);
+  margin-bottom:12px;
+}
+.rb-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+  font-size:13px;
+}
+.rb-item:last-child{border-bottom:none}
+.rb-icon{font-size:14px;flex-shrink:0;width:20px}
+.rb-q{color:var(--ink);flex:1;line-height:1.4}
+.rb-lvl{
+  font-family:var(--mono);
+  font-size:9px;
+  padding:2px 6px;
+  border-radius:3px;
+  flex-shrink:0;
+}
+.rb-lvl.basico{background:var(--teal-bg);color:var(--teal)}
+.rb-lvl.intermedio{background:var(--gold-bg);color:var(--gold)}
+.rb-lvl.avanzado{background:var(--red-bg);color:var(--red)}
+
+.results-msg{
+  padding:18px 20px;
+  border-radius:8px;
+  font-size:14px;
+  line-height:1.65;
+  margin-bottom:20px;
+}
+.results-msg.excellent{background:var(--green-bg);border:1px solid var(--green);color:var(--green)}
+.results-msg.good{background:var(--teal-bg);border:1px solid var(--teal);color:var(--teal)}
+.results-msg.ok{background:var(--gold-bg);border:1px solid var(--gold);color:var(--gold)}
+.results-msg.needs-work{background:var(--red-bg);border:1px solid var(--red);color:var(--red)}
+
+.btn-restart{
+  width:100%;
+  padding:13px;
+  background:var(--navy);
+  color:#fff;
+  border:none;
+  border-radius:8px;
+  font-family:var(--sans);
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:background .18s;
+}
+.btn-restart:hover{background:var(--navy-mid)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:600px){
+  header h1{font-size:22px}
+  .q-text{font-size:15px}
+  .results-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-kicker">ITESM Campus Santa Fe · Módulo 4 · Economía Conductual Computacional</div>
+  <h1>Test de Autoevaluación<br><span>Economía Experimental Algorítmica</span></h1>
+  <p class="header-sub">10 reactivos · Nivel básico a avanzado · Con discusión de respuestas</p>
+</header>
+
+<div id="progress-strip">
+  <div class="strip-meta">
+    <span class="strip-label">Progreso</span>
+    <span class="strip-counter" id="counter">Reactivo 1 de 10</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill" style="width:10%"></div>
+  </div>
+</div>
+
+<div id="quiz-wrap">
+  <div id="q-card-container"></div>
+  <div id="results-card"></div>
+</div>
+
+<script>
+const questions = [
+  // ── Q1 ── BÁSICO
+  {
+    level:'básico',
+    levelClass:'basico',
+    text:'¿Cuál es el coeficiente de aversión a la pérdida (λ) estimado empíricamente por Kahneman y Tversky en su Teoría de Perspectiva (1979)?',
+    options:[
+      'λ = 1.0 — los agentes valoran simétricamente ganancias y pérdidas equivalentes',
+      'λ = 2.25 — una pérdida duele aproximadamente 2.25 veces más que una ganancia equivalente',
+      'λ = 3.5 — umbral superior documentado en experimentos de neuroimagen',
+      'λ = 0.88 — parámetro de curvatura (α = β) de la función de valor'
+    ],
+    correct:1,
+    explanation:{
+      heading:'✓ Correcto: λ = 2.25',
+      body:`<p>Kahneman y Tversky estimaron experimentalmente que las <strong>pérdidas pesan aproximadamente 2.25 veces más que las ganancias de igual magnitud</strong>. Este es el valor del parámetro de asimetría λ en la función de valor de prospecto:</p>
+<span class="formula">V(x) = x^α       si x ≥ 0  (ganancias — cóncava, α = 0.88)
+V(x) = −λ(−x)^β  si x &lt; 0  (pérdidas — convexa, β = 0.88)
+
+λ = 2.25 → V(−100) = −2.25 × V(100)</span>
+<p>El parámetro <strong>α = β = 0.88</strong> es la curvatura de la función (opción D — error frecuente al confundir parámetros). Este valor de λ es la base experimental de mecanismos como el <em>scarcity messaging</em>, los precios tachados y las notificaciones de expiración de carrito.</p>`,
+      cite:'Kahneman, D., & Tversky, A. (1979). Prospect theory. Econometrica, 47(2), 263–291. DOI:10.2307/1914185'
+    }
+  },
+
+  // ── Q2 ── BÁSICO
+  {
+    level:'básico',
+    levelClass:'basico',
+    text:'Según Thaler y Sunstein (2008), un "nudge" se define correctamente como:',
+    options:[
+      'Una prohibición regulatoria que elimina opciones perjudiciales del conjunto de elección',
+      'Un incentivo económico significativo — como un subsidio o impuesto — que modifica precios relativos',
+      'Cualquier aspecto de la arquitectura de elección que altera el comportamiento de manera predecible sin prohibir opciones ni cambiar incentivos económicos de forma sustantiva',
+      'Una campaña de información que educa a los agentes sobre las consecuencias de sus decisiones'
+    ],
+    correct:2,
+    explanation:{
+      heading:'✓ Correcto: Opción C — Definición canónica de nudge',
+      body:`<p>La definición canónica de Thaler y Sunstein especifica tres condiciones que distinguen un nudge de otras intervenciones:</p>
+<p><strong>1. No prohíbe opciones:</strong> el conjunto de elección permanece intacto — a diferencia de regulaciones prohibitivas (A).<br>
+<strong>2. No modifica incentivos económicos significativamente:</strong> no altera precios relativos — a diferencia de subsidios e impuestos (B).<br>
+<strong>3. No es meramente informativo:</strong> opera sobre la arquitectura (defaults, framing, saliencia) — distinción con campañas educativas (D).</p>
+<p>En ecosistemas algorítmicos, el nudge adquiere dimensión nueva: el <strong>orden de presentación de resultados, los defaults de privacidad, las recomendaciones personalizadas</strong> son todos nudges algorítmicos masivos. La pregunta ética central: ¿a quién sirve el nudge — al usuario o a la plataforma?</p>`,
+      cite:'Thaler, R. H., & Sunstein, C. R. (2008). Nudge. Yale University Press. | Sunstein (2014). Why Nudge? DOI:10.12987/9780300209884'
+    }
+  },
+
+  // ── Q3 ── BÁSICO-INTERMEDIO
+  {
+    level:'básico–intermedio',
+    levelClass:'basico',
+    text:'En el Juego del Ultimátum, la predicción del Equilibrio de Nash subgame-perfect bajo supuesto de racionalidad perfecta y egoísmo estricto es:',
+    options:[
+      'El Proponente ofrece exactamente el 50% del total para garantizar la aceptación y maximizar la equidad',
+      'El Proponente ofrece la cantidad positiva mínima posible (ε → 0) y el Respondedor racional la acepta',
+      'El Proponente no ofrece nada y el Respondedor acepta cualquier suma por encima de cero',
+      'Ambos jugadores adoptan estrategias mixtas que convergen a una división 40/60'
+    ],
+    correct:1,
+    explanation:{
+      heading:'✓ Correcto: Oferta mínima positiva + aceptación racional',
+      body:`<p>Bajo <strong>racionalidad perfecta y egoísmo estricto</strong>, el Equilibrio de Nash subgame-perfect se calcula por inducción hacia atrás:</p>
+<p><strong>Paso 1 (Respondedor):</strong> ε &gt; 0 es estrictamente mejor que 0 → el Respondedor acepta <em>cualquier oferta positiva</em>, sin importar cuán pequeña sea.<br>
+<strong>Paso 2 (Proponente):</strong> anticipando esto, ofrece la cantidad mínima positiva ε para maximizar su retención.</p>
+<p>La evidencia experimental refuta sistemáticamente esta predicción: <strong>ofertas inferiores al 20-25% son rechazadas ~50% del tiempo</strong> (Güth et al., 1982). El rechazo revela preferencias por equidad, reciprocidad negativa y <em>castigo altruista</em> — el Respondedor prefiere 0 a una distribución percibida como injusta.</p>
+<span class="formula">Nash SPE: {Proponente: ε, Respondedor: acepta todo x > 0}
+Realidad experimental: P(aceptación | oferta &lt; 20%) ≈ 0.50</span>
+<p>Esta brecha teórico-empírica es el punto de partida de la economía conductual.</p>`,
+      cite:'Güth, Schmittberger & Schwarze (1982). JEBO 3(4):367–388. | Fehr & Schmidt (1999). QJE 114(3):817–868.'
+    }
+  },
+
+  // ── Q4 ── INTERMEDIO
+  {
+    level:'intermedio',
+    levelClass:'intermedio',
+    text:'El experimento MusicLab de Salganik, Dodds y Watts (2006) es considerado un hito en economía experimental digital principalmente porque:',
+    options:[
+      'Demostró que la calidad objetiva de la música (medida por expertos) determina unívocamente el éxito comercial a largo plazo',
+      'Utilizó mundos paralelos aleatorios para demostrar que las señales de popularidad social amplifican la desigualdad de resultados y hacen el éxito cultural fundamentalmente impredecible',
+      'Probó que los mercados musicales convergen al mismo equilibrio de popularidad sin importar las condiciones iniciales de información',
+      'Estableció que los usuarios digitales son inmunes a la influencia social cuando la calidad del producto es suficientemente alta'
+    ],
+    correct:1,
+    explanation:{
+      heading:'✓ Correcto: Señales de popularidad → desigualdad amplificada + imprevisibilidad',
+      body:`<p>El diseño experimental de MusicLab es metodológicamente elegante: asignaron <strong>N = 14,341 sujetos</strong> aleatoriamente a 9 mundos digitales con las mismas 48 canciones desconocidas. En 8 mundos, los usuarios veían las descargas previas (señal social); en 1 mundo (control), solo veían el nombre.</p>
+<p>Resultados clave:</p>
+<p><strong>1. Desigualdad amplificada:</strong> en mundos con influencia social, la concentración de descargas era 2–8× mayor que en el control — las canciones populares se volvían más populares.<br>
+<strong>2. Imprevisibilidad:</strong> canciones idénticas divergían drásticamente entre mundos (una canción "mala" podía ser #1 en un mundo y #40 en otro).<br>
+<strong>3. El éxito cultural depende de la trayectoria inicial</strong> (path dependence) más que de la calidad intrínseca.</p>
+<p>Implicación algorítmica: <strong>los sistemas de recomendación actúan como inyectores masivos de señales sociales artificiales</strong>, creando y destruyendo hits de manera cuasi-arbitraria a escala.</p>`,
+      cite:'Salganik, Dodds & Watts (2006). Science 311(5762):854–856. DOI:10.1126/science.1121066'
+    }
+  },
+
+  // ── Q5 ── INTERMEDIO
+  {
+    level:'intermedio',
+    levelClass:'intermedio',
+    text:'Vernon Smith (1962) estableció tres condiciones de validez para el diseño experimental económico. ¿Cuál de las siguientes NO forma parte de ese conjunto de condiciones?',
+    options:[
+      'Saliencia: los pagos deben depender realmente de las decisiones de los sujetos (incentivos reales)',
+      'No saturación: los sujetos deben preferir siempre más dinero que menos dentro del rango experimental',
+      'Anonimato absoluto entre el investigador y los sujetos durante todo el experimento',
+      'Paralelismo: los principios experimentales deben aplicarse también a fenómenos económicos del mundo real'
+    ],
+    correct:2,
+    explanation:{
+      heading:'✓ Correcto: El anonimato NO es un principio smithiano',
+      body:`<p>Vernon Smith sistematizó los criterios de validez del experimento económico en torno a tres principios. Muchos estudiantes añaden incorrectamente el anonimato como cuarto principio:</p>
+<p><strong>① Saliencia (Induced Value Theory):</strong> los sujetos deben obtener recompensas reales que aumenten monotónicamente con el valor de la tarea.<br>
+<strong>② No saturación (Non-satiation):</strong> dentro del rango experimental, más dinero siempre es mejor — eliminando efectos ingreso que distorsionen incentivos.<br>
+<strong>③ Paralelismo (Parallelism):</strong> proposiciones verdaderas en el laboratorio deben serlo en economías naturales con la misma estructura de incentivos.</p>
+<p>El <strong>anonimato</strong> (Opción C) puede ser conveniente para ciertos diseños pero no es un requisito methodológico smithiano — algunos experimentos requieren explícitamente interacción identificable. La confusión surge porque el anonimato suele implementarse para reducir el <em>demand effect</em> y la presencia del experimentador.</p>`,
+      cite:'Smith, V. L. (1976). Experimental economics: Induced value theory. AER 66(2):274–279. | Smith (1962). JPE 70(3):111–137.'
+    }
+  },
+
+  // ── Q6 ── INTERMEDIO
+  {
+    level:'intermedio',
+    levelClass:'intermedio',
+    text:'El experimento de contagio emocional de Facebook (Kramer et al., 2014) con N = 689,003 usuarios viola potencialmente un supuesto fundamental para la inferencia causal válida. ¿Cuál?',
+    options:[
+      'SUTVA (Stable Unit Treatment Value Assumption): la interferencia entre unidades viola la independencia de los efectos de tratamiento',
+      'Ignorabilidad: la asignación al tratamiento no fue verdaderamente aleatoria dado el algoritmo de curación del News Feed',
+      'Monotonía del instrumento: algunos usuarios podrían reducir su nivel de contenido emocional al ser expuestos a más contenido positivo',
+      'Tendencias paralelas del DiD: los grupos tratado y control mostraron tendencias diferentes antes del experimento'
+    ],
+    correct:0,
+    explanation:{
+      heading:'✓ Correcto: Violación de SUTVA — interferencia masiva entre unidades',
+      body:`<p>El supuesto de <strong>SUTVA</strong> (Rubin, 1980) establece dos condiciones:</p>
+<span class="formula">SUTVA: Y_i(T) ⊥ T_j  ∀ i ≠ j
+(El outcome de i no depende del tratamiento de j)</span>
+<p>En el experimento de Facebook, esto es flagrantemente violado: <strong>si el usuario A (tratado) publica menos contenido negativo, sus amigos B, C, D (posiblemente en el grupo de control) ven su feed modificado</strong>. Los outcomes de los usuarios se contaminan mutuamente a través de la red social — exactamente lo que el experimento intentaba medir.</p>
+<p>Esta interferencia en redes sociales implica que el estimador DiD captura el <strong>Average Treatment Effect contaminado por efectos de red</strong> — el efecto "real" del tratamiento puede estar sobreestimado o subestimado. Métodos modernos para manejar esto: experimentos en clústeres de red, o diseños de ego-network.</p>
+<p>Nota: la asignación sí fue aleatoria (Opción B incorrecta), y SUTVA aplica aquí mejor que el DiD (Opción D).</p>`,
+      cite:'Kramer, Guillory & Hancock (2014). PNAS 111(24):8788. | Rubin (1980). J. Educational Statistics. | Eckles et al. (2016). Network experimentation. JRSS.'
+    }
+  },
+
+  // ── Q7 ── AVANZADO
+  {
+    level:'avanzado',
+    levelClass:'avanzado',
+    text:'La Teoría de Perspectiva especifica V(x) = xᵅ para x ≥ 0 y V(x) = −λ(−x)^β para x < 0, con α = β = 0.88 y λ = 2.25. ¿Cuál de las siguientes interpretaciones es correcta y completa?',
+    options:[
+      'La función es cóncava tanto en el dominio de ganancias como en el de pérdidas, reflejando aversión global al riesgo',
+      'Los agentes son neutrales al riesgo en pérdidas y aversos al riesgo en ganancias, sin distinción por magnitud',
+      'La función es cóncava en ganancias (aversión al riesgo), convexa en pérdidas (búsqueda de riesgo), con asimetría λ entre dominios — generando el "efecto reflejo" de Kahneman-Tversky',
+      'El punto de referencia no afecta la valoración: V(x) depende solo de la magnitud absoluta del resultado'
+    ],
+    correct:2,
+    explanation:{
+      heading:'✓ Correcto: Cóncava en ganancias, convexa en pérdidas + asimetría λ',
+      body:`<p>La morfología de la función de valor implica tres propiedades distintas, que es necesario distinguir:</p>
+<span class="formula">① V''(x) = α(α−1)x^(α−2) &lt; 0  para x &gt; 0  [cóncava → aversión al riesgo]
+② V''(x) = −λβ(β−1)(−x)^(β−2) &gt; 0 para x &lt; 0  [convexa → búsqueda de riesgo]
+③ |V(−x)| = λ · V(x) = 2.25·V(x)   para todo x   [asimetría]</span>
+<p><strong>Efecto reflejo:</strong> un mismo agente es averso al riesgo frente a ganancias (prefiere $50 seguros sobre lotería 50/50 ±$100) pero buscador de riesgo frente a pérdidas (prefiere lotería 50/50 sobre pérdida segura de $50). Esta "S" es el núcleo del patrón experimental.</p>
+<p><strong>Punto de referencia (Opción D incorrecta):</strong> el punto de referencia es esencial — V(x) no depende del resultado absoluto sino del <em>desvío respecto al punto de referencia</em>. El mismo resultado puede ser ganancia o pérdida según el status quo de referencia. Los algoritmos explotan esto manipulando el punto de referencia presentado.</p>`,
+      cite:'Kahneman & Tversky (1979). Econometrica 47(2):263. | Tversky & Kahneman (1992). J. Risk Uncertainty 5(4):297–323.'
+    }
+  },
+
+  // ── Q8 ── AVANZADO
+  {
+    level:'avanzado',
+    levelClass:'avanzado',
+    text:'El mecanismo de Generalized Second Price (GSP) utilizado por Google Ads difiere del mecanismo de Vickrey-Clarke-Groves (VCG) principalmente en que:',
+    options:[
+      'El GSP carece de equilibrios de Nash mientras que el VCG converge siempre a un único equilibrio dominante',
+      'El GSP es incentive-compatible (estrategia dominante: revelar valoración verdadera), mientras que el VCG no garantiza compatibilidad de incentivos',
+      'El VCG es incentive-compatible y eficiente en sentido estricto, mientras que el GSP no es dominance-solvable pero admite equilibrios de Nash localmente eficientes con revenue equivalente',
+      'Ambos mecanismos son estratégicamente equivalentes y generan el mismo vector de pagos en equilibrio'
+    ],
+    correct:2,
+    explanation:{
+      heading:'✓ Correcto: VCG es incentive-compatible; GSP no lo es en sentido estricto',
+      body:`<p>Esta es la distinción técnica central del artículo seminal de Edelman, Ostrovsky & Schwarz (2007):</p>
+<span class="formula">VCG — Precio pagado por ganador k:
+  p_k^VCG = Σ_{j>k} (α_{j-1} − α_j) · v_j / α_k   [truthful = dominant strategy]
+
+GSP — Precio pagado por ganador k:
+  p_k^GSP = bid_{k+1} × QS_{k+1} / QS_k            [NO truthful en general]</span>
+<p><strong>VCG:</strong> revelar la valoración verdadera es estrategia dominante (no importa qué hagan los demás). El mecanismo es eficiente y compatible con incentivos — pero expone al vendedor a potencial menor revenue.</p>
+<p><strong>GSP:</strong> no es truthful — los postores tienen incentivos a sub-ofertar estratégicamente. Sin embargo, Edelman et al. demuestran que el GSP admite <em>equilibrios de Nash en refinamiento local de Pareto</em> que son eficientes y generan revenue equivalente al VCG en ciertos regímenes. Google adoptó GSP precisamente porque maximiza revenue con menor complejidad computacional.</p>
+<p>En la práctica, el <strong>Quality Score (QS)</strong> introduce una dimensión adicional de no-transparencia que hace más difícil la colusión implícita entre postores.</p>`,
+      cite:'Edelman, Ostrovsky & Schwarz (2007). AER 97(1):242–259. DOI:10.1257/aer.97.1.242'
+    }
+  },
+
+  // ── Q9 ── AVANZADO
+  {
+    level:'avanzado',
+    levelClass:'avanzado',
+    text:'En el modelo β-δ de descuento quasi-hiperbólico de Laibson (1997), un agente con β = 0.5 y δ = 0.98 exhibe:',
+    options:[
+      'Descuento exponencial puro y consistencia temporal: sus preferencias sobre planes futuros no cambian con el tiempo',
+      'Sesgo presente (present bias): β < 1 implica inconsistencia temporal entre el yo-presente y los yo-futuros, generando preferencia por gratificación inmediata y problemas de auto-control',
+      'Impaciencia extrema porque δ = 0.98 implica un factor de descuento casi nulo por período',
+      'Preferencias que siempre convergen al plan óptimo de largo plazo porque δ es cercano a 1'
+    ],
+    correct:1,
+    explanation:{
+      heading:'✓ Correcto: Present bias β < 1 → inconsistencia temporal',
+      body:`<p>El modelo β-δ de Laibson generaliza el descuento exponencial:</p>
+<span class="formula">U_t = u_t + β·Σ_{τ>t} δ^(τ−t) · u_τ
+
+β = 0.5 < 1  →  "impuesto" adicional al primer período futuro
+δ = 0.98     →  descuento estándar entre períodos futuros
+
+Ejemplo:  U(hoy) = u_hoy + 0.5·[0.98·u_mañana + 0.98²·u_pasado...]
+          U(mañana) = u_mañana + 0.5·[0.98·u_pasado...]</span>
+<p>La <strong>inconsistencia temporal</strong> surge porque mañana, al llegar al período siguiente, el yo-futuro descuenta igual que el yo-presente — por lo que no implementa el plan que el yo-presente preferiría. Hay un conflicto entre el yo-hoy y los yo-futuros.</p>
+<p><strong>Implicaciones en plataformas digitales:</strong> el diseño de interfaces aprovecha el present bias ofreciendo recompensas inmediatas (likes, dopamina de notificaciones) frente a costos futuros (tiempo perdido, privacidad, salud mental). Los agentes quasi-hiperbólicos son especialmente vulnerables a mecanismos que ofrecen gratificación presente con costos diferidos opacos.</p>
+<p>δ = 0.98 (Opción C) implica descuento <em>bajo</em> (casi paciente), no extremo.</p>`,
+      cite:'Laibson, D. (1997). Golden eggs and hyperbolic discounting. QJE 112(2):443–478. DOI:10.1162/003355397555253'
+    }
+  },
+
+  // ── Q10 ── AVANZADO
+  {
+    level:'avanzado',
+    levelClass:'avanzado',
+    text:'El problema identificado por Obermeyer et al. (2019) en el algoritmo comercial de gestión de salud de poblaciones puede caracterizarse técnicamente como:',
+    options:[
+      'Discriminación racial intencional (disparate treatment) diseñada explícitamente por los desarrolladores para reducir costos con pacientes negros',
+      'Un error de especificación de variable proxy: el gasto sanitario — usado como proxy de necesidad de salud — está correlacionado con raza por discriminación histórica de acceso, generando sesgo sistémico downstream en las predicciones',
+      'Overfitting severo del modelo predictivo a los datos de entrenamiento, con alta varianza en validación fuera de muestra',
+      'Multicolinealidad entre variables demográficas que infla los errores estándar e impide estimaciones robustas de riesgo'
+    ],
+    correct:1,
+    explanation:{
+      heading:'✓ Correcto: Error de especificación de proxy — causalidad oculta a través de discriminación histórica',
+      body:`<p>Este es un caso paradigmático de <strong>sesgo algorítmico emergente sin intención discriminatoria explícita</strong> — y precisamente por eso, más difícil de detectar y corregir:</p>
+<span class="formula">Modelo especificado:   Riesgo ≈ f(gasto_sanitario_histórico, ...)
+Supuesto implícito:    gasto_sanitario ≈ necesidad_de_salud
+
+Falla del supuesto:    E[gasto | raza=negra, salud=X] &lt; E[gasto | raza=blanca, salud=X]
+                       ↑ discriminación histórica en acceso a servicios de salud</span>
+<p><strong>Mecanismo causal:</strong> pacientes negros reciben históricamente <em>menos gasto sanitario por igual nivel de enfermedad</em> — no por menor necesidad, sino por barreras de acceso estructurales. Al usar gasto como proxy de necesidad, el modelo aprende esta discriminación histórica y la perpetúa: estima que pacientes negros necesitan menos intervención, cuando en realidad están más enfermos con menor gasto.</p>
+<p>Obermeyer et al. estiman que el sesgo <strong>reducía en ~50% la identificación de pacientes negros de alto riesgo</strong>. La solución no fue un cambio técnico menor sino reemplazar la variable proxy por el outcome de salud directamente — algo que requirió datos más costosos de obtener.</p>
+<p>Este caso ilustra la distinción entre <em>disparate treatment</em> (discriminación intencional — Opción A) y <em>disparate impact</em> (impacto desigual emergente de proxy inadecuado — mecanismo real).</p>`,
+      cite:'Obermeyer, Powers, Vogeli & Mullainathan (2019). Science 366(6464):447–453. DOI:10.1126/science.aax2342'
+    }
+  }
+];
+
+let current = 0;
+let score = 0;
+let answers = []; // {chosen, correct, isRight}
+let answered = false;
+
+function getLevel(lc){ return lc==='basico'?'Básico':lc==='intermedio'?'Intermedio':'Avanzado'; }
+
+function renderQuestion(idx){
+  const q = questions[idx];
+  const container = document.getElementById('q-card-container');
+
+  const letters = ['A','B','C','D'];
+
+  const optionsHTML = q.options.map((opt,i) => `
+    <button class="opt" id="opt-${i}" onclick="selectOption(${i})">
+      <span class="opt-letter">${letters[i]}</span>
+      <span class="opt-text">${opt}</span>
+    </button>
+  `).join('');
+
+  container.innerHTML = `
+    <div class="q-card" id="q-card">
+      <div class="q-header">
+        <div class="q-num-badge">${String(idx+1).padStart(2,'0')}</div>
+        <div class="q-header-right">
+          <span class="q-level-badge level-${q.levelClass}">${getLevel(q.levelClass)}</span>
+          <div class="q-text">${q.text}</div>
+        </div>
+      </div>
+      <div class="q-options">${optionsHTML}</div>
+      <div class="explanation" id="explanation"></div>
+      <div class="q-footer">
+        <button class="btn btn-primary" id="btn-confirm" onclick="confirmAnswer()" disabled>Confirmar respuesta</button>
+      </div>
+    </div>
+  `;
+
+  // Animate in
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.getElementById('q-card').classList.add('visible');
+    });
+  });
+
+  answered = false;
+  updateProgress(idx);
+}
+
+let selectedOpt = null;
+
+function selectOption(i){
+  if(answered) return;
+  selectedOpt = i;
+  document.querySelectorAll('.opt').forEach((el,j) => {
+    el.classList.toggle('selected', j===i);
+  });
+  document.getElementById('btn-confirm').disabled = false;
+}
+
+function confirmAnswer(){
+  if(answered || selectedOpt === null) return;
+  answered = true;
+  const q = questions[current];
+  const isRight = selectedOpt === q.correct;
+  if(isRight) score++;
+  answers.push({chosen: selectedOpt, correct: q.correct, isRight});
+
+  // Style options
+  document.querySelectorAll('.opt').forEach((el,j) => {
+    el.disabled = true;
+    if(j === q.correct){
+      el.classList.remove('selected','dimmed');
+      el.classList.add('correct');
+    } else if(j === selectedOpt && !isRight){
+      el.classList.remove('selected');
+      el.classList.add('wrong');
+    } else {
+      el.classList.remove('selected');
+      el.classList.add('dimmed');
+    }
+  });
+
+  // Show explanation
+  const expl = document.getElementById('explanation');
+  const headClass = isRight ? 'correct-head' : 'wrong-head';
+  const headText = isRight ? ('✓ ' + q.explanation.heading.replace(/^✓ /,'')) : ('✗ Incorrecto — ' + q.explanation.heading.replace(/^✓ /,''));
+  expl.innerHTML = `
+    <div class="expl-head ${headClass}">${headText}</div>
+    <div class="expl-body">
+      ${q.explanation.body}
+      <div class="cite">${q.explanation.cite}</div>
+    </div>
+  `;
+  expl.classList.add('show');
+
+  // Change footer button
+  const footer = document.querySelector('.q-footer');
+  if(current < questions.length - 1){
+    footer.innerHTML = `<button class="btn btn-next" onclick="nextQuestion()">Siguiente reactivo →</button>`;
+  } else {
+    footer.innerHTML = `<button class="btn btn-next" onclick="showResults()">Ver resultados ✓</button>`;
+  }
+
+  // Scroll explanation into view
+  setTimeout(() => {
+    expl.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }, 200);
+}
+
+function nextQuestion(){
+  current++;
+  selectedOpt = null;
+  renderQuestion(current);
+  window.scrollTo({top: document.getElementById('q-card-container').offsetTop - 80, behavior:'smooth'});
+}
+
+function updateProgress(idx){
+  const pct = Math.round(((idx+1)/questions.length)*100);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('counter').textContent = `Reactivo ${idx+1} de ${questions.length}`;
+}
+
+function showResults(){
+  document.getElementById('q-card-container').innerHTML = '';
+
+  const pct = Math.round((score/questions.length)*100);
+  let msgClass, msgText;
+  if(pct>=90){
+    msgClass='excellent';
+    msgText='<strong>Desempeño sobresaliente.</strong> Domina los fundamentos teóricos y los matices avanzados de la economía experimental en ecosistemas algorítmicos. Nivel de posgrado.';
+  } else if(pct>=70){
+    msgClass='good';
+    msgText='<strong>Buen desempeño.</strong> Comprende sólidamente los conceptos core. Revisa los reactivos avanzados — especialmente los mecanismos de subasta y el modelo β-δ.';
+  } else if(pct>=50){
+    msgClass='ok';
+    msgText='<strong>Desempeño en desarrollo.</strong> Los fundamentos básicos están presentes, pero los conceptos intermedios y avanzados requieren revisión. Consulta las referencias de cada reactivo.';
+  } else {
+    msgClass='needs-work';
+    msgText='<strong>Área de oportunidad significativa.</strong> Se recomienda revisar la infografía completa, especialmente Prospect Theory, los juegos clásicos y los mecanismos algorítmicos.';
+  }
+
+  const correct = answers.filter(a=>a.isRight).length;
+  const wrong = answers.length - correct;
+
+  const breakdownItems = questions.map((q,i) => {
+    const a = answers[i] || {isRight:false};
+    return `
+      <div class="rb-item">
+        <span class="rb-icon">${a.isRight ? '✓' : '✗'}</span>
+        <span class="rb-q" style="color:${a.isRight?'var(--green)':'var(--red)'}">
+          <strong>R${i+1}.</strong> ${q.text.length>90 ? q.text.substring(0,88)+'…' : q.text}
+        </span>
+        <span class="rb-lvl ${q.levelClass}">${getLevel(q.levelClass)}</span>
+      </div>
+    `;
+  }).join('');
+
+  const scoreRingColor = pct>=70 ? 'var(--teal-light)' : pct>=50 ? 'var(--gold-light)' : '#f39c82';
+
+  const resultsCard = document.getElementById('results-card');
+  resultsCard.style.display = 'block';
+  resultsCard.innerHTML = `
+    <div class="results-banner">
+      <div class="results-score-ring">
+        <span class="score-num" style="color:${scoreRingColor}">${score}</span>
+        <span class="score-denom">de ${questions.length}</span>
+      </div>
+      <h2>Evaluación Completada</h2>
+      <p>Economía Experimental en el Ecosistema Algorítmico · ITESM 2026</p>
+    </div>
+    <div class="results-body">
+      <div class="results-grid">
+        <div class="r-stat correct">
+          <span class="val">${correct}</span>
+          <div class="lbl">Respuestas correctas</div>
+        </div>
+        <div class="r-stat wrong">
+          <span class="val">${wrong}</span>
+          <div class="lbl">Respuestas incorrectas</div>
+        </div>
+        <div class="r-stat pct">
+          <span class="val">${pct}%</span>
+          <div class="lbl">Calificación final</div>
+        </div>
+      </div>
+
+      <div class="results-msg ${msgClass}">${msgText}</div>
+
+      <div class="results-breakdown">
+        <div class="rb-title">Desglose por reactivo</div>
+        ${breakdownItems}
+      </div>
+
+      <div style="background:var(--paper);border-radius:8px;padding:16px;margin-bottom:20px;font-size:12px;color:var(--ink-light);line-height:1.7">
+        <strong style="color:var(--navy);font-size:13px;display:block;margin-bottom:6px">Recursos recomendados para refuerzo</strong>
+        Kahneman & Tversky (1979) Econometrica · Smith (1962) JPE · Thaler & Sunstein (2008) Nudge · 
+        Fehr & Gächter (2000) AER · Salganik et al. (2006) Science · Edelman et al. (2007) AER · 
+        Laibson (1997) QJE · Obermeyer et al. (2019) Science · oTree: otree.readthedocs.io
+      </div>
+
+      <button class="btn-restart" onclick="restartQuiz()">↺ Reiniciar test desde el principio</button>
+    </div>
+  `;
+
+  window.scrollTo({top: resultsCard.offsetTop - 40, behavior:'smooth'});
+}
+
+function restartQuiz(){
+  current = 0; score = 0; answers = []; selectedOpt = null; answered = false;
+  document.getElementById('results-card').style.display = 'none';
+  renderQuestion(0);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// Init
+renderQuestion(0);
+</script>
+</body>
+</html>
